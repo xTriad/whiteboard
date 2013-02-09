@@ -47,15 +47,15 @@ ActiveRecord::Schema.define(:version => 20130205185201) do
     t.text "course_name",   :null => false
   end
 
-  create_table "group_users", :id => false, :force => true do |t|
-    t.integer "group_id", :null => false
-    t.integer "user_id",  :null => false
-  end
-
   create_table "groups", :primary_key => "group_id", :force => true do |t|
     t.text    "group_name",         :null => false
     t.integer "associated_course",  :null => false
     t.integer "associated_section", :null => false
+  end
+
+  create_table "groups_users", :id => false, :force => true do |t|
+    t.integer "group_id", :null => false
+    t.integer "user_id",  :null => false
   end
 
   create_table "messages", :primary_key => "message_id", :force => true do |t|
@@ -99,32 +99,25 @@ ActiveRecord::Schema.define(:version => 20130205185201) do
   end
 
   create_table "roles", :primary_key => "role_id", :force => true do |t|
-    t.string   "role_name"
+    t.string   "name"
     t.integer  "resource_id"
     t.string   "resource_type"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "roles", ["role_name", "resource_type", "resource_id"], :name => "index_Roles_on_role_name_and_resource_type_and_resource_id"
-  add_index "roles", ["role_name"], :name => "index_Roles_on_role_name"
-
-  create_table "section_users", :id => false, :force => true do |t|
-    t.integer "section_id", :null => false
-    t.integer "user_id",    :null => false
-  end
+  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_Roles_on_role_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], :name => "index_Roles_on_role_name"
 
   create_table "sections", :primary_key => "section_id", :force => true do |t|
     t.integer "course_id",      :null => false
     t.integer "section_number", :null => false
   end
 
-  create_table "user_roles", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+  create_table "sections_users", :id => false, :force => true do |t|
+    t.integer "section_id", :null => false
+    t.integer "user_id",    :null => false
   end
-
-  add_index "user_roles", ["user_id", "role_id"], :name => "index_UserRoles_on_user_id_and_role_id"
 
   create_table "users", :primary_key => "user_id", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -139,10 +132,17 @@ ActiveRecord::Schema.define(:version => 20130205185201) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "user_name"
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_Users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_Users_on_reset_password_token", :unique => true
+
+  create_table "users_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], :name => "index_UserRoles_on_user_id_and_role_id"
 
 end
