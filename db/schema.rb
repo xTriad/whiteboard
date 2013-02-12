@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205185201) do
+ActiveRecord::Schema.define(:version => 20130212152603) do
 
   create_table "assignment_grades", :primary_key => "grade_id", :force => true do |t|
     t.integer "assignment_id", :null => false
@@ -21,15 +21,19 @@ ActiveRecord::Schema.define(:version => 20130205185201) do
   end
 
   create_table "assignment_types", :primary_key => "type_id", :force => true do |t|
-    t.text "type_name", :null => false
+    t.text     "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "assignments", :primary_key => "assignment_id", :force => true do |t|
-    t.integer "type_id",                              :null => false
-    t.integer "section_id",                           :null => false
-    t.date    "due_date"
-    t.integer "highest_grade_value", :default => 100, :null => false
-    t.float   "weight"
+    t.integer  "type_id",                              :null => false
+    t.integer  "section_id",                           :null => false
+    t.date     "due_date"
+    t.integer  "highest_grade_value", :default => 100, :null => false
+    t.float    "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "attendance", :id => false, :force => true do |t|
@@ -43,12 +47,14 @@ ActiveRecord::Schema.define(:version => 20130205185201) do
   end
 
   create_table "courses", :primary_key => "course_id", :force => true do |t|
-    t.text "course_number", :null => false
-    t.text "course_name",   :null => false
+    t.text     "number",     :null => false
+    t.text     "name",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "groups", :primary_key => "group_id", :force => true do |t|
-    t.text    "group_name",         :null => false
+    t.text    "name",               :null => false
     t.integer "associated_course",  :null => false
     t.integer "associated_section", :null => false
   end
@@ -110,8 +116,10 @@ ActiveRecord::Schema.define(:version => 20130205185201) do
   add_index "roles", ["name"], :name => "index_Roles_on_role_name"
 
   create_table "sections", :primary_key => "section_id", :force => true do |t|
-    t.integer "course_id",      :null => false
-    t.integer "section_number", :null => false
+    t.integer  "course_id",  :null => false
+    t.integer  "number",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sections_users", :id => false, :force => true do |t|

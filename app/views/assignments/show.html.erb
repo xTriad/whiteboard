@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= @assignment.type_id %>
+</p>
+
+<p>
+  <b>Section:</b>
+  <%= @assignment.section_id %>
+</p>
+
+<p>
+  <b>Due date:</b>
+  <%= @assignment.due_date %>
+</p>
+
+<p>
+  <b>Highest grade value:</b>
+  <%= @assignment.highest_grade_value %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @assignment.weight %>
+</p>
+
+
+<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
+<%= link_to 'Back', assignments_path %>

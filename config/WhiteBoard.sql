@@ -98,7 +98,9 @@ ALTER SEQUENCE "AssignmentGrades_user_id_seq" OWNED BY assignment_grades.user_id
 
 CREATE TABLE assignment_types (
     type_id integer NOT NULL,
-    type_name text NOT NULL
+    name text NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -135,7 +137,9 @@ CREATE TABLE assignments (
     section_id integer NOT NULL,
     due_date date,
     highest_grade_value integer DEFAULT 100 NOT NULL,
-    weight double precision
+    weight double precision,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -269,8 +273,10 @@ ALTER SEQUENCE "Attendance_user_id_seq" OWNED BY attendance.user_id;
 
 CREATE TABLE courses (
     course_id integer NOT NULL,
-    course_number text NOT NULL,
-    course_name text NOT NULL
+    number text NOT NULL,
+    name text NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -357,7 +363,7 @@ ALTER SEQUENCE "GroupUsers_user_id_seq" OWNED BY groups_users.user_id;
 
 CREATE TABLE groups (
     group_id integer NOT NULL,
-    group_name text NOT NULL,
+    name text NOT NULL,
     associated_course integer NOT NULL,
     associated_section integer NOT NULL
 );
@@ -929,7 +935,9 @@ ALTER SEQUENCE "SectionUsers_user_id_seq" OWNED BY sections_users.user_id;
 CREATE TABLE sections (
     section_id integer NOT NULL,
     course_id integer NOT NULL,
-    section_number integer NOT NULL
+    number integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -1322,14 +1330,14 @@ SELECT pg_catalog.setval('"AssignmentGrades_user_id_seq"', 1, false);
 -- Name: AssignmentTypes_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"AssignmentTypes_type_id_seq"', 1, false);
+SELECT pg_catalog.setval('"AssignmentTypes_type_id_seq"', 1, true);
 
 
 --
 -- Name: Assignments_assignment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Assignments_assignment_id_seq"', 1, false);
+SELECT pg_catalog.setval('"Assignments_assignment_id_seq"', 3, true);
 
 
 --
@@ -1364,7 +1372,7 @@ SELECT pg_catalog.setval('"Attendance_user_id_seq"', 1, false);
 -- Name: Courses_course_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Courses_course_id_seq"', 1, false);
+SELECT pg_catalog.setval('"Courses_course_id_seq"', 2, true);
 
 
 --
@@ -1511,7 +1519,7 @@ SELECT pg_catalog.setval('"Quizzes_section_id_seq"', 1, false);
 -- Name: Roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Roles_id_seq"', 1, false);
+SELECT pg_catalog.setval('"Roles_id_seq"', 3, true);
 
 
 --
@@ -1539,14 +1547,14 @@ SELECT pg_catalog.setval('"Sections_course_id_seq"', 1, false);
 -- Name: Sections_section_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Sections_section_id_seq"', 1, false);
+SELECT pg_catalog.setval('"Sections_section_id_seq"', 1, true);
 
 
 --
 -- Name: Users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Users_id_seq"', 2, true);
+SELECT pg_catalog.setval('"Users_id_seq"', 5, true);
 
 
 --
@@ -1561,7 +1569,8 @@ COPY assignment_grades (grade_id, assignment_id, user_id, calculated, grade_valu
 -- Data for Name: assignment_types; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY assignment_types (type_id, type_name) FROM stdin;
+COPY assignment_types (type_id, name, created_at, updated_at) FROM stdin;
+1	Homework	2013-02-12 17:27:58.553135	2013-02-12 17:27:58.553135
 \.
 
 
@@ -1569,7 +1578,9 @@ COPY assignment_types (type_id, type_name) FROM stdin;
 -- Data for Name: assignments; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY assignments (assignment_id, type_id, section_id, due_date, highest_grade_value, weight) FROM stdin;
+COPY assignments (assignment_id, type_id, section_id, due_date, highest_grade_value, weight, created_at, updated_at) FROM stdin;
+1	1	1	2020-02-12	100	1	2013-02-12 17:27:58.598799	2013-02-12 17:27:58.598799
+3	1	1	2013-02-12	100	7	2013-02-12 17:42:04.044711	2013-02-12 17:42:16.522085
 \.
 
 
@@ -1585,7 +1596,9 @@ COPY attendance (section_id, user_id, class_date, present, absent, tardy, excuse
 -- Data for Name: courses; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY courses (course_id, course_number, course_name) FROM stdin;
+COPY courses (course_id, number, name, created_at, updated_at) FROM stdin;
+1	2000	Data Structures	2013-02-12 17:27:58.489006	2013-02-12 17:27:58.489006
+2	10000	Machine Learning	2013-02-12 17:42:36.612343	2013-02-12 17:42:36.612343
 \.
 
 
@@ -1593,7 +1606,7 @@ COPY courses (course_id, course_number, course_name) FROM stdin;
 -- Data for Name: groups; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY groups (group_id, group_name, associated_course, associated_section) FROM stdin;
+COPY groups (group_id, name, associated_course, associated_section) FROM stdin;
 \.
 
 
@@ -1658,6 +1671,9 @@ COPY quizzes (quiz_id, section_id, due_date, times_allowed) FROM stdin;
 --
 
 COPY roles (role_id, name, resource_id, resource_type, created_at, updated_at) FROM stdin;
+1	admin	\N	\N	2013-02-12 17:16:06.599824	2013-02-12 17:16:06.599824
+2	user	\N	\N	2013-02-12 17:16:06.628969	2013-02-12 17:16:06.628969
+3	VIP	\N	\N	2013-02-12 17:16:06.636287	2013-02-12 17:16:06.636287
 \.
 
 
@@ -1669,6 +1685,10 @@ COPY schema_migrations (version) FROM stdin;
 20130205185153
 20130205185156
 20130205185201
+20130211230823
+20130212024155
+20130212151903
+20130212152603
 \.
 
 
@@ -1676,7 +1696,8 @@ COPY schema_migrations (version) FROM stdin;
 -- Data for Name: sections; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY sections (section_id, course_id, section_number) FROM stdin;
+COPY sections (section_id, course_id, number, created_at, updated_at) FROM stdin;
+1	1	1	2013-02-12 17:27:58.530747	2013-02-12 17:27:58.530747
 \.
 
 
@@ -1694,6 +1715,9 @@ COPY sections_users (section_id, user_id) FROM stdin;
 
 COPY users (user_id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, created_at, updated_at, name) FROM stdin;
 2	kip@test.com	$2a$10$Nhr2Z88UP7nl8GXX0nsB8OzAYdGGDFR6z7iavbZslCjC8HOEyyLZS	\N	\N	\N	2	2013-02-09 00:20:35.951839	2013-02-09 00:20:20.846449	127.0.0.1	127.0.0.1	2013-02-09 00:20:20.825034	2013-02-09 00:20:35.95264	kipnichols
+3	group8admin@baylor.edu	$2a$10$YcQ9AcgYPIBEXS/IRfLJceIg4BgU4zkzQbehzlZU6aj4SIE7wHuWe	\N	\N	\N	0	\N	\N	\N	\N	2013-02-12 17:16:06.755289	2013-02-12 17:16:06.755289	group8admin
+4	jordan@wtf.com	$2a$10$FjM6B8wtTC7MZ8VDS.HKmu.tAhT45VmRMOl/MGk9Mz9fBJu9z4CPK	\N	\N	\N	1	2013-02-12 17:29:43.230596	2013-02-12 17:29:43.230596	127.0.0.1	127.0.0.1	2013-02-12 17:29:43.210981	2013-02-12 17:29:43.23146	Jordan
+5	test@example.com	$2a$10$7bk5HQPbEKV9T.R3LPv7x.MbGtSIbQdtFaxMGyq43lNUEyKFQpI5G	\N	\N	\N	1	2013-02-12 17:41:39.726344	2013-02-12 17:41:39.726344	127.0.0.1	127.0.0.1	2013-02-12 17:41:39.706301	2013-02-12 17:41:52.329981	Hello
 \.
 
 
@@ -1702,6 +1726,7 @@ COPY users (user_id, email, encrypted_password, reset_password_token, reset_pass
 --
 
 COPY users_roles (user_id, role_id) FROM stdin;
+3	1
 \.
 
 

@@ -1,0 +1,23 @@
+<h1>Listing assignment_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @assignment_types.each do |assignment_type| %>
+  <tr>
+    <td><%= assignment_type.name %></td>
+    <td><%= link_to 'Show', assignment_type %></td>
+    <td><%= link_to 'Edit', edit_assignment_type_path(assignment_type) %></td>
+    <td><%= link_to 'Destroy', assignment_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Assignment type', new_assignment_type_path %>
