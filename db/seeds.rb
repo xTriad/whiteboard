@@ -20,29 +20,65 @@ user.add_role :admin
 # Insert Courses
 puts 'DEFAULT COURSES'
 Course.create([
-  :number => 2000,
-  :name => 'Data Structures'
+  {
+    :number => 1430,
+    :name => 'Introduction I'
+  },
+  {
+    :number => 1440,
+    :name => 'Introduction II'
+  },
+  {
+    :number => 2334,
+    :name => 'Introduction to Systems'
+  },
+  {
+    :number => 3101,
+    :name => 'Computer Ethics'
+  },
+  {
+    :number => 3344,
+    :name => 'Data Structures'
+  },
+  {
+    :number => 3335,
+    :name => 'Database'
+  },
+  {
+    :number => 4321,
+    :name => 'Computer Networking'
+  },
+  {
+    :number => 4330,
+    :name => 'Foundations'
+  }
 ])
 
 # Insert Sections: 01, 02, 03 ...
 puts 'DEFAULT SECTIONS'
-Section.create([
-  :course_id => 1,
-  :number => 1
-])
+Course.all.each do |course|
+  for x in 1..3
+    Section.create(:course_id => course.course_id, :number => x);
+  end
+end
 
-#Insert Assignment Types: Homework, Quiz, Program, Test ...
+# Insert Assignment Types
 puts 'DEFAULT ASSIGNMENT TYPES'
 AssignmentType.create([
-  name: 'Homework'
+  { :name => 'Homework' },
+  { :name => 'Program' },
+  { :name => 'Quiz' },
+  { :name => 'Test' }
 ])
 
 # Insert Assignments
 puts 'DEFAULT ASSIGNMENTS'
 Assignment.create([
-  :type_id => 1,
-  :section_id => 1,
-  :due_date => '2020-02-12',
-  :highest_grade_value => 100,
-  :weight => 1
+  {
+    :type_id => 1,
+    :section_id => 1,
+    :due_date => '2020-02-12',
+    :highest_grade_value => 100,
+    :weight => 1
+  }
 ])
