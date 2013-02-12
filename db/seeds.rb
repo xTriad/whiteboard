@@ -16,3 +16,33 @@ puts 'DEFAULT USERS'
 user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'user: ' << user.name
 user.add_role :admin
+
+# Insert Courses
+puts 'DEFAULT COURSES'
+Course.create([
+  :number => 2000,
+  :name => 'Data Structures'
+])
+
+# Insert Sections: 01, 02, 03 ...
+puts 'DEFAULT SECTIONS'
+Section.create([
+  :course_id => 1,
+  :number => 1
+])
+
+#Insert Assignment Types: Homework, Quiz, Program, Test ...
+puts 'DEFAULT ASSIGNMENT TYPES'
+AssignmentType.create([
+  name: 'Homework'
+])
+
+# Insert Assignments
+puts 'DEFAULT ASSIGNMENTS'
+Assignment.create([
+  :type_id => 1,
+  :section_id => 1,
+  :due_date => '2020-02-12',
+  :highest_grade_value => 100,
+  :weight => 1
+])
