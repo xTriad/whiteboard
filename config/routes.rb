@@ -12,6 +12,7 @@ Whiteboard::Application.routes.draw do
 
 
   authenticated :user do
+    resources :uploads
     root :to => 'home#index'
   end
   root :to => "home#index"

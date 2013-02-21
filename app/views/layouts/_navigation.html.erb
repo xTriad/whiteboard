@@ -17,6 +17,9 @@
       <%= link_to 'Assignments', assignments_path %>
     </li>
     <li>
+      <%= link_to 'Upload File', uploads_path %>
+    </li>
+    <li>
       <%= link_to 'Courses', courses_path %>
     </li>
     <% if current_user.has_role? :admin %>
