@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221211232) do
+ActiveRecord::Schema.define(:version => 20130212152603) do
 
   create_table "assignment_grades", :primary_key => "grade_id", :force => true do |t|
     t.integer "assignment_id", :null => false
@@ -125,14 +125,6 @@ ActiveRecord::Schema.define(:version => 20130221211232) do
   create_table "sections_users", :id => false, :force => true do |t|
     t.integer "section_id", :null => false
     t.integer "user_id",    :null => false
-  end
-
-  create_table "uploads", :force => true do |t|
-    t.string   "title"
-    t.string   "file"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :primary_key => "user_id", :force => true do |t|
