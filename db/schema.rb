@@ -69,17 +69,6 @@ ActiveRecord::Schema.define(:version => 20130301041941) do
     t.datetime "updated_at"
   end
 
-  create_table "attachments", :force => true do |t|
-    t.string   "name"
-    t.string   "file"
-    t.text     "description"
-    t.integer  "attachable_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "attachments", ["attachable_id"], :name => "index_attachments_on_attachable_id"
-
   create_table "attendance", :id => false, :force => true do |t|
     t.integer "section_id",                    :null => false
     t.integer "user_id",                       :null => false
