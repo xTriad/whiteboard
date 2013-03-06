@@ -7,15 +7,13 @@ Whiteboard::Application.routes.draw do
 
   resources :assignment_types
 
+  resources :uploads
 
   resources :sections
 
-
   resources :courses
 
-
   resources :assignments
-
 
   authenticated :user do
     root :to => 'home#index'
