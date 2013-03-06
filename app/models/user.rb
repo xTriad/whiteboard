@@ -10,4 +10,14 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   
+  def role_name
+    name = ""
+    Role.all.each do |role|
+      if !role.users.where(:name => self.name).empty?
+        name = role.name
+      end
+    end
+    return name
+  end
+  
 end
