@@ -1,7 +1,10 @@
 class UploadsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /uploads
   # GET /uploads.json
   def index
+    #authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @uploads = Upload.all
 
     respond_to do |format|
