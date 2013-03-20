@@ -24,7 +24,10 @@ describe AssignmentsController do
   # Assignment. As you add validations to Assignment, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "type_id" => "1" }
+    {
+      :type_id => 1,
+      :section_id => 1
+    }
   end
 
   # This should return the minimal set of values that should be in the session

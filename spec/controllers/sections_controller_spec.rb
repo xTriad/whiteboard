@@ -24,7 +24,10 @@ describe SectionsController do
   # Section. As you add validations to Section, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "course_id" => "1" }
+    {
+      :course_id => 1,
+      :number => 1 # 01, 02, 03
+    }
   end
 
   # This should return the minimal set of values that should be in the session

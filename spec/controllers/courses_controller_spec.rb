@@ -24,7 +24,10 @@ describe CoursesController do
   # Course. As you add validations to Course, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "number" => "1" }
+    {
+      :number => 1,
+      :name => "Algorithms"
+    }
   end
 
   # This should return the minimal set of values that should be in the session
