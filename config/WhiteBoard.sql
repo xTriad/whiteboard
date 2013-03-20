@@ -276,7 +276,8 @@ CREATE TABLE courses (
     number text NOT NULL,
     name text NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    university_id integer
 );
 
 
@@ -880,7 +881,7 @@ ALTER SEQUENCE "Roles_id_seq" OWNED BY roles.role_id;
 
 CREATE TABLE sections_users (
     section_id integer NOT NULL,
-    user_id integer NOT NULL
+    ur_id integer NOT NULL
 );
 
 
@@ -925,7 +926,7 @@ ALTER TABLE public."SectionUsers_user_id_seq" OWNER TO postgres;
 -- Name: SectionUsers_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "SectionUsers_user_id_seq" OWNED BY sections_users.user_id;
+ALTER SEQUENCE "SectionUsers_user_id_seq" OWNED BY sections_users.ur_id;
 
 
 --
@@ -1003,7 +1004,8 @@ CREATE TABLE users (
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    name character varying(255)
+    name character varying(255),
+    university_id integer
 );
 
 
@@ -1031,6 +1033,91 @@ ALTER SEQUENCE "Users_id_seq" OWNED BY users.user_id;
 
 
 --
+-- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE active_admin_comments (
+    id integer NOT NULL,
+    resource_id character varying(255) NOT NULL,
+    resource_type character varying(255) NOT NULL,
+    author_id integer,
+    author_type character varying(255),
+    body text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    namespace character varying(255)
+);
+
+
+ALTER TABLE public.active_admin_comments OWNER TO postgres;
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE active_admin_comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_admin_comments_id_seq OWNER TO postgres;
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE active_admin_comments_id_seq OWNED BY active_admin_comments.id;
+
+
+--
+-- Name: admin_users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE admin_users (
+    id integer NOT NULL,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying(255),
+    last_sign_in_ip character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    unviersity_id integer
+);
+
+
+ALTER TABLE public.admin_users OWNER TO postgres;
+
+--
+-- Name: admin_users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE admin_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.admin_users_id_seq OWNER TO postgres;
+
+--
+-- Name: admin_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1042,16 +1129,144 @@ CREATE TABLE schema_migrations (
 ALTER TABLE public.schema_migrations OWNER TO postgres;
 
 --
+-- Name: universities; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE universities (
+    university_id integer NOT NULL,
+    university_name integer NOT NULL
+);
+
+
+ALTER TABLE public.universities OWNER TO postgres;
+
+--
+-- Name: universities_university_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE universities_university_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.universities_university_id_seq OWNER TO postgres;
+
+--
+-- Name: universities_university_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE universities_university_id_seq OWNED BY universities.university_id;
+
+
+--
+-- Name: universities_university_name_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE universities_university_name_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.universities_university_name_seq OWNER TO postgres;
+
+--
+-- Name: universities_university_name_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE universities_university_name_seq OWNED BY universities.university_name;
+
+
+--
+-- Name: uploads; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE uploads (
+    id integer NOT NULL,
+    upload_file_name character varying(255),
+    upload_content_type character varying(255),
+    upload_file_size integer,
+    upload_updated_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.uploads OWNER TO postgres;
+
+--
+-- Name: uploads_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE uploads_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.uploads_id_seq OWNER TO postgres;
+
+--
+-- Name: uploads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE uploads_id_seq OWNED BY uploads.id;
+
+
+--
 -- Name: users_roles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE users_roles (
     user_id integer,
-    role_id integer
+    role_id integer,
+    ur_id integer NOT NULL
 );
 
 
 ALTER TABLE public.users_roles OWNER TO postgres;
+
+--
+-- Name: users_roles_ur_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_roles_ur_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_roles_ur_id_seq OWNER TO postgres;
+
+--
+-- Name: users_roles_ur_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_roles_ur_id_seq OWNED BY users_roles.ur_id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('active_admin_comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY admin_users ALTER COLUMN id SET DEFAULT nextval('admin_users_id_seq'::regclass);
+
 
 --
 -- Name: grade_id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -1292,10 +1507,31 @@ ALTER TABLE ONLY sections_users ALTER COLUMN section_id SET DEFAULT nextval('"Se
 
 
 --
--- Name: user_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: ur_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY sections_users ALTER COLUMN user_id SET DEFAULT nextval('"SectionUsers_user_id_seq"'::regclass);
+ALTER TABLE ONLY sections_users ALTER COLUMN ur_id SET DEFAULT nextval('"SectionUsers_user_id_seq"'::regclass);
+
+
+--
+-- Name: university_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY universities ALTER COLUMN university_id SET DEFAULT nextval('universities_university_id_seq'::regclass);
+
+
+--
+-- Name: university_name; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY universities ALTER COLUMN university_name SET DEFAULT nextval('universities_university_name_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY uploads ALTER COLUMN id SET DEFAULT nextval('uploads_id_seq'::regclass);
 
 
 --
@@ -1303,6 +1539,13 @@ ALTER TABLE ONLY sections_users ALTER COLUMN user_id SET DEFAULT nextval('"Secti
 --
 
 ALTER TABLE ONLY users ALTER COLUMN user_id SET DEFAULT nextval('"Users_id_seq"'::regclass);
+
+
+--
+-- Name: ur_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users_roles ALTER COLUMN ur_id SET DEFAULT nextval('users_roles_ur_id_seq'::regclass);
 
 
 --
@@ -1351,6 +1594,14 @@ ALTER TABLE ONLY groups
 
 ALTER TABLE ONLY messages
     ADD CONSTRAINT "Messages_pkey" PRIMARY KEY (message_id);
+
+
+--
+-- Name: PK_User_Roles; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY users_roles
+    ADD CONSTRAINT "PK_User_Roles" PRIMARY KEY (ur_id);
 
 
 --
@@ -1418,6 +1669,38 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: admin_notes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY active_admin_comments
+    ADD CONSTRAINT admin_notes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY admin_users
+    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: universities_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY universities
+    ADD CONSTRAINT universities_pkey PRIMARY KEY (university_id);
+
+
+--
+-- Name: uploads_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY uploads
+    ADD CONSTRAINT uploads_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: index_Roles_on_role_name; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1453,10 +1736,53 @@ CREATE UNIQUE INDEX "index_Users_on_reset_password_token" ON users USING btree (
 
 
 --
+-- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX index_active_admin_comments_on_author_type_and_author_id ON active_admin_comments USING btree (author_type, author_id);
+
+
+--
+-- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX index_active_admin_comments_on_namespace ON active_admin_comments USING btree (namespace);
+
+
+--
+-- Name: index_admin_notes_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX index_admin_notes_on_resource_type_and_resource_id ON active_admin_comments USING btree (resource_type, resource_id);
+
+
+--
+-- Name: index_admin_users_on_email; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_admin_users_on_email ON admin_users USING btree (email);
+
+
+--
+-- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON admin_users USING btree (reset_password_token);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: FK_AdminUsers_Universities; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY admin_users
+    ADD CONSTRAINT "FK_AdminUsers_Universities" FOREIGN KEY (unviersity_id) REFERENCES universities(university_id);
 
 
 --
@@ -1505,6 +1831,14 @@ ALTER TABLE ONLY attendance
 
 ALTER TABLE ONLY attendance
     ADD CONSTRAINT "FK_Attendance_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+
+--
+-- Name: FK_Courses_Universities; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY courses
+    ADD CONSTRAINT "FK_Courses_Universities" FOREIGN KEY (university_id) REFERENCES universities(university_id);
 
 
 --
@@ -1620,11 +1954,11 @@ ALTER TABLE ONLY sections_users
 
 
 --
--- Name: FK_SectionUsers_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_SectionUsers_Users_Roles; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY sections_users
-    ADD CONSTRAINT "FK_SectionUsers_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
+    ADD CONSTRAINT "FK_SectionUsers_Users_Roles" FOREIGN KEY (ur_id) REFERENCES users_roles(ur_id);
 
 
 --
@@ -1649,6 +1983,14 @@ ALTER TABLE ONLY users_roles
 
 ALTER TABLE ONLY users_roles
     ADD CONSTRAINT "FK_UserRoles_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+
+--
+-- Name: FK_Users_Universities; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT "FK_Users_Universities" FOREIGN KEY (university_id) REFERENCES universities(university_id);
 
 
 --
