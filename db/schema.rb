@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301041941) do
+ActiveRecord::Schema.define(:version => 0) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20130301041941) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "unviersity_id"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -80,10 +81,11 @@ ActiveRecord::Schema.define(:version => 20130301041941) do
   end
 
   create_table "courses", :primary_key => "course_id", :force => true do |t|
-    t.text     "number",     :null => false
-    t.text     "name",       :null => false
+    t.text     "number",        :null => false
+    t.text     "name",          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "university_id"
   end
 
   create_table "groups", :primary_key => "group_id", :force => true do |t|
@@ -157,7 +159,11 @@ ActiveRecord::Schema.define(:version => 20130301041941) do
 
   create_table "sections_users", :id => false, :force => true do |t|
     t.integer "section_id", :null => false
-    t.integer "user_id",    :null => false
+    t.integer "ur_id",      :null => false
+  end
+
+  create_table "universities", :primary_key => "university_id", :force => true do |t|
+    t.integer "university_name", :null => false
   end
 
   create_table "uploads", :force => true do |t|
@@ -183,12 +189,13 @@ ActiveRecord::Schema.define(:version => 20130301041941) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.integer  "university_id"
   end
 
   add_index "users", ["email"], :name => "index_Users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_Users_on_reset_password_token", :unique => true
 
-  create_table "users_roles", :id => false, :force => true do |t|
+  create_table "users_roles", :primary_key => "ur_id", :force => true do |t|
     t.integer "user_id"
     t.integer "role_id"
   end
