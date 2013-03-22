@@ -7,14 +7,17 @@ Whiteboard::Application.routes.draw do
 
   resources :assignment_types
 
-  # TODO: http://stackoverflow.com/questions/3589884/what-does-map-resource-in-the-route-file-do-exactly/3590622#3590622
-  # resources :uploads
+  # TODO: Need whiteboard.com/user/assignments
+  # Currently we have whiteboard.com/assignments
+  # Need to get rid of whiteboard.com/uploads
+  # Upload page should only exist at whiteboard.com/user/assignments/edit
+  # See http://stackoverflow.com/questions/3589884/what-does-map-resource-in-the-route-file-do-exactly/3590622#3590622
+  resources :assignments
+  resources :uploads
 
   resources :sections
 
   resources :courses
-
-  resources :assignments
 
   authenticated :user do
     root :to => 'home#index'

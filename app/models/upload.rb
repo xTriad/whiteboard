@@ -4,6 +4,9 @@ class Upload < ActiveRecord::Base
     :url => ":rails_root/storage/system/:class/:id/:basename.:extension", # where to retrieve
     :path => ":rails_root/storage/system/:class/:id/:basename.:extension" # where to save
 
+# Need: :rails_root/storage/:class/:user-id/:assignment-id/:basename.:extension
+#                  /storage/uploads/3645/2344/huffman.cpp
+
   include Rails.application.routes.url_helpers
 
   # https://github.com/blueimp/jQuery-File-Upload/issues/365#issuecomment-13859210
