@@ -11,7 +11,8 @@
 </p>
 
 <p>
-  <b><%= link_to 'Sections', course_sections_path(1) %></b>
+  <!-- Pass in the ID of the course -->
+  <b><%= link_to 'Sections', course_sections_path(@course.course_id) %></b>
 </p>
 
 <p>
