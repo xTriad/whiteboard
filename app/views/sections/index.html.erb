@@ -12,14 +12,10 @@
 <% @sections.each do |section| %>
   <tr>
     <td><%= section.course_id %></td>
-    <td><%= section.section_number %></td>
-    <td><%= link_to 'Show', section %></td>
-    <td><%= link_to 'Edit', edit_section_path(section) %></td>
-    <td><%= link_to 'Destroy', section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= section.section_id %></td>
+    <td><%= link_to 'Show', 'course_section_path(section)' %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Section', new_section_path %>

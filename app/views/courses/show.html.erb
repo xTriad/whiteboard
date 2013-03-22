@@ -10,6 +10,13 @@
   <%= @course.name %>
 </p>
 
+<p>
+  <b><%= link_to 'Sections', course_sections_path(1) %></b>
+</p>
+
+<p>
+  <b><%= link_to 'Assignments', 'course_section_assignments' %></b>
+</p>
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
