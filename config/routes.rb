@@ -8,7 +8,7 @@ Whiteboard::Application.routes.draw do
   resources :assignment_types
 
   # TODO: http://stackoverflow.com/questions/3589884/what-does-map-resource-in-the-route-file-do-exactly/3590622#3590622
-  resources :uploads
+  # resources :uploads
 
   resources :sections
 

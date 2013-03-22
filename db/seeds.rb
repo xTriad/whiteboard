@@ -80,5 +80,12 @@ Assignment.create([
     :due_date => '2020-02-12',
     :highest_grade_value => 100,
     :weight => 1
+  },
+  {
+    :type_id => 1,
+    :section_id => 2,
+    :due_date => '2020-02-14',
+    :highest_grade_value => 90,
+    :weight => 2
   }
 ])
