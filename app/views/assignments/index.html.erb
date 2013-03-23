@@ -13,6 +13,8 @@
   </tr>
 
 <% @assignments.each do |assignment| %>
+  <!-- Move this PHP crap to the model!!! Just getting it to work for now -->
+  <% if assignment.section_id == params[:section_id].to_i %>
   <tr>
     <td><%= assignment.type_id %></td>
     <td><%= assignment.section_id %></td>
@@ -23,6 +25,7 @@
     <td><%= link_to 'Edit', 'edit_assignment_path(assignment)' %></td>
     <td><%= link_to 'Destroy', 'assignment', method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
+  <% end %>
 <% end %>
 </table>
 
