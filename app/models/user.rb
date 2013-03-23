@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-  
+
   def role_name
     name = ""
     Role.all.each do |role|
@@ -19,5 +19,9 @@ class User < ActiveRecord::Base
     end
     return name
   end
-  
+
+  Paperclip.interpolates :user_id do |attachment, style|
+    attachment.instance.user_id
+  end
+
 end

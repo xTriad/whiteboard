@@ -8,7 +8,7 @@
   </tr>
 <% @sections.each do |section| %>
   <!-- http://stackoverflow.com/q/7666513 -->
-  <!-- Move this PHP crap to the model!!! Just getting it to work for now -->
+  <!-- TODO: Move this PHP crap to the model!!! Just getting it to work for now -->
   <% if section.course_id == params[:course_id].to_i %>
     <% course = Course.find(section.course_id); %>
     <tr>

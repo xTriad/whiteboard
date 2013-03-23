@@ -13,22 +13,21 @@
   </tr>
 
 <% @assignments.each do |assignment| %>
-  <!-- Move this PHP crap to the model!!! Just getting it to work for now -->
+  <!-- TODO: Move this PHP crap to the model!!! Just getting it to work for now -->
   <% if assignment.section_id == params[:section_id].to_i %>
+  <% course = Course.find(params[:course_id].to_i) %>
+  <% section = Section.find(params[:section_id].to_i) %>
   <tr>
     <td><%= assignment.type_id %></td>
     <td><%= assignment.section_id %></td>
     <td><%= assignment.due_date %></td>
     <td><%= assignment.highest_grade_value %></td>
     <td><%= assignment.weight %></td>
-    <td><%= link_to 'Show', 'assignment' %></td>
-    <td><%= link_to 'Edit', 'edit_assignment_path(assignment)' %></td>
-    <td><%= link_to 'Destroy', 'assignment', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', course_section_assignment_path(course, section, assignment) %> |
+        <%= link_to 'Edit', edit_course_section_assignment_path(course, section, assignment) %></td>
   </tr>
   <% end %>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Assignment', 'new_assignment_path' %>

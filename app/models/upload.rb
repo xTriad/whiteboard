@@ -1,11 +1,14 @@
 class Upload < ActiveRecord::Base
   attr_accessible :upload
   has_attached_file :upload,
-    :url => ":rails_root/storage/system/:class/:id/:basename.:extension", # where to retrieve
-    :path => ":rails_root/storage/system/:class/:id/:basename.:extension" # where to save
+      :url => ":rails_root/storage/:class/:assignment_id/:basename.:extension",
+      :path => ":rails_root/storage/:class/:assignment_id/:basename.:extension"
 
-# Need: :rails_root/storage/:class/:user-id/:assignment-id/:basename.:extension
-#                  /storage/uploads/3645/2344/huffman.cpp
+    # :url => ":rails_root/storage/:class/:user_id/:assignment_id/:basename.:extension",
+    # :path => ":rails_root/storage/:class/:user_id/:assignment_id/:basename.:extension"
+
+    # :url => ":rails_root/storage/system/:class/:id/:basename.:extension", # where to retrieve
+    # :path => ":rails_root/storage/system/:class/:id/:basename.:extension" # where to save
 
   include Rails.application.routes.url_helpers
 

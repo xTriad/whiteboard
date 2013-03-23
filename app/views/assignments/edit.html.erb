@@ -2,6 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @assignment %> |
-<%= link_to 'Back', assignments_path %>
- 
+<% course = Course.find(params[:course_id].to_i) %>
+<% section = Section.find(params[:section_id].to_i) %>
+
+<%= link_to 'Back to Assignment', course_section_assignment_path(course, section, @assignment) %>

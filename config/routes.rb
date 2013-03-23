@@ -22,9 +22,6 @@ Whiteboard::Application.routes.draw do
   end
 
   resources :assignment_types
-  # resources :courses
-  # resources :sections
-  # resources :assignments
   resources :uploads
 
   authenticated :user do
