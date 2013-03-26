@@ -27,4 +27,6 @@ Whiteboard::Application.routes.draw do
 
   devise_for :users
   resources :users
+  resources :grades
+  resources :teachergrades
 end
