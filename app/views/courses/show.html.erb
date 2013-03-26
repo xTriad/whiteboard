@@ -15,7 +15,7 @@
 </p>
 
 <p>
-  <b><%= link_to 'Assignments', assignments_path %></b>
+  <b><%= link_to 'Assignments', assignments_path(:course => @course.course_id) %></b>
 </p>
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
