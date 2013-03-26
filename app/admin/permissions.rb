@@ -1,19 +1,18 @@
-ActiveAdmin.register Role do
+ActiveAdmin.register Permission do
 #=begin
-  index do                            
+  index do                           
     column :name
-    column :created_at                
-    column :updated_at                
+    column :role
     default_actions                   
   end                                 
-
+  
   filter :name
-  filter :created_at
-  filter :updated_at                      
+  filter :role_name
 
   form do |f|                         
-    f.inputs "User Details" do       
+    f.inputs "Permission Details" do       
       f.input :name
+      f.input :role_name
     end                               
     f.actions                         
   end
