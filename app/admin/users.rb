@@ -5,7 +5,7 @@ ActiveAdmin.register User do
     column :current_sign_in_at        
     column :last_sign_in_at           
     column :sign_in_count
-    column :role_name
+    #column :role_name
     default_actions                   
   end                                 
   
@@ -20,5 +20,5 @@ ActiveAdmin.register User do
       f.input :password_confirmation
     end                               
     f.actions                         
-  end       
+  end  
 end
