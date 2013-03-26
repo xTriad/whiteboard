@@ -7,6 +7,18 @@ class UploadsController < ApplicationController
     #authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @uploads = Upload.all
 
+    # For paperclip interpolation
+    # This may need to go in show as well?
+    # https://groups.google.com/forum/?fromgroups=#!topic/paperclip-plugin/fY0g5-z2oz0
+    @assignment = Assignment.find(params[:id]) #assumes we are on assignment edit page
+
+    # @user = User.new( params[:user] ) 
+    # @user.save! 
+
+    # @zip_file = ZipFile.new(params[:zip_file]) 
+    # @zip_file.user_id = @user.id 
+    # @zip_file.save! 
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @uploads.map{|upload| upload.to_jq_upload } }
