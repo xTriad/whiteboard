@@ -34,7 +34,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/edit
   def edit
-    @assignment = Assignment.find(1) # need id from somewhere
+    @assignment = Assignment.find(params[:id])
     # @user_id = 666
     # @zip_file.user_id = @user.id
   end
