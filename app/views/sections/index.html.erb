@@ -7,15 +7,13 @@
     <th></th>
   </tr>
 <% @sections.each do |section| %>
-  <!-- http://stackoverflow.com/q/7666513 -->
   <!-- TODO: Move this PHP crap to the model!!! Just getting it to work for now -->
-  <% if section.course_id == params[:course_id].to_i %>
+  <% if section.course_id == params[:course].to_i %>
     <% course = Course.find(section.course_id); %>
     <tr>
       <td><%= section.course_id %></td>
       <td><%= section.section_id %></td>
-     <!-- http://stackoverflow.com/a/5410548 -->
-      <td><%= link_to 'Show', course_section_assignments_path(course, section) %></td>
+      <td><%= link_to 'Show', section_path(section) %></td>
     </tr>
   <% end %>
 <% end %>

@@ -25,7 +25,4 @@
   <%= @assignment.weight %>
 </p>
 
-<% course = Course.find(params[:course_id].to_i) %>
-<% section = Section.find(params[:section_id].to_i) %>
-
-<%= link_to 'Edit', edit_course_section_assignment_path(course, section, @assignment) %>
+<%= link_to 'Edit', edit_assignment_path(@assignment) %>

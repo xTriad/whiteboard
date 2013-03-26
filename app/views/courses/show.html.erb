@@ -11,12 +11,11 @@
 </p>
 
 <p>
-  <!-- Pass in the ID of the course -->
-  <b><%= link_to 'Sections', course_sections_path(@course.course_id) %></b>
+  <b><%= link_to 'Sections', sections_path(:course => @course.course_id) %></b>
 </p>
 
 <p>
-  <b><%= link_to 'Assignments', 'course_section_assignments' %></b>
+  <b><%= link_to 'Assignments', assignments_path %></b>
 </p>
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
