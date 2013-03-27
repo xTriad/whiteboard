@@ -1,8 +1,8 @@
 class Upload < ActiveRecord::Base
   attr_accessible :upload
   has_attached_file :upload,
-     :url => ":rails_root/storage/:class/:assignment_id/:basename.:extension",
-     :path => ":rails_root/storage/:class/:assignment_id/:basename.:extension"
+     :url => ":rails_root/storage/assignments/:assignment_id/:basename.:extension",
+     :path => ":rails_root/storage/assignments/:assignment_id/:basename.:extension"
 
     # :url => ":rails_root/storage/:class/:user_id/:assignment_id/:basename.:extension",
     # :path => ":rails_root/storage/:class/:user_id/:assignment_id/:basename.:extension"
@@ -27,8 +27,13 @@ class Upload < ActiveRecord::Base
     }
   end
 
-  def assignment_id
-    34 # lawl, this makes it work
+  # TODO: Rename this to something more meaningful
+  def update!(id)
+    @assignment_id_from_url = id
   end
 
+  # This makes the Paperclip interpolation work for :assignment_id
+  def assignment_id
+    @assignment_id_from_url
+  end
 end

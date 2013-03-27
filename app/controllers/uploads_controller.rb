@@ -7,17 +7,9 @@ class UploadsController < ApplicationController
     #authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @uploads = Upload.all
 
-    # For paperclip interpolation
-    # This may need to go in show as well?
-    # https://groups.google.com/forum/?fromgroups=#!topic/paperclip-plugin/fY0g5-z2oz0
-    #@assignment = Assignment.find(1) # need to get id from somewhere
-
-    # @user = User.new( params[:user] ) 
-    # @user.save! 
-
-    # @zip_file = ZipFile.new(params[:zip_file]) 
-    # @zip_file.user_id = @user.id 
-    # @zip_file.save! 
+    @uploads.each do |upload|
+      upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,6 +21,7 @@ class UploadsController < ApplicationController
   # GET /uploads/1.json
   def show
     @upload = Upload.find(params[:id])
+    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,6 +33,7 @@ class UploadsController < ApplicationController
   # GET /uploads/new.json
   def new
     @upload = Upload.new
+    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
       format.html # new.html.erb
@@ -50,12 +44,14 @@ class UploadsController < ApplicationController
   # GET /uploads/1/edit
   def edit
     @upload = Upload.find(params[:id])
+    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
   end
 
   # POST /uploads
   # POST /uploads.json
   def create
     @upload = Upload.new(params[:upload])
+    @upload.update!(params[:assignment_id_tag])
 
     respond_to do |format|
       if @upload.save
@@ -76,6 +72,7 @@ class UploadsController < ApplicationController
   # PUT /uploads/1.json
   def update
     @upload = Upload.find(params[:id])
+    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
       if @upload.update_attributes(params[:upload])
@@ -92,6 +89,7 @@ class UploadsController < ApplicationController
   # DELETE /uploads/1.json
   def destroy
     @upload = Upload.find(params[:id])
+    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
     @upload.destroy
 
     respond_to do |format|
