@@ -28,7 +28,7 @@ class Upload < ActiveRecord::Base
   end
 
   def assignment_id
-    1 # lawl, this makes it work
+    34 # lawl, this makes it work
   end
 
 end

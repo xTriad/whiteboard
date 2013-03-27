@@ -10,7 +10,7 @@ class UploadsController < ApplicationController
     # For paperclip interpolation
     # This may need to go in show as well?
     # https://groups.google.com/forum/?fromgroups=#!topic/paperclip-plugin/fY0g5-z2oz0
-    @assignment = Assignment.find(1) # need to get id from somewhere
+    #@assignment = Assignment.find(1) # need to get id from somewhere
 
     # @user = User.new( params[:user] ) 
     # @user.save! 
