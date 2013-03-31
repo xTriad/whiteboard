@@ -1,14 +1,8 @@
 class Upload < ActiveRecord::Base
   attr_accessible :upload
   has_attached_file :upload,
-     :url => ":rails_root/storage/assignments/:assignment_id/:basename.:extension",
-     :path => ":rails_root/storage/assignments/:assignment_id/:basename.:extension"
-
-    # :url => ":rails_root/storage/:class/:user_id/:assignment_id/:basename.:extension",
-    # :path => ":rails_root/storage/:class/:user_id/:assignment_id/:basename.:extension"
-
-    # :url => ":rails_root/storage/system/:class/:id/:basename.:extension", # where to retrieve
-    # :path => ":rails_root/storage/system/:class/:id/:basename.:extension" # where to save
+    :url => ":rails_root/storage/assignments/:assignment_id/:basename.:extension", # where to retrieve
+    :path => ":rails_root/storage/assignments/:assignment_id/:basename.:extension" # where to save
 
   include Rails.application.routes.url_helpers
 
@@ -27,13 +21,16 @@ class Upload < ActiveRecord::Base
     }
   end
 
-  # TODO: Rename this to something more meaningful
-  def update!(id)
-    @assignment_id_from_url = id
+  # Sets the paperclip interpolation values sent in from
+  # hidden form tag values. So, these are :assignmnt_id and
+  # :user_id in the has_attached_file :url and :path hashes
+  def paperclip_values!(assignment_id)
+    @assignment_id_tag = assignment_id
+    #@user_id_tag = user_id
   end
 
   # This makes the Paperclip interpolation work for :assignment_id
   def assignment_id
-    @assignment_id_from_url
+    @assignment_id_tag
   end
 end

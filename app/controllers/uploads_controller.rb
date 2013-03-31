@@ -5,11 +5,14 @@ class UploadsController < ApplicationController
   # GET /uploads.json
   def index
     #authorize! :index, @user, :message => 'Not authorized as an administrator.'
+
+    # TODO: Only retrieve uploads for the given user's assignment
+    # Add user_id and assginment_id fields to the uploads table
     @uploads = Upload.all
 
-    @uploads.each do |upload|
-      upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
-    end
+    # @uploads.each do |upload|
+    #   upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
+    # end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,7 +24,7 @@ class UploadsController < ApplicationController
   # GET /uploads/1.json
   def show
     @upload = Upload.find(params[:id])
-    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
+    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +36,7 @@ class UploadsController < ApplicationController
   # GET /uploads/new.json
   def new
     @upload = Upload.new
-    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
+    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,14 +47,14 @@ class UploadsController < ApplicationController
   # GET /uploads/1/edit
   def edit
     @upload = Upload.find(params[:id])
-    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
+    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
   end
 
   # POST /uploads
   # POST /uploads.json
   def create
     @upload = Upload.new(params[:upload])
-    @upload.update!(params[:assignment_id_tag])
+    @upload.paperclip_values!(params[:assignment_id])
 
     respond_to do |format|
       if @upload.save
@@ -72,7 +75,7 @@ class UploadsController < ApplicationController
   # PUT /uploads/1.json
   def update
     @upload = Upload.find(params[:id])
-    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
+    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
       if @upload.update_attributes(params[:upload])
@@ -89,7 +92,7 @@ class UploadsController < ApplicationController
   # DELETE /uploads/1.json
   def destroy
     @upload = Upload.find(params[:id])
-    @upload.update!(params[:assignment_id_tag]) # TODO: Debug and see if this is needed
+    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
     @upload.destroy
 
     respond_to do |format|
