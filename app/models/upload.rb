@@ -31,6 +31,11 @@ class Upload < ActiveRecord::Base
 
   # This makes the Paperclip interpolation work for :assignment_id
   def assignment_id
-    @assignment_id_tag
+    # debugger
+    unless @assignment_id_tag.nil? || @assignment_id_tag == 0
+      @assignment_id_tag
+    else
+      read_attribute(:assignment_id)
+    end
   end
 end

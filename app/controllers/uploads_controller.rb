@@ -8,11 +8,11 @@ class UploadsController < ApplicationController
 
     # TODO: Only retrieve uploads for the given user's assignment
     # Add user_id and assginment_id fields to the uploads table
-    @uploads = Upload.all
+    @uploads = Upload.where(:assignment_id => params[:assignment_id])
 
-    # @uploads.each do |upload|
-    #   upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
-    # end
+    @uploads.each do |upload|
+      upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,7 +35,8 @@ class UploadsController < ApplicationController
   # GET /uploads/new
   # GET /uploads/new.json
   def new
-    @upload = Upload.new
+    debugger # TODO: This isn't getting called when a new upload occurs 
+    @upload = Upload.new # TODO: Create constructor that accepts ids
     @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
@@ -53,8 +54,10 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    @upload = Upload.new(params[:upload])
-    @upload.paperclip_values!(params[:assignment_id])
+    debugger
+    temp = params[:assignment_id] # this doesn't exist for this action!
+    @upload = Upload.new(params[:upload]) # TODO: Create constructor that accepts ids
+    @upload.paperclip_values!(params[:assignment_id]) # TODO: This isn't happening, needs to happen in javascript on uploads/x/new?
 
     respond_to do |format|
       if @upload.save
