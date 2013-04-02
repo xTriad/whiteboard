@@ -35,7 +35,7 @@ class UploadsController < ApplicationController
   # GET /uploads/new
   # GET /uploads/new.json
   def new
-    debugger # TODO: This isn't getting called when a new upload occurs 
+    debugger # TODO: This isn't getting called when a new upload occurs, it's happening in the javascript via ajax
     @upload = Upload.new # TODO: Create constructor that accepts ids
     @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
 
@@ -94,6 +94,7 @@ class UploadsController < ApplicationController
   # DELETE /uploads/1
   # DELETE /uploads/1.json
   def destroy
+    # TODO: Javascript usage: http://railsapps.github.com/rails-javascript-include-external.html
     @upload = Upload.find(params[:id])
     @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
     @upload.destroy
