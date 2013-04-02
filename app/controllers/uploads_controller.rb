@@ -5,14 +5,7 @@ class UploadsController < ApplicationController
   # GET /uploads.json
   def index
     #authorize! :index, @user, :message => 'Not authorized as an administrator.'
-
-    # TODO: Only retrieve uploads for the given user's assignment
-    # Add user_id and assginment_id fields to the uploads table
-    @uploads = Upload.where(:assignment_id => params[:assignment_id])
-
-    @uploads.each do |upload|
-      upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
-    end
+    @uploads = Upload.where("assignment_id = ?", params[:assignment_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +17,6 @@ class UploadsController < ApplicationController
   # GET /uploads/1.json
   def show
     @upload = Upload.find(params[:id])
-    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,10 +26,11 @@ class UploadsController < ApplicationController
 
   # GET /uploads/new
   # GET /uploads/new.json
+  # This isn't being called since the jquery-fileupload Javascript ajax
+  # handles the creation of new Uploads.
   def new
-    debugger # TODO: This isn't getting called when a new upload occurs, it's happening in the javascript via ajax
-    @upload = Upload.new # TODO: Create constructor that accepts ids
-    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
+    @upload = Upload.new
+    @upload.paperclip_values!(params[:assignment_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,17 +41,16 @@ class UploadsController < ApplicationController
   # GET /uploads/1/edit
   def edit
     @upload = Upload.find(params[:id])
-    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
   end
 
   # POST /uploads
   # POST /uploads.json
+  # This method is called from the jquery-fileupload Javascript, not
+  # from the new page and the new action above.
   def create
     # debugger
-    # TODO: Send this param via AJAX??????????
-    temp = params[:assignment_id] # This doesn't exist since we aren't coming from /new/ but javascript ajax instead
-    @upload = Upload.new(params[:upload]) # TODO: Create constructor that accepts ids
-    @upload.paperclip_values!(params[:assignment_id]) # TODO: This isn't happening, needs to happen in javascript on uploads/x/new?
+    @upload = Upload.new(params[:upload])
+    @upload.paperclip_values!(params[:assignment_id])
 
     respond_to do |format|
       if @upload.save
@@ -79,7 +71,6 @@ class UploadsController < ApplicationController
   # PUT /uploads/1.json
   def update
     @upload = Upload.find(params[:id])
-    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
 
     respond_to do |format|
       if @upload.update_attributes(params[:upload])
@@ -97,7 +88,6 @@ class UploadsController < ApplicationController
   def destroy
     # TODO: Javascript usage: http://railsapps.github.com/rails-javascript-include-external.html
     @upload = Upload.find(params[:id])
-    @upload.paperclip_values!(params[:assignment_id]) # TODO: Debug and see if this is needed
     @upload.destroy
 
     respond_to do |format|

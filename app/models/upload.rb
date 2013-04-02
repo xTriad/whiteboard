@@ -1,5 +1,5 @@
 class Upload < ActiveRecord::Base
-  attr_accessible :upload
+  attr_accessible :upload, :assignment_id
   has_attached_file :upload,
     :url => ":rails_root/storage/assignments/:assignment_id/:basename.:extension", # where to retrieve
     :path => ":rails_root/storage/assignments/:assignment_id/:basename.:extension" # where to save
@@ -22,8 +22,9 @@ class Upload < ActiveRecord::Base
   end
 
   # Sets the paperclip interpolation values sent in from
-  # hidden form tag values. So, these are :assignmnt_id and
+  # hidden form values. So, these are :assignmnt_id and
   # :user_id in the has_attached_file :url and :path hashes
+  # TODO: Replace this method with the constructor
   def paperclip_values!(assignment_id)
     @assignment_id_tag = assignment_id
     #@user_id_tag = user_id
@@ -31,7 +32,6 @@ class Upload < ActiveRecord::Base
 
   # This makes the Paperclip interpolation work for :assignment_id
   def assignment_id
-    # debugger
     unless @assignment_id_tag.nil? || @assignment_id_tag == 0
       @assignment_id_tag
     else
