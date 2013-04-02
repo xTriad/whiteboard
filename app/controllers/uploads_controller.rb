@@ -55,7 +55,8 @@ class UploadsController < ApplicationController
   # POST /uploads.json
   def create
     debugger
-    temp = params[:assignment_id] # this doesn't exist for this action!
+    # TODO: Send this param via AJAX
+    temp = params[:assignment_id] # This doesn't exist since we aren't coming from /new/ but javascript ajax instead
     @upload = Upload.new(params[:upload]) # TODO: Create constructor that accepts ids
     @upload.paperclip_values!(params[:assignment_id]) # TODO: This isn't happening, needs to happen in javascript on uploads/x/new?
 
