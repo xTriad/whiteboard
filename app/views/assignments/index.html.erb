@@ -12,11 +12,16 @@
     <th></th>
   </tr>
 
-<% @assignments.each do |assignment| %>
-  <!-- TODO: Move this PHP crap to the model!!! Just getting it to work for now -->
-  <%# if assignment.section_id == params[:section_id].to_i %>
-  <%# course = Course.find(params[:course_id].to_i) %>
-  <%# section = Section.find(params[:section_id].to_i) %>
+<!-- TODO: Move this PHP crap to the model! -->
+<% course = Course.find(params[:course].to_i) %>
+Coruse id: <%= course.course_id %>
+<% sections = Section.where("course_id = ?", course.course_id) %>
+Sections:
+<% sections.each do |section| %>
+<%= section.section_id %>
+<% end %>
+
+<% Assignment.where("section_id in (?)", sections).each do |assignment| %>
   <tr>
     <td><%= assignment.type_id %></td>
     <td><%= assignment.section_id %></td>
@@ -26,7 +31,6 @@
     <td><%= link_to 'Show', assignment_path(assignment) %> |
         <%= link_to 'Edit', edit_assignment_path(assignment) %></td>
   </tr>
-  <%# end %>
 <% end %>
 </table>
 

@@ -29,5 +29,6 @@ gem "therubyracer", ">= 0.11.3", :group => :assets, :platform => :ruby, :require
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem 'activeadmin'
 gem "meta_search", '>= 1.1.0.pre'
-gem "jquery-fileupload-rails"
+gem "jquery-fileupload-rails", "0.4.1", :path => "vendor/gems/jquery-fileupload-rails-0.4.1"
 gem 'paperclip'
+gem 'debugger', :group => [:development, :test]

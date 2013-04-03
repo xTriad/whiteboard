@@ -1,5 +1,6 @@
 Whiteboard::Application.routes.draw do
 
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -18,6 +19,8 @@ Whiteboard::Application.routes.draw do
   resources :assignments
   resources :uploads
   resources :assignment_types
+  put 'attendances/:id/:atten' => "attendances#updateAtten"
+  resources :attendances
 
   authenticated :user do
     root :to => 'home#index'
@@ -27,4 +30,6 @@ Whiteboard::Application.routes.draw do
 
   devise_for :users
   resources :users
+  resources :grades
+  resources :teachergrades
 end

@@ -1,0 +1,51 @@
+<h1>Add a New Grade</h1>
+
+<%=form_for @grade do |f|%>
+
+  <%if @grade.errors.any? %>
+     <h2>Error</h2>
+     <ul>
+       <% @grade.errors.full_messages.each do |message|%>
+           <li><%=message%></li>
+
+       <%end%>
+
+     </ul>
+  <%end%> 
+  <p>
+    <%=f.label :Assignment%><br/>
+    <%=f.text_field :aname%>
+
+  </p>
+
+  <p>
+    <%=f.label :Student%><br/>
+    <%=f.text_field :sname%>
+
+  </p>
+
+  <p>
+    <%=f.label :points%><br/>
+    <%=f.text_field :points%>
+
+  </p>
+
+  <p>
+    <%=f.label :pointspossible%><br/>
+    <%=f.text_field :pointsposs%>
+
+  </p>
+
+    <p>
+    <%=f.label :comment%><br/>
+    <%=f.text_area :comment%>
+
+  </p>
+
+  <p>
+    <%=f.submit "Add a Grade"%>
+
+  </p>
+
+
+<%end%>

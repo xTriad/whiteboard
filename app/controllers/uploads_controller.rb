@@ -4,8 +4,8 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.json
   def index
-    #authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @uploads = Upload.all
+    # authorize! :index, @user, :message => 'Not authorized as an administrator.''
+    @uploads = Upload.where(:assignment_id => params[:assignment_id], :user_id => current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,8 +26,11 @@ class UploadsController < ApplicationController
 
   # GET /uploads/new
   # GET /uploads/new.json
+  # This isn't being called since the jquery-fileupload Javascript ajax
+  # handles the creation of new Uploads.
   def new
     @upload = Upload.new
+    @upload.paperclip_values!(params[:assignment_id], params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,8 +45,17 @@ class UploadsController < ApplicationController
 
   # POST /uploads
   # POST /uploads.json
+  # This method is called from the jquery-fileupload Javascript, not
+  # from the new page/action above.
   def create
     @upload = Upload.new(params[:upload])
+
+    # Note that although these params are from the URL, they are also
+    # being passed through the params[:upload] POST variable since the
+    # database columns "user_id" and "assignment_id" won't get filled in
+    # without the POST variables for some reason. The POST variables are
+    # accessed like the following: params[:upload][:field_name]
+    @upload.paperclip_values!(params[:assignment_id], params[:user_id])
 
     respond_to do |format|
       if @upload.save
@@ -79,6 +91,7 @@ class UploadsController < ApplicationController
   # DELETE /uploads/1
   # DELETE /uploads/1.json
   def destroy
+    # TODO: Javascript usage: http://railsapps.github.com/rails-javascript-include-external.html
     @upload = Upload.find(params[:id])
     @upload.destroy
 

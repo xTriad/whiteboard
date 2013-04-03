@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130401000344) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -88,6 +88,17 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer  "university_id"
   end
 
+  create_table "grades", :force => true do |t|
+    t.string   "string"
+    t.string   "name"
+    t.string   "Integer"
+    t.string   "grade"
+    t.string   "pointsposs"
+    t.string   "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "groups", :primary_key => "group_id", :force => true do |t|
     t.text    "name",               :null => false
     t.integer "associated_course",  :null => false
@@ -162,6 +173,18 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer "ur_id",      :null => false
   end
 
+  create_table "teachergrades", :force => true do |t|
+    t.string   "string"
+    t.string   "aname"
+    t.string   "sname"
+    t.string   "Integer"
+    t.string   "points"
+    t.string   "pointsposs"
+    t.string   "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "universities", :primary_key => "university_id", :force => true do |t|
     t.integer "university_name", :null => false
   end
@@ -173,6 +196,8 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "upload_updated_at"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.integer  "user_id"
+    t.integer  "assignment_id"
   end
 
   create_table "users", :primary_key => "user_id", :force => true do |t|
