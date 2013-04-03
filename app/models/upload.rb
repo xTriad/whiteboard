@@ -1,8 +1,8 @@
 class Upload < ActiveRecord::Base
   attr_accessible :upload
   has_attached_file :upload,
-      :url => ":rails_root/storage/:class/:assignment_id/:basename.:extension",
-      :path => ":rails_root/storage/:class/:assignment_id/:basename.:extension"
+      :url => ":rails_root/storage/:class/:id/:basename.:extension",
+      :path => ":rails_root/storage/:class/:id/:basename.:extension"
 
     # :url => ":rails_root/storage/:class/:user_id/:assignment_id/:basename.:extension",
     # :path => ":rails_root/storage/:class/:user_id/:assignment_id/:basename.:extension"
