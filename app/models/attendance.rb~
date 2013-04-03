@@ -1,0 +1,7 @@
+class Attendance < ActiveRecord::Base
+   attr_accessible :section_id, :user_id, :class_date, :present, :absent, :tardy, :excused
+
+  def allToJson
+     @allAttenJSON = Attendance.all.to_json
+  end
+end
