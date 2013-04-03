@@ -209,10 +209,10 @@ ALTER SEQUENCE "Assignments_type_id_seq" OWNED BY assignments.type_id;
 
 
 --
--- Name: attendance; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: attendances; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE attendance (
+CREATE TABLE attendances (
     section_id integer NOT NULL,
     user_id integer NOT NULL,
     class_date date NOT NULL,
@@ -224,7 +224,7 @@ CREATE TABLE attendance (
 );
 
 
-ALTER TABLE public.attendance OWNER TO postgres;
+ALTER TABLE public.attendances OWNER TO postgres;
 
 --
 -- Name: Attendance_section_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -244,7 +244,7 @@ ALTER TABLE public."Attendance_section_id_seq" OWNER TO postgres;
 -- Name: Attendance_section_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "Attendance_section_id_seq" OWNED BY attendance.section_id;
+ALTER SEQUENCE "Attendance_section_id_seq" OWNED BY attendances.section_id;
 
 
 --
@@ -265,7 +265,7 @@ ALTER TABLE public."Attendance_user_id_seq" OWNER TO postgres;
 -- Name: Attendance_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "Attendance_user_id_seq" OWNED BY attendance.user_id;
+ALTER SEQUENCE "Attendance_user_id_seq" OWNED BY attendances.user_id;
 
 
 --
@@ -1091,7 +1091,7 @@ CREATE TABLE admin_users (
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    unviersity_id integer NOT NULL
+    university_id integer NOT NULL
 );
 
 
@@ -1136,7 +1136,7 @@ ALTER TABLE public.attendance_attendance_id_seq OWNER TO postgres;
 -- Name: attendance_attendance_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE attendance_attendance_id_seq OWNED BY attendance.attendance_id;
+ALTER SEQUENCE attendance_attendance_id_seq OWNED BY attendances.attendance_id;
 
 
 --
@@ -1317,7 +1317,7 @@ ALTER TABLE ONLY assignments ALTER COLUMN assignment_id SET DEFAULT nextval('"As
 -- Name: attendance_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY attendance ALTER COLUMN attendance_id SET DEFAULT nextval('attendance_attendance_id_seq'::regclass);
+ALTER TABLE ONLY attendances ALTER COLUMN attendance_id SET DEFAULT nextval('attendance_attendance_id_seq'::regclass);
 
 
 --
@@ -1470,7 +1470,7 @@ ALTER TABLE ONLY messages
 -- Name: PK_Attendance_ClassDate; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY attendance
+ALTER TABLE ONLY attendances
     ADD CONSTRAINT "PK_Attendance_ClassDate" PRIMARY KEY (class_date);
 
 
@@ -1660,7 +1660,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 --
 
 ALTER TABLE ONLY admin_users
-    ADD CONSTRAINT "FK_AdminUsers_Universities" FOREIGN KEY (unviersity_id) REFERENCES universities(university_id);
+    ADD CONSTRAINT "FK_AdminUsers_Universities" FOREIGN KEY (university_id) REFERENCES universities(university_id);
 
 
 --
@@ -1699,7 +1699,7 @@ ALTER TABLE ONLY assignments
 -- Name: FK_Attendance_Sections; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY attendance
+ALTER TABLE ONLY attendances
     ADD CONSTRAINT "FK_Attendance_Sections" FOREIGN KEY (section_id) REFERENCES sections(section_id);
 
 
@@ -1707,7 +1707,7 @@ ALTER TABLE ONLY attendance
 -- Name: FK_Attendance_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY attendance
+ALTER TABLE ONLY attendances
     ADD CONSTRAINT "FK_Attendance_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 

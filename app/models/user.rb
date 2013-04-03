@@ -8,10 +8,12 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :university_id
   
   has_and_belongs_to_many :roles, :join_table => :users_roles
   has_and_belongs_to_many :sections, :join_table => :sections_users
+
+  belongs_to :university
 
   def role_name
     name = ""

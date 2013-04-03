@@ -7,49 +7,85 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # Environment variables (ENV['...']) are set in the file config/application.yml.
 # See http://railsapps.github.com/rails-environment-variables.html
-puts 'ROLES'
+
+# Insert Universities
+puts 'DEFAULT UNIVERSITIES'
+University.create([
+  { :university_name => 'Baylor' },
+  { :university_name => 'Texas' },
+  { :university_name => 'A&M' }
+])
+
+# Insert Roles
+puts 'DEFAULT ROLES'
 YAML.load(ENV['ROLES']).each do |role|
   Role.find_or_create_by_name({ :name => role }, :without_protection => true)
   puts 'role: ' << role
 end
+
+# Insert Default Users
 puts 'DEFAULT USERS'
-user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
+user = User.find_or_create_by_email(
+  :name => ENV['ADMIN_NAME'].dup,
+  :email => ENV['ADMIN_EMAIL'].dup,
+  :password => ENV['ADMIN_PASSWORD'].dup,
+  :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
+  :university_id => 1
+)
+
 puts 'user: ' << user.name
 user.add_role :admin
+
+# Copy Users to Active Admin
+adminuser = AdminUser.create!(
+  :email => ENV['ADMIN_EMAIL'].dup,
+  :password => ENV['ADMIN_PASSWORD'].dup,
+  :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
+  # :admin => true,
+  :university_id => 1
+)
 
 # Insert Courses
 puts 'DEFAULT COURSES'
 Course.create([
   {
     :number => 1430,
+    :university_id => 1,
     :name => 'Introduction I'
   },
   {
     :number => 1440,
+    :university_id => 1,
     :name => 'Introduction II'
   },
   {
     :number => 2334,
+    :university_id => 1,
     :name => 'Introduction to Systems'
   },
   {
     :number => 3101,
+    :university_id => 1,
     :name => 'Computer Ethics'
   },
   {
     :number => 3344,
+    :university_id => 1,
     :name => 'Data Structures'
   },
   {
     :number => 3335,
+    :university_id => 1,
     :name => 'Database'
   },
   {
     :number => 4321,
+    :university_id => 1,
     :name => 'Computer Networking'
   },
   {
     :number => 4330,
+    :university_id => 1,
     :name => 'Foundations'
   }
 ])

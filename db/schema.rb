@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401000344) do
+ActiveRecord::Schema.define(:version => 0) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20130401000344) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "unviersity_id"
+    t.integer  "university_id",                          :null => false
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -70,14 +70,15 @@ ActiveRecord::Schema.define(:version => 20130401000344) do
     t.datetime "updated_at"
   end
 
-  create_table "attendance", :id => false, :force => true do |t|
-    t.integer "section_id",                    :null => false
-    t.integer "user_id",                       :null => false
-    t.date    "class_date",                    :null => false
-    t.boolean "present",    :default => true
-    t.boolean "absent",     :default => false
-    t.boolean "tardy",      :default => false
-    t.boolean "excused",    :default => false
+  create_table "attendances", :id => false, :force => true do |t|
+    t.integer "section_id",                       :null => false
+    t.integer "user_id",                          :null => false
+    t.date    "class_date",                       :null => false
+    t.boolean "present",       :default => true
+    t.boolean "absent",        :default => false
+    t.boolean "tardy",         :default => false
+    t.boolean "excused",       :default => false
+    t.integer "attendance_id",                    :null => false
   end
 
   create_table "courses", :primary_key => "course_id", :force => true do |t|
@@ -85,18 +86,7 @@ ActiveRecord::Schema.define(:version => 20130401000344) do
     t.text     "name",          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "university_id"
-  end
-
-  create_table "grades", :force => true do |t|
-    t.string   "string"
-    t.string   "name"
-    t.string   "Integer"
-    t.string   "grade"
-    t.string   "pointsposs"
-    t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "university_id", :null => false
   end
 
   create_table "groups", :primary_key => "group_id", :force => true do |t|
@@ -122,8 +112,8 @@ ActiveRecord::Schema.define(:version => 20130401000344) do
   end
 
   create_table "permissions", :primary_key => "perm_id", :force => true do |t|
-    t.integer "role_id",   :null => false
-    t.text    "perm_name", :null => false
+    t.integer "role_id", :null => false
+    t.text    "name",    :null => false
   end
 
   create_table "quiz_answers", :primary_key => "answer_id", :force => true do |t|
@@ -173,20 +163,8 @@ ActiveRecord::Schema.define(:version => 20130401000344) do
     t.integer "ur_id",      :null => false
   end
 
-  create_table "teachergrades", :force => true do |t|
-    t.string   "string"
-    t.string   "aname"
-    t.string   "sname"
-    t.string   "Integer"
-    t.string   "points"
-    t.string   "pointsposs"
-    t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "universities", :primary_key => "university_id", :force => true do |t|
-    t.integer "university_name", :null => false
+    t.text "university_name", :null => false
   end
 
   create_table "uploads", :force => true do |t|
@@ -196,8 +174,8 @@ ActiveRecord::Schema.define(:version => 20130401000344) do
     t.datetime "upload_updated_at"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
-    t.integer  "user_id"
-    t.integer  "assignment_id"
+    t.integer  "user_id",             :null => false
+    t.integer  "assignment_id",       :null => false
   end
 
   create_table "users", :primary_key => "user_id", :force => true do |t|
@@ -214,7 +192,7 @@ ActiveRecord::Schema.define(:version => 20130401000344) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
-    t.integer  "university_id"
+    t.integer  "university_id",                          :null => false
   end
 
   add_index "users", ["email"], :name => "index_Users_on_email", :unique => true
