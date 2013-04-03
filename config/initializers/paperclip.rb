@@ -9,6 +9,11 @@ Paperclip.interpolates :assignment_id do |attachment, style|
   attachment.instance.assignment_id
 end
 
+# TODO: Safer to use method below since this requires attr_accessible?
+Paperclip.interpolates :user_id do |attachment, style|
+  attachment.instance.user_id
+end
+
 # module Paperclip
 #   module Interpolations
 #     def user_id(attachment, style)

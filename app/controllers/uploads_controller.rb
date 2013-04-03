@@ -4,8 +4,8 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.json
   def index
-    #authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @uploads = Upload.where("assignment_id = ?", params[:assignment_id])
+    # authorize! :index, @user, :message => 'Not authorized as an administrator.''
+    @uploads = Upload.where(:assignment_id => params[:assignment_id], :user_id => current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -30,7 +30,7 @@ class UploadsController < ApplicationController
   # handles the creation of new Uploads.
   def new
     @upload = Upload.new
-    @upload.paperclip_values!(params[:assignment_id])
+    @upload.paperclip_values!(params[:assignment_id], params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,11 +46,16 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   # This method is called from the jquery-fileupload Javascript, not
-  # from the new page and the new action above.
+  # from the new page/action above.
   def create
-    # debugger
     @upload = Upload.new(params[:upload])
-    @upload.paperclip_values!(params[:assignment_id])
+
+    # Note that although these params are from the URL, they are also
+    # being passed through the params[:upload] POST variable since the
+    # database columns "user_id" and "assignment_id" won't get filled in
+    # without the POST variables for some reason. The POST variables are
+    # accessed like the following: params[:upload][:field_name]
+    @upload.paperclip_values!(params[:assignment_id], params[:user_id])
 
     respond_to do |format|
       if @upload.save
