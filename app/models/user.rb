@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :sections, :join_table => :sections_users
 
   belongs_to :university
+  has_many :attendances # TODO: Have Kip confirm this
 
   def role_name
     name = ""

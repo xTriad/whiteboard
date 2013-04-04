@@ -1,40 +1,25 @@
 class AttendancesController < InheritedResources::Base
 
-def updateAtten
-  @attendance = Attendance.find(params[:id])
-  if params[:atten] == "present"
-        @attendance.present = true
-        @attendance.absent = false
-        @attendance.tardy = false
-	@attendance.excused = false
-  elsif params[:atten] == "absent"
-        @attendance.present = false
-        @attendance.absent = true
-        @attendance.tardy = false
-	@attendance.excused = false
-  elsif params[:atten] == "tardy"
-        @attendance.present = false
-        @attendance.absent = false
-        @attendance.tardy = true
-	@attendance.excused = false
-  elsif params[:atten] == "excused"
-        @attendance.present = false
-        @attendance.absent = false
-        @attendance.tardy = false
-	@attendance.excused = true
+  def update_attendance
+    @attendance = Attendance.find(params[:id])
+    @attendance.set_attendance(params[:atten])
+    @attendance.save
+
+    respond_to do |format|
+        format.json { render json: @attendance }
+      end
   end
-@attendance.save
-  respond_to do |format|
-      format.json { render json: @attendance }
-    end
-end
 
-
-
-# GET /attendances
+  # GET /attendances
   # GET /attendances.json
   def index
-    @attendances = Attendance.all
+    if params.has_key?(:section) && params.has_key?(:date)
+      # TODO: Show the students in the section for the given day
+      @attendances = Attendance.within(24.hours.ago) # TODO: Add section scope
+    elsif
+      # TODO: Show all the sections the professor is currently teaching
+      @attendances = Attendance.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,8 +29,9 @@ end
 
   # GET /attendances/1
   # GET /attendances/1.json
+  # This shouldn't be called
   def show
-    @attendance = Attendance.find(params[:id])
+    @attendances = Attendance.within(24.hours.ago)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -67,8 +53,6 @@ end
   # GET /attendances/1/edit
   def edit
     @attendance = Attendance.find(params[:id])
-    # @user_id = 123
-    # @zip_file.user_id = @user.id
   end
 
   # POST /attendances

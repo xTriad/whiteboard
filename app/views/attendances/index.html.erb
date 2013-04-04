@@ -1,114 +1,65 @@
-<h1>Attendance for Section ###</h1>
+<h1>Attendance</h1>
 
 <script type="text/javascript">
 
-var allStudents = "<%= Attendance.all.to_json %>";
-var betterAllStudents = allStudents.replace(/&quot;/g, "\"");
-var arrayOfStudents = JSON.parse(betterAllStudents);
+// var allStudents = "<%= Attendance.all.to_json %>";
+// var betterAllStudents = allStudents.replace(/&quot;/g, "\"");
+// var arrayOfStudents = JSON.parse(betterAllStudents);
 
-function callback(serverData, serverStatus) {
-// TODO Server error checking here
-//alert(serverStatus);
-}
-// attenState needs to be of the form 2/present (:id/:state)
-function ajaxAtten(attenState) {
-var AJAX = null;
-   if (window.XMLHttpRequest) { // Not IE
-      AJAX=new XMLHttpRequest();
-   } else { // IE
-      AJAX=new ActiveXObject("Microsoft.XMLHTTP");
-   }
-   if (AJAX==null) {
-      alert("AJAX error."); 
-      return false;
-   }
-   var url='http://localhost:3000/attendances/'+attenState;
-   // Method, url, async
-   AJAX.open("PUT", url, true);
-   AJAX.send(null); // Send the request.
+// var url='http://localhost:3000/attendances/'+attenState;
+// // Method, url, async
+// AJAX.open("PUT", url, true);
+// AJAX.send(null); // Send the request.
 
-   // When the browser has the request info
-   AJAX.onreadystatechange = function() {  
-       //  see if the complete flag is set.
-       if (AJAX.readyState==4 || AJAX.readyState=="complete") { 
-          // Pass the response to our processing function
-          callback(AJAX.responseText, AJAX.status);
-       }
-   } 
-}
-function doSomething(i) {
+// http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg
+// http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg
+// http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg
+// http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg
 
-if(arrayOfStudents[i].present) {
-    arrayOfStudents[i].present = false;
-    arrayOfStudents[i].absent = true;
-    document.getElementById(i).src="http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg";
-    ajaxAtten(arrayOfStudents[i].attendance_id + "/absent");
-} else if(arrayOfStudents[i].absent) {
-    arrayOfStudents[i].absent = false;
-    arrayOfStudents[i].tardy = true;
-    document.getElementById(i).src="http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg";
-    ajaxAtten(arrayOfStudents[i].attendance_id + "/tardy");
-} else if(arrayOfStudents[i].tardy) {
-    arrayOfStudents[i].tardy = false;
-    arrayOfStudents[i].excused = true;
-    document.getElementById(i).src="http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg";
-    ajaxAtten(arrayOfStudents[i].attendance_id + "/excused");
-} else {
-    arrayOfStudents[i].excused = false;
-    arrayOfStudents[i].present = true;
-    // Either student is excused or no state is true; set to present
-    document.getElementById(i).src="http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg";
-    ajaxAtten(arrayOfStudents[i].attendance_id + "/present");
-}
-}
 </script>
 
-<table>
-<script language="Javascript">
-var allStudents = "<%= Attendance.all.to_json %>";
-var betterAllStudents = allStudents.replace(/&quot;/g, "\"");
-var arrayOfStudents = JSON.parse(betterAllStudents);
-document.write('<tr>');
-for(var i=0; i<arrayOfStudents.length; i++) {
-    if(arrayOfStudents[i].present) {
-    document.write('<th><img src="http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg" alt="' + i + '" id = "'+i+'" width="100" height="100" onclick="JavaScript:doSomething(id);">&nbsp;</th>');
-    } else if(arrayOfStudents[i].absent){
-    document.write('<th><img src="http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg" alt="' + i + '" id = "'+i+'" width="100" height="100" onclick="JavaScript:doSomething(id);">&nbsp;</th>');
-    } else if(arrayOfStudents[i].tardy){
-    document.write('<th><img src="http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg" alt="' + i + '" id = "'+i+'" width="100" height="100" onclick="JavaScript:doSomething(id);">&nbsp;</th>');
-    }else if(arrayOfStudents[i].excused){
-    document.write('<th><img src="http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg" alt="' + i + '" id = "'+i+'" width="100" height="100" onclick="JavaScript:doSomething(id);">&nbsp;</th>');
-    }
-}
-document.write('</tr><tr><% @attendances.each do |attendance| %>');
-document.write('<td><%= User.find(attendance.user_id).name %></td>');
-document.write('<% end %></tr>');
-</script>
-</table>
+TODO: List only the sections the professor is currently teaching if no URL params<br />
+TODO: Else, list the attendance for the given section and date<br /><br />
 
-<br><br>
-<h4>This table to be deleted - data checking only.</h4>
+<!-- If showing attendance for given section and date -->
+
+Data: <br /><br />
+
+Course: x<br />
+Section: x<br />
+Date: x<br />
 
 <table>
   <tr>
-    <th>Section</th>
-    <th>User</th>
-    <th>Class Date</th>
+    <th>Student</th>
     <th>Present</th>
     <th>Absent</th>
     <th>Tardy</th>
     <th>Excused</th>
   </tr>
-
-<% @attendances.each do |attendance| %>
+  <% @attendances.each do |attendance| %>
   <tr>
-    <td><%= attendance.section_id %></td>
-    <td><%= User.find(attendance.user_id).name %></td>
-    <td><%= attendance.class_date %></td>
-    <td><%= attendance.present %></td>
-    <td><%= attendance.absent %></td>
-    <td><%= attendance.tardy %></td>
-    <td><%= attendance.excused %></td>
+    <td><%= attendance.user_id %></td>
+    <td>x</td>
+    <td>x</td>
+  </tr>
+  <% end %>
+</table>
+
+<br /><br />
+
+<!-- If showing professor courses -->
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Section</th>
+    <th></th>
+  </tr>
+<% Course.professor_courses.each do |course| %>
+  <tr>
+    <td><%= course.name %></td>
+    <td>x</td>
+    <td><%= link_to 'Attendance', attendance_path(1) %></td>
   </tr>
 <% end %>
 </table>

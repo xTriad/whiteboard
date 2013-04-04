@@ -15,6 +15,7 @@ class UploadsController < ApplicationController
 
   # GET /uploads/1
   # GET /uploads/1.json
+  # This should never be called
   def show
     @upload = Upload.find(params[:id])
 
@@ -26,7 +27,7 @@ class UploadsController < ApplicationController
 
   # GET /uploads/new
   # GET /uploads/new.json
-  # This isn't being called since the jquery-fileupload Javascript ajax
+  # This should never be called since the jquery-fileupload Javascript ajax
   # handles the creation of new Uploads.
   def new
     @upload = Upload.new
