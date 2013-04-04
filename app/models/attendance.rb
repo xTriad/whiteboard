@@ -2,12 +2,13 @@ class Attendance < ActiveRecord::Base
   attr_accessible :attendance_id, :section_id, :user_id, :class_date, :present, :absent, :tardy, :excused
   belongs_to :user # TODO: Have Kip confirm this
 
-  # Get attendance object for last 24 hours: Attendance.within(24.hours.ago)
-  scope :within, lambda { |time_ago| { :conditions => ['class_date > ?', time_ago] } }
+  scope :within, lambda { |time_ago| { :conditions => ['class_date > ?', time_ago] } } # within(24.hours.ago)
+  scope :in_section, lambda { |section| { :conditions => ['section_id = ?', section] } }
   # created_at => (DateTime.now.at_beginning_of_day.utc..Time.now.utc)
+  # scope :red, where(:color => 'red')
 
   def self.all_to_json
-    Attendance.all.to_json
+    all.to_json
   end
 
   def set_attendance(a)

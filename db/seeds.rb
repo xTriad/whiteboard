@@ -62,7 +62,7 @@ User.create([
   }
 ])
 
-# Copy Users to Active Admin
+# Copy admin users to Active Admin
 adminuser = AdminUser.create!(
   :email => ENV['ADMIN_EMAIL'].dup,
   :password => ENV['ADMIN_PASSWORD'].dup,
@@ -160,25 +160,21 @@ Assignment.create([
 puts 'DEFAULT ATTENDANCES'
 Attendance.create([
   {
-    :attendance_id => 1,
     :section_id => 1,
     :user_id => Admin_UID,
     :class_date => DateTime.new(2013,4,1)
   },
   {
-    :attendance_id => 2,
     :section_id => 1,
     :user_id => 2,
     :class_date => DateTime.new(2013,4,1)
   },
   {
-    :attendance_id => 3,
     :section_id => 1,
     :user_id => Admin_UID,
     :class_date => DateTime.now
   },
   {
-    :attendance_id => 4,
     :section_id => 1,
     :user_id => 2,
     :class_date => DateTime.now

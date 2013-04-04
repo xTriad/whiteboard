@@ -1,4 +1,18 @@
 class AttendancesController < InheritedResources::Base
+  helper_method :section_and_date_defined, :format_attendance_date, :date_url_format, :date_page_format
+
+  # May need to put these helper methods in a AttendancesHelper module in lib/
+  # if there start to be too many. See page 21 in Rails Antipatterns.
+
+  # The format to store dates in the URL
+  def date_url_format
+    '%d-%m-%Y'
+  end
+
+  # The format to display dates on the page
+  def date_page_format
+    '%B %d %Y'
+  end
 
   def update_attendance
     @attendance = Attendance.find(params[:id])
@@ -10,20 +24,42 @@ class AttendancesController < InheritedResources::Base
       end
   end
 
+  def format_attendance_date(date)
+    DateTime.strptime(date, date_url_format).strftime(date_page_format)
+  end
+
+  def section_and_date_defined
+    if params.has_key?(:section) && params.has_key?(:date)
+      return true
+    else
+      return false
+    end
+  end
+
   # GET /attendances
   # GET /attendances.json
   def index
-    if params.has_key?(:section) && params.has_key?(:date)
-      # TODO: Show the students in the section for the given day
-      @attendances = Attendance.within(24.hours.ago) # TODO: Add section scope
-    elsif
-      # TODO: Show all the sections the professor is currently teaching
-      @attendances = Attendance.all
-    end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @attendances }
+    # TODO: Check if professor with proper permissions
+
+    if section_and_date_defined
+
+      # Show the students in the section for the given day
+      @attendances = Attendance.in_section(params[:section]).within(24.hours.ago)
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @attendances }
+      end
+
+    elsif
+
+      # Show all the sections the professor is currently teaching
+      @professor_sections = Section.professor_sections(current_user.id)
+
+      respond_to do |format|
+        format.html # index.html.erb
+      end
     end
   end
 

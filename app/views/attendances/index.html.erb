@@ -18,50 +18,10 @@
 
 </script>
 
-TODO: List only the sections the professor is currently teaching if no URL params<br />
-TODO: Else, list the attendance for the given section and date<br /><br />
-
-<!-- If showing attendance for given section and date -->
-
-Data: <br /><br />
-
-Course: x<br />
-Section: x<br />
-Date: x<br />
-
-<table>
-  <tr>
-    <th>Student</th>
-    <th>Present</th>
-    <th>Absent</th>
-    <th>Tardy</th>
-    <th>Excused</th>
-  </tr>
-  <% @attendances.each do |attendance| %>
-  <tr>
-    <td><%= attendance.user_id %></td>
-    <td>x</td>
-    <td>x</td>
-  </tr>
-  <% end %>
-</table>
-
-<br /><br />
-
-<!-- If showing professor courses -->
-<table>
-  <tr>
-    <th>Course</th>
-    <th>Section</th>
-    <th></th>
-  </tr>
-<% Course.professor_courses.each do |course| %>
-  <tr>
-    <td><%= course.name %></td>
-    <td>x</td>
-    <td><%= link_to 'Attendance', attendance_path(1) %></td>
-  </tr>
+<% if section_and_date_defined %>
+  <%= render 'attendance' %>
+<% else %>
+  <%= render 'professor_sections' %>
 <% end %>
-</table>
 
 <br />
