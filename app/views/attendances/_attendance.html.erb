@@ -1,0 +1,25 @@
+
+Course: <%= Course.find_name_by_section_id(params[:section]) %><br />
+Section: <%= Section.find_number_by_section_id(params[:section]) %><br />
+Date: <%= format_attendance_date(params[:date]) %><br /><br />
+
+<table>
+  <tr>
+    <th>Student</th>
+    <th>Present</th>
+    <th>Absent</th>
+    <th>Tardy</th>
+    <th>Excused</th>
+  </tr>
+  <% @attendances.each do |attendance| %>
+  <tr>
+    <td><%= User.find_name_by_user_id(attendance.user_id) %></td>
+    <td><%= attendance.present %></td>
+    <td><%= attendance.absent %></td>
+    <td><%= attendance.tardy %></td>
+    <td><%= attendance.excused %></td>
+  </tr>
+  <% end %>
+</table>
+
+<br /><br />
