@@ -8,6 +8,20 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -1467,11 +1481,11 @@ ALTER TABLE ONLY messages
 
 
 --
--- Name: PK_Attendance_ClassDate; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: PK_Attendance_ID; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY attendances
-    ADD CONSTRAINT "PK_Attendance_ClassDate" PRIMARY KEY (class_date);
+    ADD CONSTRAINT "PK_Attendance_ID" PRIMARY KEY (attendance_id);
 
 
 --

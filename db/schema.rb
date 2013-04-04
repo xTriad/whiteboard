@@ -70,15 +70,14 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "updated_at"
   end
 
-  create_table "attendances", :id => false, :force => true do |t|
-    t.integer "section_id",                       :null => false
-    t.integer "user_id",                          :null => false
-    t.date    "class_date",                       :null => false
-    t.boolean "present",       :default => true
-    t.boolean "absent",        :default => false
-    t.boolean "tardy",         :default => false
-    t.boolean "excused",       :default => false
-    t.integer "attendance_id",                    :null => false
+  create_table "attendances", :primary_key => "attendance_id", :force => true do |t|
+    t.integer "section_id",                    :null => false
+    t.integer "user_id",                       :null => false
+    t.date    "class_date",                    :null => false
+    t.boolean "present",    :default => true
+    t.boolean "absent",     :default => false
+    t.boolean "tardy",      :default => false
+    t.boolean "excused",    :default => false
   end
 
   create_table "courses", :primary_key => "course_id", :force => true do |t|
