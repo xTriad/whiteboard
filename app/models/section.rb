@@ -1,5 +1,5 @@
 class Section < ActiveRecord::Base
-  has_and_belongs_to_many :users, :join_table => :sections_users_roles # TODO: Index this table!!!
+  has_and_belongs_to_many :users, :join_table => :sections_users # TODO: Index this table!!!
   attr_accessible :course_id, :number
   belongs_to :course
   has_many :assignments
@@ -15,7 +15,27 @@ class Section < ActiveRecord::Base
 
     # Rails expects user_id, not ur_id
     # Need to join users_roles as well to get user_id and role_id
-    section.users.find(:all, :conditions => ['ur_id = ?', 1])
+    section.users.find(:all)
+
+    # @c = Clinical.select(%q{date_format(transactiondate, '%Y') as year, date_format(transactiondate, '%b') as month, sum(LineBalance) as income})
+    #   .where(:payments => 0)
+    #   .where('linebalance <> ?', 0)
+    #   .where('analysiscode <> ?', 213)
+    #   .group(:monthyear)
+
+    # find_by_sql(%Q{
+    #   select ...
+    #   from ...
+    #   where x = #{connection.quote(some_string);}
+    # })
+
+    # def self.popular_items
+    #   MyObject.find_by_sql("select m.*, count(*) as count from my_objects ETC ETC ETC")
+    # end
+
+    # result = ActiveRecord::Base.connection.select_all( "SELECT * FROM authors_books WHERE 1" )
+    # result = ActiveRecord::Base.connection.select_one('SELECT COUNT(*) FROM mytable')
+    # result = ActiveRecord::Base.connection.execute('SELECT * FROM mytable')
 
     # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_and_belongs_to_many
     # The join table should not have a primary key or a model associated with it...yet users_roles has one

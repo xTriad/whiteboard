@@ -180,3 +180,8 @@ Attendance.create([
     :class_date => DateTime.now
   }
 ])
+
+# Insert SectionsUsers
+# household = Household.first
+# household.appliances << Appliance.first
+# household.save
