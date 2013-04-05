@@ -45,6 +45,8 @@ class AttendancesController < InheritedResources::Base
     if section_and_date_defined
 
       # Show the students in the section for the given day
+      # TODO: Create find_students_in_section that only returns students
+      @students = Section.find_users_in_section(params[:section])
       @attendances = Attendance.in_section(params[:section]).within(24.hours.ago)
 
       respond_to do |format|
@@ -65,7 +67,7 @@ class AttendancesController < InheritedResources::Base
 
   # GET /attendances/1
   # GET /attendances/1.json
-  # This shouldn't be called
+  # This should never be called
   def show
     @attendances = Attendance.within(24.hours.ago)
 
@@ -77,6 +79,7 @@ class AttendancesController < InheritedResources::Base
 
   # GET /attendances/new
   # GET /attendances/new.json
+  # This should never be called
   def new
     @attendance = Attendance.new
 
@@ -87,6 +90,7 @@ class AttendancesController < InheritedResources::Base
   end
 
   # GET /attendances/1/edit
+  # This should never be called
   def edit
     @attendance = Attendance.find(params[:id])
   end

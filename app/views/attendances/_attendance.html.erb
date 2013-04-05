@@ -1,4 +1,10 @@
 
+<!-- TODO: Look to see if any attendances for the day have already been set
+and set them on the page visually. When the professor submits, submit
+every possible attendance, new and modified to the database. -->
+
+<!-- var attendances = @attendances; -->
+
 Course: <%= Course.find_name_by_section_id(params[:section]) %><br />
 Section: <%= Section.find_number_by_section_id(params[:section]) %><br />
 Date: <%= format_attendance_date(params[:date]) %><br /><br />
@@ -11,15 +17,17 @@ Date: <%= format_attendance_date(params[:date]) %><br /><br />
     <th>Tardy</th>
     <th>Excused</th>
   </tr>
-  <% @attendances.each do |attendance| %>
+  <% @students.each do |student| %>
   <tr>
-    <td><%= User.find_name_by_user_id(attendance.user_id) %></td>
-    <td><%= attendance.present %></td>
-    <td><%= attendance.absent %></td>
-    <td><%= attendance.tardy %></td>
-    <td><%= attendance.excused %></td>
+    <td><%= student.name %></td>
+    <td><%#= attendance.present %></td>
+    <td><%#= attendance.absent %></td>
+    <td><%#= attendance.tardy %></td>
+    <td><%#= attendance.excused %></td>
   </tr>
   <% end %>
 </table>
+
+<%= link_to 'Back', attendances_path %>
 
 <br /><br />

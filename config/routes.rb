@@ -10,7 +10,7 @@ Whiteboard::Application.routes.draw do
   resources :assignments
   resources :uploads
 
-  put 'attendances/:id/:atten' => "attendances#update_attendance"
+  # put 'attendances/:id/:atten' => "attendances#update_attendance"
   resources :attendances
   resources :grades
   resources :teachergrades

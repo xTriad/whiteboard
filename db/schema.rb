@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "updated_at"
   end
 
-  create_table "sections_users", :id => false, :force => true do |t|
+  create_table "sections_users_roles", :id => false, :force => true do |t|
     t.integer "section_id", :null => false
     t.integer "ur_id",      :null => false
   end

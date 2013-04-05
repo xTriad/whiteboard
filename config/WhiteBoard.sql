@@ -8,20 +8,6 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -891,16 +877,16 @@ ALTER SEQUENCE "Roles_id_seq" OWNED BY roles.role_id;
 
 
 --
--- Name: sections_users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: sections_users_roles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE sections_users (
+CREATE TABLE sections_users_roles (
     section_id integer NOT NULL,
     ur_id integer NOT NULL
 );
 
 
-ALTER TABLE public.sections_users OWNER TO postgres;
+ALTER TABLE public.sections_users_roles OWNER TO postgres;
 
 --
 -- Name: SectionUsers_section_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -920,7 +906,7 @@ ALTER TABLE public."SectionUsers_section_id_seq" OWNER TO postgres;
 -- Name: SectionUsers_section_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "SectionUsers_section_id_seq" OWNED BY sections_users.section_id;
+ALTER SEQUENCE "SectionUsers_section_id_seq" OWNED BY sections_users_roles.section_id;
 
 
 --
@@ -941,7 +927,7 @@ ALTER TABLE public."SectionUsers_user_id_seq" OWNER TO postgres;
 -- Name: SectionUsers_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "SectionUsers_user_id_seq" OWNED BY sections_users.ur_id;
+ALTER SEQUENCE "SectionUsers_user_id_seq" OWNED BY sections_users_roles.ur_id;
 
 
 --
@@ -1841,7 +1827,7 @@ ALTER TABLE ONLY quizzes
 -- Name: FK_SectionUsers_Sections; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY sections_users
+ALTER TABLE ONLY sections_users_roles
     ADD CONSTRAINT "FK_SectionUsers_Sections" FOREIGN KEY (section_id) REFERENCES sections(section_id);
 
 
@@ -1849,7 +1835,7 @@ ALTER TABLE ONLY sections_users
 -- Name: FK_SectionUsers_Users_Roles; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY sections_users
+ALTER TABLE ONLY sections_users_roles
     ADD CONSTRAINT "FK_SectionUsers_Users_Roles" FOREIGN KEY (ur_id) REFERENCES users_roles(ur_id);
 
 

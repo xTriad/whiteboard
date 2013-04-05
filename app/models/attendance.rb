@@ -27,7 +27,7 @@ class Attendance < ActiveRecord::Base
       absent = false
       tardy = true
       excused = false
-    elsif
+    else
       present = false
       absent = false
       tardy = false
