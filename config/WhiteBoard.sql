@@ -877,39 +877,6 @@ ALTER SEQUENCE "Roles_id_seq" OWNED BY roles.role_id;
 
 
 --
--- Name: sections_users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE sections_users (
-    section_id integer NOT NULL,
-    user_id integer NOT NULL
-);
-
-
-ALTER TABLE public.sections_users OWNER TO postgres;
-
---
--- Name: SectionUsers_section_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE "SectionUsers_section_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public."SectionUsers_section_id_seq" OWNER TO postgres;
-
---
--- Name: SectionUsers_section_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE "SectionUsers_section_id_seq" OWNED BY sections_users.section_id;
-
-
---
 -- Name: sections; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1130,6 +1097,19 @@ CREATE TABLE schema_migrations (
 ALTER TABLE public.schema_migrations OWNER TO postgres;
 
 --
+-- Name: sections_users_roles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sections_users_roles (
+    user_id integer NOT NULL,
+    role_id integer NOT NULL,
+    section_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sections_users_roles OWNER TO postgres;
+
+--
 -- Name: universities; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1222,19 +1202,6 @@ ALTER TABLE public.uploads_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE uploads_id_seq OWNED BY uploads.id;
 
-
---
--- Name: users_roles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE users_roles (
-    user_id integer NOT NULL,
-    role_id integer NOT NULL,
-    section_id integer NOT NULL
-);
-
-
-ALTER TABLE public.users_roles OWNER TO postgres;
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -1539,7 +1506,7 @@ CREATE INDEX "index_Roles_on_role_name_and_resource_type_and_resource_id" ON rol
 -- Name: index_UserRoles_on_user_id_and_role_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE INDEX "index_UserRoles_on_user_id_and_role_id" ON users_roles USING btree (user_id, role_id);
+CREATE INDEX "index_UserRoles_on_user_id_and_role_id" ON sections_users_roles USING btree (user_id, role_id);
 
 
 --
@@ -1770,7 +1737,7 @@ ALTER TABLE ONLY quizzes
 -- Name: FK_SectionUserRoles_Role; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY users_roles
+ALTER TABLE ONLY sections_users_roles
     ADD CONSTRAINT "FK_SectionUserRoles_Role" FOREIGN KEY (role_id) REFERENCES roles(role_id);
 
 
@@ -1778,7 +1745,7 @@ ALTER TABLE ONLY users_roles
 -- Name: FK_SectionUserRoles_Section; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY users_roles
+ALTER TABLE ONLY sections_users_roles
     ADD CONSTRAINT "FK_SectionUserRoles_Section" FOREIGN KEY (section_id) REFERENCES sections(section_id);
 
 
@@ -1786,24 +1753,8 @@ ALTER TABLE ONLY users_roles
 -- Name: FK_SectionUserRoles_User; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY users_roles
+ALTER TABLE ONLY sections_users_roles
     ADD CONSTRAINT "FK_SectionUserRoles_User" FOREIGN KEY (user_id) REFERENCES users(user_id);
-
-
---
--- Name: FK_SectionUsers_Sections; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY sections_users
-    ADD CONSTRAINT "FK_SectionUsers_Sections" FOREIGN KEY (section_id) REFERENCES sections(section_id);
-
-
---
--- Name: FK_SectionUsers_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY sections_users
-    ADD CONSTRAINT "FK_SectionUsers_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 --

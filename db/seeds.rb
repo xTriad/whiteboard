@@ -42,6 +42,8 @@ puts 'DEFAULT USERS'
     :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
     :university_id => Baylor
   )
+  # TODO: http://www.ruby-forum.com/topic/173845
+  # http://stackoverflow.com/a/788579
   user.add_role :admin
   Admin_UID = 1
 
