@@ -162,6 +162,14 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer "user_id",    :null => false
   end
 
+  create_table "sections_users_roles", :id => false, :force => true do |t|
+    t.integer "user_id",    :null => false
+    t.integer "role_id",    :null => false
+    t.integer "section_id", :null => false
+  end
+
+  add_index "sections_users_roles", ["user_id", "role_id"], :name => "index_UserRoles_on_user_id_and_role_id"
+
   create_table "universities", :primary_key => "university_id", :force => true do |t|
     t.text "university_name", :null => false
   end
@@ -196,12 +204,5 @@ ActiveRecord::Schema.define(:version => 0) do
 
   add_index "users", ["email"], :name => "index_Users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_Users_on_reset_password_token", :unique => true
-
-  create_table "users_roles", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "role_id"
-  end
-
-  add_index "users_roles", ["user_id", "role_id"], :name => "index_UserRoles_on_user_id_and_role_id"
 
 end
