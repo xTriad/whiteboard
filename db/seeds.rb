@@ -90,6 +90,13 @@ puts 'DEFAULT USERS'
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Baylor
+    },
+    {
+      :name => 'student4',
+      :email => 'student4@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Baylor
     }
   ])
 

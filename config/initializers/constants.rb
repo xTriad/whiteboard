@@ -25,6 +25,7 @@ TA2_UID        = 5
 Student1_UID   = 6
 Student2_UID   = 7
 Student3_UID   = 8
+Student4_UID   = 9
 
 # Organize the Test Account IDs into a hash
 # This needs to reflect the IDs above EXACTLY
@@ -32,6 +33,6 @@ Test_Users = {
   :admins      => [1],
   :professors  => [2,3],
   :tas         => [4,5],
-  :students    => [6,7,8],
+  :students    => [6,7,8,9],
   :observers   => []
 }

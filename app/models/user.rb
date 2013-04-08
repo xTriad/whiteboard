@@ -20,9 +20,15 @@ class User < ActiveRecord::Base
   has_many :attendances # TODO: Have Kip confirm this
 
   # Returns all sections the professor is currently teaching
-  def self.find_professor_sections(professor_user_id)
-    user = find(:first, :conditions => ['user_id = ?', professor_user_id])
+  def self.find_professor_sections(user_id)
+    user = find(:first, :conditions => ['user_id = ?', user_id])
     user.sections.find(:all, :conditions => ['role_id = ?', Professor_RID])
+  end
+
+  # Returns all sections the student is currently enrolled in
+  def self.find_student_sections(user_id)
+    user = find(:first, :conditions => ['user_id = ?', user_id])
+    user.sections.find(:all, :conditions => ['role_id = ?', Student_RID])
   end
 
   def self.find_name_by_user_id(user_id)

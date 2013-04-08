@@ -1,11 +1,4 @@
-Professor: <%= current_user.name %><br /><br />
-
 <table>
-  <tr>
-    <th>Course</th>
-    <th>Section</th>
-    <th></th>
-  </tr>
 <% @professor_sections.each do |section| %>
   <tr>
     <td><%= section.find_course_name %></td>
