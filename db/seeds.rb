@@ -42,9 +42,7 @@ puts 'DEFAULT USERS'
     :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
     :university_id => Baylor
   )
-  # TODO: http://www.ruby-forum.com/topic/173845
-  # http://stackoverflow.com/a/788579
-  user.add_role :admin
+
   Admin_UID = 1
 
 User.create([
@@ -187,3 +185,12 @@ Attendance.create([
 # household = Household.first
 # household.appliances << Appliance.first
 # household.save
+
+# TODO: http://www.ruby-forum.com/topic/173845
+# http://stackoverflow.com/a/788579
+# Populate section_users_roles
+puts 'Populating SECTIONS_USERS_ROLES'
+section = Section.find(1)
+role = Role.find(1)
+user.sections_users_roles << SectionsUsersRole.new(:section => section, :role => role)
+# user.add_role :admin

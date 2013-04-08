@@ -1,8 +1,12 @@
 class Section < ActiveRecord::Base
-  has_and_belongs_to_many :users, :join_table => :sections_users # TODO: Index this table!!!
   attr_accessible :course_id, :number
   belongs_to :course
   has_many :assignments
+
+  # has_and_belongs_to_many :users, :join_table => :sections_users # TODO: Index this table!!!
+  has_many :sections_users_roles
+  has_many :roles, :through => :sections_users_roles
+  has_many :users, :through => :sections_users_roles
 
   # TODO: Only return the sections the professor is teaching
   def self.professor_sections(professor_user_id)

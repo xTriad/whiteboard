@@ -10,8 +10,11 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :university_id
 
-  has_and_belongs_to_many :roles, :join_table => :users_roles
-  has_and_belongs_to_many :sections, :join_table => :sections_users
+  # has_and_belongs_to_many :roles, :join_table => :users_roles
+  # has_and_belongs_to_many :sections, :join_table => :sections_users
+  has_many :sections_users_roles
+  has_many :sections, :through => :sections_users_roles
+  has_many :users, :through => :sections_users_roles
 
   belongs_to :university
   has_many :attendances # TODO: Have Kip confirm this
