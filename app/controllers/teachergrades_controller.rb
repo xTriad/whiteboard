@@ -18,10 +18,18 @@ class TeachergradesController < ApplicationController
 
   @grade = Teachergrade.new(params[:teachergrade])
 
+  @assignid = Assignments.find(params[:teachergrade.assignmentname])
+
+  @grade2 = AssignmentGrade.new(params[:teachergrade])
+
     if @grade.save
-        redirect_to teachergrades_path, :notice=>"Your Grade Saved" 
+          
     else
         render "new" 
+
+    @grade2.save
+
+
     end
 
   end
