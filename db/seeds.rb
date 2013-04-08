@@ -50,8 +50,22 @@ puts 'DEFAULT USERS'
       :university_id => Baylor
     },
     {
+      :name => 'prof2',
+      :email => 'prof2@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Baylor
+    },
+    {
       :name => 'ta1',
       :email => 'ta1@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Baylor
+    },
+    {
+      :name => 'ta2',
+      :email => 'ta2@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Baylor
@@ -178,22 +192,22 @@ puts 'DEFAULT ATTENDANCES'
   Attendance.create([
     {
       :section_id => 1,
-      :user_id => Admin_UID,
-      :class_date => DateTime.new(2013,4,1)
-    },
-    {
-      :section_id => 1,
       :user_id => Student1_UID,
       :class_date => DateTime.new(2013,4,1)
     },
     {
       :section_id => 1,
-      :user_id => Admin_UID,
+      :user_id => Student2_UID,
+      :class_date => DateTime.new(2013,4,1)
+    },
+    {
+      :section_id => 1,
+      :user_id => Student1_UID,
       :class_date => DateTime.now
     },
     {
       :section_id => 1,
-      :user_id => Student1_UID,
+      :user_id => Student2_UID,
       :class_date => DateTime.now
     }
   ])
@@ -201,23 +215,39 @@ puts 'DEFAULT ATTENDANCES'
 # Many to Many to Many: http://www.ruby-forum.com/topic/173845
 # http://stackoverflow.com/a/788579
 
-# Populate sections_users_roles
+# Populate sections_users_roles. This put users with even IDs into
+# sections with even IDs and vice versa. It does this for each user
+# type as well, so each section will have professors, students, etc.
 puts 'Populating SECTIONS_USERS_ROLES'
 
-  User.find(:all).each do |user|
-    Section.find(:all).each do |section|
-      role = nil
+  sections = Section.find(:all)
 
-      if(user.user_id >= Student1_UID)
-        role = Role.find(Student_RID)       # Student role
-      elsif(user.user_id == Admin_UID)
-        role = Role.find(Admin_RID)         # Admin role
-      elsif(user.user_id == Professor1_UID)
-        role = Role.find(Professor_RID)     # Professor role
-      else
-        role = Role.find(TA_RID)            # TA role
+  Test_Users.each do |role_name, role|
+    role.each do |user_id|
+      user_id_oddity = (user_id % 2 == 0) ? 1 : 0
+
+      sections.each do |section|
+        section_id_oddity = (section.section_id % 2 == 0) ? 1 : 0
+
+        # If both even or both odd
+        if user_id_oddity == section_id_oddity
+          role_object = nil
+
+          case role_name
+            when :students
+              role_object = Role.find(Student_RID)
+            when :professors
+              role_object = Role.find(Professor_RID)
+            when :tas
+              role_object = Role.find(TA_RID)
+            when :admins
+              role_object = Role.find(Admin_RID)
+            when :observers
+              role_object = Role.find(Observer_RID)
+          end
+
+          User.find(user_id).sections_users_roles << SectionsUsersRole.new(:section => section, :role => role_object)
+        end
       end
-
-      user.sections_users_roles << SectionsUsersRole.new(:section => section, :role => role)
     end
   end

@@ -8,11 +8,42 @@ class Section < ActiveRecord::Base
   has_many :roles, :through => :sections_users_roles
   has_many :users, :through => :sections_users_roles
 
-  # TODO: Only return the sections the professor is teaching
-  def self.professor_sections(professor_user_id)
-    all
+  # Returns all users in a section in a single query, but organizes
+  # them according to their role_id into a hash object.
+  def self.find_users_in_section_hashed(section_id)
+    section = find(:first, :conditions => ['section_id = ?', section_id])
+
+    users_hash = {
+      :admins => [],
+      :professors => [],
+      :tas => [],
+      :students => [],
+      :observers => []
+    }
+
+    # TODO: Need to be able to return users and their role_id in a
+    # a single query which we can then iterate through
+    section.users.find(:all).each do |user|
+      role_id = nil
+
+      case role_id
+        when Student_RID
+          users_hash[:students] << user
+        when Professor_RID
+          users_hash[:professors] << user
+        when TA_RID
+          users_hash[:tas] << user
+        when Admin_RID
+          users_hash[:admins] << user
+        when Observer_RID
+          users_hash[:observers] << user
+      end
+    end
+
+    return users_hash
   end
 
+  # Returns all users in a section, professors, students etc.
   def self.find_users_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
     section.users.find(:all)

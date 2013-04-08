@@ -74,7 +74,7 @@ class AttendancesController < InheritedResources::Base
     elsif
 
       # Show all the sections the professor is currently teaching
-      @professor_sections = Section.professor_sections(current_user.id)
+      @professor_sections = User.find_professor_sections(current_user.id)
 
       respond_to do |format|
         format.html # index.html.erb

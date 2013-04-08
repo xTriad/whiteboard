@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
   belongs_to :university
   has_many :attendances # TODO: Have Kip confirm this
 
+  # Returns all sections the professor is currently teaching
+  def self.find_professor_sections(professor_user_id)
+    user = find(:first, :conditions => ['user_id = ?', professor_user_id])
+    user.sections.find(:all, :conditions => ['role_id = ?', Professor_RID])
+  end
+
   def self.find_name_by_user_id(user_id)
     find(:first, :conditions => ['user_id = ?', user_id]).name
   end
