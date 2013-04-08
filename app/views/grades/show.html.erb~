@@ -1,0 +1,6 @@
+<h1><%=@grade.sname%></h1>
+<p><%=@grade.aname%></p>
+<p><%=@grade.points%></p>
+<p><%=@grade.pointsposs%></p>
+<p><%=@grade.comment%></p>
+<small><%=@grade.created_at %></small>

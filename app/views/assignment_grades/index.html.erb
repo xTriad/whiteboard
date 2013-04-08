@@ -1,0 +1,12 @@
+<h1>Class Name</h1>
+<h2>Section Name</h2>
+
+<% @grades.each do |agrade| %>
+  <p><%=link_to agrade.assignment_id, agrade%>| <%=agrade.user_id%> | <%=agrade.grade_value%> | <%=agrade.pointsposs%> | <%=link_to "Edit", edit_teachergrade_path(agrade)%> </p>
+
+  <hr/>
+
+
+<%end%>
+
+<p><%=link_to "Add New Grade",new_teachergrade_path%></p>

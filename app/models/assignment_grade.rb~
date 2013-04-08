@@ -1,0 +1,4 @@
+class AssignmentGrade < ActiveRecord::Base
+  # attr_accessible :title, :body
+  attr_accessible :Integer, :Integer, :aname, :comment, :points, :pointsposs, :sname, :string, :string, :string
+end
