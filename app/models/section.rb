@@ -27,15 +27,15 @@ class Section < ActiveRecord::Base
       role_id = nil
 
       case role_id
-        when Student_RID
+        when Constants::Student_RID
           users_hash[:students] << user
-        when Professor_RID
+        when Constants::Professor_RID
           users_hash[:professors] << user
-        when TA_RID
+        when Constants::TA_RID
           users_hash[:tas] << user
-        when Admin_RID
+        when Constants::Admin_RID
           users_hash[:admins] << user
-        when Observer_RID
+        when Constants::Observer_RID
           users_hash[:observers] << user
       end
     end
@@ -51,17 +51,17 @@ class Section < ActiveRecord::Base
 
   def self.find_professors_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
-    section.users.find(:all, :conditions => ['role_id = ?', Professor_RID])
+    section.users.find(:all, :conditions => ['role_id = ?', Constants::Professor_RID])
   end
 
   def self.find_tas_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
-    section.users.find(:all, :conditions => ['role_id = ?', TA_RID])
+    section.users.find(:all, :conditions => ['role_id = ?', Constants::TA_RID])
   end
 
   def self.find_students_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
-    section.users.find(:all, :conditions => ['role_id = ?', Student_RID])
+    section.users.find(:all, :conditions => ['role_id = ?', Constants::Student_RID])
   end
 
   def self.find_number_by_section_id(section_id)
