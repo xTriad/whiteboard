@@ -13,39 +13,24 @@ class Section < ActiveRecord::Base
     all
   end
 
-  # TODO: Get Kip to help with this
   def self.find_users_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
-
-    # Rails expects user_id, not ur_id
-    # Need to join users_roles as well to get user_id and role_id
     section.users.find(:all)
+  end
 
-    # @c = Clinical.select(%q{date_format(transactiondate, '%Y') as year, date_format(transactiondate, '%b') as month, sum(LineBalance) as income})
-    #   .where(:payments => 0)
-    #   .where('linebalance <> ?', 0)
-    #   .where('analysiscode <> ?', 213)
-    #   .group(:monthyear)
+  def self.find_professors_in_section(section_id)
+    section = find(:first, :conditions => ['section_id = ?', section_id])
+    section.users.find(:all, :conditions => ['role_id = ?', Professor_RID])
+  end
 
-    # find_by_sql(%Q{
-    #   select ...
-    #   from ...
-    #   where x = #{connection.quote(some_string);}
-    # })
+  def self.find_tas_in_section(section_id)
+    section = find(:first, :conditions => ['section_id = ?', section_id])
+    section.users.find(:all, :conditions => ['role_id = ?', TA_RID])
+  end
 
-    # def self.popular_items
-    #   MyObject.find_by_sql("select m.*, count(*) as count from my_objects ETC ETC ETC")
-    # end
-
-    # result = ActiveRecord::Base.connection.select_all( "SELECT * FROM authors_books WHERE 1" )
-    # result = ActiveRecord::Base.connection.select_one('SELECT COUNT(*) FROM mytable')
-    # result = ActiveRecord::Base.connection.execute('SELECT * FROM mytable')
-
-    # http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_and_belongs_to_many
-    # The join table should not have a primary key or a model associated with it...yet users_roles has one
-
-    # joins(:users).where(:users => { :category => 'public' })
-    # joins(:users).where('users.ur_id' => 'public' )
+  def self.find_students_in_section(section_id)
+    section = find(:first, :conditions => ['section_id = ?', section_id])
+    section.users.find(:all, :conditions => ['role_id = ?', Student_RID])
   end
 
   def self.find_number_by_section_id(section_id)

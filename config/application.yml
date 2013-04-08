@@ -12,4 +12,4 @@ GMAIL_PASSWORD: Your_Password
 ADMIN_NAME: admin
 ADMIN_EMAIL: admin@whiteboard.com
 ADMIN_PASSWORD: password
-ROLES: [admin, user, VIP]
+ROLES: [admin, professor, ta, student, observer]

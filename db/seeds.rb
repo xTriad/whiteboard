@@ -14,22 +14,20 @@
 
 # Insert Universities
 puts 'DEFAULT UNIVERSITIES'
-University.create([
-  { :university_name => 'Baylor' },
-  { :university_name => 'Texas' },
-  { :university_name => 'Tech' }
-])
 
-Baylor = 1
-Texas = 2
-Tech = 3
+  University.create([
+    { :university_name => 'Baylor' },
+    { :university_name => 'Texas' },
+    { :university_name => 'Tech' }
+  ])
 
 # Insert Roles
 puts 'DEFAULT ROLES'
-YAML.load(ENV['ROLES']).each do |role|
-  Role.find_or_create_by_name({ :name => role }, :without_protection => true)
-  puts 'role: ' << role
-end
+
+  YAML.load(ENV['ROLES']).each do |role|
+    Role.find_or_create_by_name({ :name => role }, :without_protection => true)
+    puts 'role: ' << role
+  end
 
 # Insert Users
 puts 'DEFAULT USERS'
@@ -43,154 +41,183 @@ puts 'DEFAULT USERS'
     :university_id => Baylor
   )
 
-  Admin_UID = 1
+  User.create([
+    {
+      :name => 'prof1',
+      :email => 'prof1@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Baylor
+    },
+    {
+      :name => 'ta1',
+      :email => 'ta1@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Baylor
+    },
+    {
+      :name => 'student1',
+      :email => 'student1@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Baylor
+    },
+    {
+      :name => 'student2',
+      :email => 'student2@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Baylor
+    },
+    {
+      :name => 'student3',
+      :email => 'student3@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Baylor
+    }
+  ])
 
-User.create([
-  {
-    :name => 'user1',
-    :email => 'user1@whiteboard.com',
-    :password => 'password',
-    :password_confirmation => 'password',
+  # Copy admin users to Active Admin
+  adminuser = AdminUser.create!(
+    :email => ENV['ADMIN_EMAIL'].dup,
+    :password => ENV['ADMIN_PASSWORD'].dup,
+    :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
     :university_id => Baylor
-  },
-  {
-    :name => 'user2',
-    :email => 'user2@whiteboard.com',
-    :password => 'password',
-    :password_confirmation => 'password',
-    :university_id => Baylor
-  }
-])
-
-# Copy admin users to Active Admin
-adminuser = AdminUser.create!(
-  :email => ENV['ADMIN_EMAIL'].dup,
-  :password => ENV['ADMIN_PASSWORD'].dup,
-  :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
-  :university_id => Baylor
-)
+  )
 
 # Insert Courses
 puts 'DEFAULT COURSES'
-Course.create([
-  {
-    :number => 1430,
-    :university_id => Baylor,
-    :name => 'Introduction I'
-  },
-  {
-    :number => 1440,
-    :university_id => Baylor,
-    :name => 'Introduction II'
-  },
-  {
-    :number => 2334,
-    :university_id => Baylor,
-    :name => 'Introduction to Systems'
-  },
-  {
-    :number => 3101,
-    :university_id => Baylor,
-    :name => 'Computer Ethics'
-  },
-  {
-    :number => 3344,
-    :university_id => Baylor,
-    :name => 'Data Structures'
-  },
-  {
-    :number => 3335,
-    :university_id => Baylor,
-    :name => 'Database'
-  },
-  {
-    :number => 4321,
-    :university_id => Baylor,
-    :name => 'Computer Networking'
-  },
-  {
-    :number => 4330,
-    :university_id => Baylor,
-    :name => 'Foundations'
-  }
-])
 
-# Insert Sections: 01, 02, 03 ...
+  Course.create([
+    {
+      :number => 1430,
+      :university_id => Baylor,
+      :name => 'Introduction I'
+    },
+    {
+      :number => 1440,
+      :university_id => Baylor,
+      :name => 'Introduction II'
+    },
+    {
+      :number => 2334,
+      :university_id => Baylor,
+      :name => 'Introduction to Systems'
+    },
+    {
+      :number => 3101,
+      :university_id => Baylor,
+      :name => 'Computer Ethics'
+    },
+    {
+      :number => 3344,
+      :university_id => Baylor,
+      :name => 'Data Structures'
+    },
+    {
+      :number => 3335,
+      :university_id => Baylor,
+      :name => 'Database'
+    },
+    {
+      :number => 4321,
+      :university_id => Baylor,
+      :name => 'Computer Networking'
+    },
+    {
+      :number => 4330,
+      :university_id => Baylor,
+      :name => 'Foundations'
+    }
+  ])
+
+# Insert Sections: 01, 02, 03
 puts 'DEFAULT SECTIONS'
-Course.all.each do |course|
-  for x in 1..3
-    Section.create(:course_id => course.course_id, :number => x);
+
+  Course.all.each do |course|
+    for x in 1..3
+      Section.create(:course_id => course.course_id, :number => x);
+    end
   end
-end
 
 # Insert Assignment Types
 puts 'DEFAULT ASSIGNMENT TYPES'
-AssignmentType.create([
-  { :name => 'Homework' },
-  { :name => 'Program' },
-  { :name => 'Quiz' },
-  { :name => 'Test' }
-])
 
-Homework = 1
-Program = 2
-Quiz = 3
-Test = 4
+  AssignmentType.create([
+    { :name => 'Homework' },
+    { :name => 'Program' },
+    { :name => 'Quiz' },
+    { :name => 'Test' }
+  ])
 
 # Insert Assignments
 puts 'DEFAULT ASSIGNMENTS'
-Assignment.create([
-  {
-    :type_id => Homework,
-    :section_id => 1,
-    :due_date => '2020-02-12',
-    :highest_grade_value => 100,
-    :weight => 1
-  },
-  {
-    :type_id => Homework,
-    :section_id => 2,
-    :due_date => '2020-02-14',
-    :highest_grade_value => 90,
-    :weight => 2
-  }
-])
+
+  Assignment.create([
+    {
+      :type_id => Homework,
+      :section_id => 1,
+      :due_date => '2020-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :type_id => Homework,
+      :section_id => 2,
+      :due_date => '2020-02-14',
+      :highest_grade_value => 90,
+      :weight => 2
+    }
+  ])
 
 # Insert Attendances
 puts 'DEFAULT ATTENDANCES'
-Attendance.create([
-  {
-    :section_id => 1,
-    :user_id => Admin_UID,
-    :class_date => DateTime.new(2013,4,1)
-  },
-  {
-    :section_id => 1,
-    :user_id => 2,
-    :class_date => DateTime.new(2013,4,1)
-  },
-  {
-    :section_id => 1,
-    :user_id => Admin_UID,
-    :class_date => DateTime.now
-  },
-  {
-    :section_id => 1,
-    :user_id => 2,
-    :class_date => DateTime.now
-  }
-])
 
-# Insert SectionsUsers
-# household = Household.first
-# household.appliances << Appliance.first
-# household.save
+  Attendance.create([
+    {
+      :section_id => 1,
+      :user_id => Admin_UID,
+      :class_date => DateTime.new(2013,4,1)
+    },
+    {
+      :section_id => 1,
+      :user_id => Student1_UID,
+      :class_date => DateTime.new(2013,4,1)
+    },
+    {
+      :section_id => 1,
+      :user_id => Admin_UID,
+      :class_date => DateTime.now
+    },
+    {
+      :section_id => 1,
+      :user_id => Student1_UID,
+      :class_date => DateTime.now
+    }
+  ])
 
-# TODO: http://www.ruby-forum.com/topic/173845
+# Many to Many to Many: http://www.ruby-forum.com/topic/173845
 # http://stackoverflow.com/a/788579
-# Populate section_users_roles
+
+# Populate sections_users_roles
 puts 'Populating SECTIONS_USERS_ROLES'
-section = Section.find(1)
-role = Role.find(1)
-user.sections_users_roles << SectionsUsersRole.new(:section => section, :role => role)
-# user.add_role :admin
+
+  User.find(:all).each do |user|
+    Section.find(:all).each do |section|
+      role = nil
+
+      if(user.user_id >= Student1_UID)
+        role = Role.find(Student_RID)       # Student role
+      elsif(user.user_id == Admin_UID)
+        role = Role.find(Admin_RID)         # Admin role
+      elsif(user.user_id == Professor1_UID)
+        role = Role.find(Professor_RID)     # Professor role
+      else
+        role = Role.find(TA_RID)            # TA role
+      end
+
+      user.sections_users_roles << SectionsUsersRole.new(:section => section, :role => role)
+    end
+  end

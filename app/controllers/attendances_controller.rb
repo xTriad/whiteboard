@@ -1,5 +1,9 @@
 class AttendancesController < InheritedResources::Base
-  helper_method :section_and_date_defined, :format_attendance_date, :date_url_format, :date_page_format
+  helper_method :section_and_date_defined,
+                :format_attendance_date,
+                :date_url_format,
+                :date_page_format,
+                :output_user_list
 
   # May need to put these helper methods in a AttendancesHelper module in lib/
   # if there start to be too many. See page 21 in Rails Antipatterns.
@@ -12,6 +16,16 @@ class AttendancesController < InheritedResources::Base
   # The format to display dates on the page
   def date_page_format
     '%B %d %Y'
+  end
+
+  def output_user_list(users)
+    output = ''
+
+    users.each do |user|
+      output += user.name + ' '
+    end
+
+    return output
   end
 
   def update_attendance
@@ -40,13 +54,16 @@ class AttendancesController < InheritedResources::Base
   # GET /attendances.json
   def index
 
-    # TODO: Check if professor with proper permissions
+    # TODO: Check if professor/admin with proper permissions
 
     if section_and_date_defined
 
       # Show the students in the section for the given day
-      # TODO: Create find_students_in_section that only returns students
-      @students = Section.find_users_in_section(params[:section])
+      @professors = Section.find_professors_in_section(params[:section])
+      @tas = Section.find_tas_in_section(params[:section])
+      @students = Section.find_students_in_section(params[:section])
+
+      # Any attendances already set in class for this day
       @attendances = Attendance.in_section(params[:section]).within(24.hours.ago)
 
       respond_to do |format|
