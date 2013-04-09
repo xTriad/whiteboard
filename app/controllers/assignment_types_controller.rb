@@ -1,4 +1,6 @@
 class AssignmentTypesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /assignment_types
   # GET /assignment_types.json
   def index

@@ -222,8 +222,8 @@ puts 'DEFAULT ATTENDANCES'
 # Many to Many to Many: http://www.ruby-forum.com/topic/173845
 # http://stackoverflow.com/a/788579
 
-# Populate sections_users_roles. This put users with even IDs into
-# sections with even IDs and vice versa. It does this for each user
+# Populate sections_users_roles. This puts users with odd IDs into
+# sections with odd IDs and vice versa. It does this for each user
 # type as well, so each section will have professors, students, etc.
 puts 'Populating SECTIONS_USERS_ROLES'
 

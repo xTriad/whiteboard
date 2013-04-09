@@ -1,4 +1,6 @@
 class AttendancesController < InheritedResources::Base
+  before_filter :authenticate_user!
+
   helper_method :section_and_date_defined,
                 :format_attendance_date,
                 :date_url_format,

@@ -1,4 +1,5 @@
 class TeachergradesController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
    @grades = Teachergrade.all
