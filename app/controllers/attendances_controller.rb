@@ -7,7 +7,7 @@ class AttendancesController < InheritedResources::Base
                 :date_page_format,
                 :output_user_list
 
-  # May need to put these helper methods in a AttendancesHelper module in lib/
+  # May need to put these helper methods in a AttendancesHelper module in app/helpers/
   # if there start to be too many. See page 21 in Rails Antipatterns.
 
   # The format to store dates in the URL
