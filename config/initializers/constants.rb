@@ -35,6 +35,7 @@ module Constants
     Student2   = 7
     Student3   = 8
     Student4   = 9
+    Observer1  = 10
 
     # Organizes the test account IDs into a hash.
     # This needs to reflect the IDs above EXACTLY.
@@ -43,7 +44,7 @@ module Constants
       :professors  => [2,3],
       :tas         => [4,5],
       :students    => [6,7,8,9],
-      :observers   => []
+      :observers   => [10]
     }
   end
 

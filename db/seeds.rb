@@ -41,6 +41,7 @@ puts 'DEFAULT USERS'
     :university_id => Constants::Uni::Baylor
   )
 
+  # If you add any users be sure to update the constants.rb file!
   User.create([
     {
       :name => 'prof1',
@@ -94,6 +95,13 @@ puts 'DEFAULT USERS'
     {
       :name => 'student4',
       :email => 'student4@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'observer1',
+      :email => 'observer1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
@@ -218,9 +226,6 @@ puts 'DEFAULT ATTENDANCES'
       :class_date => DateTime.now
     }
   ])
-
-# Many to Many to Many: http://www.ruby-forum.com/topic/173845
-# http://stackoverflow.com/a/788579
 
 # Populate sections_users_roles. This puts users with odd IDs into
 # sections with odd IDs and vice versa. It does this for each user
