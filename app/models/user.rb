@@ -18,13 +18,13 @@ class User < ActiveRecord::Base
   # Returns all sections the professor is currently teaching
   def self.find_professor_sections(user_id)
     user = find(:first, :conditions => ['user_id = ?', user_id])
-    user.sections.find(:all, :conditions => ['role_id = ?', Constants::Professor_RID])
+    user.sections.find(:all, :conditions => ['role_id = ?', Constants::Role::Professor])
   end
 
   # Returns all sections the student is currently enrolled in
   def self.find_student_sections(user_id)
     user = find(:first, :conditions => ['user_id = ?', user_id])
-    user.sections.find(:all, :conditions => ['role_id = ?', Constants::Student_RID])
+    user.sections.find(:all, :conditions => ['role_id = ?', Constants::Role::Student])
   end
 
   def self.find_name_by_user_id(user_id)

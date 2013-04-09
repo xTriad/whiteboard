@@ -16,17 +16,17 @@ class Section < ActiveRecord::Base
 
   def self.find_professors_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
-    section.users.find(:all, :conditions => ['role_id = ?', Constants::Professor_RID])
+    section.users.find(:all, :conditions => ['role_id = ?', Constants::Role::Professor])
   end
 
   def self.find_tas_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
-    section.users.find(:all, :conditions => ['role_id = ?', Constants::TA_RID])
+    section.users.find(:all, :conditions => ['role_id = ?', Constants::Role::TA])
   end
 
   def self.find_students_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
-    section.users.find(:all, :conditions => ['role_id = ?', Constants::Student_RID])
+    section.users.find(:all, :conditions => ['role_id = ?', Constants::Role::Student])
   end
 
   def self.find_number_by_section_id(section_id)
@@ -63,15 +63,15 @@ class Section < ActiveRecord::Base
       role_id = nil
 
       case role_id
-        when Constants::Student_RID
+        when Constants::Role::Student
           users_hash[:students] << user
-        when Constants::Professor_RID
+        when Constants::Role::Professor
           users_hash[:professors] << user
-        when Constants::TA_RID
+        when Constants::Role::TA
           users_hash[:tas] << user
-        when Constants::Admin_RID
+        when Constants::Role::Admin
           users_hash[:admins] << user
-        when Constants::Observer_RID
+        when Constants::Role::Observer
           users_hash[:observers] << user
       end
     end

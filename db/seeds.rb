@@ -38,7 +38,7 @@ puts 'DEFAULT USERS'
     :email => ENV['ADMIN_EMAIL'].dup,
     :password => ENV['ADMIN_PASSWORD'].dup,
     :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
-    :university_id => Constants::Baylor
+    :university_id => Constants::Uni::Baylor
   )
 
   User.create([
@@ -47,56 +47,56 @@ puts 'DEFAULT USERS'
       :email => 'prof1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
-      :university_id => Constants::Baylor
+      :university_id => Constants::Uni::Baylor
     },
     {
       :name => 'prof2',
       :email => 'prof2@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
-      :university_id => Constants::Baylor
+      :university_id => Constants::Uni::Baylor
     },
     {
       :name => 'ta1',
       :email => 'ta1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
-      :university_id => Constants::Baylor
+      :university_id => Constants::Uni::Baylor
     },
     {
       :name => 'ta2',
       :email => 'ta2@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
-      :university_id => Constants::Baylor
+      :university_id => Constants::Uni::Baylor
     },
     {
       :name => 'student1',
       :email => 'student1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
-      :university_id => Constants::Baylor
+      :university_id => Constants::Uni::Baylor
     },
     {
       :name => 'student2',
       :email => 'student2@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
-      :university_id => Constants::Baylor
+      :university_id => Constants::Uni::Baylor
     },
     {
       :name => 'student3',
       :email => 'student3@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
-      :university_id => Constants::Baylor
+      :university_id => Constants::Uni::Baylor
     },
     {
       :name => 'student4',
       :email => 'student4@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
-      :university_id => Constants::Baylor
+      :university_id => Constants::Uni::Baylor
     }
   ])
 
@@ -105,7 +105,7 @@ puts 'DEFAULT USERS'
     :email => ENV['ADMIN_EMAIL'].dup,
     :password => ENV['ADMIN_PASSWORD'].dup,
     :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
-    :university_id => Constants::Baylor
+    :university_id => Constants::Uni::Baylor
   )
 
 # Insert Courses
@@ -114,42 +114,42 @@ puts 'DEFAULT COURSES'
   Course.create([
     {
       :number => 1430,
-      :university_id => Constants::Baylor,
+      :university_id => Constants::Uni::Baylor,
       :name => 'Introduction I'
     },
     {
       :number => 1440,
-      :university_id => Constants::Baylor,
+      :university_id => Constants::Uni::Baylor,
       :name => 'Introduction II'
     },
     {
       :number => 2334,
-      :university_id => Constants::Baylor,
+      :university_id => Constants::Uni::Baylor,
       :name => 'Introduction to Systems'
     },
     {
       :number => 3101,
-      :university_id => Constants::Baylor,
+      :university_id => Constants::Uni::Baylor,
       :name => 'Computer Ethics'
     },
     {
       :number => 3344,
-      :university_id => Constants::Baylor,
+      :university_id => Constants::Uni::Baylor,
       :name => 'Data Structures'
     },
     {
       :number => 3335,
-      :university_id => Constants::Baylor,
+      :university_id => Constants::Uni::Baylor,
       :name => 'Database'
     },
     {
       :number => 4321,
-      :university_id => Constants::Baylor,
+      :university_id => Constants::Uni::Baylor,
       :name => 'Computer Networking'
     },
     {
       :number => 4330,
-      :university_id => Constants::Baylor,
+      :university_id => Constants::Uni::Baylor,
       :name => 'Foundations'
     }
   ])
@@ -178,14 +178,14 @@ puts 'DEFAULT ASSIGNMENTS'
 
   Assignment.create([
     {
-      :type_id => Constants::Homework,
+      :type_id => Constants::AssignType::Homework,
       :section_id => 1,
       :due_date => '2020-02-12',
       :highest_grade_value => 100,
       :weight => 1
     },
     {
-      :type_id => Constants::Homework,
+      :type_id => Constants::AssignType::Homework,
       :section_id => 2,
       :due_date => '2020-02-14',
       :highest_grade_value => 90,
@@ -199,22 +199,22 @@ puts 'DEFAULT ATTENDANCES'
   Attendance.create([
     {
       :section_id => 1,
-      :user_id => Constants::Student1_UID,
+      :user_id => Constants::User::Student1,
       :class_date => DateTime.new(2013,4,1)
     },
     {
       :section_id => 1,
-      :user_id => Constants::Student2_UID,
+      :user_id => Constants::User::Student2,
       :class_date => DateTime.new(2013,4,1)
     },
     {
       :section_id => 1,
-      :user_id => Constants::Student1_UID,
+      :user_id => Constants::User::Student1,
       :class_date => DateTime.now
     },
     {
       :section_id => 1,
-      :user_id => Constants::Student2_UID,
+      :user_id => Constants::User::Student2,
       :class_date => DateTime.now
     }
   ])
@@ -229,7 +229,7 @@ puts 'Populating SECTIONS_USERS_ROLES'
 
   sections = Section.find(:all)
 
-  Constants::Test_Users.each do |role_name, role|
+  Constants::User::By_Role.each do |role_name, role|
     role.each do |user_id|
       user_id_oddity = (user_id % 2 == 0) ? 1 : 0
 
@@ -242,15 +242,15 @@ puts 'Populating SECTIONS_USERS_ROLES'
 
           case role_name
             when :students
-              role_object = Role.find(Constants::Student_RID)
+              role_object = Role.find(Constants::Role::Student)
             when :professors
-              role_object = Role.find(Constants::Professor_RID)
+              role_object = Role.find(Constants::Role::Professor)
             when :tas
-              role_object = Role.find(Constants::TA_RID)
+              role_object = Role.find(Constants::Role::TA)
             when :admins
-              role_object = Role.find(Constants::Admin_RID)
+              role_object = Role.find(Constants::Role::Admin)
             when :observers
-              role_object = Role.find(Constants::Observer_RID)
+              role_object = Role.find(Constants::Role::Observer)
           end
 
           User.find(user_id).sections_users_roles << SectionsUsersRole.new(:section => section, :role => role_object)

@@ -7,15 +7,15 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    if user.has_role? Constants::Admin_RID
+    if user.has_role? Constants::Role::Admin
       can :manage, :all
-    elsif user.has_role? Constants::Professor_RID
+    elsif user.has_role? Constants::Role::Professor
       can :manage, [Assignment, Attendance, Teachergrade, Upload]
       can :read, [Course, Grade, Section]
-    elsif user.has_role? Constants::TA_RID
+    elsif user.has_role? Constants::Role::TA
       can :manage, [Upload, Teachergrade]
       can :read, [Assignment, Course, Grade, Section]
-    elsif user.has_role? Constants::Student_RID
+    elsif user.has_role? Constants::Role::Student
       can :manage, [Upload]
       can :read, [Assignment, Course, Grade, Section]
     else
