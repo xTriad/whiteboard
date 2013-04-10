@@ -1,13 +1,25 @@
-<h1>Courses</h1>
+<html>
 
-<table>
-<% @courses.each do |course| %>
-  <tr>
-    <td><%= course.number %></td>
-    <td><%= course.name %></td>
-    <td><%= link_to 'Show', course %></td>
-  </tr>
-<% end %>
-</table>
+<div class="pageheader">
+<h1>Courses</h1>
+</div>
+
+<div class="backpic">
+<body>
+<div class="listofitems">
+
+  <% @courses.each do |course| %>
+
+      <div class="mainListItem"><%= course.number%> &nbsp; <%=course.name %></div>
+
+      <div class="subListItem"><%= link_to 'Assignments', assignments_path(:course => course.course_id) %> &nbsp; <%= link_to 'Course Information', course %></div></br>
+
+  <% end %>
+
+</div>
+</body>
+</div>
 
 <br />
+
+</html>
