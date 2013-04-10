@@ -16,6 +16,7 @@ class UploadsController < ApplicationController
   # GET /uploads/1
   # GET /uploads/1.json
   def show
+    debugger
     authorize! :read, Upload
     redirect_to root_path
   end
@@ -25,12 +26,14 @@ class UploadsController < ApplicationController
   # This should never be called since the jquery-fileupload Javascript ajax
   # handles the creation of new Uploads.
   def new
+    debugger
     authorize! :create, Upload
     redirect_to root_path
   end
 
   # GET /uploads/1/edit
   def edit
+    debugger
     authorize! :update, Upload
     redirect_to root_path
   end
@@ -79,6 +82,7 @@ class UploadsController < ApplicationController
     # TODO: Javascript usage: http://railsapps.github.com/rails-javascript-include-external.html
     @upload = Upload.find(params[:id])
     authorize! :destroy, @upload
+    @upload.paperclip_values!(@upload.read_attribute(:assignment_id), @upload.read_attribute(:user_id))
     @upload.destroy
 
     respond_to do |format|
