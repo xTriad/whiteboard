@@ -42,24 +42,21 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.find(params[:course])
-    authorize! :create, @course
-    redirect_to @course
+    authorize! :create, Course
+    redirect_to courses_path
   end
 
   # PUT /courses/1
   # PUT /courses/1.json
   def update
-    @course = Course.find(params[:id])
-    authorize! :update, @course
-    redirect_to @course
+    authorize! :update, Course
+    redirect_to courses_path
   end
 
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
-    @course = Course.find(params[:id])
-    authorize! :destroy, @course
-    redirect_to @course
+    authorize! :destroy, Course
+    redirect_to courses_path
   end
 end

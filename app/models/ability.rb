@@ -27,6 +27,8 @@ class Ability
       # can :read, Course, Course.where('course_id in (?)', course_ids) do |course|
       #   product.discontinued?
       # end
+
+      # can :write, Forum, :id => Forum.with_role(:moderator, user).map(&:id)
     else
       can :manage, []
       can :read, []
