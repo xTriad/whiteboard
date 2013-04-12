@@ -1,6 +1,4 @@
 class CoursesController < ApplicationController
-  include Helpers
-
   before_filter :authenticate_user!
 
   # GET /courses
