@@ -1,11 +1,13 @@
 class AttendancesController < InheritedResources::Base
+  before_filter :authenticate_user!
+
   helper_method :section_and_date_defined,
                 :format_attendance_date,
                 :date_url_format,
                 :date_page_format,
                 :output_user_list
 
-  # May need to put these helper methods in a AttendancesHelper module in lib/
+  # May need to put these helper methods in a AttendancesHelper module in app/helpers/
   # if there start to be too many. See page 21 in Rails Antipatterns.
 
   # The format to store dates in the URL
@@ -43,18 +45,13 @@ class AttendancesController < InheritedResources::Base
   end
 
   def section_and_date_defined
-    if params.has_key?(:section) && params.has_key?(:date)
-      return true
-    else
-      return false
-    end
+    return params.has_key?(:section) && params.has_key?(:date)
   end
 
   # GET /attendances
   # GET /attendances.json
   def index
-
-    # TODO: Check if professor/admin with proper permissions
+    authorize! :read, Attendance
 
     if section_and_date_defined
 
@@ -84,75 +81,42 @@ class AttendancesController < InheritedResources::Base
 
   # GET /attendances/1
   # GET /attendances/1.json
-  # This should never be called
   def show
-    @attendances = Attendance.within(24.hours.ago)
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @attendance }
-    end
+    authorize! :read, Attendance
+    redirect_to attendances_path
   end
 
   # GET /attendances/new
   # GET /attendances/new.json
-  # This should never be called
   def new
-    @attendance = Attendance.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @attendance }
-    end
+    authorize! :create, Attendance
+    redirect_to attendances_path
   end
 
   # GET /attendances/1/edit
-  # This should never be called
   def edit
-    @attendance = Attendance.find(params[:id])
+    authorize! :update, Attendance
+    redirect_to attendances_path
   end
 
   # POST /attendances
   # POST /attendances.json
   def create
-    @attendance = Attendance.new(params[:attendance])
-
-    respond_to do |format|
-      if @attendance.save
-        format.html { redirect_to @attendance, notice: 'Attendance was successfully created.' }
-        format.json { render json: @attendance, status: :created, location: @attendance }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
-      end
-    end
+    authorize! :create, Attendance
+    redirect_to attendances_path
   end
 
   # PUT /attendances/1
   # PUT /attendances/1.json
   def update
-    @attendance = Attendance.find(params[:id])
-
-    respond_to do |format|
-      if @attendance.update_attributes(params[:attendance])
-        format.html { redirect_to @attendance, notice: 'Attendance was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
-      end
-    end
+    authorize! :update, Attendance
+    redirect_to attendances_path
   end
 
   # DELETE /attendances/1
   # DELETE /attendances/1.json
   def destroy
-    @attendance = Attendance.find(params[:id])
-    @attendance.destroy
-
-    respond_to do |format|
-      format.html { redirect_to attendances_url }
-      format.json { head :no_content }
-    end
+    authorize! :destroy, Attendance
+    redirect_to attendances_path
   end
 end
