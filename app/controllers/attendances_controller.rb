@@ -45,11 +45,7 @@ class AttendancesController < InheritedResources::Base
   end
 
   def section_and_date_defined
-    if params.has_key?(:section) && params.has_key?(:date)
-      return true
-    else
-      return false
-    end
+    return params.has_key?(:section) && params.has_key?(:date)
   end
 
   # GET /attendances

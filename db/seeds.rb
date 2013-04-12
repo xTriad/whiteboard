@@ -193,11 +193,46 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 1
     },
     {
+      :type_id => Constants::AssignType::Program,
+      :section_id => 1,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :type_id => Constants::AssignType::Test,
+      :section_id => 1,
+      :due_date => '2018-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
       :type_id => Constants::AssignType::Homework,
       :section_id => 2,
-      :due_date => '2020-02-14',
+      :due_date => '2021-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :type_id => Constants::AssignType::Homework,
+      :section_id => 2,
+      :due_date => '2022-02-14',
       :highest_grade_value => 90,
       :weight => 2
+    },
+    {
+      :type_id => Constants::AssignType::Program,
+      :section_id => 2,
+      :due_date => '2023-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :type_id => Constants::AssignType::Test,
+      :section_id => 2,
+      :due_date => '2024-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
     }
   ])
 
@@ -232,7 +267,19 @@ puts 'DEFAULT ATTENDANCES'
 # type as well, so each section will have professors, students, etc.
 puts 'Populating SECTIONS_USERS_ROLES'
 
-  sections = Section.find(:all)
+  # Keep student from being placed into two sections of the same course
+  # student_courses[student_id] = [course_id, course_id, ...]
+  student_courses = {}
+  User.find(:all).each do |user|
+    student_courses[user.user_id] = []
+  end
+
+  sections        = Section.find(:all)
+  admin_role      = Role.find(Constants::Role::Admin)
+  professor_role  = Role.find(Constants::Role::Professor)
+  ta_role         = Role.find(Constants::Role::TA)
+  student_role    = Role.find(Constants::Role::Student)
+  observer_role   = Role.find(Constants::Role::Observer)
 
   Constants::User::By_Role.each do |role_name, role|
     role.each do |user_id|
@@ -243,22 +290,34 @@ puts 'Populating SECTIONS_USERS_ROLES'
 
         # If both even or both odd
         if user_id_oddity == section_id_oddity
+          user = User.find(user_id)
           role_object = nil
 
           case role_name
+
             when :students
-              role_object = Role.find(Constants::Role::Student)
+              role_object = student_role
+
+              # Skip this 'each' iteration if the user is already in the course in another section
+              next if student_courses[user.user_id].include?(section.course_id)
+
+              # Add the course to the list of courses the student it taking
+              student_courses[user.user_id] << section.course_id
+
             when :professors
-              role_object = Role.find(Constants::Role::Professor)
+              role_object = professor_role
+
             when :tas
-              role_object = Role.find(Constants::Role::TA)
+              role_object = ta_role
+
             when :admins
-              role_object = Role.find(Constants::Role::Admin)
+              role_object = admin_role
+
             when :observers
-              role_object = Role.find(Constants::Role::Observer)
+              role_object = observer_role
           end
 
-          User.find(user_id).sections_users_roles << SectionsUsersRole.new(:section => section, :role => role_object)
+          user.sections_users_roles << SectionsUsersRole.new(:section => section, :role => role_object)
         end
       end
     end

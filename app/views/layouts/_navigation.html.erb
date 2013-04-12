@@ -8,6 +8,12 @@
       </li>
     <% end %>
 
+    <% if can? :read, Assignment %>
+      <li>
+        <%= link_to 'Assignments', assignments_path %>
+      </li>
+    <% end %>
+
     <% if can? :read, Attendance %>
       <li>
         <%= link_to 'Attendance', attendances_path %>

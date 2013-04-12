@@ -1,37 +1,9 @@
-<h1>Listing assignments</h1>
+<h1>Assignments</h1>
 
-<table>
-  <tr>
-    <th>Type</th>
-    <th>Section</th>
-    <th>Due date</th>
-    <th>Highest grade value</th>
-    <th>Weight</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<!-- TODO: Move this PHP crap to the model! -->
-<% course = Course.find(params[:course].to_i) %>
-Coruse id: <%= course.course_id %>
-<% sections = Section.where("course_id = ?", course.course_id) %>
-Sections:
-<% sections.each do |section| %>
-<%= section.section_id %>
+<% if course_defined? %>
+  <%= render 'assignments' %>
+<% else %>
+  <%= render 'courses' %>
 <% end %>
-
-<% Assignment.where("section_id in (?)", sections).each do |assignment| %>
-  <tr>
-    <td><%= assignment.type_id %></td>
-    <td><%= assignment.section_id %></td>
-    <td><%= assignment.due_date %></td>
-    <td><%= assignment.highest_grade_value %></td>
-    <td><%= assignment.weight %></td>
-    <td><%= link_to 'Show', assignment_path(assignment) %> |
-        <%= link_to 'Edit', edit_assignment_path(assignment) %></td>
-  </tr>
-<% end %>
-</table>
 
 <br />

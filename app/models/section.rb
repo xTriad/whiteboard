@@ -8,6 +8,11 @@ class Section < ActiveRecord::Base
   has_many :assignments
   belongs_to :course
 
+  # Return all sections in the given course
+  def self.find_all_by_course_id(course_id)
+    where("course_id = ?", course_id)
+  end
+
   # Returns all users in a section, professors, students etc.
   def self.find_users_in_section(section_id)
     section = find(:first, :conditions => ['section_id = ?', section_id])
@@ -38,8 +43,6 @@ class Section < ActiveRecord::Base
   end
 
   def find_course_name
-    # We get the "course" variable from "belongs_to :course"!
-    # Pages 32-42 in Rails Antipatterns is candy
     self.course.name
   end
 

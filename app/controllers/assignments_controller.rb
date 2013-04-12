@@ -1,11 +1,44 @@
 class AssignmentsController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :course_defined?,
+                :display_course_sections,
+                :get_user_courses
+
+  def course_defined?
+    return params.has_key?(:course)
+  end
+
+  def display_course_sections
+
+  end
+
+  def get_user_courses
+    
+  end
 
   # GET /assignments
   # GET /assignments.json
   def index
     authorize! :read, Assignment
-    @assignments = Assignment.all
+
+    if course_defined?
+      @course = Course.find(params[:course])
+
+      if cannot? :manage, Teachergrade
+        @section = User.find_user_section_by_course_id(current_user.id, @course.course_id)
+        @assignments = Assignment.find_by_section_id(@section.section_id)
+      else
+        @prof_sections = Section.find_all_by_course_id(@course.course_id)
+        @assignments = {}
+
+        @prof_sections.each do |section|
+          @assignments[section.section_id] = {
+            :section => section,
+            :assignments => Assignment.find_by_section_id(section.section_id)
+          }
+        end
+      end
+    end
 
     respond_to do |format|
       format.html # index.html.erb
