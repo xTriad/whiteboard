@@ -1,6 +1,39 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :display_courses
 
+=begin
+  def display_courses
+    output = '<table cellspacing="5" cellpadding="5" style="background-color: #fff;">'
+    @counter = 0
+
+    @courses.each do |course|
+      if @counter == 0
+        output += '<tr>'
+      end
+
+      output += '<td style="background-color: #ff00ff;">'
+        output += '<div class="mainListItem">#{course.number} &nbsp; #{course.name}</div>'
+        output += '<div class="subListItem">'
+          output +=  '<a href="' + assignments_path(:course => course.course_id) + '">Assignments</a>,'
+          output += '&nbsp;'
+          output += '<a href="adsfasdf">Course Information</a>,'
+        output += '</div>'
+      output += '</td>'
+
+      if @counter == 2
+        output += '</tr>'
+        @counter = -1
+      end
+
+      @counter += 1
+     end
+
+   output += '</table>'
+
+   return output.html_safe
+  end
+=end
   # GET /courses
   # GET /courses.json
   def index
