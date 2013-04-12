@@ -1,25 +1,39 @@
 <html>
+<body>
 
 <div class="pageheader">
 <h1>Courses</h1>
 </div>
 
-<div class="backpic">
-<body>
-<div class="listofitems">
+
+<div>
+
+<table cellspacing="1000" cellpadding="5" >
+
+<% @counter = 0 %>
 
   <% @courses.each do |course| %>
 
-      <div class="mainListItem"><%= course.number%> &nbsp; <%=course.name %></div>
+<% if @counter == 0 %>
+<tr>
+<%end%>
+      <td> <div class="mainListItem"><%= course.number%> &nbsp; <%=course.name %>&nbsp;&nbsp;</div>
+      <div class="subListItem"><%= link_to 'Assignments', assignments_path(:course => course.course_id) %> </br> <%= link_to 'Course Information', course %> </br> <%= link_to 'Attendance', attendances_path %></div></td>
+<!-- TODO add more links/rearrange links -->
 
-      <div class="subListItem"><%= link_to 'Assignments', assignments_path(:course => course.course_id) %> &nbsp; <%= link_to 'Course Information', course %></div></br>
+<% if @counter == 2 %>
+</tr>
+<% @counter = -1 %>
+<%end%>
+<% @counter += 1 %>
 
   <% end %>
 
+
+</table>
+
 </div>
 </body>
-</div>
 
 <br />
-
 </html>
