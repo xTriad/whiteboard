@@ -1,11 +1,18 @@
 class CoursesController < ApplicationController
+  include Helpers
+
   before_filter :authenticate_user!
 
   # GET /courses
   # GET /courses.json
   def index
     authorize! :read, Course
-    @courses = Course.find_student_courses(current_user.id)
+
+    if cannot? :manage, Teachergrade
+      @courses = Course.find_student_courses(current_user.id)
+    else
+      @courses = Course.find_professor_courses(current_user.id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

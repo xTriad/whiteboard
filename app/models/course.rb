@@ -19,4 +19,14 @@ class Course < ActiveRecord::Base
 
     return courses
   end
+
+  def self.find_professor_courses(user_id)
+    courses = []
+
+    User.find_professor_sections(user_id).each do |section|
+      courses << find(section.course_id)
+    end
+
+    return courses
+  end
 end

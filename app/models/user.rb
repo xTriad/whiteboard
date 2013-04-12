@@ -19,6 +19,13 @@ class User < ActiveRecord::Base
   # Roles_Cache[user_id] = [role_id, role_id ...]
   Roles_Cache = {}
 
+  # Finds the specific section the user is enrolled in by their
+  # user_id and the given course_id
+  def self.find_user_section_by_course_id(user_id, course_id)
+    user = find(:first, :conditions => ['user_id = ?', user_id])
+    user.sections.find(:first, :conditions => ['course_id = ?', course_id])
+  end
+
   # Returns all sections the professor is currently teaching
   def self.find_professor_sections(user_id)
     user = find(:first, :conditions => ['user_id = ?', user_id])
