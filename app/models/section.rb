@@ -77,4 +77,8 @@ class Section < ActiveRecord::Base
     # Pages 32-42 in Rails Antipatterns is candy
     self.course.name
   end
+  
+  def to_s
+    "#{self.course.name} - #{self.number}"
+  end
 end

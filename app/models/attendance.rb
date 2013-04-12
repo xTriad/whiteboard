@@ -1,6 +1,6 @@
 class Attendance < ActiveRecord::Base
   attr_accessible :attendance_id, :section_id, :user_id, :class_date, :present, :absent, :tardy, :excused
-  belongs_to :user # TODO: Have Kip confirm this
+  belongs_to :user
 
   scope :within, lambda { |time_ago| { :conditions => ['class_date > ?', time_ago] } } # within(24.hours.ago)
   scope :in_section, lambda { |section| { :conditions => ['section_id = ?', section] } }
