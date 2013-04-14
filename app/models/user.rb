@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
 
       if Roles_Cache[cur_user_id].include?(role_id)
         has_role = true
-        puts "\t   2. Sucessfully retrived the role from cache"
+        puts "\t   2. Sucessfully retrieved the role from cache"
       end
     else
       the_users_roles = []
@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
       Roles_Cache[cur_user_id] = the_users_roles
 
       if the_users_roles.include?(role_id)
-        puts "\t   2. Successfully retrived the role from the database"
+        puts "\t   2. Successfully retrieved the role from the database"
         has_role = true
       end
     end

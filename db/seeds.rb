@@ -167,7 +167,13 @@ puts 'DEFAULT SECTIONS'
 
   Course.all.each do |course|
     for x in 1..3
-      Section.create(:course_id => course.course_id, :number => x);
+      description = 'A blank description.'
+
+      if course.course_id == 4
+        description = 'I HOPE YOU LOVE GRABOW HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA'
+      end
+
+      Section.create(:course_id => course.course_id, :number => x, :description => description);
     end
   end
 

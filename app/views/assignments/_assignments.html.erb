@@ -21,7 +21,7 @@ Course: <%= @course.name %><br />
       <td><%= assignment.highest_grade_value %></td>
       <td><%= assignment.weight %></td>
       <td><%= link_to 'Show', assignment_path(assignment) %> |
-        <%= link_to 'Edit', edit_assignment_path(assignment) %></td>
+        <%= link_to 'Files', files_assignment_path(assignment) %></td>
     </tr>
   <% end %>
 <% else %>
@@ -41,7 +41,7 @@ Course: <%= @course.name %><br />
         <td><%= assignment.highest_grade_value %></td>
         <td><%= assignment.weight %></td>
         <td><%= link_to 'Show', assignment_path(assignment) %> |
-          <%= link_to 'Files', edit_assignment_path(assignment) %> |
+          <%= link_to 'Files', files_assignment_path(assignment) %> |
           <%= link_to 'Edit', edit_assignment_path(assignment) %></td>
       </tr>
     <% end %>
