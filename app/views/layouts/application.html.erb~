@@ -15,7 +15,7 @@
         <div class="container"> -->
     <header class="navbar navbar-fixed-top">
       <nav class = "pageheader">
-        <div class="navbarcontainer">
+        <div class="container">
           <%= render 'layouts/navigation' %>
         </div>
       </nav>

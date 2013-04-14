@@ -4,6 +4,7 @@
 
 <%= link_to "", root_path, :class => 'topnavleft' %>
 
+</span> 
 <span class="topnavright">
 
 <ul class="nav">

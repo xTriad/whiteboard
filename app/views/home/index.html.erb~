@@ -4,3 +4,11 @@
   <p>User: <%=link_to user.name, user %></p>
 <% end %>
 
+
+<div class="sidebar">
+<ul>
+<li>Hello</li>
+<li>Hi</li>
+<li>Testing</li>
+</ul>
+</div>
