@@ -5,18 +5,18 @@
 <table cellspacing="0" cellpadding="5" >
 
 <% @counter = 0 %>
-<% @courses.each do |course| %>
+<% @course_sections.each do |cs| %>
   <% if @counter == 0 %>
     <tr>
   <% end %>
     <td>
       <div class="mainListItem">
-        <%= course.number %> &nbsp;
-        <%= course.name %> &nbsp;
+        <%= cs[:course].number %> &nbsp;
+        <%= cs[:course].name %> &nbsp;
       </div>
       <div class="subListItem">
-        <%= link_to 'Assignments', assignments_path(:course => course.course_id) %> <br />
-        <%= link_to 'Course Information', course %> <br />
+        <%= link_to 'Assignments', assignments_path(:course => cs[:course].course_id) %> <br />
+        <%= link_to 'Course Information', course_path(cs[:course], :section => cs[:section].section_id) %> <br />
         <%= link_to 'Attendance', attendances_path %>
       </div>
     </td>

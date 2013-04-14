@@ -1,22 +1,3 @@
-<h1>Listing sections</h1>
-
-<table>
-  <tr>
-    <th>Course</th>
-    <th>Section number</th>
-    <th></th>
-  </tr>
-<% @sections.each do |section| %>
-  <!-- TODO: Move this PHP crap to the model!!! Just getting it to work for now -->
-  <% if section.course_id == params[:course].to_i %>
-    <% course = Course.find(section.course_id); %>
-    <tr>
-      <td><%= section.course_id %></td>
-      <td><%= section.section_id %></td>
-      <td><%= link_to 'Show', section_path(section) %></td>
-    </tr>
-  <% end %>
-<% end %>
-</table>
+This page should never be used.
 
 <br />

@@ -1,5 +1,5 @@
 class Section < ActiveRecord::Base
-  attr_accessible :course_id, :number
+  attr_accessible :description
 
   has_many :sections_users_roles
   has_many :roles, :through => :sections_users_roles

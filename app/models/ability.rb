@@ -10,8 +10,8 @@ class Ability
     if user.has_role? Constants::Role::Admin
       can :manage, :all
     elsif user.has_role? Constants::Role::Professor
-      can :manage, [Assignment, Attendance, Teachergrade, Upload]
-      can :read, [Course, Grade, Section]
+      can :manage, [Assignment, Attendance, Section, Teachergrade, Upload]
+      can :read, [Course, Grade]
     elsif user.has_role? Constants::Role::TA
       can :manage, [Upload, Teachergrade]
       can :read, [Assignment, Course, Grade, Section]

@@ -8,9 +8,9 @@ class CoursesController < ApplicationController
     authorize! :read, Course
 
     if cannot? :manage, Teachergrade
-      @courses = Course.find_student_courses(current_user.id)
+      @course_sections = Course.find_student_courses(current_user.id)
     else
-      @courses = Course.find_professor_courses(current_user.id)
+      @course_sections = Course.find_professor_courses(current_user.id)
     end
 
     respond_to do |format|
@@ -24,6 +24,12 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     authorize! :read, @course
+
+    if params.has_key?(:section)
+      @section = Section.find(params[:section])
+    else
+      redirect_to courses_path and return
+    end
 
     respond_to do |format|
       format.html # show.html.erb
