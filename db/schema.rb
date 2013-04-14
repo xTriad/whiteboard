@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(:version => 0) do
     t.float    "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.text     "description"
   end
 
   create_table "attendances", :primary_key => "attendance_id", :force => true do |t|
@@ -151,10 +153,11 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "roles", ["name"], :name => "index_Roles_on_role_name"
 
   create_table "sections", :primary_key => "section_id", :force => true do |t|
-    t.integer  "course_id",  :null => false
-    t.integer  "number",     :null => false
+    t.integer  "course_id",   :null => false
+    t.integer  "number",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   create_table "sections_users_roles", :id => false, :force => true do |t|

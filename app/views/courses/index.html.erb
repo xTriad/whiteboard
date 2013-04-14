@@ -1,36 +1,36 @@
-
-
 <div class="pageheader">
-<h1>Courses</h1>
+  <h1>Courses</h1>
 </div>
 
-
-<div>
-
-<table cellspacing="1000" cellpadding="5" >
+<table cellspacing="0" cellpadding="5" >
 
 <% @counter = 0 %>
+<% @courses.each do |course| %>
+  <% if @counter == 0 %>
+    <tr>
+  <% end %>
+    <td>
+      <div class="mainListItem">
+        <%= course.number %> &nbsp;
+        <%= course.name %> &nbsp;
+      </div>
+      <div class="subListItem">
+        <%= link_to 'Assignments', assignments_path(:course => course.course_id) %> <br />
+        <%= link_to 'Course Information', course %> <br />
+        <%= link_to 'Attendance', attendances_path %>
+      </div>
+    </td>
 
-  <% @courses.each do |course| %>
-
-<% if @counter == 0 %>
-<tr>
-<%end%>
-      <td> <div class="mainListItem"><%= course.number%> &nbsp; <%=course.name %>&nbsp;&nbsp;</div>
-      <div class="subListItem"><%= link_to 'Assignments', assignments_path(:course => course.course_id) %> </br> <%= link_to 'Course Information', course %> </br> <%= link_to 'Attendance', attendances_path %></div></td>
 <!-- TODO add more links/rearrange links -->
 
-<% if @counter == 2 %>
-</tr>
-<% @counter = -1 %>
-<%end%>
-<% @counter += 1 %>
-
+  <% if @counter == 2 %>
+    </tr>
+    <% @counter = -1 %>
   <% end %>
 
+  <% @counter += 1 %>
+<% end %>
 
 </table>
-
-</div>
 
 <br />

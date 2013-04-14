@@ -8,6 +8,20 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -139,7 +153,9 @@ CREATE TABLE assignments (
     highest_grade_value integer DEFAULT 100 NOT NULL,
     weight double precision,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    name character varying(255),
+    description text
 );
 
 
@@ -885,7 +901,8 @@ CREATE TABLE sections (
     course_id integer NOT NULL,
     number integer NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    description text
 );
 
 
