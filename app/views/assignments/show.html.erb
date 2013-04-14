@@ -1,13 +1,11 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <b>Name:</b>
+  <%= @assignment.name %>
+</p>
 
 <p>
   <b>Type:</b>
   <%= @assignment.get_type_name %>
-</p>
-
-<p>
-  <b>Section:</b>
-  <%= @assignment.section_id %>
 </p>
 
 <p>
@@ -23,6 +21,10 @@
 <p>
   <b>Weight:</b>
   <%= @assignment.weight %>
+</p>
+
+<p>
+  <%= @assignment.description %>
 </p>
 
 <%= link_to 'Edit', edit_assignment_path(@assignment) %>

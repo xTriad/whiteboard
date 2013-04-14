@@ -7,8 +7,12 @@ Whiteboard::Application.routes.draw do
 
   resources :courses
   resources :sections
-  resources :assignments
   resources :uploads
+  resources :assignments do
+    member do
+      get  'files' # /assignments/1/files
+    end
+  end
 
   # put 'attendances/:id/:atten' => "attendances#update_attendance"
   resources :attendances

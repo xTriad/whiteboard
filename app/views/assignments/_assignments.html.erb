@@ -3,6 +3,7 @@ Course: <%= @course.name %><br />
 <table>
   <tr>
     <th>Type</th>
+    <th>Name</th>
     <th>Section</th>
     <th>Due date</th>
     <th>Highest grade value</th>
@@ -14,6 +15,7 @@ Course: <%= @course.name %><br />
   <% @assignments.each do |assignment| %>
     <tr>
       <td><%= assignment.get_type_name %></td>
+      <td><%= assignment.name %></td>
       <td><%= assignment.section_id %></td>
       <td><%= assignment.due_date %></td>
       <td><%= assignment.highest_grade_value %></td>
@@ -25,11 +27,15 @@ Course: <%= @course.name %><br />
 <% else %>
   <% @assignments.each do |key, section_assignments| %>
     <tr>
-      <td><b>Section: <%= @assignments[key][:section].number %></b></td>
+      <td colspan="7" style="padding: 10px 0px 10px 0px;">
+        <b>Section: <%= @assignments[key][:section].number %></b> - 
+        <b><%= link_to 'New Assignment', new_assignment_path(:section => @assignments[key][:section].section_id) %></b>
+      </td>
     </tr>
     <% @assignments[key][:assignments].each do |assignment| %>
       <tr>
         <td><%= assignment.get_type_name %></td>
+        <td><%= assignment.name %></td>
         <td><%= assignment.section_id %></td>
         <td><%= assignment.due_date %></td>
         <td><%= assignment.highest_grade_value %></td>

@@ -16,6 +16,11 @@ class AssignmentsController < ApplicationController
     
   end
 
+  # GET /assignments/1/files
+  def files
+    authorize! :update, Upload
+  end
+
   # GET /assignments
   # GET /assignments.json
   def index
@@ -28,7 +33,7 @@ class AssignmentsController < ApplicationController
         @section = User.find_user_section_by_course_id(current_user.id, @course.course_id)
         @assignments = Assignment.find_by_section_id(@section.section_id)
       else
-        @prof_sections = Section.find_all_by_course_id(@course.course_id)
+        @prof_sections = User.find_professor_sections_in_course(current_user.id, @course.course_id)
         @assignments = {}
 
         @prof_sections.each do |section|
@@ -64,6 +69,8 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new
     authorize! :create, @assignment
 
+    @section_id = params[:section]
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @assignment }
@@ -73,7 +80,8 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1/edit
   def edit
     @assignment = Assignment.find(params[:id])
-    authorize! :update, Upload # This is intentional
+    authorize! :update, @assignment
+    @section_id = @assignment.section_id
   end
 
   # POST /assignments

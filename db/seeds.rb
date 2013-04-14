@@ -186,6 +186,8 @@ puts 'DEFAULT ASSIGNMENTS'
 
   Assignment.create([
     {
+      :name => 'Proofs',
+      :description => 'Figure out these impossible proofs.',
       :type_id => Constants::AssignType::Homework,
       :section_id => 1,
       :due_date => '2020-02-12',
@@ -193,6 +195,8 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 1
     },
     {
+      :name => 'Huffman Encoder',
+      :description => 'Create a huffman encoder',
       :type_id => Constants::AssignType::Program,
       :section_id => 1,
       :due_date => '2019-02-12',
