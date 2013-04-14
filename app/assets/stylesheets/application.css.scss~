@@ -44,7 +44,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', end
 float: left;
 padding-left: 10px;
 padding-top: 0px;
-margin-top: 4px;
+margin-top: 5px;
 
 font-weight: bold;
 font-size: 18px;
