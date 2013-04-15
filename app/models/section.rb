@@ -6,6 +6,7 @@ class Section < ActiveRecord::Base
   has_many :users, :through => :sections_users_roles
 
   has_many :assignments
+  has_many :assignment_grades
   belongs_to :course
 
   # Return all sections in the given course

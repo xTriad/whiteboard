@@ -18,7 +18,7 @@
   <%@current_section ||= session[:current_section_id]&&User.find_by_id(session[:current_section_id])%>
 
 
-  <%assignments = Assignment.where(:section_id=>@current_section)%>
+  <%assignments = Assignment.find_by_section_id(@current_section)%>
 
   <%students = User.where(:user_id=>@current_user)%>
   <p>

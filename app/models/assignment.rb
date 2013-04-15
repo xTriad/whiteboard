@@ -1,5 +1,5 @@
 class Assignment < ActiveRecord::Base
-  attr_accessible :due_date, :highest_grade_value, :section_id, :type_id, :weight, :assignment_name
+  attr_accessible :due_date, :name, :description, :highest_grade_value, :section_id, :type_id, :weight
   belongs_to :section
 
   # Return all assignments in the given course section

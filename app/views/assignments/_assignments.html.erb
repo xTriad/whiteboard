@@ -11,7 +11,7 @@ Course: <%= @course.name %><br />
     <th></th>
   </tr>
 
-<% if cannot? :manage, Teachergrade %>
+<% if cannot? :manage, AssignmentGrade %>
   <% @assignments.each do |assignment| %>
     <tr>
       <td><%= assignment.get_type_name %></td>

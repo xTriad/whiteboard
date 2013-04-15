@@ -1,7 +1,13 @@
 class AssignmentGradesController < ApplicationController
 
   def index
-   @assignment_grades = AssignmentGrade.all
+
+    if !params.has_key?(:section)
+      @courses = Course.find_professor_courses(current_user.id)
+    else
+      # @grades = AssignmentGrade.find_grades_by_section_id(params[:section])
+      @assignments = Assignment.find_by_section_id(params[:section])
+    end
   end
 
   def show
@@ -16,7 +22,7 @@ class AssignmentGradesController < ApplicationController
 
   def create
  
-  @assignment=Assignment.where(:assignment_name => params[:assignment_grade][:assignment_name]).first 
+  # @assignment=Assignment.where(:assignment_id => params[:assignment_grade][:assignment_id]).first
   @assignmentid=@assignment[:assignment_id] 
 
   @user=User.where(:name => params[:assignment_grade][:user_name]).first

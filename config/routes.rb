@@ -1,8 +1,5 @@
 Whiteboard::Application.routes.draw do
 
-  resources :assignment_grades
-
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -21,7 +18,7 @@ Whiteboard::Application.routes.draw do
   # put 'attendances/:id/:atten' => "attendances#update_attendance"
   resources :attendances
   resources :grades
-  resources :teachergrades
+  resources :assignment_grades
 
   authenticated :user do
     root :to => 'home#index'

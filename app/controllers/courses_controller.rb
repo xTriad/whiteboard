@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
   def index
     authorize! :read, Course
 
-    if cannot? :manage, Teachergrade
+    if cannot? :manage, AssignmentGrade
       @course_sections = Course.find_student_courses(current_user.id)
     else
       @course_sections = Course.find_professor_courses(current_user.id)

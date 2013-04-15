@@ -10,14 +10,14 @@ class Ability
     if user.has_role? Constants::Role::Admin
       can :manage, :all
     elsif user.has_role? Constants::Role::Professor
-      can :manage, [Assignment, Attendance, Section, Teachergrade, Upload]
-      can :read, [Course, Grade]
+      can :manage, [Assignment, Attendance, Section, AssignmentGrade, Upload]
+      can :read, [Course]
     elsif user.has_role? Constants::Role::TA
-      can :manage, [Upload, Teachergrade]
-      can :read, [Assignment, Course, Grade, Section]
+      can :manage, [Upload, AssignmentGrade]
+      can :read, [Assignment, Course, Section]
     elsif user.has_role? Constants::Role::Student
       can :manage, [Upload]
-      can :read, [Assignment, Course, Grade, Section]
+      can :read, [Assignment, Course, Section]
 
       # http://stackoverflow.com/questions/10748529/creating-a-where-query-in-rails-from-an-array
       # A user should only be able to view courses they are enrolled in

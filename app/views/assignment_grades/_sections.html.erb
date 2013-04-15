@@ -1,0 +1,12 @@
+
+<table>
+
+<% @courses.each do |course| %>
+  <tr>
+    <td>
+      <b><%= link_to course[:course].name + ' - ' + course[:section].number.to_s, assignment_grades_path(:section => course[:section].section_id) %></b>
+    </td>
+  </tr>
+ <% end %>
+
+</table>

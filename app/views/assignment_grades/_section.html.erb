@@ -1,0 +1,18 @@
+
+<table>
+
+<% @assignments.each do |assignment| %>
+  <tr>
+    <td>
+      <b>(Name is null) <%= assignment.name %></b>
+    </td>
+    <td>
+      <b><%= assignment.get_type_name %></b>
+    </td>
+    <td>
+      <%= link_to 'Edit Grades', assignment_grades_path(:assignment => assignment.assignment_id) %>
+    </td>
+  </tr>
+ <% end %>
+
+</table>
