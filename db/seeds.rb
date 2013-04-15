@@ -252,22 +252,22 @@ puts 'DEFAULT ATTENDANCES'
   Attendance.create([
     {
       :section_id => 1,
-      :user_id => Constants::User::Student1,
-      :class_date => DateTime.new(2013,4,1)
-    },
-    {
-      :section_id => 1,
       :user_id => Constants::User::Student2,
       :class_date => DateTime.new(2013,4,1)
     },
     {
       :section_id => 1,
-      :user_id => Constants::User::Student1,
+      :user_id => Constants::User::Student4,
+      :class_date => DateTime.new(2013,4,1)
+    },
+    {
+      :section_id => 1,
+      :user_id => Constants::User::Student2,
       :class_date => DateTime.now
     },
     {
       :section_id => 1,
-      :user_id => Constants::User::Student2,
+      :user_id => Constants::User::Student4,
       :class_date => DateTime.now
     }
   ])

@@ -3,24 +3,127 @@
 and set them on the page visually. When the professor submits, submit
 every possible attendance, new and modified to the database. -->
 
+<style type="text/css">
+
+#students_container {
+  padding: 20px;
+}
+
+.student {
+  background-color: #ccc;
+  border: 1px solid #000;
+  width: 122px;
+  height: 122px;
+  padding: 20px;
+  margin: 10px;
+  display: inline;
+}
+
+.present, .absent, .tardy, .excused {
+  background-repeat: none;
+  width: 122px;
+  height: 122px;
+}
+
+.present {
+  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg');
+}
+
+.absent {
+  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg');
+}
+
+.tardy {
+  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg');
+}
+
+.excused {
+  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg');
+}
+
+</style>
+
 <script type="text/javascript">
 
-var attendance = <%= raw Attendance.all.to_json %>;
-// var arrayOfStudents = JSON.parse(betterAllStudents);
+// Example output: Notice the keys for the attendance hash are the user ids, and the
+// attendance hash consists of the already set attendance values for the section
+// on this date.
 
-// var url='http://localhost:3000/attendances/'+attenState;
-// // Method, url, async
-// AJAX.open("PUT", url, true);
-// AJAX.send(null); // Send the request.
+// var data = {
+//   section_id: 1,
+//   attendance: {
+//     "7": { user_name: "student2", class_date: "2013-04-15", attendance: 1 },
+//     "9": { user_name: "student4", class_date: "2013-04-15", attendance: 1 }
+//   },
+//   students: [
+//     { user_name: "student2", user_id: 7 },
+//     { user_name: "student4", user_id: 9 }
+//   ],
+//   images: {
+//     present: 'http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg',
+//     absent:  'http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg',
+//     tardy:   'http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg',
+//     excused: 'http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg'
+//   }
+// };
 
-// http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg
-// http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg
-// http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg
-// http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg
+var data = {
+  <%= raw attendance_json %>
+  images: {
+    present: 'http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg',
+    absent:  'http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg',
+    tardy:   'http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg',
+    excused: 'http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg'
+  }
+};
+
+// Displays the students when the page loads
+function display_students() {
+  $.each(data.students, function() {
+    var student = $('<div class="student"></div>')
+      .html(this.user_name)
+      .click(function() {
+        // Update JSON @ attendances/send?date=14-04-2013&section=1
+      });
+
+      // If an attendance value has already been set for this student on this date
+      if(data.attendance.hasOwnProperty(this.user_id.toString())) {
+        var attendance_value = data.attendance[this.user_id.toString()].attendance;
+
+        switch(attendance_value) {
+          case 1: student.addClass('present'); break;
+          case 2: student.addClass('absent'); break;
+          case 3: student.addClass('tardy'); break;
+          case 4: student.addClass('excused'); break;
+        }
+      }
+      else {
+        student.addClass('present');
+      }
+
+    $('#students_container').append(student);
+  });
+}
+
+function preload_images() {
+  for(var key in data.images) {
+    new Image().src = data.images[key];
+  }
+}
+
+function addEventHandlers() {
+  $('input[name="update"]').click(function() {
+    alert('Send JSON response');
+  });
+}
+
+$(document).ready(function() {
+  preload_images();
+  addEventHandlers();
+  display_students();
+});
 
 </script>
-
-<!-- var attendances = @attendances; -->
 
 Course: <%= Course.find_name_by_section_id(params[:section]) %><br />
 Section: <%= Section.find_number_by_section_id(params[:section]) %><br />
@@ -29,19 +132,8 @@ Date: <%= format_attendance_date(params[:date]) %><br /><br />
 Professor: <%= output_user_list(@professors) %><br />
 TA: <%= output_user_list(@tas) %><br /><br />
 
-<table>
-  <tr>
-    <th>Student</th>
-    <th>Attendance</th>
-  </tr>
-  <% @students.each do |student| %>
-  <tr>
-    <td><%= student.name %></td>
-    <td><%#= attendance.attendance %></td>
-  </tr>
-  <% end %>
-</table>
+<div id="students_container"></div>
 
 <br />
 
-<%= link_to 'Back', attendances_path %>
+<input type="button" name="update" value="Update Attendance" />
