@@ -3,6 +3,23 @@
 and set them on the page visually. When the professor submits, submit
 every possible attendance, new and modified to the database. -->
 
+<script type="text/javascript">
+
+var attendance = <%= raw Attendance.all.to_json %>;
+// var arrayOfStudents = JSON.parse(betterAllStudents);
+
+// var url='http://localhost:3000/attendances/'+attenState;
+// // Method, url, async
+// AJAX.open("PUT", url, true);
+// AJAX.send(null); // Send the request.
+
+// http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg
+// http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg
+// http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg
+// http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg
+
+</script>
+
 <!-- var attendances = @attendances; -->
 
 Course: <%= Course.find_name_by_section_id(params[:section]) %><br />

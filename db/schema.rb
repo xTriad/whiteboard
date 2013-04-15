@@ -73,13 +73,10 @@ ActiveRecord::Schema.define(:version => 0) do
   end
 
   create_table "attendances", :primary_key => "attendance_id", :force => true do |t|
-    t.integer "section_id",                    :null => false
-    t.integer "user_id",                       :null => false
-    t.date    "class_date",                    :null => false
-    t.boolean "present",    :default => true
-    t.boolean "absent",     :default => false
-    t.boolean "tardy",      :default => false
-    t.boolean "excused",    :default => false
+    t.integer "section_id",                :null => false
+    t.integer "user_id",                   :null => false
+    t.date    "class_date",                :null => false
+    t.integer "attendance", :default => 1, :null => false
   end
 
   create_table "courses", :primary_key => "course_id", :force => true do |t|

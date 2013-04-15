@@ -7,10 +7,6 @@ class Attendance < ActiveRecord::Base
   # created_at => (DateTime.now.at_beginning_of_day.utc..Time.now.utc)
   # scope :red, where(:color => 'red')
 
-  def self.all_to_json
-    all.to_json
-  end
-
   def set_attendance(a)
     if a == "present"
       present = true
