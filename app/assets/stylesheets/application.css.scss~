@@ -16,10 +16,10 @@
 .content {
  /* background-color: #eee; */
   padding: 20px;
- margin-top: 10px;
+  margin-top: 10px;
   margin-left:auto;
-margin-right:auto;
-width:90%;
+  margin-right:auto;
+  width:900px;
 
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
@@ -27,8 +27,6 @@ width:90%;
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
-
-
 
 background: rgb(4,81,0); /* Old browsers */
 background: -moz-linear-gradient(top,  rgba(4,81,0,1) 0%, rgba(255,255,255,1) 5%, rgba(216,216,216,1) 95%, rgba(4,81,0,1) 100%); /* FF3.6+ */
@@ -41,27 +39,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', end
 }
 
 .sidebar {
-float: left;
-padding-left: 10px;
-padding-top: 0px;
-margin-top: 5px;
+  float: left;
+  padding-left: 10px;
+  padding-top: 0px;
+  margin-top: 5px;
 
-font-weight: bold;
-font-size: 18px;
-margin-left:auto;
-margin-right:auto;
-width: 80%;
-clear: both;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left:auto;
+  margin-right:auto;
+  width: 200px;  
+  clear: both;
 }
 
 .sidebar li {
-list-style-position: outside;
-list-style-type: none;
-font-size: 18px;
-letter-spacing: 1px;
-line-height:150%;
-text-align: left;
-vertical-align: top;
+  list-style-position: outside;
+  list-style-type: none;
+  font-size: 18px;
+  letter-spacing: 1px;
+  line-height:150%;
+  text-align: left;  
+  vertical-align: top;
 }
 
 .navbarcontainer {
@@ -69,53 +67,51 @@ vertical-align: top;
 }
 
 .pageheader {
-clear:both;
+  clear:both;
   padding-top: auto;
   padding-bottom: auto;
 
 /*  width: 99%;
   margin-right: auto;
   margin-left:auto;
-
-margin-top:auto;
-margin-bottom:auto;*/
+  margin-top:auto;
+  margin-bottom:auto;*/
 
 }
 
 .topnavright {
-float:right;
-text-align: right;
-clear:right;
+  float:right;
+  text-align: right;
+  clear:right;
 }
 
 .topnavleft {
-margin: 5px;
-background-color: #000000;
-background-image: url('whiteboard2.png');
-float:left;
-background-position: center center;
-background-repeat: no-repeat;
-display: block;
-height: 50px;
-text-decoration: none;
-width: 200px;
-clear:left;
+  margin: 5px;
+  background-color: #000000;
+  background-image: url('/whiteboard2.png');
+  float:left;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: block;
+  height: 50px;
+  text-decoration: none;
+  width: 200px;
+  clear:left;
 }
 
 .mainListItem {
-font-size: 25px;
-font-weight: bold;
-line-height:28px;
-color: #000000;
+  font-size: 25px;
+  font-weight: bold;
+  line-height:28px;
+  color: #000000;
 
-border-bottom-style: solid;
-border-color: black;
-border-width: 2px;
+  border-bottom-style: solid;
+  border-color: black;
+  border-width: 2px;
 }
 
 .subListItem {
-font-size: 18px;
-line-height:18px;
+  font-size: 18px;
+  line-height:18px;
 }
-
 
