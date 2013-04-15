@@ -209,21 +209,22 @@ ALTER SEQUENCE "Assignments_type_id_seq" OWNED BY assignments.type_id;
 
 
 --
--- Name: attendance; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: attendances; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE attendance (
+CREATE TABLE attendances (
     section_id integer NOT NULL,
     user_id integer NOT NULL,
     class_date date NOT NULL,
     present boolean DEFAULT true,
     absent boolean DEFAULT false,
     tardy boolean DEFAULT false,
-    excused boolean DEFAULT false
+    excused boolean DEFAULT false,
+    attendance_id integer NOT NULL
 );
 
 
-ALTER TABLE public.attendance OWNER TO postgres;
+ALTER TABLE public.attendances OWNER TO postgres;
 
 --
 -- Name: Attendance_section_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -243,7 +244,7 @@ ALTER TABLE public."Attendance_section_id_seq" OWNER TO postgres;
 -- Name: Attendance_section_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "Attendance_section_id_seq" OWNED BY attendance.section_id;
+ALTER SEQUENCE "Attendance_section_id_seq" OWNED BY attendances.section_id;
 
 
 --
@@ -264,7 +265,7 @@ ALTER TABLE public."Attendance_user_id_seq" OWNER TO postgres;
 -- Name: Attendance_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "Attendance_user_id_seq" OWNED BY attendance.user_id;
+ALTER SEQUENCE "Attendance_user_id_seq" OWNED BY attendances.user_id;
 
 
 --
@@ -277,7 +278,7 @@ CREATE TABLE courses (
     name text NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    university_id integer
+    university_id integer NOT NULL
 );
 
 
@@ -524,7 +525,7 @@ ALTER SEQUENCE "Messages_sender_id_seq" OWNED BY messages.sender_id;
 CREATE TABLE permissions (
     perm_id integer NOT NULL,
     role_id integer NOT NULL,
-    perm_name text NOT NULL
+    name text NOT NULL
 );
 
 
@@ -876,60 +877,6 @@ ALTER SEQUENCE "Roles_id_seq" OWNED BY roles.role_id;
 
 
 --
--- Name: sections_users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE sections_users (
-    section_id integer NOT NULL,
-    ur_id integer NOT NULL
-);
-
-
-ALTER TABLE public.sections_users OWNER TO postgres;
-
---
--- Name: SectionUsers_section_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE "SectionUsers_section_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public."SectionUsers_section_id_seq" OWNER TO postgres;
-
---
--- Name: SectionUsers_section_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE "SectionUsers_section_id_seq" OWNED BY sections_users.section_id;
-
-
---
--- Name: SectionUsers_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE "SectionUsers_user_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public."SectionUsers_user_id_seq" OWNER TO postgres;
-
---
--- Name: SectionUsers_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE "SectionUsers_user_id_seq" OWNED BY sections_users.ur_id;
-
-
---
 -- Name: sections; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1005,7 +952,7 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     name character varying(255),
-    university_id integer
+    university_id integer NOT NULL
 );
 
 
@@ -1090,7 +1037,7 @@ CREATE TABLE admin_users (
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    unviersity_id integer
+    university_id integer NOT NULL
 );
 
 
@@ -1118,6 +1065,27 @@ ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
 
 
 --
+-- Name: attendance_attendance_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE attendance_attendance_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.attendance_attendance_id_seq OWNER TO postgres;
+
+--
+-- Name: attendance_attendance_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE attendance_attendance_id_seq OWNED BY attendances.attendance_id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1129,12 +1097,25 @@ CREATE TABLE schema_migrations (
 ALTER TABLE public.schema_migrations OWNER TO postgres;
 
 --
+-- Name: sections_users_roles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sections_users_roles (
+    user_id integer NOT NULL,
+    role_id integer NOT NULL,
+    section_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sections_users_roles OWNER TO postgres;
+
+--
 -- Name: universities; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE universities (
     university_id integer NOT NULL,
-    university_name integer NOT NULL
+    university_name text NOT NULL
 );
 
 
@@ -1193,7 +1174,9 @@ CREATE TABLE uploads (
     upload_file_size integer,
     upload_updated_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    user_id integer NOT NULL,
+    assignment_id integer NOT NULL
 );
 
 
@@ -1221,40 +1204,6 @@ ALTER SEQUENCE uploads_id_seq OWNED BY uploads.id;
 
 
 --
--- Name: users_roles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE users_roles (
-    user_id integer,
-    role_id integer,
-    ur_id integer NOT NULL
-);
-
-
-ALTER TABLE public.users_roles OWNER TO postgres;
-
---
--- Name: users_roles_ur_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE users_roles_ur_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.users_roles_ur_id_seq OWNER TO postgres;
-
---
--- Name: users_roles_ur_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE users_roles_ur_id_seq OWNED BY users_roles.ur_id;
-
-
---
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1276,20 +1225,6 @@ ALTER TABLE ONLY assignment_grades ALTER COLUMN grade_id SET DEFAULT nextval('"A
 
 
 --
--- Name: assignment_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY assignment_grades ALTER COLUMN assignment_id SET DEFAULT nextval('"AssignmentGrades_assignment_id_seq"'::regclass);
-
-
---
--- Name: user_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY assignment_grades ALTER COLUMN user_id SET DEFAULT nextval('"AssignmentGrades_user_id_seq"'::regclass);
-
-
---
 -- Name: type_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1304,31 +1239,10 @@ ALTER TABLE ONLY assignments ALTER COLUMN assignment_id SET DEFAULT nextval('"As
 
 
 --
--- Name: type_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: attendance_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY assignments ALTER COLUMN type_id SET DEFAULT nextval('"Assignments_type_id_seq"'::regclass);
-
-
---
--- Name: section_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY assignments ALTER COLUMN section_id SET DEFAULT nextval('"Assignments_section_id_seq"'::regclass);
-
-
---
--- Name: section_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY attendance ALTER COLUMN section_id SET DEFAULT nextval('"Attendance_section_id_seq"'::regclass);
-
-
---
--- Name: user_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY attendance ALTER COLUMN user_id SET DEFAULT nextval('"Attendance_user_id_seq"'::regclass);
+ALTER TABLE ONLY attendances ALTER COLUMN attendance_id SET DEFAULT nextval('attendance_attendance_id_seq'::regclass);
 
 
 --
@@ -1346,52 +1260,10 @@ ALTER TABLE ONLY groups ALTER COLUMN group_id SET DEFAULT nextval('"Groups_group
 
 
 --
--- Name: associated_course; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY groups ALTER COLUMN associated_course SET DEFAULT nextval('"Groups_associated_course_seq"'::regclass);
-
-
---
--- Name: associated_section; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY groups ALTER COLUMN associated_section SET DEFAULT nextval('"Groups_associated_section_seq"'::regclass);
-
-
---
--- Name: group_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY groups_users ALTER COLUMN group_id SET DEFAULT nextval('"GroupUsers_group_id_seq"'::regclass);
-
-
---
--- Name: user_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY groups_users ALTER COLUMN user_id SET DEFAULT nextval('"GroupUsers_user_id_seq"'::regclass);
-
-
---
 -- Name: message_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY messages ALTER COLUMN message_id SET DEFAULT nextval('"Messages_message_id_seq"'::regclass);
-
-
---
--- Name: sender_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY messages ALTER COLUMN sender_id SET DEFAULT nextval('"Messages_sender_id_seq"'::regclass);
-
-
---
--- Name: receiver_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY messages ALTER COLUMN receiver_id SET DEFAULT nextval('"Messages_receiver_id_seq"'::regclass);
 
 
 --
@@ -1402,24 +1274,10 @@ ALTER TABLE ONLY permissions ALTER COLUMN perm_id SET DEFAULT nextval('"Permissi
 
 
 --
--- Name: role_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY permissions ALTER COLUMN role_id SET DEFAULT nextval('"Permissions_role_id_seq"'::regclass);
-
-
---
 -- Name: answer_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY quiz_answers ALTER COLUMN answer_id SET DEFAULT nextval('"QuizAnswers_answer_id_seq"'::regclass);
-
-
---
--- Name: question_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY quiz_answers ALTER COLUMN question_id SET DEFAULT nextval('"QuizAnswers_question_id_seq"'::regclass);
 
 
 --
@@ -1433,27 +1291,6 @@ ALTER TABLE ONLY quiz_attempts ALTER COLUMN attempt_id SET DEFAULT nextval('"Qui
 -- Name: question_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY quiz_attempts ALTER COLUMN question_id SET DEFAULT nextval('"QuizAttempts_question_id_seq"'::regclass);
-
-
---
--- Name: user_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY quiz_attempts ALTER COLUMN user_id SET DEFAULT nextval('"QuizAttempts_user_id_seq"'::regclass);
-
-
---
--- Name: answer_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY quiz_attempts ALTER COLUMN answer_id SET DEFAULT nextval('"QuizAttempts_answer_id_seq"'::regclass);
-
-
---
--- Name: question_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY quiz_questions ALTER COLUMN question_id SET DEFAULT nextval('"QuizQuestions_question_id_seq"'::regclass);
 
 
@@ -1461,21 +1298,7 @@ ALTER TABLE ONLY quiz_questions ALTER COLUMN question_id SET DEFAULT nextval('"Q
 -- Name: quiz_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY quiz_questions ALTER COLUMN quiz_id SET DEFAULT nextval('"QuizQuestions_quiz_id_seq"'::regclass);
-
-
---
--- Name: quiz_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY quizzes ALTER COLUMN quiz_id SET DEFAULT nextval('"Quizzes_quiz_id_seq"'::regclass);
-
-
---
--- Name: section_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY quizzes ALTER COLUMN section_id SET DEFAULT nextval('"Quizzes_section_id_seq"'::regclass);
 
 
 --
@@ -1493,38 +1316,10 @@ ALTER TABLE ONLY sections ALTER COLUMN section_id SET DEFAULT nextval('"Sections
 
 
 --
--- Name: course_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY sections ALTER COLUMN course_id SET DEFAULT nextval('"Sections_course_id_seq"'::regclass);
-
-
---
--- Name: section_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY sections_users ALTER COLUMN section_id SET DEFAULT nextval('"SectionUsers_section_id_seq"'::regclass);
-
-
---
--- Name: ur_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY sections_users ALTER COLUMN ur_id SET DEFAULT nextval('"SectionUsers_user_id_seq"'::regclass);
-
-
---
 -- Name: university_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY universities ALTER COLUMN university_id SET DEFAULT nextval('universities_university_id_seq'::regclass);
-
-
---
--- Name: university_name; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY universities ALTER COLUMN university_name SET DEFAULT nextval('universities_university_name_seq'::regclass);
 
 
 --
@@ -1539,13 +1334,6 @@ ALTER TABLE ONLY uploads ALTER COLUMN id SET DEFAULT nextval('uploads_id_seq'::r
 --
 
 ALTER TABLE ONLY users ALTER COLUMN user_id SET DEFAULT nextval('"Users_id_seq"'::regclass);
-
-
---
--- Name: ur_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY users_roles ALTER COLUMN ur_id SET DEFAULT nextval('users_roles_ur_id_seq'::regclass);
 
 
 --
@@ -1597,11 +1385,11 @@ ALTER TABLE ONLY messages
 
 
 --
--- Name: PK_User_Roles; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: PK_Attendance_ID; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY users_roles
-    ADD CONSTRAINT "PK_User_Roles" PRIMARY KEY (ur_id);
+ALTER TABLE ONLY attendances
+    ADD CONSTRAINT "PK_Attendance_ID" PRIMARY KEY (attendance_id);
 
 
 --
@@ -1718,7 +1506,7 @@ CREATE INDEX "index_Roles_on_role_name_and_resource_type_and_resource_id" ON rol
 -- Name: index_UserRoles_on_user_id_and_role_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE INDEX "index_UserRoles_on_user_id_and_role_id" ON users_roles USING btree (user_id, role_id);
+CREATE INDEX "index_UserRoles_on_user_id_and_role_id" ON sections_users_roles USING btree (user_id, role_id);
 
 
 --
@@ -1782,7 +1570,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 --
 
 ALTER TABLE ONLY admin_users
-    ADD CONSTRAINT "FK_AdminUsers_Universities" FOREIGN KEY (unviersity_id) REFERENCES universities(university_id);
+    ADD CONSTRAINT "FK_AdminUsers_Universities" FOREIGN KEY (university_id) REFERENCES universities(university_id);
 
 
 --
@@ -1821,7 +1609,7 @@ ALTER TABLE ONLY assignments
 -- Name: FK_Attendance_Sections; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY attendance
+ALTER TABLE ONLY attendances
     ADD CONSTRAINT "FK_Attendance_Sections" FOREIGN KEY (section_id) REFERENCES sections(section_id);
 
 
@@ -1829,7 +1617,7 @@ ALTER TABLE ONLY attendance
 -- Name: FK_Attendance_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY attendance
+ALTER TABLE ONLY attendances
     ADD CONSTRAINT "FK_Attendance_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
@@ -1946,19 +1734,27 @@ ALTER TABLE ONLY quizzes
 
 
 --
--- Name: FK_SectionUsers_Sections; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_SectionUserRoles_Role; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY sections_users
-    ADD CONSTRAINT "FK_SectionUsers_Sections" FOREIGN KEY (section_id) REFERENCES sections(section_id);
+ALTER TABLE ONLY sections_users_roles
+    ADD CONSTRAINT "FK_SectionUserRoles_Role" FOREIGN KEY (role_id) REFERENCES roles(role_id);
 
 
 --
--- Name: FK_SectionUsers_Users_Roles; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_SectionUserRoles_Section; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY sections_users
-    ADD CONSTRAINT "FK_SectionUsers_Users_Roles" FOREIGN KEY (ur_id) REFERENCES users_roles(ur_id);
+ALTER TABLE ONLY sections_users_roles
+    ADD CONSTRAINT "FK_SectionUserRoles_Section" FOREIGN KEY (section_id) REFERENCES sections(section_id);
+
+
+--
+-- Name: FK_SectionUserRoles_User; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sections_users_roles
+    ADD CONSTRAINT "FK_SectionUserRoles_User" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 --
@@ -1970,19 +1766,19 @@ ALTER TABLE ONLY sections
 
 
 --
--- Name: FK_UserRoles_Roles; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_Uploads_Assignments; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY users_roles
-    ADD CONSTRAINT "FK_UserRoles_Roles" FOREIGN KEY (role_id) REFERENCES roles(role_id);
+ALTER TABLE ONLY uploads
+    ADD CONSTRAINT "FK_Uploads_Assignments" FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id);
 
 
 --
--- Name: FK_UserRoles_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_Uploads_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY users_roles
-    ADD CONSTRAINT "FK_UserRoles_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
+ALTER TABLE ONLY uploads
+    ADD CONSTRAINT "FK_Uploads_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 --

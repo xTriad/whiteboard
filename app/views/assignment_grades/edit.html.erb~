@@ -3,12 +3,12 @@
 <%=form_for @grade do |f|%>
   <p>
     <%=f.label :Assignment%><br/>
-    <%=f.text_field :assignment_id%>
+    <%=f.text_field :assignment_name%>
   </p>
 
   <p>
     <%=f.label :Student%><br/>
-    <%=f.text_field :user_id%>
+    <%=f.text_field :user_name%>
   </p>
 
   <p>
@@ -17,13 +17,8 @@
   </p>
 
   <p>
-    <%=f.label :PoinsPossible%><br/>
-    <%=f.text_field :pointsposs%>
-  </p>
-
-  <p>
-    <%=f.label :comment%><br/>
-    <%=f.text_area :comment%>
+    <%=f.label :Comment%><br/>
+    <%=f.text_field :comment%>
   </p>
 
   <p>

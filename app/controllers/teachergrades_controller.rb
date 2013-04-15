@@ -1,24 +1,22 @@
 class TeachergradesController < ApplicationController
 
   def index
-   @grades = Teachergrade.all
+   @grades = AssignmentGrade.all
   end
 
   def show
-  @grade=Teachergrade.find(params[:id])
+  @grade=AssignmentGrade.find(params[:id])
    
   end
 
   def new
-  @grade=Teachergrade.new
+  @grade=AssignmentGrade.new
 
   end
 
   def create
 
-  @grade = Teachergrade.new(params[:teachergrade])
-
-  @assignid = Assignments.find(params[:teachergrade.assignmentname])
+  @assignment = Assignment.where(assignment_name:params[:teachergrade.aname]).first
 
   @grade2 = AssignmentGrade.new(params[:teachergrade])
 
@@ -36,13 +34,13 @@ class TeachergradesController < ApplicationController
 
   def edit
 
-  @grade=Teachergrade.find(params[:id])
+  @grade=AssignmentGrade.find(params[:id])
 
   end
 
   def update
 
-  @grade=Teachergrade.find(params[:id])
+  @grade=AssignmentGrade.find(params[:id])
 
     if @grade.update_attributes(params[:teachergrade])
 
@@ -57,7 +55,7 @@ class TeachergradesController < ApplicationController
 
   def destroy
 
-  @grade = Teachergrade.find(params[:id])
+  @grade = AssignmentGrade.find(params[:id])
     @grade.destroy
     redirect_to teachergrades_path, :notice=>"Grade Deleted" 
  

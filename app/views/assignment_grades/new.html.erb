@@ -1,32 +1,47 @@
 <h1>Add a New Grade</h1>
 
-<%=form_for @grade do |f|%>
+<%=form_for @assignment_grade do |f|%>
 
-  <%if @grade.errors.any? %>
+  <%if @assignment_grade.errors.any? %>
      <h2>Error</h2>
      <ul>
-       <% @grade.errors.full_messages.each do |message|%>
+       <% @assignment_grade.errors.full_messages.each do |message|%>
            <li><%=message%></li>
 
        <%end%>
 
      </ul>
-  <%end%> 
+  <%end%>
+
+  <%@current_user ||= session[:current_user_id]&&User.find_by_id(session[:current_user_id])%>
+
+  <%@current_section ||= session[:current_section_id]&&User.find_by_id(session[:current_section_id])%>
+
+
+  <%assignments = Assignment.where(:section_id=>@current_section)%>
+
+  <%students = User.where(:user_id=>@current_user)%>
   <p>
     <%=f.label :Assignment%><br/>
-    <%=f.text_field :assignment_id%>
+    <%=options_for_select(assignments)%>
 
   </p>
 
   <p>
     <%=f.label :Student%><br/>
-    <%=f.text_field :user_id%>
+    <%=options_for_select(students)%>
 
   </p>
 
   <p>
-    <%=f.label :points%><br/>
+    <%=f.label :Points%><br/>
     <%=f.text_field :grade_value%>
+
+  </p>
+
+  <p>
+    <%=f.label :Comment%><br/>
+    <%=f.text_area :comment%>
 
   </p>
 

@@ -1,19 +1,24 @@
 <h1>Edit Grade</h1>
 
-<%=form_for @grade do |f|%>
+<%=form_for @assignment_grade do |f|%>
   <p>
     <%=f.label :Assignment%><br/>
-    <%=f.text_field :assignment_id%>
+    <%=f.text_field :assignment_name%>
   </p>
 
   <p>
     <%=f.label :Student%><br/>
-    <%=f.text_field :user_id%>
+    <%=f.text_field :user_name%>
   </p>
 
   <p>
     <%=f.label :Grade%><br/>
     <%=f.text_field :grade_value%>
+  </p>
+
+  <p>
+    <%=f.label :Comment%><br/>
+    <%=f.text_field :comment%>
   </p>
 
   <p>

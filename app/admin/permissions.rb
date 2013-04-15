@@ -7,12 +7,12 @@ ActiveAdmin.register Permission do
   end                                 
   
   filter :name
-  filter :role_name
+  filter :role
 
   form do |f|                         
     f.inputs "Permission Details" do       
       f.input :name
-      f.input :role_name
+      f.input :role
     end                               
     f.actions                         
   end

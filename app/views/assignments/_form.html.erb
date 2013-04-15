@@ -1,10 +1,11 @@
 <!-- <div class="container"> -->
 <!--   <h2>Upload file</h2> -->
-  <%= form_for Upload.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
-   <%= hidden_field_tag 'assignment_id_tag', params[:id] %>
+  <%= form_for Upload.new, :url => uploads_path(:assignment_id => params[:id], :user_id => current_user.id), :html => { :multipart => true, :id => "fileupload"  } do |f| %>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
       <div class="span7">
+        <%= f.hidden_field :assignment_id, :value => params[:id] %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-success fileinput-button">
           <i class="icon-plus icon-white"></i>

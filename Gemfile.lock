@@ -1,3 +1,8 @@
+PATH
+  remote: vendor/gems/jquery-fileupload-rails-0.4.1
+  specs:
+    jquery-fileupload-rails (0.4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -129,9 +134,6 @@ GEM
       has_scope (~> 0.5.0)
       responders (~> 0.6)
     journey (1.0.4)
-    jquery-fileupload-rails (0.4.1)
-      actionpack (>= 3.1)
-      railties (>= 3.1)
     jquery-rails (2.2.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -267,7 +269,7 @@ DEPENDENCIES
   factory_girl_rails (>= 4.2.0)
   figaro (>= 0.5.3)
   hub (>= 1.10.2)
-  jquery-fileupload-rails
+  jquery-fileupload-rails (= 0.4.1)!
   jquery-rails
   launchy (>= 2.1.2)
   libv8 (>= 3.11.8)

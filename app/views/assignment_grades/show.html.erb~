@@ -1,5 +1,5 @@
-<p id="notice"><%= notice %></p>
+<h1><%=@grade.assignment_name%></h1>
+<p><%=@grade.user_name%></p>
+<p><%=@grade.grade_value%></p>
+<p><%=@grade.comment%></p>
 
-
-<%= link_to 'Edit', edit_assignment_grade_path(@assignment_grade) %> |
-<%= link_to 'Back', assignment_grades_path %>

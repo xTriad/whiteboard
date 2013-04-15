@@ -9,6 +9,10 @@ Paperclip.interpolates :assignment_id do |attachment, style|
   attachment.instance.assignment_id
 end
 
+Paperclip.interpolates :user_id do |attachment, style|
+  attachment.instance.user_id
+end
+
 # module Paperclip
 #   module Interpolations
 #     def user_id(attachment, style)
