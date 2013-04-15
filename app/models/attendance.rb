@@ -1,5 +1,5 @@
 class Attendance < ActiveRecord::Base
-  attr_accessible :attendance_id, :section_id, :user_id, :class_date, :present, :absent, :tardy, :excused
+  attr_accessible :attendance_id, :section_id, :user_id, :class_date, :attendance
   belongs_to :user
 
   scope :within, lambda { |time_ago| { :conditions => ['class_date > ?', time_ago] } } # within(24.hours.ago)
@@ -9,25 +9,13 @@ class Attendance < ActiveRecord::Base
 
   def set_attendance(a)
     if a == "present"
-      present = true
-      absent = false
-      tardy = false
-      excused = false
+      attendance = Constants::Attendance::Present
     elsif a == "absent"
-      present = false
-      absent = true
-      tardy = false
-      excused = false
+      attendance = Constants::Attendance::Absent
     elsif a == "tardy"
-      present = false
-      absent = false
-      tardy = true
-      excused = false
+      attendance = Constants::Attendance::Tardy
     else
-      present = false
-      absent = false
-      tardy = false
-      excused = true
+      attendance = Constants::Attendance::Excused
     end
   end
 end

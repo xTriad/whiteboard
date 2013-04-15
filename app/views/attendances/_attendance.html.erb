@@ -32,18 +32,12 @@ TA: <%= output_user_list(@tas) %><br /><br />
 <table>
   <tr>
     <th>Student</th>
-    <th>Present</th>
-    <th>Absent</th>
-    <th>Tardy</th>
-    <th>Excused</th>
+    <th>Attendance</th>
   </tr>
   <% @students.each do |student| %>
   <tr>
     <td><%= student.name %></td>
-    <td><%#= attendance.present %></td>
-    <td><%#= attendance.absent %></td>
-    <td><%#= attendance.tardy %></td>
-    <td><%#= attendance.excused %></td>
+    <td><%#= attendance.attendance %></td>
   </tr>
   <% end %>
 </table>
