@@ -253,22 +253,26 @@ puts 'DEFAULT ATTENDANCES'
     {
       :section_id => 1,
       :user_id => Constants::User::Student2,
-      :class_date => DateTime.new(2013,4,1)
+      :class_date => DateTime.new(2013,4,1),
+      :attendance => Constants::Attendance::Present
     },
     {
       :section_id => 1,
       :user_id => Constants::User::Student4,
-      :class_date => DateTime.new(2013,4,1)
+      :class_date => DateTime.new(2013,4,1),
+      :attendance => Constants::Attendance::Present
     },
     {
       :section_id => 1,
       :user_id => Constants::User::Student2,
-      :class_date => DateTime.now
+      :class_date => DateTime.now,
+      :attendance => Constants::Attendance::Present
     },
     {
       :section_id => 1,
       :user_id => Constants::User::Student4,
-      :class_date => DateTime.now
+      :class_date => DateTime.now,
+      :attendance => Constants::Attendance::Absent
     }
   ])
 
