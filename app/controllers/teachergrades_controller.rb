@@ -2,40 +2,46 @@ class TeachergradesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-   @grades = Teachergrade.all
+   @grades = AssignmentGrade.all
   end
 
   def show
-  @grade=Teachergrade.find(params[:id])
+  @grade=AssignmentGrade.find(params[:id])
    
   end
 
   def new
-  @grade=Teachergrade.new
+  @grade=AssignmentGrade.new
 
   end
 
   def create
 
-  @grade = Teachergrade.new(params[:teachergrade])
+  @assignment = Assignment.where(assignment_name:params[:teachergrade.aname]).first
+
+  @grade2 = AssignmentGrade.new(params[:teachergrade])
 
     if @grade.save
-        redirect_to teachergrades_path, :notice=>"Your Grade Saved" 
+          
     else
         render "new" 
+
+    @grade2.save
+
+
     end
 
   end
 
   def edit
 
-  @grade=Teachergrade.find(params[:id])
+  @grade=AssignmentGrade.find(params[:id])
 
   end
 
   def update
 
-  @grade=Teachergrade.find(params[:id])
+  @grade=AssignmentGrade.find(params[:id])
 
     if @grade.update_attributes(params[:teachergrade])
 
@@ -50,7 +56,7 @@ class TeachergradesController < ApplicationController
 
   def destroy
 
-  @grade = Teachergrade.find(params[:id])
+  @grade = AssignmentGrade.find(params[:id])
     @grade.destroy
     redirect_to teachergrades_path, :notice=>"Grade Deleted" 
  

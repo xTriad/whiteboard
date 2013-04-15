@@ -2,22 +2,22 @@ class GradesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-   @grades = Grade.all
+   @grades = Teachergrade.all
   end
 
   def show
-  @grade=Grade.find(params[:id])
+  @grade=Teachergrade.find(params[:id])
    
   end
 
   def new
-  @grade=Grade.new
+  @grade=Teachergrade.new
 
   end
 
   def create
 
-  @grade = Grade.new(params[:grade])
+  @grade = Teachergrade.new(params[:grade])
 
     if @grade.save
         redirect_to grades_path, :notice=>"Your Grade Saved" 
@@ -29,13 +29,13 @@ class GradesController < ApplicationController
 
   def edit
 
-  @grade=Grade.find(params[:id])
+  @grade=Teachergrade.find(params[:id])
 
   end
 
   def update
 
-  @grade=Grade.find(params[:id])
+  @grade=Teachergrade.find(params[:id])
 
     if @grade.update_attributes(params[:grade])
 
@@ -50,7 +50,7 @@ class GradesController < ApplicationController
 
   def destroy
 
-  @grade = Grade.find(params[:id])
+  @grade = Teachergrade.find(params[:id])
     @grade.destroy
     redirect_to grades_path, :notice=>"Your Post Terminated" 
  

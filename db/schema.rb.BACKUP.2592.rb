@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 0) do
     t.float    "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "assignment_name"
   end
 
   create_table "attendances", :primary_key => "attendance_id", :force => true do |t|
