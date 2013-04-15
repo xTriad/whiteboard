@@ -2,7 +2,7 @@ class AttendancesController < InheritedResources::Base
   before_filter :authenticate_user!
 
   helper_method :section_and_date_defined,
-                :format_attendance_date,
+                :format_date_from_url,
                 :date_url_format,
                 :date_page_format,
                 :output_user_list,
@@ -13,7 +13,7 @@ class AttendancesController < InheritedResources::Base
 
   # The format to store dates in the URL
   def date_url_format
-    '%d-%m-%Y'
+    '%Y-%m-%d'
   end
 
   # The format to display dates on the page
@@ -37,11 +37,12 @@ class AttendancesController < InheritedResources::Base
     @attendance.save
 
     respond_to do |format|
-      format.json { render json: @attendance } # Be careful of the as_json override!
+      format.json { render json: @attendance }
     end
   end
 
-  def format_attendance_date(date)
+  # Converts the attendance in the URL to the format used on the web page
+  def format_date_from_url(date)
     DateTime.strptime(date, date_url_format).strftime(date_page_format)
   end
 
@@ -53,13 +54,14 @@ class AttendancesController < InheritedResources::Base
   # has initialized @attendances.
   def attendance_json
     counter = @attendances.length
-    json = "section_id: " << params[:section] << ",\n  attendance: {\n"
+    json =  "section_id: "   << params[:section] << ",\n"
+    json << "  class_date: \"" << params[:date] << "\",\n"
+    json << "  attendance: {\n"
 
     # Print out the attendances already set for this section on this date
     @attendances.each do |attendance|
       json << "    \"" << attendance.user_id.to_s << "\": { "
       json << "user_name: \""  << User.find(attendance.user_id).name << "\", "
-      json << "class_date: \"" << attendance.class_date.to_s         << "\", "
       json << "attendance: "   << attendance.attendance.to_s
       json << " }"
 
