@@ -16,12 +16,13 @@
 .content {
  /* background-color: #eee; */
   padding: 20px;
-  margin-top: 10px;
+  
   margin-left:auto;
   margin-right:auto;
   width:800px;
   clear:right;
   float:right;
+
 
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
@@ -30,22 +31,36 @@
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 
-background: rgb(4,81,0); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(4,81,0,1) 0%, rgba(255,255,255,1) 5%, rgba(216,216,216,1) 95%, rgba(4,81,0,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(4,81,0,1)), color-stop(5%,rgba(255,255,255,1)), color-stop(95%,rgba(216,216,216,1)), color-stop(100%,rgba(4,81,0,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', endColorstr='#045100',GradientType=0 ); /* IE6-9 */
+
+
+background: rgb(4,81,0);
+background: -moz-linear-gradient(top,  rgba(4,81,0,1) 0%, rgba(255,255,255,1) 5%, rgba(216,216,216,1) 95%, rgba(4,81,0,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(4,81,0,1)), color-stop(5%,rgba(255,255,255,1)), color-stop(95%,rgba(216,216,216,1)), color-stop(100%,rgba(4,81,0,1))); 
+background: -webkit-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); 
+background: -o-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); 
+background: -ms-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); 
+background: linear-gradient(to bottom,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', endColorstr='#045100',GradientType=0 );
+
 }
 
 
 .maincontent {
+margin-top: 10px;
+
   width: 1000px;
+  background-color: #eee;
+  background-position: left top;
+
+  display: block;
   margin-right: auto;
   margin-left: auto;
-}
+
+  background-repeat: no-repeat;
+  display: block;
+  /* TODO this is NOT what we want - here because background won't show up otherwise
+  height: 500px;*/
+  }
 
 
 .sidebar {
@@ -75,6 +90,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', end
 
 .navbarcontainer {
   width: 1000px;
+  height: 60px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -82,18 +98,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', end
 .navbarcontainer a {
   color: white;
 }
+.sidebar li a {
+  color: #eee;
+  &:visited {
+    color: #555;
+  }
+  &:hover {
+    color: #045100;
+    text-decoration: none;
+  }
+}
 
 .pageheader {
   clear:both;
-  padding-top: auto;
-  padding-bottom: auto;
-
-/*  width: 99%;
-  margin-right: auto;
-  margin-left:auto;
-  margin-top:auto;
-  margin-bottom:auto;*/
-
 }
 
 .topnavright {

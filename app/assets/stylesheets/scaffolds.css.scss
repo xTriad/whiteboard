@@ -4,7 +4,13 @@ body {
   font-size: 13px;
   line-height: 18px;
 
-background-color: #000;
+background-color: black;
+background-image: url('/stone2.png');
+background-position: left top;
+background-repeat: no-repeat;
+background-size: cover;
+display: block;
+
 }
 
 p, ol, ul, td {
@@ -27,7 +33,6 @@ a {
   &:hover {
     color: #045100;
     /*background-color: #000;*/
-    background-color: none;
     text-decoration: none;
   }
 }
