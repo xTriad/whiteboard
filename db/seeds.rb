@@ -210,6 +210,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 2
     },
     {
+      :name => 'Test 1',
       :type_id => Constants::AssignType::Test,
       :section_id => 1,
       :due_date => '2018-02-12',
@@ -217,6 +218,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 1
     },
     {
+      :name => 'Homework 1',
       :type_id => Constants::AssignType::Homework,
       :section_id => 2,
       :due_date => '2021-02-12',
@@ -224,6 +226,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 1
     },
     {
+      :name => 'Homework 2',
       :type_id => Constants::AssignType::Homework,
       :section_id => 2,
       :due_date => '2022-02-14',
@@ -231,6 +234,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 2
     },
     {
+      :name => 'AVL Tree',
       :type_id => Constants::AssignType::Program,
       :section_id => 2,
       :due_date => '2023-02-12',
@@ -243,6 +247,87 @@ puts 'DEFAULT ASSIGNMENTS'
       :due_date => '2024-02-12',
       :highest_grade_value => 100,
       :weight => 1
+    },
+    {
+      :name => 'Tetris',
+      :description => 'Create aTetris',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 3,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Huffman Encoder',
+      :description => 'Create a huffman encoder',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 3,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :name => 'Tic Tac Toe',
+      :description => 'Create Tic Tac Toe',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 3,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :name => 'Tetris',
+      :description => 'Create aTetris',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 4,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Huffman Encoder',
+      :description => 'Create a huffman encoder',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 4,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :name => 'Tic Tac Toe',
+      :description => 'Create Tic Tac Toe',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 4,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Tetris',
+      :description => 'Create aTetris',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 5,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Huffman Encoder',
+      :description => 'Create a huffman encoder',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 5,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :name => 'Tic Tac Toe',
+      :description => 'Create Tic Tac Toe',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 5,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
     }
   ])
 

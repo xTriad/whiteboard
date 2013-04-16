@@ -1,4 +1,6 @@
-<table>
+<h1><%= @assignment.get_name %> Grades</h1>
+
+<table cellpadding="5">
 
 <% @users.each do |user| %>
   <% grade = AssignmentGrade.find_user_grade(user.user_id, @assignment.assignment_id) %>

@@ -1,10 +1,13 @@
+<h1><%= Course.find_name_by_section_id(params[:section]) %> Assignments</h1>
 
-<table>
+Section: <%= Section.find_number_by_section_id(params[:section]) %><br /><br />
+
+<table cellpadding="5">
 
 <% @assignments.each do |assignment| %>
   <tr>
     <td>
-      <b><%= assignment.get_name %></b>
+      <b><%= link_to assignment.get_name, assignment_grades_path(:assignment => assignment.assignment_id) %></b>
     </td>
     <td>
       <b><%= assignment.get_type_name %></b>
@@ -17,9 +20,6 @@
     </td>
     <td>
       <b><%= assignment.weight %></b>
-    </td>
-    <td>
-      <%= link_to 'Edit Grades', assignment_grades_path(:assignment => assignment.assignment_id) %>
     </td>
   </tr>
 <% end %>
