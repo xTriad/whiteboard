@@ -55,7 +55,7 @@ class AttendancesController < InheritedResources::Base
     return json
   end
 
-  # Handles the AJAX JSON submit call from the professor
+  # Handles the AJAX call from the professor
   # attendances/sendjson?date=2013-04-14&section=1&user=1&attendance=1
   def sendjson
     authorize! :update, Attendance
@@ -67,7 +67,6 @@ class AttendancesController < InheritedResources::Base
       @attendance = Attendance.find_by_user_section_date(params[:user], params[:section], params[:date])
 
       # Sanitize the incoming attendance
-
       if @attendance != nil && Constants::Attendance::List.include?(params[:attendance].to_i)
         @attendance.attendance = params[:attendance].to_i
       else

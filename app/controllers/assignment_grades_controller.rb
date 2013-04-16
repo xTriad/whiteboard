@@ -1,6 +1,7 @@
 class AssignmentGradesController < ApplicationController
 
   def index
+    authorize! :read, AssignmentGrade
 
     if params.has_key?(:section)
 
@@ -23,9 +24,12 @@ class AssignmentGradesController < ApplicationController
 
   def show
     @assignment_grade = AssignmentGrade.find(params[:id])
+    authorize! :read, @assignment_grade
   end
 
   def new
+    authorize! :create, AssignmentGrade
+
     if !params.has_key?(:user) || !params.has_key?(:assignment)
       redirect_to assignment_grades_path and return
     end
@@ -36,10 +40,11 @@ class AssignmentGradesController < ApplicationController
   end
 
   def create
-    @grade = AssignmentGrade.new(params[:assignment_grade])
+    @assignment_grade = AssignmentGrade.new(params[:assignment_grade])
+    authorize! :create, @assignment_grade
 
     respond_to do |format|
-      if @grade.save
+      if @assignment_grade.save
         format.html { redirect_to assignment_grades_path(:assignment => params[:assignment_grade][:assignment_id]) }
       else
         format.html { render action: "new" }
@@ -49,12 +54,15 @@ class AssignmentGradesController < ApplicationController
 
   def edit
     @assignment_grade = AssignmentGrade.find(params[:id])
+    authorize! :update, @assignment_grade
+
     @user_id = @assignment_grade.user_id
     @assignment_id = @assignment_grade.assignment_id
   end
 
   def update
     @assignment_grade = AssignmentGrade.find(params[:id])
+    authorize! :update, @assignment_grade
 
     respond_to do |format|
       if @assignment_grade.update_attributes(params[:assignment_grade])
@@ -67,6 +75,7 @@ class AssignmentGradesController < ApplicationController
 
   def destroy
     @assignment_grade = AssignmentGrade.find(params[:id])
+    authorize! :destroy, @assignment_grade
     @assignment_grade.destroy
 
     respond_to do |format|
