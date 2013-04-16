@@ -19,7 +19,7 @@
   margin-top: 10px;
   margin-left:auto;
   margin-right:auto;
-  width:900px;
+  width:800px;
   clear:right;
   float:right;
 
@@ -40,6 +40,14 @@ background: linear-gradient(to bottom,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', endColorstr='#045100',GradientType=0 ); /* IE6-9 */
 }
 
+
+.maincontent {
+  width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
 .sidebar {
   float: left;
   padding-left: 10px;
@@ -50,8 +58,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', end
   font-size: 18px;
   margin-left:auto;
   margin-right:auto;
-  width: 160px;  
-  clear: both;
+  width: 140px;  
+  clear: left;
 }
 
 .sidebar li {
@@ -64,8 +72,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', end
   vertical-align: top;
 }
 
-.navbarcontainer {
 
+.navbarcontainer {
+  width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.navbarcontainer a {
+  color: white;
 }
 
 .pageheader {

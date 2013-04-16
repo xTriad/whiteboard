@@ -9,37 +9,30 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
+  
   <body class="<%= controller_name %> <%= action_name %>">
-<!--     <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner"> 
-        <div class="container"> -->
-    <header class="navbar navbar-fixed-top">
+    <header class="navbarcontainer">
       <nav class = "pageheader">
-        <div class="navbarcontainer">
-          <%= render 'layouts/navigation' %>
+        <div >
+          <%= render 'layouts/topnav' %>
         </div>
       </nav>
     </header>
+
   <div id="main" role="main">
+    <div class = "maincontent">
 
-<div class = "sidebar">
-<%= render 'layouts/sidebar' %>
-</div>
-<div>
-      <div class="container" >
-        <div class="content">
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
-          </div>
-          <footer>
-          </footer>
-        </div>
-      </div> <!--! end of .container -->
-</div>
-
-    </div> <!--! end of #main -->
+      <div class = "sidebar">
+        <%= render 'layouts/sidebar2' %>
+      </div>
+      <!-- The main "box" -->
+       <div class = "content">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+        <footer>
+        </footer>
+       </div>
+     </div> <!-- end of maincontent -->
+   </div> <!--! end of #main -->
   </body>
 </html>
