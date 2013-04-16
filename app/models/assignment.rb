@@ -17,4 +17,8 @@ class Assignment < ActiveRecord::Base
     AssignmentType.find_name_by_type_id(self.type_id)
   end
 
+  def get_name
+    (self.name != nil) ? self.name : 'Unnamed'
+  end
+
 end

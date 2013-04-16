@@ -11,4 +11,18 @@ class AssignmentGrade < ActiveRecord::Base
 
     where('assignment_id in (?)', assignments_ids)
   end
+
+  def self.find_by_user_assignment_id(user_id, assignment_id)
+    find(:first, :conditions => ['user_id = ? AND assignment_id = ?', user_id, assignment_id])
+  end
+
+  def self.find_user_grade(user_id, assignment_id)
+    grade = find(:first, :conditions => ['user_id = ? AND assignment_id = ?', user_id, assignment_id])
+
+    if grade != nil
+      return grade.grade_value
+    else
+      return 'N/A'
+    end
+  end
 end

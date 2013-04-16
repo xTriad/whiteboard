@@ -220,7 +220,7 @@ CREATE TABLE attendances (
     user_id integer NOT NULL,
     class_date date NOT NULL,
     attendance_id integer NOT NULL,
-    attendance integer NOT NULL
+    attendance integer DEFAULT 1 NOT NULL
 );
 
 

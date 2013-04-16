@@ -4,15 +4,24 @@
 <% @assignments.each do |assignment| %>
   <tr>
     <td>
-      <b>(Name is null) <%= assignment.name %></b>
+      <b><%= assignment.get_name %></b>
     </td>
     <td>
       <b><%= assignment.get_type_name %></b>
     </td>
     <td>
+      <b><%= assignment.due_date %></b>
+    </td>
+    <td>
+      <b><%= assignment.highest_grade_value %></b>
+    </td>
+    <td>
+      <b><%= assignment.weight %></b>
+    </td>
+    <td>
       <%= link_to 'Edit Grades', assignment_grades_path(:assignment => assignment.assignment_id) %>
     </td>
   </tr>
- <% end %>
+<% end %>
 
 </table>
