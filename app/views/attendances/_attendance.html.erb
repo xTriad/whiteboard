@@ -1,36 +1,195 @@
+<style type="text/css">
 
-<!-- TODO: Look to see if any attendances for the day have already been set
-and set them on the page visually. When the professor submits, submit
-every possible attendance, new and modified to the database. -->
+#students_container > div {
+  float: left;
+}
 
-<!-- var attendances = @attendances; -->
+.student {
+  color: #ff0000;
+  background-color: #ccc;
+  font-weight: bold;
+  border: 1px solid #000;
+  margin: 0px 10px 10px 0px;
+  width: 122px;
+  height: 122px;
+  text-align: center;
+}
+
+.student_name {
+  width: auto;
+  background-color: #000;
+}
+
+.last {
+  margin-right: 0px !important;
+}
+
+.present {
+  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg');
+}
+
+.absent {
+  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg');
+}
+
+.tardy {
+  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg');
+}
+
+.excused {
+  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg');
+}
+
+</style>
+
+<script type="text/javascript">
+
+// Example output: Notice the keys for the attendance hash are the user ids, and the
+// attendance hash consists of the already set attendance values for the section
+// on this date. Whenever the professor submits this data, the data in the attendances
+// hash is what needs to be sent to the server.
+
+// var data = {
+//   section_id: 1,
+//   class_date: "2013-04-15",
+//   attendance: {
+//     "7": { attendance: 1 },
+//     "9": { attendance: 2 }
+//   },
+//   students: {
+//     "7": { user_name: "student2" },
+//     "9": { user_name: "student4" }
+//   },
+//   images: {
+//     ...
+//   }
+// };
+
+var data = {
+  <%= raw attendance_json %>
+  images: {
+    present: 'http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg',
+    absent:  'http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg',
+    tardy:   'http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg',
+    excused: 'http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg'
+  }
+};
+
+// Displays the students when the page loads
+function display_students() {
+  for(var user_id in data.students) {
+    var student = data.students[user_id];
+
+    var student_div = $('<div class="student"></div>')
+      .html('<div class="student_name">' + student.user_name + '</div>')
+      .data('user_id', user_id)
+      .css({opacity: 0.9 })
+      .hover(function() {
+          $(this).css({opacity: 1.0 })
+        },
+        function() {
+          $(this).css({opacity: 0.9 })
+        }
+      )
+      .click(function() {
+
+        // 1 = present, 2 = absent, 3 = tardy, 4 = excused
+        var attendance;
+
+        // Rotate image
+        if($(this).hasClass('present')) {
+          $(this).removeClass('present').addClass('absent');
+          attendance = 2;
+        }
+        else if($(this).hasClass('absent')) {
+          $(this).removeClass('absent').addClass('tardy');
+          attendance = 3;
+        }
+        else if($(this).hasClass('tardy')) {
+          $(this).removeClass('tardy').addClass('excused');
+          attendance = 4;
+        }
+        else {
+          $(this).removeClass('excused').addClass('present');
+          attendance = 1;
+        }
+
+        // Update JSON
+        var user_id = $(this).data('user_id');
+        data.attendance[user_id] = { attendance: attendance };
+    });
+
+    // If an attendance value has already been set for this student on this date
+    if(data.attendance.hasOwnProperty(user_id)) {
+      var attendance_value = data.attendance[user_id].attendance;
+
+      switch(attendance_value) {
+        case 1: student_div.addClass('present'); break;
+        case 2: student_div.addClass('absent'); break;
+        case 3: student_div.addClass('tardy'); break;
+        case 4: student_div.addClass('excused'); break;
+      }
+    }
+    else {
+      student_div.addClass('present');
+
+      // Load the rest of the students into the attendance hash as present
+      data.attendance[user_id] = { attendance: 1 };
+    }
+
+    $('#students_container').append(student_div);
+  }
+}
+
+// Preload the attendance images so there isn't a slight hesitation when
+// the professor clicks on a student and the next image has to load.
+function preload_images() {
+  for(var key in data.images) {
+    new Image().src = data.images[key];
+  }
+}
+
+function add_event_handlers() {
+
+  // Send the data.attendance hash to attendances/sendjson?date=2013-04-14&section=1
+  $('input[name="update"]').click(function() {
+    $.ajaxSetup ({
+      cache: false
+    });
+
+    $.ajax({
+      // type: 'POST'
+      url: 'attendances/sendjson?date=' + data.class_date + '&section=' + data.section_id,
+      data: { attendance: JSON.stringify(data.attendance) },
+      processData: false,
+      dataType: 'json',
+      success:function(a) { alert(a); },
+      error:function() { alert('failure'); }
+    });
+  });
+
+}
+
+$(document).ready(function() {
+  preload_images();
+  add_event_handlers();
+  display_students();
+});
+
+</script>
 
 Course: <%= Course.find_name_by_section_id(params[:section]) %><br />
 Section: <%= Section.find_number_by_section_id(params[:section]) %><br />
-Date: <%= format_attendance_date(params[:date]) %><br /><br />
+Date: <%= format_date_from_url(params[:date]) %><br /><br />
 
 Professor: <%= output_user_list(@professors) %><br />
 TA: <%= output_user_list(@tas) %><br /><br />
 
-<table>
-  <tr>
-    <th>Student</th>
-    <th>Present</th>
-    <th>Absent</th>
-    <th>Tardy</th>
-    <th>Excused</th>
-  </tr>
-  <% @students.each do |student| %>
-  <tr>
-    <td><%= student.name %></td>
-    <td><%#= attendance.present %></td>
-    <td><%#= attendance.absent %></td>
-    <td><%#= attendance.tardy %></td>
-    <td><%#= attendance.excused %></td>
-  </tr>
-  <% end %>
-</table>
+<div id="students_container"></div>
 
+<br style="clear: both;" />
 <br />
 
-<%= link_to 'Back', attendances_path %>
+<input type="button" name="update" value="Update Attendance" />
+
+<br />

@@ -1,0 +1,7 @@
+<% if params.has_key?(:section) %>
+  <%= render 'section' %>
+<% elsif params.has_key?(:assignment) %>
+  <%= render 'assignments' %>
+<% else %>
+  <%= render 'sections' %>
+<% end %>

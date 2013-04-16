@@ -1,11 +1,12 @@
 class Section < ActiveRecord::Base
-  attr_accessible :course_id, :number
+  attr_accessible :course_id, :number, :description
 
   has_many :sections_users_roles
   has_many :roles, :through => :sections_users_roles
   has_many :users, :through => :sections_users_roles
 
   has_many :assignments
+  has_many :assignment_grades
   belongs_to :course
 
   # Return all sections in the given course
@@ -82,4 +83,7 @@ class Section < ActiveRecord::Base
     return users_hash
   end
 
+  def to_s
+    "#{self.course.name} - #{self.number}"
+  end
 end

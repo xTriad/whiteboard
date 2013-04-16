@@ -1,0 +1,15 @@
+<%= simple_form_for(@assignment_grade) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.hidden_field :assignment_id, :value => @assignment_id %>
+    <%= f.hidden_field :user_id, :value => @user_id %>
+    <%= f.hidden_field :calculated, :value => true %>
+    <%= f.input :grade_value, :autofocus => true %>
+    <%= f.input :comment %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

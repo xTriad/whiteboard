@@ -1,6 +1,3 @@
-<!-- <span class="topbarlogo">
-<%= link_to "Whiteboard", root_path, :class => 'brand' %>
-</span> -->
 
 <%= link_to "", root_path, :class => 'topnavleft' %>
 
@@ -8,6 +5,7 @@
 
 <ul class="nav">
   <% if user_signed_in? %>
+
 
     <% if can? :read, AdminUser %>
       <li>

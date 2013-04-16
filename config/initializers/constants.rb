@@ -24,6 +24,14 @@ module Constants
     Test       = 4
   end
 
+  # Attendance IDs
+  module Attendance
+    Present    = 1
+    Absent     = 2
+    Tardy      = 3
+    Excused    = 4
+  end
+
   # Test account IDs
   module User
     Admin      = 1

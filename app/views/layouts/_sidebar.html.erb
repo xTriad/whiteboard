@@ -21,15 +21,9 @@
       </li>
     <% end %>
 
-    <% if can? :read, Grade %>
+    <% if can? :read, AssignmentGrade %>
       <li>
-        <%= link_to 'Gradebook', grades_path %>
-      </li>
-    <% end %>
-
-    <% if can? :read, Teachergrade %>
-      <li>
-        <%= link_to 'Teacher Grades', teachergrades_path %>
+        <%= link_to 'Gradebook', assignment_grades_path %>
       </li>
     <% end %>
 <% else %>

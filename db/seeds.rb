@@ -167,7 +167,13 @@ puts 'DEFAULT SECTIONS'
 
   Course.all.each do |course|
     for x in 1..3
-      Section.create(:course_id => course.course_id, :number => x);
+      description = 'A blank description.'
+
+      if course.course_id == 4
+        description = 'I HOPE YOU LOVE GRABOW HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA'
+      end
+
+      Section.create(:course_id => course.course_id, :number => x, :description => description);
     end
   end
 
@@ -186,6 +192,8 @@ puts 'DEFAULT ASSIGNMENTS'
 
   Assignment.create([
     {
+      :name => 'Proofs',
+      :description => 'Figure out these impossible proofs.',
       :type_id => Constants::AssignType::Homework,
       :section_id => 1,
       :due_date => '2020-02-12',
@@ -193,6 +201,8 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 1
     },
     {
+      :name => 'Huffman Encoder',
+      :description => 'Create a huffman encoder',
       :type_id => Constants::AssignType::Program,
       :section_id => 1,
       :due_date => '2019-02-12',
@@ -200,6 +210,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 2
     },
     {
+      :name => 'Test 1',
       :type_id => Constants::AssignType::Test,
       :section_id => 1,
       :due_date => '2018-02-12',
@@ -207,6 +218,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 1
     },
     {
+      :name => 'Homework 1',
       :type_id => Constants::AssignType::Homework,
       :section_id => 2,
       :due_date => '2021-02-12',
@@ -214,6 +226,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 1
     },
     {
+      :name => 'Homework 2',
       :type_id => Constants::AssignType::Homework,
       :section_id => 2,
       :due_date => '2022-02-14',
@@ -221,6 +234,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 2
     },
     {
+      :name => 'AVL Tree',
       :type_id => Constants::AssignType::Program,
       :section_id => 2,
       :due_date => '2023-02-12',
@@ -233,6 +247,87 @@ puts 'DEFAULT ASSIGNMENTS'
       :due_date => '2024-02-12',
       :highest_grade_value => 100,
       :weight => 1
+    },
+    {
+      :name => 'Tetris',
+      :description => 'Create aTetris',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 3,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Huffman Encoder',
+      :description => 'Create a huffman encoder',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 3,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :name => 'Tic Tac Toe',
+      :description => 'Create Tic Tac Toe',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 3,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :name => 'Tetris',
+      :description => 'Create aTetris',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 4,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Huffman Encoder',
+      :description => 'Create a huffman encoder',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 4,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :name => 'Tic Tac Toe',
+      :description => 'Create Tic Tac Toe',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 4,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Tetris',
+      :description => 'Create aTetris',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 5,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Huffman Encoder',
+      :description => 'Create a huffman encoder',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 5,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
+    },
+    {
+      :name => 'Tic Tac Toe',
+      :description => 'Create Tic Tac Toe',
+      :type_id => Constants::AssignType::Program,
+      :section_id => 5,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 2
     }
   ])
 
@@ -242,23 +337,27 @@ puts 'DEFAULT ATTENDANCES'
   Attendance.create([
     {
       :section_id => 1,
-      :user_id => Constants::User::Student1,
-      :class_date => DateTime.new(2013,4,1)
+      :user_id => Constants::User::Student2,
+      :class_date => DateTime.new(2013,4,1),
+      :attendance => Constants::Attendance::Present
+    },
+    {
+      :section_id => 1,
+      :user_id => Constants::User::Student4,
+      :class_date => DateTime.new(2013,4,1),
+      :attendance => Constants::Attendance::Present
     },
     {
       :section_id => 1,
       :user_id => Constants::User::Student2,
-      :class_date => DateTime.new(2013,4,1)
+      :class_date => DateTime.now,
+      :attendance => Constants::Attendance::Present
     },
     {
       :section_id => 1,
-      :user_id => Constants::User::Student1,
-      :class_date => DateTime.now
-    },
-    {
-      :section_id => 1,
-      :user_id => Constants::User::Student2,
-      :class_date => DateTime.now
+      :user_id => Constants::User::Student4,
+      :class_date => DateTime.now,
+      :attendance => Constants::Attendance::Absent
     }
   ])
 

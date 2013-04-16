@@ -1,5 +1,5 @@
 class Assignment < ActiveRecord::Base
-  attr_accessible :due_date, :highest_grade_value, :section_id, :type_id, :weight
+  attr_accessible :due_date, :name, :description, :highest_grade_value, :section_id, :type_id, :weight
   belongs_to :section
 
   # Return all assignments in the given course section
@@ -15,6 +15,10 @@ class Assignment < ActiveRecord::Base
 
   def get_type_name
     AssignmentType.find_name_by_type_id(self.type_id)
+  end
+
+  def get_name
+    (self.name != nil) ? self.name : 'Unnamed'
   end
 
 end

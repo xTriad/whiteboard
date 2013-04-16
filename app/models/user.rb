@@ -32,6 +32,12 @@ class User < ActiveRecord::Base
     user.sections.find(:all, :conditions => ['role_id = ?', Constants::Role::Professor])
   end
 
+  # Returns all sections the professor is currently teaching in a given course
+  def self.find_professor_sections_in_course(user_id, course_id)
+    user = find(:first, :conditions => ['user_id = ?', user_id])
+    user.sections.find(:all, :conditions => ['role_id = ? AND course_id = ?', Constants::Role::Professor, course_id])
+  end
+
   # Returns all sections the student is currently enrolled in
   def self.find_student_sections(user_id)
     user = find(:first, :conditions => ['user_id = ?', user_id])
@@ -56,7 +62,7 @@ class User < ActiveRecord::Base
 
       if Roles_Cache[cur_user_id].include?(role_id)
         has_role = true
-        puts "\t   2. Sucessfully retrived the role from cache"
+        puts "\t   2. Sucessfully retrieved the role from cache"
       end
     else
       the_users_roles = []
@@ -71,7 +77,7 @@ class User < ActiveRecord::Base
       Roles_Cache[cur_user_id] = the_users_roles
 
       if the_users_roles.include?(role_id)
-        puts "\t   2. Successfully retrived the role from the database"
+        puts "\t   2. Successfully retrieved the role from the database"
         has_role = true
       end
     end

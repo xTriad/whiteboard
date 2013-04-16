@@ -23,7 +23,8 @@ CREATE TABLE assignment_grades (
     assignment_id integer NOT NULL,
     user_id integer NOT NULL,
     calculated boolean,
-    grade_value double precision
+    grade_value double precision,
+    comment text
 );
 
 
@@ -139,7 +140,9 @@ CREATE TABLE assignments (
     highest_grade_value integer DEFAULT 100 NOT NULL,
     weight double precision,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    name character varying(255),
+    description text
 );
 
 
@@ -216,15 +219,19 @@ CREATE TABLE attendances (
     section_id integer NOT NULL,
     user_id integer NOT NULL,
     class_date date NOT NULL,
-    present boolean DEFAULT true,
-    absent boolean DEFAULT false,
-    tardy boolean DEFAULT false,
-    excused boolean DEFAULT false,
-    attendance_id integer NOT NULL
+    attendance_id integer NOT NULL,
+    attendance integer DEFAULT 1 NOT NULL
 );
 
 
 ALTER TABLE public.attendances OWNER TO postgres;
+
+--
+-- Name: COLUMN attendances.attendance; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN attendances.attendance IS 'present=1, absent=2, tardy=3, excused=4';
+
 
 --
 -- Name: Attendance_section_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -885,7 +892,8 @@ CREATE TABLE sections (
     course_id integer NOT NULL,
     number integer NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    description text
 );
 
 

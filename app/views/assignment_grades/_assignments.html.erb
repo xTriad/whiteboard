@@ -1,0 +1,24 @@
+<h1><%= @assignment.get_name %> Grades</h1>
+
+<table cellpadding="5">
+
+<% @users.each do |user| %>
+  <% grade = AssignmentGrade.find_user_grade(user.user_id, @assignment.assignment_id) %>
+  <tr>
+    <td>
+      <b><%= user.name %></b>
+    </td>
+    <td>
+      <b><%= grade %></b>
+    </td>
+    <td>
+      <% if grade != 'N/A' %>
+        <%= link_to 'Edit Grade', edit_assignment_grade_path(AssignmentGrade.find_by_user_assignment_id(user.user_id, @assignment.assignment_id)) %>
+      <% else %>
+        <%= link_to 'Edit Grade', new_assignment_grade_path(:assignment => @assignment.assignment_id, :user => user.user_id) %>
+      <% end %>
+    </td>
+  </tr>
+ <% end %>
+
+</table>
