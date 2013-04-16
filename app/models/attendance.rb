@@ -7,16 +7,9 @@ class Attendance < ActiveRecord::Base
   # scope :today, where(DateTime.now.at_beginning_of_day.utc..Time.now.utc)
   # scope :red, where(:color => 'red')
 
+  # 1 = present, 2 = absent, 3 = tardy, 4 = excused
   def set_attendance(a)
-    if a == "present"
-      attendance = Constants::Attendance::Present
-    elsif a == "absent"
-      attendance = Constants::Attendance::Absent
-    elsif a == "tardy"
-      attendance = Constants::Attendance::Tardy
-    else # "excused"
-      attendance = Constants::Attendance::Excused
-    end
+    attendance = a
   end
 
 end

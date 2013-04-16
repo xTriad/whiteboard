@@ -2,7 +2,7 @@
   <h1>Courses</h1>
 </div>
 
-<table cellspacing="0" cellpadding="5" >
+<table cellpadding="5" >
 
 <% @counter = 0 %>
 <% @course_sections.each do |cs| %>
@@ -12,16 +12,16 @@
     <td>
       <div class="mainListItem">
         <%= cs[:course].number %> &nbsp;
-        <%= cs[:course].name %> &nbsp;
+        <%= cs[:course].name %>
       </div>
       <div class="subListItem">
         <%= link_to 'Assignments', assignments_path(:course => cs[:course].course_id) %> <br />
         <%= link_to 'Course Information', course_path(cs[:course], :section => cs[:section].section_id) %> <br />
-        <%= link_to 'Attendance', attendances_path %>
+        <% if is_professor? %>
+          <%= link_to 'Attendance', attendances_path(:section => cs[:section].section_id, :date => DateTime.now.strftime(date_url_format)) %>
+        <% end %>
       </div>
     </td>
-
-<!-- TODO add more links/rearrange links -->
 
   <% if @counter == 2 %>
     </tr>

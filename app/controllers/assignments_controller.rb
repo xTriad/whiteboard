@@ -29,7 +29,7 @@ class AssignmentsController < ApplicationController
     if course_defined?
       @course = Course.find(params[:course])
 
-      if cannot? :manage, AssignmentGrade
+      if is_student?
         @section = User.find_user_section_by_course_id(current_user.id, @course.course_id)
         @assignments = Assignment.find_by_section_id(@section.section_id)
       else

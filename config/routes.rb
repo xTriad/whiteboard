@@ -14,10 +14,12 @@ Whiteboard::Application.routes.draw do
     end
   end
 
-  # put 'attendances/:id/:atten' => "attendances#update_attendance"
-  resources :attendances
-  resources :grades
   resources :assignment_grades
+  resources :attendances do
+    collection do
+      get 'sendjson' # /attendances/sendjson
+    end
+  end
 
   authenticated :user do
     root :to => 'home#index'

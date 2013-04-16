@@ -1,8 +1,3 @@
-
-<!-- TODO: Look to see if any attendances for the day have already been set
-and set them on the page visually. When the professor submits, submit
-every possible attendance, new and modified, to the database. -->
-
 <style type="text/css">
 
 #students_container > div {
@@ -58,13 +53,13 @@ every possible attendance, new and modified, to the database. -->
 //   section_id: 1,
 //   class_date: "2013-04-15",
 //   attendance: {
-//     "7": { user_name: "student2", attendance: 1 },
-//     "9": { user_name: "student4", attendance: 2 }
+//     "7": { attendance: 1 },
+//     "9": { attendance: 2 }
 //   },
-//   students: [
-//     { user_name: "student2", user_id: 7 },
-//     { user_name: "student4", user_id: 9 }
-//   ],
+//   students: {
+//     "7": { user_name: "student2" },
+//     "9": { user_name: "student4" }
+//   },
 //   images: {
 //     ...
 //   }
@@ -82,10 +77,12 @@ var data = {
 
 // Displays the students when the page loads
 function display_students() {
-  $.each(data.students, function() {
-    var student = $('<div class="student"></div>')
-      .html('<div class="student_name">' + this.user_name + '</div>')
-      .data('user_id', this.user_id)
+  for(var user_id in data.students) {
+    var student = data.students[user_id];
+
+    var student_div = $('<div class="student"></div>')
+      .html('<div class="student_name">' + student.user_name + '</div>')
+      .data('user_id', user_id)
       .css({opacity: 0.9 })
       .hover(function() {
           $(this).css({opacity: 1.0 })
@@ -96,41 +93,52 @@ function display_students() {
       )
       .click(function() {
 
+        // 1 = present, 2 = absent, 3 = tardy, 4 = excused
+        var attendance;
+
         // Rotate image
         if($(this).hasClass('present')) {
           $(this).removeClass('present').addClass('absent');
+          attendance = 2;
         }
         else if($(this).hasClass('absent')) {
           $(this).removeClass('absent').addClass('tardy');
+          attendance = 3;
         }
         else if($(this).hasClass('tardy')) {
           $(this).removeClass('tardy').addClass('excused');
+          attendance = 4;
         }
         else {
           $(this).removeClass('excused').addClass('present');
+          attendance = 1;
         }
 
         // Update JSON
         var user_id = $(this).data('user_id');
-      });
+        data.attendance[user_id] = { attendance: attendance };
+    });
 
-      // If an attendance value has already been set for this student on this date
-      if(data.attendance.hasOwnProperty(this.user_id.toString())) {
-        var attendance_value = data.attendance[this.user_id.toString()].attendance;
+    // If an attendance value has already been set for this student on this date
+    if(data.attendance.hasOwnProperty(user_id)) {
+      var attendance_value = data.attendance[user_id].attendance;
 
-        switch(attendance_value) {
-          case 1: student.addClass('present'); break;
-          case 2: student.addClass('absent'); break;
-          case 3: student.addClass('tardy'); break;
-          case 4: student.addClass('excused'); break;
-        }
+      switch(attendance_value) {
+        case 1: student_div.addClass('present'); break;
+        case 2: student_div.addClass('absent'); break;
+        case 3: student_div.addClass('tardy'); break;
+        case 4: student_div.addClass('excused'); break;
       }
-      else {
-        student.addClass('present');
-      }
+    }
+    else {
+      student_div.addClass('present');
 
-    $('#students_container').append(student);
-  });
+      // Load the rest of the students into the attendance hash as present
+      data.attendance[user_id] = { attendance: 1 };
+    }
+
+    $('#students_container').append(student_div);
+  }
 }
 
 // Preload the attendance images so there isn't a slight hesitation when
@@ -142,9 +150,24 @@ function preload_images() {
 }
 
 function add_event_handlers() {
+
+  // Send the data.attendance hash to attendances/sendjson?date=2013-04-14&section=1
   $('input[name="update"]').click(function() {
-    alert('Send JSON response @ attendances/send?date=2013-04-14&section=1');
+    $.ajaxSetup ({
+      cache: false
+    });
+
+    $.ajax({
+      // type: 'POST'
+      url: 'attendances/sendjson?date=' + data.class_date + '&section=' + data.section_id,
+      data: { attendance: JSON.stringify(data.attendance) },
+      processData: false,
+      dataType: 'json',
+      success:function(a) { alert(a); },
+      error:function() { alert('failure'); }
+    });
   });
+
 }
 
 $(document).ready(function() {
