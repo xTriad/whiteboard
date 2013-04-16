@@ -117,6 +117,29 @@ function display_students() {
         // Update JSON
         var user_id = $(this).data('user_id');
         data.attendance[user_id] = { attendance: attendance };
+
+        // Send update to server
+        $.ajax({
+          url: 'attendances/sendjson?' +
+                 'date=' + data.class_date + 
+                 '&section=' + data.section_id +
+                 '&user=' + user_id +
+                 '&attendance=' + attendance,
+          processData: false,
+          dataType: 'json',
+          success:function(a) {
+            // var s = ''
+
+            // for(var key in a) {
+            //   s += key + ': ' + a[key] + '\n';
+            // }
+
+            // alert(s);
+          },
+          error:function() {
+            alert('FAILURE');
+          }
+        });
     });
 
     // If an attendance value has already been set for this student on this date
@@ -149,30 +172,17 @@ function preload_images() {
   }
 }
 
-function add_event_handlers() {
+function setup() {
 
-  // Send the data.attendance hash to attendances/sendjson?date=2013-04-14&section=1
-  $('input[name="update"]').click(function() {
-    $.ajaxSetup ({
-      cache: false
-    });
-
-    $.ajax({
-      // type: 'POST'
-      url: 'attendances/sendjson?date=' + data.class_date + '&section=' + data.section_id,
-      data: { attendance: JSON.stringify(data.attendance) },
-      processData: false,
-      dataType: 'json',
-      success:function(a) { alert(a); },
-      error:function() { alert('failure'); }
-    });
+  $.ajaxSetup ({
+    cache: false
   });
 
 }
 
 $(document).ready(function() {
   preload_images();
-  add_event_handlers();
+  setup();
   display_students();
 });
 
@@ -188,8 +198,4 @@ TA: <%= output_user_list(@tas) %><br /><br />
 <div id="students_container"></div>
 
 <br style="clear: both;" />
-<br />
-
-<input type="button" name="update" value="Update Attendance" />
-
 <br />

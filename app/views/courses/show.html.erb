@@ -16,7 +16,7 @@
 
 <p>
   <b><%= link_to 'Assignments', assignments_path(:course => @course.course_id) %></b>
-  <% if params.has_key?(:section) && is_student? %>
+  <% if params.has_key?(:section) && is_professor? %>
     | <b><%= link_to 'Edit', edit_section_path(params[:section], :course => @course.course_id) %></b>
   <% end %>
 </p>

@@ -30,6 +30,9 @@ module Constants
     Absent     = 2
     Tardy      = 3
     Excused    = 4
+
+    # This needs to match the above values EXACTLY
+    List       = [1,2,3,4]
   end
 
   # Test account IDs

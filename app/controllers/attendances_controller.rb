@@ -5,30 +5,6 @@ class AttendancesController < InheritedResources::Base
                 :format_date_from_url,
                 :attendance_json
 
-  # Handles the AJAX JSON submit call from the professor
-  # attendances/sendjson?date=2013-04-14&section=1
-  def sendjson
-
-    if !params.has_key?(:section) || !params.has_key?(:date)
-      redirect_to sendjson_attendances_path and return
-    end
-
-    # debugger
-    # data = ActiveSupport::JSON.decode(params["_json"])
-    data = params[:attendance]
-    debugger
-
-    # @attendance = Attendance.find(params[:id])
-    # @attendance.set_attendance(params[:atten])
-    # @attendance.save
-
-    # respond_to do |format|
-    #   format.json { render json: @attendance }
-    # end
-
-    redirect_to sendjson_attendances_path and return
-  end
-
   def section_and_date_defined
     return params.has_key?(:section) && params.has_key?(:date)
   end
@@ -79,6 +55,36 @@ class AttendancesController < InheritedResources::Base
     return json
   end
 
+  # Handles the AJAX JSON submit call from the professor
+  # attendances/sendjson?date=2013-04-14&section=1&user=1&attendance=1
+  def sendjson
+    authorize! :update, Attendance
+    error = false
+
+    if !params.has_key?(:section) || !params.has_key?(:date) || !params.has_key?(:user) || !params.has_key?(:attendance)
+      error = true
+    else
+      @attendance = Attendance.find_by_user_section_date(params[:user], params[:section], params[:date])
+
+      # Sanitize the incoming attendance
+
+      if @attendance != nil && Constants::Attendance::List.include?(params[:attendance].to_i)
+        @attendance.attendance = params[:attendance].to_i
+      else
+        error = true
+      end
+    end
+
+    respond_to do |format|
+      if !error && @attendance.save
+        format.json { render json: @attendance }
+      else
+        format.json { render json: @attendance.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_path, :notice => 'Invalid attendance parameters.' }
+      end
+    end
+  end
+
   # GET /attendances
   # GET /attendances.json
   def index
@@ -91,13 +97,42 @@ class AttendancesController < InheritedResources::Base
       @tas = Section.find_tas_in_section(params[:section])
       @students = Section.find_students_in_section(params[:section])
 
-      # Any attendances already set in class for this day
-      # TODO: Make this since midnight rather than 24 hours ago
-      @attendances = Attendance.in_section(params[:section]).within(24.hours.ago)
+      # Retrieve any attendances already set in class for this day
+      @date = DateTime.now
+      @attendances = Attendance.in_section(params[:section]).today
+
+      # Get an array of the student IDs that already have an attendance set
+      @user_ids = []
+      @attendances.each{ |attendance| @user_ids << attendance.user_id }
+
+      # Create an attendance object for every student who doesn't already have one
+      errors = { :error => false, :obj => nil }
+      @students.each do |student|
+        if !@user_ids.include?(student.user_id)
+          new_attendance = Attendance.new({
+            :user_id    => student.user_id,
+            :section_id => params[:section],
+            :class_date => @date,
+            :attendance => Constants::Attendance::Present
+          })
+
+          if !new_attendance.save
+            errors[:error] = true
+            errors[:obj] = new_attendance
+          end
+
+          @attendances << new_attendance
+        end
+      end
 
       respond_to do |format|
-        format.html # index.html.erb
-        format.json { render json: @attendances }
+        if !errors[:error]
+          format.html # index.html.erb
+          format.json { render json: @attendances }
+        else
+          format.json { render json: errors[:obj].errors, status: :unprocessable_entity }
+          format.html { redirect_to attendances_path, :notice => 'There was an issue with loading the class attendance.'}
+        end
       end
 
     elsif

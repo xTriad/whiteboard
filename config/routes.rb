@@ -4,17 +4,16 @@ Whiteboard::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
   resources :users
-
   resources :courses
   resources :sections
   resources :uploads
+  resources :assignment_grades
   resources :assignments do
     member do
       get  'files' # /assignments/1/files
     end
   end
 
-  resources :assignment_grades
   resources :attendances do
     collection do
       get 'sendjson' # /attendances/sendjson
