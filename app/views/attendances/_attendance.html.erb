@@ -20,6 +20,7 @@
   width: 122px;
   height: 122px;
   text-align: center;
+  cursor: pointer;
 }
 
 .student_name {
@@ -45,6 +46,13 @@
 
 .excused {
   background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg');
+}
+
+/* So clicking the attendance doesn't highlight the element */
+.no_select {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 </style>
@@ -87,8 +95,8 @@ function display_students() {
   for(var user_id in data.students) {
     var student = data.students[user_id];
 
-    var student_div = $('<div class="student"></div>')
-      .html('<div class="student_name">' + student.user_name + '</div>')
+    var student_div = $('<div class="student no_select"></div>')
+      .html('<div class="student_name no_select">' + student.user_name + '</div>')
       .data('user_id', user_id)
       .css({opacity: 0.9 })
       .hover(function() {
