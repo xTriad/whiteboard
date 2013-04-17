@@ -19,15 +19,18 @@
   font-weight: bold;
   border: 1px solid #000;
   margin: 0px 10px 10px 0px;
-  width: 122px;
-  height: 122px;
+  width: 400px;
+  height: 276px;
   text-align: center;
   cursor: pointer;
+  position: relative;
 }
 
 .student_name {
-  width: auto;
+  width: 100%;
   background-color: #000;
+  position: absolute;
+  bottom: 0px;
 }
 
 .last {
@@ -35,19 +38,19 @@
 }
 
 .present {
-  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/cake-2-1.jpg');
+  background-image: url('/attendance_present.png');
 }
 
 .absent {
-  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/105ac7f7-3730-4dc8-8e06-a27298eb92c8.jpg');
+  background-image: url('/attendance_absent.png');
 }
 
 .tardy {
-  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/1164044a-eb49-416b-8ec4-7c03d32a5a96.jpg');
+  background-image: url('/attendance_tardy.png');
 }
 
 .excused {
-  background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg');
+  background-image: url('/attendance_excused.png');
 }
 
 /* So clicking the attendance doesn't highlight the element */
