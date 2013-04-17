@@ -16,7 +16,7 @@ Whiteboard::Application.routes.draw do
 
   resources :attendances do
     collection do
-      get 'sendjson' # /attendances/sendjson
+      get 'alter' # /attendances/alter
     end
   end
 

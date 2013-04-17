@@ -4,6 +4,13 @@
   float: left;
 }
 
+#ajax_errors {
+  color: #ff0000;
+  font-weight: bold;
+  margin: 0px auto;
+  text-align: center;
+}
+
 .student {
   color: #ff0000;
   background-color: #ccc;
@@ -114,13 +121,13 @@ function display_students() {
           attendance = 1;
         }
 
-        // Update JSON
+        // Update our local records
         var user_id = $(this).data('user_id');
         data.attendance[user_id] = { attendance: attendance };
 
         // Send update to server
         $.ajax({
-          url: 'attendances/sendjson?' +
+          url: 'attendances/alter?' +
                  'date=' + data.class_date + 
                  '&section=' + data.section_id +
                  '&user=' + user_id +
@@ -137,7 +144,12 @@ function display_students() {
             // alert(s);
           },
           error:function() {
-            alert('FAILURE');
+            $('#ajax_errors')
+              .html('Failed to update the attendance.')
+              .fadeOut(3000, function() {
+                $('#ajax_errors').html('').css('display','block');
+              }
+            );
           }
         });
     });
@@ -198,4 +210,5 @@ TA: <%= output_user_list(@tas) %><br /><br />
 <div id="students_container"></div>
 
 <br style="clear: both;" />
-<br />
+
+<div id="ajax_errors"></div>

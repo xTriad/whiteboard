@@ -4,6 +4,7 @@ class Attendance < ActiveRecord::Base
 
   scope :within, lambda { |time_ago| { :conditions => ['class_date > ?', time_ago] } } # within(24.hours.ago)
   scope :in_section, lambda { |section| { :conditions => ['section_id = ?', section] } }
+  scope :on_this_date, lambda { |date| { :conditions => ['class_date = ?', date] } }
   scope :today, where(:class_date => DateTime.now)
 
   def self.find_by_user_section_date(user_id, section_id, class_date)

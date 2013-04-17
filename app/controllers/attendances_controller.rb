@@ -56,8 +56,8 @@ class AttendancesController < InheritedResources::Base
   end
 
   # Handles the AJAX call from the professor
-  # attendances/sendjson?date=2013-04-14&section=1&user=1&attendance=1
-  def sendjson
+  # attendances/alter?date=2013-04-14&section=1&user=1&attendance=1
+  def alter
     authorize! :update, Attendance
     error = false
 
@@ -78,7 +78,6 @@ class AttendancesController < InheritedResources::Base
       if !error && @attendance.save
         format.json { render json: @attendance }
       else
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
         format.html { redirect_to root_path, :notice => 'Invalid attendance parameters.' }
       end
     end
@@ -97,8 +96,7 @@ class AttendancesController < InheritedResources::Base
       @students = Section.find_students_in_section(params[:section])
 
       # Retrieve any attendances already set in class for this day
-      @date = DateTime.now
-      @attendances = Attendance.in_section(params[:section]).today
+      @attendances = Attendance.in_section(params[:section]).on_this_date(params[:date])
 
       # Get an array of the student IDs that already have an attendance set
       @user_ids = []
@@ -111,7 +109,7 @@ class AttendancesController < InheritedResources::Base
           new_attendance = Attendance.new({
             :user_id    => student.user_id,
             :section_id => params[:section],
-            :class_date => @date,
+            :class_date => params[:date],
             :attendance => Constants::Attendance::Present
           })
 
