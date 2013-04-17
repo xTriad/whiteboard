@@ -4,6 +4,13 @@
   float: left;
 }
 
+#ajax_errors {
+  color: #ff0000;
+  font-weight: bold;
+  margin: 0px auto;
+  text-align: center;
+}
+
 .student {
   color: #ff0000;
   background-color: #ccc;
@@ -13,6 +20,7 @@
   width: 122px;
   height: 122px;
   text-align: center;
+  cursor: pointer;
 }
 
 .student_name {
@@ -38,6 +46,13 @@
 
 .excused {
   background-image: url('http://i293.photobucket.com/albums/mm55/SqueakyMachine/f52bded2-e0d5-4b55-bb50-f59e6eac425a.jpg');
+}
+
+/* So clicking the attendance doesn't highlight the element */
+.no_select {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 </style>
@@ -80,8 +95,8 @@ function display_students() {
   for(var user_id in data.students) {
     var student = data.students[user_id];
 
-    var student_div = $('<div class="student"></div>')
-      .html('<div class="student_name">' + student.user_name + '</div>')
+    var student_div = $('<div class="student no_select"></div>')
+      .html('<div class="student_name no_select">' + student.user_name + '</div>')
       .data('user_id', user_id)
       .css({opacity: 0.9 })
       .hover(function() {
@@ -114,9 +129,37 @@ function display_students() {
           attendance = 1;
         }
 
-        // Update JSON
+        // Update our local records
         var user_id = $(this).data('user_id');
         data.attendance[user_id] = { attendance: attendance };
+
+        // Send update to server
+        $.ajax({
+          url: 'attendances/alter?' +
+                 'date=' + data.class_date + 
+                 '&section=' + data.section_id +
+                 '&user=' + user_id +
+                 '&attendance=' + attendance,
+          processData: false,
+          dataType: 'json',
+          success:function(a) {
+            // var s = ''
+
+            // for(var key in a) {
+            //   s += key + ': ' + a[key] + '\n';
+            // }
+
+            // alert(s);
+          },
+          error:function() {
+            $('#ajax_errors')
+              .html('Failed to update the attendance.')
+              .fadeOut(3000, function() {
+                $('#ajax_errors').html('').css('display','block');
+              }
+            );
+          }
+        });
     });
 
     // If an attendance value has already been set for this student on this date
@@ -149,30 +192,17 @@ function preload_images() {
   }
 }
 
-function add_event_handlers() {
+function setup() {
 
-  // Send the data.attendance hash to attendances/sendjson?date=2013-04-14&section=1
-  $('input[name="update"]').click(function() {
-    $.ajaxSetup ({
-      cache: false
-    });
-
-    $.ajax({
-      // type: 'POST'
-      url: 'attendances/sendjson?date=' + data.class_date + '&section=' + data.section_id,
-      data: { attendance: JSON.stringify(data.attendance) },
-      processData: false,
-      dataType: 'json',
-      success:function(a) { alert(a); },
-      error:function() { alert('failure'); }
-    });
+  $.ajaxSetup ({
+    cache: false
   });
 
 }
 
 $(document).ready(function() {
   preload_images();
-  add_event_handlers();
+  setup();
   display_students();
 });
 
@@ -188,8 +218,5 @@ TA: <%= output_user_list(@tas) %><br /><br />
 <div id="students_container"></div>
 
 <br style="clear: both;" />
-<br />
 
-<input type="button" name="update" value="Update Attendance" />
-
-<br />
+<div id="ajax_errors"></div>

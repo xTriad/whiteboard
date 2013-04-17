@@ -32,16 +32,18 @@ puts 'DEFAULT ROLES'
 # Insert Users
 puts 'DEFAULT USERS'
 
-  # Main admin
-  user = User.find_or_create_by_email(
-    :name => ENV['ADMIN_NAME'].dup,
-    :email => ENV['ADMIN_EMAIL'].dup,
-    :password => ENV['ADMIN_PASSWORD'].dup,
-    :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
+  # If you add any users be sure to update the constants.rb file!
+
+  # Main admin for Baylor
+  User.find_or_create_by_email(
+    :name => ENV['ADMIN1_NAME'].dup,
+    :email => ENV['ADMIN1_EMAIL'].dup,
+    :password => ENV['ADMIN1_PASSWORD'].dup,
+    :password_confirmation => ENV['ADMIN1_PASSWORD'].dup,
     :university_id => Constants::Uni::Baylor
   )
 
-  # If you add any users be sure to update the constants.rb file!
+  # Baylor
   User.create([
     {
       :name => 'prof1',
@@ -100,6 +102,76 @@ puts 'DEFAULT USERS'
       :university_id => Constants::Uni::Baylor
     },
     {
+      :name => 'student5',
+      :email => 'student5@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student6',
+      :email => 'student6@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student7',
+      :email => 'student7@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student8',
+      :email => 'student8@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student9',
+      :email => 'student9@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student10',
+      :email => 'student10@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student11',
+      :email => 'student11@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student12',
+      :email => 'student12@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student13',
+      :email => 'student13@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
+      :name => 'student14',
+      :email => 'student14@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Baylor
+    },
+    {
       :name => 'observer1',
       :email => 'observer1@whiteboard.com',
       :password => 'password',
@@ -108,12 +180,67 @@ puts 'DEFAULT USERS'
     }
   ])
 
+  # Main admin for Texas
+  User.find_or_create_by_email(
+    :name => ENV['ADMIN2_NAME'].dup,
+    :email => ENV['ADMIN2_EMAIL'].dup,
+    :password => ENV['ADMIN2_PASSWORD'].dup,
+    :password_confirmation => ENV['ADMIN2_PASSWORD'].dup,
+    :university_id => Constants::Uni::Texas
+  )
+
+  # Texas
+  User.create([
+    {
+      :name => 'prof3',
+      :email => 'prof3@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Texas
+    },
+    {
+      :name => 'prof4',
+      :email => 'prof4@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Texas
+    },
+    {
+      :name => 'student15',
+      :email => 'student15@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Texas
+    },
+    {
+      :name => 'student16',
+      :email => 'student16@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Texas
+    },
+    {
+      :name => 'student17',
+      :email => 'student17@whiteboard.com',
+      :password => 'password',
+      :password_confirmation => 'password',
+      :university_id => Constants::Uni::Texas
+    }
+  ])
+
   # Copy admin users to Active Admin
-  adminuser = AdminUser.create!(
-    :email => ENV['ADMIN_EMAIL'].dup,
-    :password => ENV['ADMIN_PASSWORD'].dup,
-    :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
+  AdminUser.create!(
+    :email => ENV['ADMIN1_EMAIL'].dup,
+    :password => ENV['ADMIN1_PASSWORD'].dup,
+    :password_confirmation => ENV['ADMIN1_PASSWORD'].dup,
     :university_id => Constants::Uni::Baylor
+  )
+
+  AdminUser.create!(
+    :email => ENV['ADMIN2_EMAIL'].dup,
+    :password => ENV['ADMIN2_PASSWORD'].dup,
+    :password_confirmation => ENV['ADMIN2_PASSWORD'].dup,
+    :university_id => Constants::Uni::Texas
   )
 
 # Insert Courses
@@ -159,6 +286,16 @@ puts 'DEFAULT COURSES'
       :number => 4330,
       :university_id => Constants::Uni::Baylor,
       :name => 'Foundations'
+    },
+    {
+      :number => 1234,
+      :university_id => Constants::Uni::Texas,
+      :name => 'How to be a Hipster'
+    },
+    {
+      :number => 4321,
+      :university_id => Constants::Uni::Texas,
+      :name => 'Cooking Lessons'
     }
   ])
 
@@ -328,6 +465,24 @@ puts 'DEFAULT ASSIGNMENTS'
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
       :weight => 2
+    },
+    {
+      :name => 'Intro To Being a Hipster',
+      :description => 'Teaches one how to dress and act like a hipster.',
+      :type_id => Constants::AssignType::Homework,
+      :section_id => 26,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
+    },
+    {
+      :name => 'Intro To Being a Hipster',
+      :description => 'Teaches one how to dress and act like a hipster.',
+      :type_id => Constants::AssignType::Homework,
+      :section_id => 27,
+      :due_date => '2019-02-12',
+      :highest_grade_value => 100,
+      :weight => 1
     }
   ])
 
@@ -346,18 +501,6 @@ puts 'DEFAULT ATTENDANCES'
       :user_id => Constants::User::Student4,
       :class_date => DateTime.new(2013,4,1),
       :attendance => Constants::Attendance::Present
-    },
-    {
-      :section_id => 1,
-      :user_id => Constants::User::Student2,
-      :class_date => DateTime.now,
-      :attendance => Constants::Attendance::Present
-    },
-    {
-      :section_id => 1,
-      :user_id => Constants::User::Student4,
-      :class_date => DateTime.now,
-      :attendance => Constants::Attendance::Absent
     }
   ])
 
@@ -389,7 +532,13 @@ puts 'Populating SECTIONS_USERS_ROLES'
 
         # If both even or both odd
         if user_id_oddity == section_id_oddity
+
           user = User.find(user_id)
+
+          # Make sure the user and the section belong to the same university
+          course = Course.find_by_section_id(section.section_id)
+          next if user.university_id != course.university_id
+
           role_object = nil
 
           case role_name
