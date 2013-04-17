@@ -14,7 +14,7 @@
  */
 
 .content {
- /* background-color: #eee; */
+  background-color: #eee; 
   padding: 20px;
   
   margin-left:auto;
@@ -32,7 +32,6 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 
 
-
 background: rgb(4,81,0);
 background: -moz-linear-gradient(top,  rgba(4,81,0,1) 0%, rgba(255,255,255,1) 5%, rgba(216,216,216,1) 95%, rgba(4,81,0,1) 100%);
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(4,81,0,1)), color-stop(5%,rgba(255,255,255,1)), color-stop(95%,rgba(216,216,216,1)), color-stop(100%,rgba(4,81,0,1))); 
@@ -46,13 +45,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', end
 
 
 .maincontent {
-margin-top: 10px;
-
+  margin-top: 10px;
   width: 1000px;
   background-color: #eee;
   background-position: left top;
-
-  display: block;
+  padding: 20px;
   margin-right: auto;
   margin-left: auto;
 
@@ -65,16 +62,13 @@ margin-top: 10px;
 
 .sidebar {
   float: left;
-  padding-left: 10px;
-  padding-top: 0px;
-  margin-top: 5px;
-
+  padding: 5px;
   font-weight: bold;
   font-size: 18px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-right: 5px;
   width: 140px;  
-  clear: left;
+  /*clear: left;*/
+  background-color: #ff0000;
 }
 
 .sidebar li {
@@ -149,3 +143,6 @@ margin-top: 10px;
   line-height:18px;
 }
 
+.clear {
+  clear: both;
+}

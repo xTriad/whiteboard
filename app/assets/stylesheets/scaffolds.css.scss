@@ -1,16 +1,20 @@
 body {
-  color: #333;
+  color: #000;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
 
-background-color: black;
-background-image: url('/stone2.png');
+background-color: #fff;
 background-position: left top;
 background-repeat: no-repeat;
 background-size: cover;
 display: block;
 
+}
+
+.nav > li > a:hover {
+  text-decoration: none;
+  background-color: transparent;
 }
 
 p, ol, ul, td {
