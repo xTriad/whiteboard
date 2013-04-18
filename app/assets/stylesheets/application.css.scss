@@ -70,7 +70,7 @@ div {
 
 /* Navigation */
 
-#navbar {
+#headernav {
   width: auto;
   padding: 0px 20px 0px 20px;
   margin: 0px auto;
@@ -78,12 +78,12 @@ div {
   border-bottom: 1px solid #000;
 }
 
-#navbar .nav {
+#headernav .nav {
   float: right;
   padding: 5px;
 }
 
-#navbar .nav > li {
+#headernav .nav > li {
   float: left;
   margin-left: 5px;
 }
@@ -124,14 +124,60 @@ div {
 
 /* Top Nav */
 
-#topnav {
+#navbar {
+  color: #fff;
   background-color: #05568D;
+  border-radius: 10px 10px 0px 0px;
+  box-shadow: 0 0 5px rgba(1, 1, 1, 0.7);
+  -webkit-box-shadow: 0 0 3px rgba(1, 1, 1, 0.7);
+  padding: 0px;
   margin: 0px auto;
-  text-align: right;
 }
 
-#topnav .nav {
-  padding: 20px;
+#navbar > ul {
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
+}
+
+#navbar .nav {
+  float: left;
+}
+
+#navbar .nav > li {
+  float: left;
+  border-right: 1px solid #000;
+}
+
+#navbar .nav > li:first-child {
+  border-radius: 10px 0px 0px 0px;
+  -webkit-border-radius: 10px 0px 0px 0px;
+}
+
+#navbar .nav > li:hover {
+  background-color: #003F76;
+}
+
+#navbar .nav > li > a {
+  color: #fff;
+  display: block;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+#navbar .nav > li > a:hover {
+  color: #EDEDED;
+}
+
+#navbar .date {
+  float: right;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#navbar .date > li {
+  padding: 10px 20px;
 }
 
 /* Content */
