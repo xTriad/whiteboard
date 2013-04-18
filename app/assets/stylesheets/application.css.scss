@@ -13,6 +13,7 @@
  *= require_tree .
  */
 
+/* Namespace the bootstrap styles so they don't conflic with our CSS */
 .bootstrap-styles {
   @import "bootstrap";
   @import "bootstrap-responsive";
@@ -105,9 +106,10 @@ div {
   float: left;
 }
 
-/*.logo {
+/*
+.logo {
   background-color: #000;
-  background-image: url('/whiteboard2.png');
+  background-image: url('/images/logo2.png');
   background-position: center center;
   background-repeat: no-repeat;
   text-decoration: none;

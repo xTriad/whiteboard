@@ -1,4 +1,5 @@
 class AssignmentGradesController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
     authorize! :read, AssignmentGrade

@@ -14,7 +14,6 @@
 }
 
 .student {
-  color: #ff0000;
   background-color: #ccc;
   font-weight: bold;
   border: 1px solid #000;
@@ -28,6 +27,7 @@
 
 .student_name {
   width: 100%;
+  color: #eee;
   background-color: #000;
   position: absolute;
   bottom: 0px;
@@ -38,19 +38,19 @@
 }
 
 .present {
-  background-image: url('/attendance_present.png');
+  background-image: url('/images/attendance/present.png');
 }
 
 .absent {
-  background-image: url('/attendance_absent.png');
+  background-image: url('/images/attendance/absent.png');
 }
 
 .tardy {
-  background-image: url('/attendance_tardy.png');
+  background-image: url('/images/attendance/tardy.png');
 }
 
 .excused {
-  background-image: url('/attendance_excused.png');
+  background-image: url('/images/attendance/excused.png');
 }
 
 /* So clicking the attendance doesn't highlight the element */
