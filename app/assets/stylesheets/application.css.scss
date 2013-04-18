@@ -13,86 +13,166 @@
  *= require_tree .
  */
 
-.content {
-  background-color: #eee; 
-  padding: 20px;
-  
-  margin-left:auto;
-  margin-right:auto;
-  width:800px;
-  clear:right;
-  float:right;
+/* Global Styles */
 
-
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
-
-
-background: rgb(4,81,0);
-background: -moz-linear-gradient(top,  rgba(4,81,0,1) 0%, rgba(255,255,255,1) 5%, rgba(216,216,216,1) 95%, rgba(4,81,0,1) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(4,81,0,1)), color-stop(5%,rgba(255,255,255,1)), color-stop(95%,rgba(216,216,216,1)), color-stop(100%,rgba(4,81,0,1))); 
-background: -webkit-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); 
-background: -o-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); 
-background: -ms-linear-gradient(top,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); 
-background: linear-gradient(to bottom,  rgba(4,81,0,1) 0%,rgba(255,255,255,1) 5%,rgba(216,216,216,1) 95%,rgba(4,81,0,1) 100%); 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', endColorstr='#045100',GradientType=0 );
-
+body {
+  color: #000;
+  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  background-color: #fff;
+  margin: 0px;
+  padding: 0px;
 }
 
+p, ol, ul, td {
+  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
 
-.maincontent {
-  margin-top: 10px;
-  width: 1000px;
+li {
+  list-style-type: none;
+}
+
+pre {
   background-color: #eee;
-  background-position: left top;
-  padding: 20px;
-  margin-right: auto;
-  margin-left: auto;
+  padding: 10px;
+  font-size: 11px;
+}
 
-  background-repeat: no-repeat;
-  display: block;
-  /* TODO this is NOT what we want - here because background won't show up otherwise
-  height: 500px;*/
+a {
+  color: #000;
+  &:visited {
+    color: #555;
   }
+  &:hover {
+    color: #045100;
+    /*background-color: #000;*/
+    text-decoration: none;
+  }
+}
 
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
 
-.sidebar {
-  float: left;
+/* Navigation */
+
+#navbar {
+  width: auto;
+  padding: 0px 20px 0px 20px;
+  margin: 0px auto;
+  border: 1px solid #ff0000;
+}
+
+#navbar .nav {
+  border: 1px solid #0000ff;
+  float: right;
   padding: 5px;
+}
+
+#navbar .nav > li {
+  float: left;
+  margin-left: 5px;
+}
+
+.nav-table {
+  width: 100%;
+  display: table;
+  border: 1px solid #000;
+}
+
+.nav-cell {
+  display: table-cell;
+  border: 1px solid #ff0000;
+}
+
+.vertical {
+  vertical-align: middle;
+}
+
+.logo {
+  background-color: #000;
+  background-image: url('/whiteboard2.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  display: block;
+  height: 50px;
+  width: 200px;
+  margin: 5px;
+  float: left;
+  clear: left;
+}
+
+/* Content */
+
+#main {
+  padding: 0px 20px 0px 20px;
+  margin: 0px auto;
+}
+
+#shit {
+  width: 100%;
+  float: left;
+}
+
+.body-row {
+  width: 1240px;
+  max-width: 100%;
+  min-width: 768px;
+  margin: 0px auto;
+}
+
+#wrapper {
+  background-color: #eee;
+  border: 1px solid #000;
+  margin: 0px auto;
+}
+
+#content {
+  background-color: #eee; 
+  width: 71%;
+  float: right;
+  border: 1px solid #FF00FF;
+}
+
+/* Sidebar */
+
+#sidebar {
+  padding: 0px;
   font-weight: bold;
   font-size: 18px;
-  margin-right: 5px;
-  width: 140px;  
-  /*clear: left;*/
-  background-color: #ff0000;
+  width: 26%;
+  border: 1px solid #FF00FF;
+  float: left;
 }
 
-.sidebar li {
+#sidebar .nav {
+
+}
+
+#sidebar .nav li {
   list-style-position: outside;
-  list-style-type: none;
   font-size: 18px;
   letter-spacing: 1px;
-  line-height:150%;
+  /*line-height:150%;*/
   text-align: left;  
   vertical-align: top;
+  padding: 0px;
+  margin: 0px;
 }
 
 
-.navbarcontainer {
-  width: 1000px;
-  height: 60px;
-  margin-right: auto;
-  margin-left: auto;
+#sidebar ul.nav {
+  padding: 0px;
+  margin: 0px;
 }
 
-.navbarcontainer a {
-  color: white;
-}
-.sidebar li a {
+#sidebar li a {
   color: #eee;
   &:visited {
     color: #555;
@@ -103,46 +183,41 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045100', end
   }
 }
 
-.pageheader {
-  clear:both;
-}
+/* Misc */
 
-.topnavright {
-  float:right;
-  text-align: right;
-  clear:right;
-}
-
-.topnavleft {
-  margin: 5px;
-  background-color: #000000;
-  background-image: url('/whiteboard2.png');
-  float:left;
-  background-position: center center;
-  background-repeat: no-repeat;
-  display: block;
-  height: 50px;
-  text-decoration: none;
-  width: 200px;
-  clear:left;
-}
-
-.mainListItem {
-  font-size: 25px;
-  font-weight: bold;
-  line-height:28px;
-  color: #000000;
-
-  border-bottom-style: solid;
-  border-color: black;
-  border-width: 2px;
-}
-
-.subListItem {
-  font-size: 18px;
-  line-height:18px;
+#notice {
+  color: green;
 }
 
 .clear {
   clear: both;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
 }

@@ -1,13 +1,10 @@
 
-<%= link_to "", root_path, :class => 'topnavleft' %>
-
-<span class="topnavright">
+<%= link_to "", root_path, :class => 'logo' %>
 
 <ul class="nav">
   <% if user_signed_in? %>
 
-
-    <% if can? :read, AdminUser %>
+    <% if is_admin? %>
       <li>
         <%= link_to 'Admin', admin_root_path %>
       </li>
@@ -28,4 +25,3 @@
     </li>
   <% end %>
 </ul>
-</span>

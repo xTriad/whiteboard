@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
                 :output_user_list,
                 :format_date_from_url,
                 :is_student?,
-                :is_professor?
+                :is_professor?,
+                :is_admin?
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
 
   def is_professor?
     return can? :manage, AssignmentGrade
+  end
+
+  def is_admin?
+    return can? :manage, :all
   end
 
   # The format to store dates in the URL

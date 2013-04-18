@@ -11,29 +11,25 @@
   </head>
   
   <body class="<%= controller_name %> <%= action_name %>">
-    <header class="navbarcontainer">
-      <nav class = "pageheader">
-        <div>
+    <header id="navbar">
+      <div class="nav-table">
+        <div class="nav-cell vertical">
           <%= render 'layouts/navigation' %>
         </div>
-      </nav>
+      </div>
     </header>
 
-  <div id="main" role="main">
-    <div class = "maincontent">
-
-      <div class = "sidebar">
-        <%= render 'layouts/sidebar' %>
+    <div id="main" role="main">
+      <div id="wrapper" class="body-row">
+         <div id="content">
+          <%= render 'layouts/messages' %>
+          <%= yield %>
+        </div>
+        <div id="sidebar">
+          <%= render 'layouts/sidebar' %>
+        </div>
+        <div class="clear"></div>
       </div>
-      <!-- The main "box" -->
-       <div class = "content">
-        <%= render 'layouts/messages' %>
-        <%= yield %>
-        <footer>
-        </footer>
-       </div>
-       <div class="clear"></div>
-     </div> <!-- end of maincontent -->
-   </div> <!--! end of #main -->
+    </div>
   </body>
 </html>
