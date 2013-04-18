@@ -68,61 +68,58 @@ div {
   }
 }
 
-/* Navigation */
+/* Header Nav */
 
 #headernav {
+  display: block;
   width: auto;
-  padding: 0px 20px 0px 20px;
+  padding: 0px;
   margin: 0px auto;
+  color: #fff;
   background-color: #333;
+  border-top: 1px solid #000;
   border-bottom: 1px solid #000;
+}
+
+#headernav > ul {
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 #headernav .nav {
   float: right;
-  padding: 5px;
 }
 
 #headernav .nav > li {
   float: left;
-  margin-left: 5px;
+  border-left: 1px solid #000;
 }
 
-.nav-table {
-  width: 100%;
-  display: table;
+#headernav .nav > li:hover {
+  background-color: #003F76;
 }
 
-.nav-cell {
-  display: table-cell;
-}
-
-.vertical {
-  vertical-align: middle;
-}
-
-.logo {
-  font-size: 20px;
-  float: left;
-}
-
-/*
-.logo {
-  background-color: #000;
-  background-image: url('/images/logo2.png');
-  background-position: center center;
-  background-repeat: no-repeat;
-  text-decoration: none;
+#headernav .nav > li > a {
+  color: #fff;
   display: block;
-  height: 50px;
-  width: 200px;
-  margin: 5px;
-  float: left;
-  clear: left;
+  padding: 5px 13px;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
 }
-*/
 
-/* Top Nav */
+#headernav .nav > li > a:hover {
+  color: #EDEDED;
+}
+
+#headernav .login {
+  font-size: 14px;
+  font-weight: bold;
+  float: left;
+  padding: 5px 13px;
+}
+
+/* Navbar */
 
 #navbar {
   color: #fff;
@@ -183,7 +180,7 @@ div {
 /* Content */
 
 #main {
-  padding: 20px 20px 0px 20px;
+  padding: 70px 20px 0px 20px;
   margin: 0px auto;
 }
 
