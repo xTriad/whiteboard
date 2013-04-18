@@ -26,7 +26,7 @@ body {
   font-size: 13px;
   line-height: 18px;
   background-color: #0769AD;
-  margin: 0px;
+  margin: 0px 0px 20px 0px;
   padding: 0px;
 }
 
@@ -123,22 +123,29 @@ div {
   margin: 0px auto;
 }
 
-#shit {
-  width: 100%;
-  float: left;
-}
-
 .body-row {
   width: 1240px;
   max-width: 100%;
   min-width: 768px;
   margin: 0px auto;
+  border: 1px solid #000;
+  -webkit-box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
+  box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
 }
 
 #wrapper {
   background-color: #fff;
-  border: 1px solid #000;
   margin: 0px auto;
+}
+
+#topnav {
+  background-color: #05568D;
+  margin: 0px auto;
+  text-align: right;
+}
+
+#topnav .nav {
+  padding: 20px;
 }
 
 #content {
@@ -154,8 +161,9 @@ div {
   font-size: 18px;
   width: 20%;
   float: left;
-  background-color: #000;
-  /*background-color: #f2f2f2;*/
+  background-color: #eee;
+  background-image: -webkit-radial-gradient(right, #eee, #ffffff 90%);
+  background-image: radial-gradient(right, #f2f2f2, #ffffff 80%);
 }
 
 #sidebar .nav {
@@ -188,14 +196,6 @@ div {
     color: #045100;
     text-decoration: none;
   }
-}
-
-#topnav {
-  width: auto;
-  background-color: #b3d4fc;
-  padding: 20px;
-  text-align: right;
-  border: 1px solid #000;
 }
 
 /* Misc */
