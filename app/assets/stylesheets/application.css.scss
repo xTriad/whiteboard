@@ -18,6 +18,10 @@
   @import "bootstrap-responsive";
 }
 
+.bootstrap-padding {
+  padding: 20px 20px 20px 0px !important;
+}
+
 /* Global Styles */
 
 body {
@@ -53,7 +57,6 @@ a {
   }
   &:hover {
     color: #045100;
-    /*background-color: #000;*/
     text-decoration: none;
   }
 }
@@ -116,6 +119,19 @@ div {
   clear: left;
 }
 */
+
+/* Top Nav */
+
+#topnav {
+  background-color: #05568D;
+  margin: 0px auto;
+  text-align: right;
+}
+
+#topnav .nav {
+  padding: 20px;
+}
+
 /* Content */
 
 #main {
@@ -138,18 +154,8 @@ div {
   margin: 0px auto;
 }
 
-#topnav {
-  background-color: #05568D;
-  margin: 0px auto;
-  text-align: right;
-}
-
-#topnav .nav {
-  padding: 20px;
-}
-
 #content {
-  width: 71%;
+  width: 74%;
   float: right;
 }
 
@@ -159,7 +165,7 @@ div {
   padding: 20px;
   font-weight: bold;
   font-size: 18px;
-  width: 20%;
+  width: 17%;
   float: left;
   background-color: #eee;
   background-image: -webkit-radial-gradient(right, #eee, #ffffff 90%);
@@ -199,6 +205,36 @@ div {
 }
 
 /* Misc */
+
+.box-container {
+  width: auto;
+  padding: 0px;
+  margin-bottom: 20px;
+}
+
+.box {
+  background-color: #eee;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.box-container .half {
+  width: 42%;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.box h1 {
+  font-size: 16px;
+  font-weight: bold;
+}
 
 #notice {
   color: green;
