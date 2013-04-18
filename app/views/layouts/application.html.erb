@@ -24,9 +24,11 @@
         Something here.
       </div>
       <div id="wrapper" class="body-row">
-         <div id="content">
-          <%= render 'layouts/messages' %>
-          <%= yield %>
+        <div id="content">
+          <div class="bootstrap-styles">
+            <%= render 'layouts/messages' %>
+            <%= yield %>
+          </div>
         </div>
         <div id="sidebar">
           <%= render 'layouts/sidebar' %>

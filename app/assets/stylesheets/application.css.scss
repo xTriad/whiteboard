@@ -13,6 +13,11 @@
  *= require_tree .
  */
 
+.bootstrap-styles {
+  @import "bootstrap";
+  @import "bootstrap-responsive";
+}
+
 /* Global Styles */
 
 body {

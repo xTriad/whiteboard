@@ -31,3 +31,4 @@ gem "meta_search", '>= 1.1.0.pre'
 gem "jquery-fileupload-rails", "0.4.1", :path => "vendor/gems/jquery-fileupload-rails-0.4.1"
 gem 'paperclip'
 gem 'debugger', :group => [:development, :test]
+gem "bootstrap-sass", ">= 2.2.2.0"
