@@ -207,17 +207,45 @@ div {
 /* Sidebar */
 
 #sidebar {
-  padding: 20px;
+  color: #000;
   font-weight: bold;
   font-size: 18px;
-  width: 17%;
+  width: 22%;
   float: left;
+  padding: 0px;
   background-color: #eee;
   background-image: -webkit-radial-gradient(right, #eee, #ffffff 90%);
   background-image: radial-gradient(right, #f2f2f2, #ffffff 80%);
 }
 
+#sidebar > ul {
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
+  width: 100%;
+}
+
 #sidebar .nav {
+  float: left;
+}
+
+#sidebar .nav > li:hover {
+  background-color: #CCC;
+}
+
+#sidebar .nav > li > a {
+  color: #000;
+  display: block;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+#sidebar .nav > li > a:hover {
+  color: #000;
+}
+
+/*#sidebar .nav {
 
 }
 
@@ -225,7 +253,6 @@ div {
   list-style-position: outside;
   font-size: 18px;
   letter-spacing: 1px;
-  /*line-height:150%;*/
   text-align: left;  
   vertical-align: top;
   padding: 0px;
@@ -247,7 +274,7 @@ div {
     color: #045100;
     text-decoration: none;
   }
-}
+}*/
 
 /* Misc */
 
