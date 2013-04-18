@@ -20,7 +20,7 @@ body {
   font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  background-color: #fff;
+  background-color: #0769AD;
   margin: 0px;
   padding: 0px;
 }
@@ -65,11 +65,11 @@ div {
   width: auto;
   padding: 0px 20px 0px 20px;
   margin: 0px auto;
-  border: 1px solid #ff0000;
+  background-color: #333;
+  border-bottom: 1px solid #000;
 }
 
 #navbar .nav {
-  border: 1px solid #0000ff;
   float: right;
   padding: 5px;
 }
@@ -82,12 +82,10 @@ div {
 .nav-table {
   width: 100%;
   display: table;
-  border: 1px solid #000;
 }
 
 .nav-cell {
   display: table-cell;
-  border: 1px solid #ff0000;
 }
 
 .vertical {
@@ -95,6 +93,11 @@ div {
 }
 
 .logo {
+  font-size: 20px;
+  float: left;
+}
+
+/*.logo {
   background-color: #000;
   background-image: url('/whiteboard2.png');
   background-position: center center;
@@ -107,11 +110,11 @@ div {
   float: left;
   clear: left;
 }
-
+*/
 /* Content */
 
 #main {
-  padding: 0px 20px 0px 20px;
+  padding: 20px 20px 0px 20px;
   margin: 0px auto;
 }
 
@@ -128,27 +131,26 @@ div {
 }
 
 #wrapper {
-  background-color: #eee;
+  background-color: #fff;
   border: 1px solid #000;
   margin: 0px auto;
 }
 
 #content {
-  background-color: #eee; 
   width: 71%;
   float: right;
-  border: 1px solid #FF00FF;
 }
 
 /* Sidebar */
 
 #sidebar {
-  padding: 0px;
+  padding: 20px;
   font-weight: bold;
   font-size: 18px;
-  width: 26%;
-  border: 1px solid #FF00FF;
+  width: 20%;
   float: left;
+  background-color: #000;
+  /*background-color: #f2f2f2;*/
 }
 
 #sidebar .nav {
@@ -181,6 +183,14 @@ div {
     color: #045100;
     text-decoration: none;
   }
+}
+
+#topnav {
+  width: auto;
+  background-color: #b3d4fc;
+  padding: 20px;
+  text-align: right;
+  border: 1px solid #000;
 }
 
 /* Misc */
