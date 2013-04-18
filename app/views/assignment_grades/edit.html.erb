@@ -1,14 +1,24 @@
 <h1>Edit Grade</h1>
 
 <%=form_for @assignment_grade do |f|%>
+   <%@current_user ||= session[:current_user_id]&&User.find_by_id(session[:current_user_id])%>
+
+  <%@current_section ||= session[:current_section_id]&&User.find_by_id(session[:current_section_id])%>
+
+
+  <%assignments = Assignment.where(:section_id=>@current_section)%>
+
+  <%students = User.where(:user_id=>@current_user)%>
   <p>
     <%=f.label :Assignment%><br/>
-    <%=f.text_field :assignment_name%>
+    <%=options_for_select(assignments)%>
+
   </p>
 
   <p>
     <%=f.label :Student%><br/>
-    <%=f.text_field :user_name%>
+    <%=options_for_select(students)%>
+
   </p>
 
   <p>
