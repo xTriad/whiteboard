@@ -4,6 +4,7 @@ Whiteboard::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
   resources :users
+  resources :messages
   resources :courses
   resources :sections
   resources :uploads

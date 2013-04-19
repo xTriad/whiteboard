@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 
   # Caches query results in the has_role? method
   # Roles_Cache[user_id] = [role_id, role_id ...]
+  # TODO: Use INSTANCE variables to handle all permissions!
+  #   Give each user a @role and even @can_do_something
+  #   Then we could do current_user.can_do_this or current_user.role can ...
+  #   This will allow us to query the database to see their university, section etc.
   Roles_Cache = {}
 
   # Finds the specific section the user is enrolled in by their

@@ -23,6 +23,26 @@
   padding: 20px 20px 20px 0px !important;
 }
 
+.bootstrap-styles h1 {
+  font-size: 27px;
+}
+
+.bootstrap-styles textarea {
+  height: 200px;
+  width: 500px;
+}
+
+.bootstrap-styles .form-actions {
+  background-color: transparent;
+  border-top: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.bootstrap-styles form {
+  margin: 0px;
+}
+
 /* Global Styles */
 
 body {
@@ -52,9 +72,9 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #0088cc;
   &:visited {
-    color: #555;
+    color: #0088cc;
   }
   &:hover {
     color: #045100;
@@ -142,7 +162,8 @@ div {
 
 #navbar .nav > li {
   float: left;
-  border-right: 1px solid #000;
+  position: relative;
+  padding: 0px;
 }
 
 #navbar .nav > li:first-child {
@@ -157,7 +178,7 @@ div {
 #navbar .nav > li > a {
   color: #fff;
   display: block;
-  padding: 10px 20px;
+  padding: 10px 20px 10px 30px;
   font-weight: bold;
   font-size: 14px;
   text-decoration: none;
@@ -165,6 +186,37 @@ div {
 
 #navbar .nav > li > a:hover {
   color: #EDEDED;
+}
+
+#navbar .nav .arrow {
+  border: 19px solid transparent;
+  border-right: 1px none black;
+  border-left-color: #000;
+  -moz-border-right-colors: #000;
+  display: block;
+  position: absolute;
+  right: -18px;
+  top: 0px;
+  z-index: 50;
+  width: 0px;
+  height: 0px
+}
+
+#navbar .nav .arrow > span {
+  border: 18px solid transparent;
+  border-right: 1px none black;
+  border-left-color: #05568D;
+  -moz-border-right-colors: #05568D;
+  display: block;
+  position: absolute;
+  right: 1px;
+  top: -18px;
+  z-index: 51;
+  white-space: nowrap;
+  overflow: hidden;
+  text-indent: 9999px;
+  width: 0px;
+  height: 0px
 }
 
 #navbar .date {

@@ -15,3 +15,15 @@
 //= require jquery-fileupload
 //= require bootstrap
 //= require_tree .
+
+// Changes the color of an individual navbar arrow when the item is highlighted.
+$(document).ready(function() {
+  $('#navbar .nav > li').hover(
+    function() {
+      $(this).find('> span > span').css('border-left-color','#003F76');
+    },
+    function() {
+      $(this).find('> span > span').css('border-left-color','#05568D');
+    }
+  )
+});
