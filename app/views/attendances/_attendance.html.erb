@@ -40,7 +40,15 @@ $(document).ready(function() {
 
 Course: <%= Course.find_name_by_section_id(params[:section]) %><br />
 Section: <%= Section.find_number_by_section_id(params[:section]) %><br />
-Date: <%= format_date_from_url(params[:date]) %><br /><br />
+Date: <%= format_date_from_url(params[:date]) %> <br />
+
+<% @pageDate = DateTime.parse(params[:date]) %>
+<%= link_to "Previous Day", attendances_path(:section => params[:section], :date => @pageDate.prev_day().strftime(date_url_format)) %>
+
+<% if  @pageDate <= DateTime.now.prev_day()%>
+<%= link_to "Next Day", attendances_path(:section => params[:section], :date => @pageDate.next_day().strftime(date_url_format)) %> 
+<% end %> <br /><br />
+
 
 Professor: <%= output_user_list(@professors) %><br />
 TA: <%= output_user_list(@tas) %><br /><br />
