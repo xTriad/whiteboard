@@ -61,10 +61,6 @@ $(function() {
   </tr>
 </table>
 
-<% @pageDate = DateTime.parse(params[:date]) %>
-<%= link_to "Previous Day", attendances_path(:section => params[:section], :date => @pageDate.prev_day().strftime(date_url_format)) %>
-<% changingDate = DateTime.now %>
-<% earliestDate = DateTime.now.prev_year() %>
 
 <br />
 
