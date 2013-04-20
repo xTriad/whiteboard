@@ -36,6 +36,15 @@ $(document).ready(function() {
   attendance.init(data);
 });
 
+$(function() {
+  // To be unable to select weekends: beforeShowDay: $.datepicker.noWeekends,
+  $( "#datepicker" ).datepicker({ minDate: "-1Y", maxDate: "+0D", dateFormat: "yy-mm-dd",
+    onSelect: function(dateText) {
+      location.href = 'attendances?date=' + dateText + "&section=" + 2;
+    }
+  });
+});
+
 </script>
 
 Course: <%= Course.find_name_by_section_id(params[:section]) %><br />
@@ -44,11 +53,15 @@ Date: <%= format_date_from_url(params[:date]) %> <br />
 
 <% @pageDate = DateTime.parse(params[:date]) %>
 <%= link_to "Previous Day", attendances_path(:section => params[:section], :date => @pageDate.prev_day().strftime(date_url_format)) %>
+<% changingDate = DateTime.now %>
+<% earliestDate = DateTime.now.prev_year() %>
+
 
 <% if  @pageDate <= DateTime.now.prev_day()%>
 <%= link_to "Next Day", attendances_path(:section => params[:section], :date => @pageDate.next_day().strftime(date_url_format)) %> 
 <% end %> <br /><br />
 
+Select Date: <input type="text" id="datepicker" /><br /><br />
 
 Professor: <%= output_user_list(@professors) %><br />
 TA: <%= output_user_list(@tas) %><br /><br />
