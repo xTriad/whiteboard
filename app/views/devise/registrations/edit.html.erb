@@ -1,4 +1,7 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<hr>
+
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f| %>
   <%= f.error_notification %>
   <%= display_base_errors resource %>
@@ -9,4 +12,3 @@
   <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
   <%= f.button :submit, 'Update', :class => 'btn-primary' %>
 <% end %>
-<%= link_to "Back", :back %>

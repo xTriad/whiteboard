@@ -1,6 +1,10 @@
 
 <ul class="login">
-  <li>Jordan Nelson</li>
+  <% if user_signed_in? %>
+    <li><%= current_user.name %></li>
+  <% else %>
+    <li>Welcome, Guest</li>
+  <% end %>
 </ul>
 
 <ul class="nav">
@@ -23,10 +27,10 @@
     </li>
   <% else %>
     <li>
-    <%= link_to 'Login', new_user_session_path %>
+      <%= link_to 'Login', new_user_session_path %>
     </li>
     <li>
-      <%= link_to 'Sign up', new_user_registration_path %>
+      <%= link_to 'Forgot Password', new_user_password_path %>
     </li>
   <% end %>
 </ul>

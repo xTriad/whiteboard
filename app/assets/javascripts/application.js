@@ -16,8 +16,10 @@
 //= require bootstrap
 //= require_tree .
 
-// Changes the color of an individual navbar arrow when the item is highlighted.
 $(document).ready(function() {
+
+  // Changes the color of an individual navbar arrow when the item is
+  // highlighted.
   $('#navbar .nav > li').hover(
     function() {
       $(this).find('> span > span').css('border-left-color','#003F76');
@@ -25,5 +27,27 @@ $(document).ready(function() {
     function() {
       $(this).find('> span > span').css('border-left-color','#05568D');
     }
-  )
+  );
 });
+
+// Select the sidebar button associated with the current page and
+// change its color.
+function selectSidebarButton(controller_name) {
+
+  // var controller_name = window.location.pathname
+  //   .replace(/^\//i,'')
+  //   .replace(/\/.*$/i,'');
+
+  controller_name = controller_name + '_controller';
+
+  $('#sidebar .nav > li.' + controller_name)
+    .addClass('selected')
+    .hover(
+      function() {
+        $(this).removeClass('selected');
+      },
+      function() {
+        $(this).addClass('selected');
+      }
+    );
+}
