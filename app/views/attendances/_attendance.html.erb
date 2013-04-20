@@ -47,26 +47,47 @@ $(function() {
 
 </script>
 
-Course: <%= Course.find_name_by_section_id(params[:section]) %><br />
-Section: <%= Section.find_number_by_section_id(params[:section]) %><br />
-Date: <%= format_date_from_url(params[:date]) %> <br />
+<table width="100%">
+  <tr>
+    <td width="50%">
+      Course: <%= @course_name %><br />
+      Section: <%= @section_number %><br />
+      Date: <%= format_date_from_url(params[:date]) %>
+    </td>
+    <td width="50%" align="right">
+      Professor: <%= output_user_list(@professors) %><br />
+      TA: <%= output_user_list(@tas) %>
+    </td>
+  </tr>
+</table>
 
 <% @pageDate = DateTime.parse(params[:date]) %>
 <%= link_to "Previous Day", attendances_path(:section => params[:section], :date => @pageDate.prev_day().strftime(date_url_format)) %>
 <% changingDate = DateTime.now %>
 <% earliestDate = DateTime.now.prev_year() %>
 
+<br />
 
-<% if  @pageDate <= DateTime.now.prev_day()%>
-<%= link_to "Next Day", attendances_path(:section => params[:section], :date => @pageDate.next_day().strftime(date_url_format)) %> 
-<% end %> <br /><br />
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <%= link_to "Previous Day", attendances_path(:section => params[:section], :date => @page_date.prev_day().strftime(date_url_format)) %>
+    </td>
+    <td width="50%" align="right">
+      <% if @page_date <= DateTime.now.prev_day() %>
+        <%= link_to "Next Day", attendances_path(:section => params[:section], :date => @page_date.next_day().strftime(date_url_format)) %> 
+      <% end %>
+    </td>
+  </tr>
+</table>
 
 Select Date: <input type="text" id="datepicker" /><br /><br />
+<br />
 
-Professor: <%= output_user_list(@professors) %><br />
-TA: <%= output_user_list(@tas) %><br /><br />
-
-<div id="students_container"></div>
+<div class="box">
+  <div id="students_container"></div>
+  <div class="clear"></div>
+</div>
 
 <br style="clear: both;" />
 

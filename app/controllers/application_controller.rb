@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
   # The format to display dates on the page
   def date_page_format
-    '%B %d %Y'
+    '%B %d, %Y'
   end
 
   def output_user_list(users)
