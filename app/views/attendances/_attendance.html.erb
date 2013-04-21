@@ -34,15 +34,15 @@ var data = {
 
 $(document).ready(function() {
   attendance.init(data);
-});
 
-$(function() {
   // To be unable to select weekends: beforeShowDay: $.datepicker.noWeekends,
-  $( "#datepicker" ).datepicker({ minDate: "-1Y", maxDate: "+0D", dateFormat: "yy-mm-dd",
+  $("#datepicker").datepicker({ minDate: "-1Y", maxDate: "+0D", dateFormat: "yy-mm-dd",
     onSelect: function(dateText) {
-      location.href = 'attendances?date=' + dateText + "&section=" + 2;
+      location.href = 'attendances?date=' + dateText + "&section=" + <%= params[:section] %>;
     }
   });
+
+  $('#datepicker').val('Select a date');
 });
 
 </script>
@@ -61,10 +61,15 @@ $(function() {
   </tr>
 </table>
 
+<br />
+
+<div class="center">
+  <input type="text" id="datepicker" />
+</div>
 
 <br />
 
-<table width="100%">
+<table width="100%" style="margin-bottom: 3px;">
   <tr>
     <td width="50%">
       <%= link_to "Previous Day", attendances_path(:section => params[:section], :date => @page_date.prev_day().strftime(date_url_format)) %>
@@ -76,9 +81,6 @@ $(function() {
     </td>
   </tr>
 </table>
-
-Select Date: <input type="text" id="datepicker" /><br /><br />
-<br />
 
 <div class="box">
   <div id="students_container"></div>
