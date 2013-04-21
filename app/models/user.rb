@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     find(:first, :conditions => ['user_id = ?', user_id]).name
   end
 
+  def self.find_id_by_email(email)
+    find(:first, :conditions => ['email = ?', email]).id
+  end
+
   # This method gets called many times on every page view so
   # it needs to cache as much as possible.
   def has_role?(role_id)

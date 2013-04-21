@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 0) do
   end
 
   create_table "assignment_types", :primary_key => "type_id", :force => true do |t|
-    t.text     "name",       :null => false
+    t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -74,22 +74,22 @@ ActiveRecord::Schema.define(:version => 0) do
   end
 
   create_table "attendances", :primary_key => "attendance_id", :force => true do |t|
-    t.integer "section_id", :null => false
-    t.integer "user_id",    :null => false
-    t.date    "class_date", :null => false
-    t.integer "attendance", :null => false
+    t.integer "section_id",                :null => false
+    t.integer "user_id",                   :null => false
+    t.date    "class_date",                :null => false
+    t.integer "attendance", :default => 1, :null => false
   end
 
   create_table "courses", :primary_key => "course_id", :force => true do |t|
     t.text     "number",        :null => false
-    t.text     "name",          :null => false
+    t.string   "name",          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "university_id", :null => false
   end
 
   create_table "groups", :primary_key => "group_id", :force => true do |t|
-    t.text    "name",               :null => false
+    t.string  "name",               :null => false
     t.integer "associated_course",  :null => false
     t.integer "associated_section", :null => false
   end
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer "sender_id",                           :null => false
     t.integer "receiver_id",                         :null => false
     t.boolean "sent",             :default => false
-    t.text    "subject"
+    t.string  "subject"
     t.text    "message"
     t.boolean "receiver_read",    :default => false
     t.boolean "sender_deleted",   :default => false
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(:version => 0) do
 
   create_table "permissions", :primary_key => "perm_id", :force => true do |t|
     t.integer "role_id", :null => false
-    t.text    "name",    :null => false
+    t.string  "name",    :null => false
   end
 
   create_table "quiz_answers", :primary_key => "answer_id", :force => true do |t|
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "sections_users_roles", ["user_id", "role_id"], :name => "index_UserRoles_on_user_id_and_role_id"
 
   create_table "universities", :primary_key => "university_id", :force => true do |t|
-    t.text "university_name", :null => false
+    t.string "university_name", :null => false
   end
 
   create_table "uploads", :force => true do |t|

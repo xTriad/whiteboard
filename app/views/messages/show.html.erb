@@ -1,48 +1,19 @@
-<p>
-  <b>Message:</b>
-  <%= @message.message_id %>
-</p>
+<h1><%= @message.subject %></h1>
+
+<hr>
 
 <p>
-  <b>Sender:</b>
-  <%= @message.sender_id %>
+  <% if @is_sender %>
+    <b>To:</b>
+    <%= link_to @receiver_name, user_path(@message.receiver_id) %>
+  <% else %>
+    <b>From:</b>
+    <%= link_to @sender_name, user_path(@message.sender_id) %>
+  <% end %>
 </p>
 
-<p>
-  <b>Receiver:</b>
-  <%= @message.receiver_id %>
-</p>
-
-<p>
-  <b>Sent:</b>
-  <%= @message.sent %>
-</p>
-
-<p>
-  <b>Subject:</b>
-  <%= @message.subject %>
-</p>
-
-<p>
-  <b>Message:</b>
+<p class="box">
   <%= @message.message %>
 </p>
 
-<p>
-  <b>Receiver read:</b>
-  <%= @message.receiver_read %>
-</p>
-
-<p>
-  <b>Sender deleted:</b>
-  <%= @message.sender_deleted %>
-</p>
-
-<p>
-  <b>Receiver deleted:</b>
-  <%= @message.receiver_deleted %>
-</p>
-
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<%= link_to 'Reply', new_message_path %>

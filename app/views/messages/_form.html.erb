@@ -3,8 +3,8 @@
 
   <div class="form-inputs">
     <%= f.hidden_field :sender_id, :value => current_user.user_id %>
-    <%= label_tag(:receiver_id, "Name") %>
-    <%= text_field_tag(:receiver_id) %>
+    <%= label_tag(:receiver_email, "Email") %>
+    <%= text_field_tag(:receiver_email) %>
     <%= f.input :subject %>
     <%= f.input :message %>
   </div>

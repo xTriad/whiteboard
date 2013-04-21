@@ -46,14 +46,14 @@ puts 'DEFAULT USERS'
   # Baylor
   User.create([
     {
-      :name => 'prof1',
+      :name => 'Paul Grabow',
       :email => 'prof1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'prof2',
+      :name => 'Bill Booth',
       :email => 'prof2@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -74,7 +74,7 @@ puts 'DEFAULT USERS'
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student1',
+      :name => 'Bruce Wayne',
       :email => 'student1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -506,6 +506,52 @@ puts 'DEFAULT ATTENDANCES'
       :user_id => Constants::User::Student4,
       :class_date => DateTime.new(2013,4,1),
       :attendance => Constants::Attendance::Present
+    }
+  ])
+
+# Insert Messages
+puts 'DEFAULT MESSAGES'
+
+  Message.create([
+    {
+      :sender_id => Constants::User::Professor1,
+      :receiver_id => Constants::User::Professor2,
+      :sent => true,
+      :subject => 'A Private Message',
+      :message => 'Hello, Bill, You should join my ethics class because it\'s super awesome and not boring at all.',
+      :receiver_read => false,
+      :sender_deleted => false,
+      :receiver_deleted => false
+    },
+    {
+      :sender_id => Constants::User::Professor2,
+      :receiver_id => Constants::User::Professor1,
+      :sent => true,
+      :subject => 'Reply: A Private Message',
+      :message => 'I\'d love to!',
+      :receiver_read => false,
+      :sender_deleted => false,
+      :receiver_deleted => false
+    },
+    {
+      :sender_id => Constants::User::Professor1,
+      :receiver_id => Constants::User::Professor2,
+      :sent => true,
+      :subject => 'Reply: A Private Message',
+      :message => 'That\'s GREAT BRO!',
+      :receiver_read => false,
+      :sender_deleted => false,
+      :receiver_deleted => false
+    },
+    {
+      :sender_id => Constants::User::Professor1,
+      :receiver_id => Constants::User::Professor2,
+      :sent => true,
+      :subject => 'Hello!',
+      :message => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elit massa, rutrum et egestas in, semper sit amet risus. Donec tincidunt lacinia molestie. Nulla facilisi. Suspendisse felis tortor, rutrum vel rhoncus ut, vulputate quis felis. Nullam mollis aliquam convallis. Proin eu orci purus, quis lacinia enim. In nec purus quam. Sed blandit, mauris a eleifend pharetra, elit metus mattis quam, eget aliquet tellus dui sed risus. Duis cursus rhoncus tellus, nec aliquet magna eleifend et.',
+      :receiver_read => false,
+      :sender_deleted => false,
+      :receiver_deleted => false
     }
   ])
 

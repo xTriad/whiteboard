@@ -204,6 +204,9 @@ div {
   font-weight: bold;
   font-size: 14px;
   text-decoration: none;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #navbar .nav > li > a:hover {
