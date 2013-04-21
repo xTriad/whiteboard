@@ -2,35 +2,38 @@
 
 <hr>
 
-<table cellpadding="5" >
+<div id="courses">
+  <% @course_sections.each do |cs| %>
+    <div class="item" id="course_<%= cs[:course].course_id %>_section_<%= cs[:section].section_id %>">
+      <div class="valign">
+        <div class="title">
+          <%= cs[:course].number %> 
+          <%= cs[:course].name %>
+        </div>
 
-<% @counter = 0 %>
-<% @course_sections.each do |cs| %>
-  <% if @counter == 0 %>
-    <tr>
-  <% end %>
-    <td>
-      <div class="mainListItem">
-        <%= cs[:course].number %> &nbsp;
-        <%= cs[:course].name %>
+        <div class="content">
+          <%= link_to 'Assignments', assignments_path(:course => cs[:course].course_id) %> <br />
+
+          <%= link_to 'Course Information', course_path(cs[:course], :section => cs[:section].section_id) %> <br />
+
+          <% if is_professor? %>
+            <%= link_to 'Attendance', attendances_path(:section => cs[:section].section_id, :date => DateTime.now.strftime(date_url_format)) %>
+          <% end %>
+        </div>
       </div>
-      <div class="subListItem">
-        <%= link_to 'Assignments', assignments_path(:course => cs[:course].course_id) %> <br />
-        <%= link_to 'Course Information', course_path(cs[:course], :section => cs[:section].section_id) %> <br />
-        <% if is_professor? %>
-          <%= link_to 'Attendance', attendances_path(:section => cs[:section].section_id, :date => DateTime.now.strftime(date_url_format)) %>
-        <% end %>
-      </div>
-    </td>
-
-  <% if @counter == 2 %>
-    </tr>
-    <% @counter = -1 %>
+    </div>
   <% end %>
+  <div class="clear"></div>
+</div>
 
-  <% @counter += 1 %>
-<% end %>
+<script type="text/javascript">
 
-</table>
+$(document).ready(function() {
+  $('#courses .item').click(function() {
+    var course_id = $(this).attr('id').split('_')[1];
+    var section_id = $(this).attr('id').split('_')[3];
+    location.href = '/courses/' + course_id + '?section=' + section_id;
+  })
+});
 
-<br />
+</script>

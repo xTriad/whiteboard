@@ -268,6 +268,11 @@ puts 'DEFAULT COURSES'
       :name => 'Computer Ethics'
     },
     {
+      :number => 1337,
+      :university_id => Constants::Uni::Baylor,
+      :name => 'A Course With A Really Long Name That Should Break Something'
+    },
+    {
       :number => 3344,
       :university_id => Constants::Uni::Baylor,
       :name => 'Data Structures'

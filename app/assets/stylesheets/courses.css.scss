@@ -2,21 +2,54 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.mainListItem {
-  font-size: 25px;
+#courses > .item {
+  float: left;
+  padding: 7px 10px 10px 10px;
+  font-size: 12px;
+  width: 190px;
+  max-width: 190px;
+  height: 150px;
+  max-height: 150px;
+  margin: 0px 5px 5px 0px;
+  display: table;
+  overflow: hidden;
+  background: #eeeeee; /* Old browsers */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #dcdcdc 51%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(51%,#dcdcdc), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}
+
+#courses > .item:hover {
+  cursor: pointer;
+  background: #E7E7E7; /* Old browsers */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #d5d5d5 51%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(51%,#d5d5d5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}
+
+#courses > .item > .valign {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#courses > .item > .valign > .title {
   font-weight: bold;
-  line-height:28px;
-  color: #000;
-  border-bottom-style: solid;
-  border-color: black;
-  border-width: 2px;
+  line-height: 15px;
+  margin: 0px 0px 3px 0px;
+  padding: 0px;
 }
 
-.subListItem {
-  font-size: 18px;
-  line-height:18px;
-}
-
-.pageheader {
-  clear: both;
+#courses > .item > .valign > .content {
+  padding: 0px;
+  margin: 0px;
+  line-height: 25px;
 }

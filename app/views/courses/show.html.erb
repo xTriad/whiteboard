@@ -2,22 +2,15 @@
 
 <hr>
 
-<table width="100%">
-  <tr>
-    <td>
-      Section: <%= @section.number %>
-    </td>
-    <td align="right">
-      <b><%= link_to 'Assignments', assignments_path(:course => @course.course_id) %></b>
-      <% if is_professor? %>
-        <b> | <%= link_to 'Edit', edit_section_path(params[:section], :course => @course.course_id) %></b>
-      <% end %>
-    </td>
-  </tr>
-</table>
-
-<br />
+<p class="top-right">
+  <b>Section <%= @section.number %></b>
+</p>
 
 <p>
   <%= @section.description %>
 </p>
+
+<b><%= link_to 'Assignments', assignments_path(:course => @course.course_id) %></b>
+<% if is_professor? %>
+  <b> | <%= link_to 'Edit', edit_section_path(params[:section], :course => @course.course_id) %></b>
+<% end %>
