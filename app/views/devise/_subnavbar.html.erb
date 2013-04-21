@@ -1,6 +1,28 @@
-<li>
-  <a href="/">Account</a>
+<% if params[:action] == 'new' %>
+
+  <li>
+    <%= link_to 'Sign In', new_user_session_path %>
     <span class="arrow">
       <span>></span>
     </span>
-</li>
+  </li>
+
+<% elsif params[:action] == 'edit' %>
+
+  <li>
+    <%= link_to 'Edit', edit_user_registration_path %>
+    <span class="arrow">
+      <span>></span>
+    </span>
+  </li>
+
+<% else %>
+
+  <li>
+    <%= link_to 'Account', edit_user_registration_path %>
+    <span class="arrow">
+      <span>></span>
+    </span>
+  </li>
+
+<% end %>
