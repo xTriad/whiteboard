@@ -21,6 +21,8 @@
 
 .bootstrap-padding {
   padding: 20px 20px 20px 0px !important;
+  font-size: 14px;
+  position: relative;
 }
 
 .bootstrap-styles h1, .bootstrap-styles h2, .bootstrap-styles h3 {
@@ -350,6 +352,12 @@ div {
 .center {
   margin: 0px auto !important;
   text-align: center;
+}
+
+.top-right {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .box h1 {

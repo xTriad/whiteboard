@@ -1,8 +1,10 @@
-<h1><%= Course.find_name_by_section_id(params[:section]) %> Assignments</h1>
+<h1><%= Course.find_name_by_section_id(params[:section]) %> Grades</h1>
 
 <hr>
 
-Section: <%= Section.find_number_by_section_id(params[:section]) %><br /><br />
+<p class="top-right">
+  <b>Section <%= Section.find_number_by_section_id(params[:section]) %></b>
+</p>
 
 <table cellpadding="5">
 

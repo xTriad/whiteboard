@@ -1,22 +1,23 @@
-<p>
-  <b>Course number:</b>
-  <%= @course.number %>
-</p>
+<h1><%= @course.number %> <%= @course.name %></h1>
 
-<p>
-  <b>Course name:</b>
-  <%= @course.name %>
-</p>
+<hr>
+
+<table width="100%">
+  <tr>
+    <td>
+      Section: <%= @section.number %>
+    </td>
+    <td align="right">
+      <b><%= link_to 'Assignments', assignments_path(:course => @course.course_id) %></b>
+      <% if is_professor? %>
+        <b> | <%= link_to 'Edit', edit_section_path(params[:section], :course => @course.course_id) %></b>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<br />
 
 <p>
   <%= @section.description %>
 </p>
-
-<p>
-  <b><%= link_to 'Assignments', assignments_path(:course => @course.course_id) %></b>
-  <% if params.has_key?(:section) && is_professor? %>
-    | <b><%= link_to 'Edit', edit_section_path(params[:section], :course => @course.course_id) %></b>
-  <% end %>
-</p>
-
-<%= link_to 'Back', courses_path %>

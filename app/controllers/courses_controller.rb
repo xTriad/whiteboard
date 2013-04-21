@@ -22,14 +22,13 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @course = Course.find(params[:id])
-    authorize! :read, @course
-
-    if params.has_key?(:section)
-      @section = Section.find(params[:section])
-    else
+    if !params.has_key?(:section)
       redirect_to courses_path and return
     end
+
+    @course = Course.find(params[:id])
+    authorize! :read, @course
+    @section = Section.find(params[:section])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,7 +1,6 @@
-<p>
-  <b>Name:</b>
-  <%= @assignment.name %>
-</p>
+<h1><%= @assignment.get_name %></h1>
+
+<hr>
 
 <p>
   <b>Type:</b>
@@ -27,4 +26,8 @@
   <%= @assignment.description %>
 </p>
 
-<%= link_to 'Edit', edit_assignment_path(@assignment) %>
+<%= link_to 'Files', files_assignment_path(@assignment) %>
+
+<% if can? :update, @assignment %>
+ | <%= link_to 'Edit', edit_assignment_path(@assignment) %>
+<% end %>

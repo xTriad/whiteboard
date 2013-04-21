@@ -19,6 +19,9 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1/files
   def files
     authorize! :update, Upload
+    @assignment = Assignment.find(params[:id])
+    authorize! :read, @assignment
+    @course = Course.find_by_section_id(@assignment.section_id)
   end
 
   # GET /assignments
@@ -56,6 +59,7 @@ class AssignmentsController < ApplicationController
   def show
     @assignment = Assignment.find(params[:id])
     authorize! :read, @assignment
+    @course = Course.find_by_section_id(@assignment.section_id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -66,10 +70,15 @@ class AssignmentsController < ApplicationController
   # GET /assignments/new
   # GET /assignments/new.json
   def new
+    if !params.has_key?(:section)
+      redirect_to assignments_url and return
+    end
+
     @assignment = Assignment.new
     authorize! :create, @assignment
 
     @section_id = params[:section]
+    @course = Course.find_by_section_id(@section_id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -82,6 +91,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     authorize! :update, @assignment
     @section_id = @assignment.section_id
+    @course = Course.find_by_section_id(@section_id)
   end
 
   # POST /assignments

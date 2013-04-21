@@ -1,6 +1,44 @@
 <li>
-  <a href="/">Gradebook</a>
-    <span class="arrow">
-      <span>></span>
-    </span>
+  <%= link_to 'Gradebook', assignment_grades_path %>
+  <span class="arrow">
+    <span>></span>
+  </span>
 </li>
+
+<% if !@course.nil? %>
+
+    <li>
+      <%= link_to @course.name, assignment_grades_path(:section => @section_id) %>
+      <span class="arrow">
+        <span>></span>
+      </span>
+    </li>
+
+  <% if !@assignment.nil? %>
+    <li>
+      <%= link_to @assignment.get_name, assignment_grades_path(:assignment => @assignment.assignment_id) %>
+      <span class="arrow">
+        <span>></span>
+      </span>
+    </li>
+
+    <% if params[:action] == 'edit' %>
+
+      <li>
+        <%= link_to 'Edit', edit_assignment_grade_path(@assignment_grade) %>
+        <span class="arrow">
+          <span>></span>
+        </span>
+      </li>
+
+    <% elsif params[:action] == 'new' %>
+
+      <li>
+        <%= link_to 'New', new_assignment_grade_path(:assignment => @assignment_id, :user => @user_id) %>
+        <span class="arrow">
+          <span>></span>
+        </span>
+      </li>
+    <% end %>
+  <% end %>
+<% end %>

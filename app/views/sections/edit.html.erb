@@ -1,9 +1,7 @@
-<% if params.has_key?(:course) %>
-  <h1><%= Course.find(params[:course]).name %></h1>
-<% end %>
+<h1><%= @course.number %> <%= @course.name %></h1>
 
 <hr>
 
-Section: <%= @section.number %><br /><br />
+<p class="top-right"><b>Section <%= @section.number %></b></p>
 
 <%= render 'form' %>
