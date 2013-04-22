@@ -108,6 +108,8 @@ ActiveRecord::Schema.define(:version => 0) do
     t.boolean "receiver_read",    :default => false
     t.boolean "sender_deleted",   :default => false
     t.boolean "receiver_deleted", :default => false
+    t.date    "date_sent",                           :null => false
+    t.integer "reply_to"
   end
 
   create_table "permissions", :primary_key => "perm_id", :force => true do |t|

@@ -8,6 +8,20 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -456,7 +470,9 @@ CREATE TABLE messages (
     message text,
     receiver_read boolean DEFAULT false,
     sender_deleted boolean DEFAULT false,
-    receiver_deleted boolean DEFAULT false
+    receiver_deleted boolean DEFAULT false,
+    date_sent date NOT NULL,
+    reply_to integer
 );
 
 

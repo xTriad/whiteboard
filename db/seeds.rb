@@ -60,7 +60,7 @@ puts 'DEFAULT USERS'
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'ta1',
+      :name => 'Garrett Benoit',
       :email => 'ta1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -521,7 +521,8 @@ puts 'DEFAULT MESSAGES'
       :message => 'Hello, Bill, You should join my ethics class because it\'s super awesome and not boring at all.',
       :receiver_read => false,
       :sender_deleted => false,
-      :receiver_deleted => false
+      :receiver_deleted => false,
+      :date_sent => DateTime.now
     },
     {
       :sender_id => Constants::User::Professor2,
@@ -531,7 +532,9 @@ puts 'DEFAULT MESSAGES'
       :message => 'I\'d love to!',
       :receiver_read => false,
       :sender_deleted => false,
-      :receiver_deleted => false
+      :receiver_deleted => false,
+      :date_sent => DateTime.now,
+      :reply_to => 1
     },
     {
       :sender_id => Constants::User::Professor1,
@@ -541,7 +544,9 @@ puts 'DEFAULT MESSAGES'
       :message => 'That\'s GREAT BRO!',
       :receiver_read => false,
       :sender_deleted => false,
-      :receiver_deleted => false
+      :receiver_deleted => false,
+      :date_sent => DateTime.now,
+      :reply_to => 1
     },
     {
       :sender_id => Constants::User::Professor1,
@@ -551,7 +556,8 @@ puts 'DEFAULT MESSAGES'
       :message => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elit massa, rutrum et egestas in, semper sit amet risus. Donec tincidunt lacinia molestie. Nulla facilisi. Suspendisse felis tortor, rutrum vel rhoncus ut, vulputate quis felis. Nullam mollis aliquam convallis. Proin eu orci purus, quis lacinia enim. In nec purus quam. Sed blandit, mauris a eleifend pharetra, elit metus mattis quam, eget aliquet tellus dui sed risus. Duis cursus rhoncus tellus, nec aliquet magna eleifend et.',
       :receiver_read => false,
       :sender_deleted => false,
-      :receiver_deleted => false
+      :receiver_deleted => false,
+      :date_sent => DateTime.now
     }
   ])
 

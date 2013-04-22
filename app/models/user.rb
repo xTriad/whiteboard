@@ -49,11 +49,23 @@ class User < ActiveRecord::Base
   end
 
   def self.find_name_by_user_id(user_id)
-    find(:first, :conditions => ['user_id = ?', user_id]).name
+    user = find(:first, :conditions => ['user_id = ?', user_id])
+
+    if !user.nil?
+      return user.name
+    else
+      return nil
+    end
   end
 
   def self.find_id_by_email(email)
-    find(:first, :conditions => ['email = ?', email]).id
+    user = find(:first, :conditions => ['email = ?', email])
+
+    if !user.nil?
+      return user.id
+    else
+      return nil
+    end
   end
 
   # This method gets called many times on every page view so

@@ -4,18 +4,14 @@ class MessagesController < InheritedResources::Base
   # GET /messages.json
   def index
     authorize! :read, Message
-    @messages = Message.find_user_messages(current_user.id)
+    @messages = Message.find_user_conversations(current_user.id)
   end
 
   # GET /messages/1
   # GET /messages/1.json
   def show
-    @message = Message.find(params[:id])
-    authorize! :read, @message
-
-    @is_sender = (@message.sender_id == current_user.id) ? true : false
-    @receiver_name = User.find_name_by_user_id(@message.receiver_id)
-    @sender_name = User.find_name_by_user_id(@message.sender_id)
+    authorize! :read, Message
+    @messages = Message.find_conversation(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,6 +24,29 @@ class MessagesController < InheritedResources::Base
   def new
     @message = Message.new
     authorize! :create, @message
+
+    # If this is a reply to an already created convo
+    if params.has_key?(:reply)
+      @first_convo_message = Message.find(params[:reply])
+
+      # Figure out who the receiver is in this conversation. If
+      # only one person then it's ourself, otherwise we need to
+      # query for a distinct list of convo participants and grab
+      # the one whose id does not match our own.
+      @participant_ids = [@first_convo_message.sender_id, @first_convo_message.receiver_id]
+
+      # Assume it's the same person replying to themselves, although
+      # this is probably not true and will be corrected below if so
+      @receiver_id = @participant_ids.first
+
+      # Find the person we are replying to
+      @participant_ids.each do |user_id|
+        if user_id != current_user.id
+          @receiver_id = user_id
+          break
+        end
+      end
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,17 +64,40 @@ class MessagesController < InheritedResources::Base
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
-    authorize! :create, @message   
+    authorize! :create, @message
 
-    @message.receiver_id = User.find_id_by_email(params[:receiver_email])
+    # TODO: Get this error message to show
+    error = '';
+    is_reply = false
+
+    if @message.subject.length < 1 || @message.message.length < 1
+      error = 'You must have a subject and a message.'
+    else
+      receiver_id = nil
+
+      if params[:message].has_key?(:receiver_id)
+        receiver_id = params[:message][:receiver_id]
+        is_reply = true
+      else
+        receiver_id = User.find_id_by_email(params[:receiver_email])
+      end
+
+      if !receiver_id.nil? && receiver_id != 0
+        @message.receiver_id = receiver_id
+      else
+        error = 'The user with the email address #{params[:receiver_email]} does not exist'
+      end
+    end
 
     respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message }
-        format.json { render json: @message, status: :created, location: @message }
+      if !receiver_id.nil? & receiver_id != 0 && @message.save
+        if is_reply
+          format.html { redirect_to message_path(@message.reply_to) }
+        else
+          format.html { redirect_to @message }
+        end
       else
-        format.html { render action: "new" }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+        format.html { render action: "new", notice: error }
       end
     end
   end

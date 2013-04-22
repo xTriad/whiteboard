@@ -1,19 +1,19 @@
-<h1><%= @message.subject %></h1>
+<h1><%= @messages.first.subject %></h1>
 
 <hr>
 
-<p>
-  <% if @is_sender %>
-    <b>To:</b>
-    <%= link_to @receiver_name, user_path(@message.receiver_id) %>
-  <% else %>
-    <b>From:</b>
-    <%= link_to @sender_name, user_path(@message.sender_id) %>
-  <% end %>
-</p>
+<div id="message-convo">
+<% @messages.each do |message| %>
+  <p class="box">
+    <span class="author">
+      <%= User.find_name_by_user_id(message.sender_id) %>
+    </span>
+    <span class="message">
+      <%= message.message %>
+    </span>
+    <div class="clear"></div>
+  </p>
+<% end %>
+</div>
 
-<p class="box">
-  <%= @message.message %>
-</p>
-
-<%= link_to 'Reply', new_message_path %>
+<%= link_to 'Reply', new_message_path(:reply => @messages.first.message_id) %>

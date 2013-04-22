@@ -1,3 +1,13 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#message-convo .box > .author {
+  font-weight: bold;
+  margin: 0px 0px 5px 0px;
+  display: block;
+}
+
+#message-convo .box > .message {
+  display: block;
+}
