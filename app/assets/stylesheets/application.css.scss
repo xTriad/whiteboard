@@ -13,14 +13,262 @@
  *= require_tree .
  */
 
-.content {
+.bootstrap-styles {
+  @import "bootstrap";
+  @import "bootstrap-responsive";
+}
+
+.bootstrap-padding {
+  padding: 20px 20px 20px 0px !important;
+}
+
+/* Global Styles */
+
+body {
+  color: #000;
+  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  background-color: #0769AD;
+  margin: 0px 0px 20px 0px;
+  padding: 0px;
+}
+
+p, ol, ul, td {
+  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+li {
+  list-style-type: none;
+}
+
+pre {
   background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a {
+  color: #000;
+  &:visited {
+    color: #555;
+  }
+  &:hover {
+    color: #045100;
+    text-decoration: none;
+  }
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+/* Navigation */
+
+#navbar {
+  width: auto;
+  padding: 0px 20px 0px 20px;
+  margin: 0px auto;
+  background-color: #333;
+  border-bottom: 1px solid #000;
+}
+
+#navbar .nav {
+  float: right;
+  padding: 5px;
+}
+
+#navbar .nav > li {
+  float: left;
+  margin-left: 5px;
+}
+
+.nav-table {
+  width: 100%;
+  display: table;
+}
+
+.nav-cell {
+  display: table-cell;
+}
+
+.vertical {
+  vertical-align: middle;
+}
+
+.logo {
+  font-size: 20px;
+  float: left;
+}
+
+/*.logo {
+  background-color: #000;
+  background-image: url('/whiteboard2.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  display: block;
+  height: 50px;
+  width: 200px;
+  margin: 5px;
+  float: left;
+  clear: left;
+}
+*/
+
+/* Top Nav */
+
+#topnav {
+  background-color: #05568D;
+  margin: 0px auto;
+  text-align: right;
+}
+
+#topnav .nav {
   padding: 20px;
-  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+/* Content */
+
+#main {
+  padding: 20px 20px 0px 20px;
+  margin: 0px auto;
+}
+
+.body-row {
+  width: 1240px;
+  max-width: 100%;
+  min-width: 768px;
+  margin: 0px auto;
+  border: 1px solid #000;
+  -webkit-box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
+  box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
+}
+
+#wrapper {
+  background-color: #fff;
+  margin: 0px auto;
+}
+
+#content {
+  width: 74%;
+  float: right;
+}
+
+/* Sidebar */
+
+#sidebar {
+  padding: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  width: 17%;
+  float: left;
+  background-color: #eee;
+  background-image: -webkit-radial-gradient(right, #eee, #ffffff 90%);
+  background-image: radial-gradient(right, #f2f2f2, #ffffff 80%);
+}
+
+#sidebar .nav {
+
+}
+
+#sidebar .nav li {
+  list-style-position: outside;
+  font-size: 18px;
+  letter-spacing: 1px;
+  /*line-height:150%;*/
+  text-align: left;  
+  vertical-align: top;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+#sidebar ul.nav {
+  padding: 0px;
+  margin: 0px;
+}
+
+#sidebar li a {
+  color: #eee;
+  &:visited {
+    color: #555;
+  }
+  &:hover {
+    color: #045100;
+    text-decoration: none;
+  }
+}
+
+/* Misc */
+
+.box-container {
+  width: auto;
+  padding: 0px;
+  margin-bottom: 20px;
+}
+
+.box {
+  background-color: #eee;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.box-container .half {
+  width: 42%;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.box h1 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#notice {
+  color: green;
+}
+
+.clear {
+  clear: both;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
 }

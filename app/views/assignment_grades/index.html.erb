@@ -1,12 +1,7 @@
-<h1>Class Name</h1>
-<h2>Section Name</h2>
-
-<% @assignment_grades.each do |agrade| %>
-  <p><%=link_to agrade.assignment_name, agrade%>| <%=agrade.user_name%> | <%=agrade.grade_value%> | <%=agrade.comment%> | <%=link_to "Edit", edit_assignment_grade_path(agrade)%> </p>
-
-  <hr/>
-
-
-<%end%>
-
-<p><%=link_to "Add New Grade",new_assignment_grade_path%></p>
+<% if params.has_key?(:section) %>
+  <%= render 'section' %>
+<% elsif params.has_key?(:assignment) %>
+  <%= render 'assignments' %>
+<% else %>
+  <%= render 'sections' %>
+<% end %>

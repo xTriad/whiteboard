@@ -1,23 +1,28 @@
 Whiteboard::Application.routes.draw do
 
-  resources :assignment_grades
-
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
   resources :users
-
   resources :courses
   resources :sections
-  resources :assignments
   resources :uploads
+  resources :assignment_grades do
+     collection do
+      get 'alter' # /assignment_grades/alter
+    end
+  end
+  resources :assignments do
+    member do
+      get  'files' # /assignments/1/files
+    end
+  end
 
-  # put 'attendances/:id/:atten' => "attendances#update_attendance"
-  resources :attendances
-  resources :grades
-  resources :teachergrades
+  resources :attendances do
+    collection do
+      get 'alter' # /attendances/alter
+    end
+  end
 
   authenticated :user do
     root :to => 'home#index'
@@ -26,13 +31,3 @@ Whiteboard::Application.routes.draw do
   root :to => 'home#index'
 
 end
-
-# See http://guides.rubyonrails.org/routing.html
-#       2.7.1 Limits to Nesting
-#       2.5 Singular Resources (make profile go to currently logged in user's profile)
-#            match "profile" => "users#show"
-#       3.2 Dynamic Segments
-#            match ':controller/:action/:id/:user_id'
-
-# TODO: **** 2.9 Adding More RESTful Actions *****
-# http://stackoverflow.com/questions/3589884/what-does-map-resource-in-the-route-file-do-exactly/3590622#3590622

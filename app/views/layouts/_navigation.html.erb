@@ -1,21 +1,17 @@
-<%= link_to "Whiteboard", root_path, :class => 'brand' %>
+
+<ul class="logo">
+  <li>WhiteBoard</li>
+</ul>
+
 <ul class="nav">
   <% if user_signed_in? %>
-    <li>
-      <%= link_to 'Courses', courses_path %>
-    </li>
-    <li>
-      <%= link_to 'Attendance', attendances_path %>
-    </li>
-    <li>
-      <%= link_to 'Gradebook', grades_path %>
-    </li>
-    <li>
-      <%= link_to 'Teacher Grades', teachergrades_path %>
-    </li>
-    <li>
-      <%= link_to 'Admin', admin_root_path %>
-    </li>
+
+    <% if is_admin? %>
+      <li>
+        <%= link_to 'Admin', admin_root_path %>
+      </li>
+    <% end %>
+
     <li>
       <%= link_to 'Edit account', edit_user_registration_path %>
     </li>

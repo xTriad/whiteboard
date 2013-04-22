@@ -9,7 +9,13 @@
 #
 GMAIL_USERNAME: Your_Username
 GMAIL_PASSWORD: Your_Password
-ADMIN_NAME: admin
-ADMIN_EMAIL: admin@whiteboard.com
-ADMIN_PASSWORD: password
+
+ADMIN1_NAME: admin1
+ADMIN1_EMAIL: admin1@whiteboard.com
+ADMIN1_PASSWORD: password
+
+ADMIN2_NAME: admin2
+ADMIN2_EMAIL: admin2@whiteboard.com
+ADMIN2_PASSWORD: password
+
 ROLES: [admin, professor, ta, student, observer]

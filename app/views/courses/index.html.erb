@@ -1,13 +1,36 @@
-<h1>Courses</h1>
+<div class="pageheader">
+  <h1>Courses</h1>
+</div>
 
-<table>
-<% @courses.each do |course| %>
-  <tr>
-    <td><%= course.number %></td>
-    <td><%= course.name %></td>
-    <td><%= link_to 'Show', course %></td>
-  </tr>
+<table cellpadding="5" >
+
+<% @counter = 0 %>
+<% @course_sections.each do |cs| %>
+  <% if @counter == 0 %>
+    <tr>
+  <% end %>
+    <td>
+      <div class="mainListItem">
+        <%= cs[:course].number %> &nbsp;
+        <%= cs[:course].name %>
+      </div>
+      <div class="subListItem">
+        <%= link_to 'Assignments', assignments_path(:course => cs[:course].course_id) %> <br />
+        <%= link_to 'Course Information', course_path(cs[:course], :section => cs[:section].section_id) %> <br />
+        <% if is_professor? %>
+          <%= link_to 'Attendance', attendances_path(:section => cs[:section].section_id, :date => DateTime.now.strftime(date_url_format)) %>
+        <% end %>
+      </div>
+    </td>
+
+  <% if @counter == 2 %>
+    </tr>
+    <% @counter = -1 %>
+  <% end %>
+
+  <% @counter += 1 %>
 <% end %>
+
 </table>
 
 <br />

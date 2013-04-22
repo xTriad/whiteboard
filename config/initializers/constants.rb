@@ -1,42 +1,82 @@
 module Constants
 
   # Role IDs
-  Admin_RID      = 1
-  Professor_RID  = 2
-  TA_RID         = 3
-  Student_RID    = 4
-  Observer_RID   = 5
+  module Role
+    Admin      = 1
+    Professor  = 2
+    TA         = 3
+    Student    = 4
+    Observer   = 5
+  end
 
   # University IDs
-  Baylor         = 1
-  Texas          = 2
-  Tech           = 3
+  module Uni
+    Baylor     = 1
+    Texas      = 2
+    Tech       = 3
+  end
 
   # AssignmentType IDs
-  Homework       = 1
-  Program        = 2
-  Quiz           = 3
-  Test           = 4
+  module AssignType
+    Homework   = 1
+    Program    = 2
+    Quiz       = 3
+    Test       = 4
+  end
+
+  # Attendance IDs
+  module Attendance
+    Present    = 1
+    Absent     = 2
+    Tardy      = 3
+    Excused    = 4
+
+    # This needs to match the above values EXACTLY
+    List       = [1,2,3,4]
+  end
 
   # Test account IDs
-  Admin_UID      = 1
-  Professor1_UID = 2
-  Professor2_UID = 3
-  TA1_UID        = 4
-  TA2_UID        = 5
-  Student1_UID   = 6
-  Student2_UID   = 7
-  Student3_UID   = 8
-  Student4_UID   = 9
+  module User
 
-  # Organize the Test Account IDs into a hash
-  # This needs to reflect the IDs above EXACTLY
-  Test_Users = {
-    :admins      => [1],
-    :professors  => [2,3],
-    :tas         => [4,5],
-    :students    => [6,7,8,9],
-    :observers   => []
-  }
+    # Baylor
+    Admin1     = 1
+    Professor1 = 2
+    Professor2 = 3
+    TA1        = 4
+    TA2        = 5
+    Student1   = 6
+    Student2   = 7
+    Student3   = 8
+    Student4   = 9
+    Student5   = 10
+    Student6   = 11
+    Student7   = 12
+    Student8   = 13
+    Student9   = 14
+    Student10  = 15
+    Student11  = 16
+    Student12  = 17
+    Student13  = 18
+    Student14  = 19
+    Observer1  = 20
+
+    # Texas
+    Admin2     = 21
+    Professor3 = 22
+    Professor4 = 23
+    Student15  = 24
+    Student16  = 25
+    Student17  = 26
+
+    # Organizes the test account IDs into a hash.
+    # This needs to reflect the IDs above EXACTLY.
+    By_Role = {
+      :admins      => [1,21],
+      :professors  => [2,3,22,23],
+      :tas         => [4,5],
+      :students    => [6,7,8,9,10,11,12,13,14,15,16,17,18,19,24,25,26],
+      :observers   => [20]
+    }
+  end
 
 end

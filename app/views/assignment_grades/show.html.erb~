@@ -1,5 +1,0 @@
-<h1><%=@grade.assignment_name%></h1>
-<p><%=@grade.user_name%></p>
-<p><%=@grade.grade_value%></p>
-<p><%=@grade.comment%></p>
-

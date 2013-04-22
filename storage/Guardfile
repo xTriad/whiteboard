@@ -1,0 +1,24 @@
+# More info at https://github.com/guard/guard#readme
+
+# Notes:
+# r[1] is the path without the .ext (the/path/file)
+# r[0] is the relative path, "./the/path/file.ext"
+# This will find the path without /file.ext: r[0][0, r[0].index(/\/[^\/]+$/)]
+
+# The script needs to know file name(s) and accept a file path ($1).
+# When a new assn is made, put a compileCode.todo in the assn folder. This file will be used to compile/run all student files as soon as they are uploaded.
+
+
+guard 'shell', :recursive => true do
+
+  # Make the script executable
+  watch(%r{^(.+)\.todo$}) {
+    |r| `chmod a+x #{r[1]}.todo`
+  }
+
+  # Run compileCode.todo with the file path as $1
+  watch(%r{^(.+)\.(c|cpp|java|pl|py)$}) {
+    |r| `./#{r[0][0, r[0].index(/\//)]}/compileCode.todo #{r[0][0, r[0].index(/\/[^\/]+$/)]}/`
+  }
+
+end

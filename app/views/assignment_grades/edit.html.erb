@@ -1,5 +1,6 @@
-<h1>Edit Grade</h1>
+<h1><%= User.find(@user_id).name %>'s Grade</h1>
 
+<<<<<<< HEAD
 <%=form_for @assignment_grade do |f|%>
    <%@current_user ||= session[:current_user_id]&&User.find_by_id(session[:current_user_id])%>
 
@@ -36,3 +37,6 @@
   </p>
 
 <%end%>
+=======
+<%= render 'form' %>
+>>>>>>> e1b310fd878ed9edbb58b87864ae19beecbbec5f

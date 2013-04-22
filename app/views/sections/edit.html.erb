@@ -1,6 +1,9 @@
-<h1>Editing section</h1>
+<h1>
+<% if params.has_key?(:course) %>
+  <%= Course.find(params[:course]).name %>
+<% end %>
+</h1>
+
+Section: <%= @section.number %><br /><br />
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @section %> |
-<%= link_to 'Back', sections_path %>

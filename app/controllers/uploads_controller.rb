@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.json
   def index
-    # authorize! :index, @user, :message => 'Not authorized as an administrator.''
+    authorize! :read, Upload
     @uploads = Upload.where(:assignment_id => params[:assignment_id], :user_id => current_user.id)
 
     respond_to do |format|
@@ -15,14 +15,10 @@ class UploadsController < ApplicationController
 
   # GET /uploads/1
   # GET /uploads/1.json
-  # This should never be called
   def show
-    @upload = Upload.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @upload }
-    end
+    debugger
+    authorize! :read, Upload
+    redirect_to root_path
   end
 
   # GET /uploads/new
@@ -30,18 +26,16 @@ class UploadsController < ApplicationController
   # This should never be called since the jquery-fileupload Javascript ajax
   # handles the creation of new Uploads.
   def new
-    @upload = Upload.new
-    @upload.paperclip_values!(params[:assignment_id], params[:user_id])
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @upload }
-    end
+    debugger
+    authorize! :create, Upload
+    redirect_to root_path
   end
 
   # GET /uploads/1/edit
   def edit
-    @upload = Upload.find(params[:id])
+    debugger
+    authorize! :update, Upload
+    redirect_to root_path
   end
 
   # POST /uploads
@@ -50,6 +44,7 @@ class UploadsController < ApplicationController
   # from the new page/action above.
   def create
     @upload = Upload.new(params[:upload])
+    authorize! :create, @upload
 
     # Note that although these params are from the URL, they are also
     # being passed through the params[:upload] POST variable since the
@@ -76,17 +71,9 @@ class UploadsController < ApplicationController
   # PUT /uploads/1
   # PUT /uploads/1.json
   def update
-    @upload = Upload.find(params[:id])
-
-    respond_to do |format|
-      if @upload.update_attributes(params[:upload])
-        format.html { redirect_to @upload, notice: 'Upload was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
-      end
-    end
+    debugger
+    authorize! :update, Upload
+    redirect_to root_path
   end
 
   # DELETE /uploads/1
@@ -94,6 +81,8 @@ class UploadsController < ApplicationController
   def destroy
     # TODO: Javascript usage: http://railsapps.github.com/rails-javascript-include-external.html
     @upload = Upload.find(params[:id])
+    authorize! :destroy, @upload
+    @upload.paperclip_values!(@upload.read_attribute(:assignment_id), @upload.read_attribute(:user_id))
     @upload.destroy
 
     respond_to do |format|

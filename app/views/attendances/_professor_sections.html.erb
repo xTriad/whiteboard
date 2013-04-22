@@ -1,9 +1,9 @@
-<table>
+<table cellpadding="5">
+
 <% @professor_sections.each do |section| %>
   <tr>
-    <td><%= section.find_course_name %></td>
-    <td><%= section.number %></td>
-    <td><%= link_to 'Attendance', attendances_path(:section => section.section_id, :date => DateTime.now.strftime(date_url_format)) %></td>
+    <td><b><%= link_to section.find_course_name + ' - ' + section.number.to_s, attendances_path(:section => section.section_id, :date => DateTime.now.strftime(date_url_format)) %></b></td>
   </tr>
 <% end %>
+
 </table>
