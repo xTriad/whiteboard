@@ -200,7 +200,7 @@ div {
 #navbar .nav > li > a {
   color: #fff;
   display: block;
-  padding: 10px 20px 10px 30px;
+  padding: 10px 15px 10px 36px;
   font-weight: bold;
   font-size: 14px;
   text-decoration: none;
@@ -211,6 +211,10 @@ div {
 
 #navbar .nav > li > a:hover {
   color: #EDEDED;
+}
+
+#navbar .nav > li a.first {
+  padding-left: 20px;
 }
 
 #navbar .nav .arrow {

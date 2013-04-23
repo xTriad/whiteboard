@@ -28,6 +28,8 @@ class MessagesController < InheritedResources::Base
     # If this is a reply to an already created convo
     if params.has_key?(:reply)
       @first_convo_message = Message.find(params[:reply])
+      @reply_to = @first_convo_message.message_id
+      @first_convo_message.subject = 'Re: ' + @first_convo_message.subject
 
       # Figure out who the receiver is in this conversation. If
       # only one person then it's ourself, otherwise we need to
@@ -66,38 +68,50 @@ class MessagesController < InheritedResources::Base
     @message = Message.new(params[:message])
     authorize! :create, @message
 
-    # TODO: Get this error message to show
     error = '';
     is_reply = false
+
+    if params[:message].has_key?(:receiver_id)
+      is_reply = true
+    end
 
     if @message.subject.length < 1 || @message.message.length < 1
       error = 'You must have a subject and a message.'
     else
-      receiver_id = nil
+      @receiver_id = nil
 
       if params[:message].has_key?(:receiver_id)
-        receiver_id = params[:message][:receiver_id]
-        is_reply = true
+        @receiver_id = params[:message][:receiver_id]
       else
-        receiver_id = User.find_id_by_email(params[:receiver_email])
+        @receiver_id = User.find_id_by_email(params[:receiver_email])
       end
 
-      if !receiver_id.nil? && receiver_id != 0
-        @message.receiver_id = receiver_id
+      if !@receiver_id.nil?
+        @message.receiver_id = @receiver_id
       else
-        error = 'The user with the email address #{params[:receiver_email]} does not exist'
+        error = 'The user with the email address "' + params[:receiver_email] + '" does not exist'
       end
     end
 
     respond_to do |format|
-      if !receiver_id.nil? & receiver_id != 0 && @message.save
+      if !@receiver_id.nil? && @message.save
         if is_reply
           format.html { redirect_to message_path(@message.reply_to) }
         else
           format.html { redirect_to @message }
         end
       else
-        format.html { render action: "new", notice: error }
+        flash[:error] = error
+
+        if is_reply
+          @first_convo_message = Message.new(params[:message])
+          @reply_to = @first_convo_message.reply_to
+          @receiver_id = params[:message][:receiver_id]
+
+          format.html { render action: "new" }
+        else
+          format.html { render action: "new" }
+        end
       end
     end
   end
