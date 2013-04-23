@@ -2,15 +2,15 @@
 
 <hr>
 
-<table>
+<table class="table table-striped">
 <% @messages.each do |message| %>
   <tr>
-    <td><%= link_to User.find_name_by_user_id(message.receiver_id), user_path(message.receiver_id) %></td>
-    <td><%= link_to message.subject, message %></td>
+    <td width="20%"><%= link_to User.find_name_by_user_id(message.receiver_id), user_path(message.receiver_id) %></td>
+    <td width="80%"><%= link_to message.subject, message %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<a href="<%= new_message_path %>"><input class="btn btn-primary" type="button" value="Create New Message" /></a>
+<a href="<%= new_message_path %>">
+  <input class="btn btn-primary" type="button" value="Create New Message" />
+</a>

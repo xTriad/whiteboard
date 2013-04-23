@@ -2,12 +2,11 @@
 
 <hr>
 
-<table cellpadding="5">
-
+<table class="table table-striped">
 <% @users.each do |user| %>
   <% grade = AssignmentGrade.find_user_grade(user.user_id, @assignment.assignment_id) %>
   <tr>
-    <td>
+    <td width="20%">
       <b><%= user.name %></b>
     </td>
     <td>
@@ -22,5 +21,4 @@
     </td>
   </tr>
  <% end %>
-
 </table>

@@ -10,7 +10,16 @@
   <%= @section.description %>
 </p>
 
-<b><%= link_to 'Assignments', assignments_path(:course => @course.course_id) %></b>
+<a href="<%= assignments_path(:course => @course.course_id) %>">
+  <input class="btn btn-primary" type="button" value="Assignments" />
+</a>
+
 <% if is_professor? %>
-  <b> | <%= link_to 'Edit', edit_section_path(params[:section], :course => @course.course_id) %></b>
+  <a href="<%= attendances_path(:date => DateTime.now.strftime(date_url_format), :section => @section.section_id) %>">
+    <input class="btn btn-primary" type="button" value="Attendance" />
+  </a>
+  <a href="<%= edit_section_path(params[:section], :course => @course.course_id) %>">
+    <input class="btn btn-primary" type="button" value="Edit" />
+  </a>
 <% end %>
+

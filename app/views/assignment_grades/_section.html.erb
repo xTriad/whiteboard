@@ -6,8 +6,7 @@
   <b>Section <%= Section.find_number_by_section_id(params[:section]) %></b>
 </p>
 
-<table cellpadding="5">
-
+<table class="table table-striped">
 <% @assignments.each do |assignment| %>
   <tr>
     <td>
@@ -27,5 +26,4 @@
     </td>
   </tr>
 <% end %>
-
 </table>

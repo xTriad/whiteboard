@@ -51,11 +51,14 @@ $(document).ready(function() {
 
 </script>
 
+<p class="top-right">
+  <b>Section <%= @section_number %></b>
+</p>
+
 <table width="100%">
   <tr>
     <td width="50%">
       Course: <%= @course_name %><br />
-      Section: <%= @section_number %><br />
       Date: <%= format_date_from_url(params[:date]) %>
     </td>
     <td width="50%" align="right">

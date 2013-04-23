@@ -2,12 +2,30 @@
 
 <hr>
 
-<table cellpadding="5">
+<div id="courses" class="blocks-buttons">
+  <% @professor_sections.each do |section| %>
+    <% course = Course.find_by_section_id(section.section_id) %>
+    <div class="item" id="course_<%= course.course_id %>_section_<%= section.section_id %>">
+      <div class="valign">
+        <div class="title">
+          <%= link_to course.name, attendances_path(:date => DateTime.now.strftime(date_url_format), :section => section.section_id) %>
+        </div>
+        <div class="content">
+          Section <%= section.number.to_s %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
 
-<% @professor_sections.each do |section| %>
-  <tr>
-    <td><b><%= link_to section.find_course_name + ' - ' + section.number.to_s, attendances_path(:section => section.section_id, :date => DateTime.now.strftime(date_url_format)) %></b></td>
-  </tr>
-<% end %>
+<script type="text/javascript">
 
-</table>
+$(document).ready(function() {
+  $('#courses .item').click(function() {
+    var section_id = $(this).attr('id').split('_')[3];
+    location.href = '/attendances/?date=<%= DateTime.now.strftime(date_url_format) %>&section=' + section_id;
+  })
+});
+
+</script>
