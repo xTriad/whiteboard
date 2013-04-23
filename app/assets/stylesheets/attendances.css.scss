@@ -42,19 +42,20 @@
 }
 
 .present {
-  background-image: url('/images/attendance/present.png');
+  /*background-image: url('/assets/attendance/present.png');*/
+  background-image: url(image-path('attendance/present.png'));
 }
 
 .absent {
-  background-image: url('/images/attendance/absent.png');
+  background-image: url(image-path('attendance/absent.png'));
 }
 
 .tardy {
-  background-image: url('/images/attendance/tardy.png');
+  background-image: url(image-path('attendance/tardy.png'));
 }
 
 .excused {
-  background-image: url('/images/attendance/excused.png');
+  background-image: url(image-path('attendance/excused.png'));
 }
 
 /* So clicking the attendance doesn't highlight the element */

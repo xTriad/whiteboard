@@ -21,4 +21,8 @@ class Assignment < ActiveRecord::Base
     (self.name != nil) ? self.name : 'Unnamed'
   end
 
+  def get_description
+    (self.description != nil && self.description.match(/\S/)) ? self.description : 'No description.'
+  end
+
 end

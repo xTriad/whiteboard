@@ -16,7 +16,7 @@
       <b><%= assignment.get_type_name %></b>
     </td>
     <td>
-      <b><%= assignment.due_date %></b>
+      <b><%= assignment.due_date.strftime(date_page_format) %></b>
     </td>
     <td>
       <b><%= assignment.highest_grade_value %></b>

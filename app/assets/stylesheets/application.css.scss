@@ -167,10 +167,17 @@ div {
 
 #navbar {
   color: #fff;
-  background-color: #05568D;
   border-radius: 10px 10px 0px 0px;
   padding: 0px;
   margin: 0px auto;
+  background: #05568d; /* Old browsers */
+  background: -moz-linear-gradient(top,  #05568d 0%, #003f76 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#05568d), color-stop(100%,#003f76)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #05568d 0%,#003f76 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #05568d 0%,#003f76 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #05568d 0%,#003f76 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #05568d 0%,#003f76 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05568d', endColorstr='#003f76',GradientType=0 ); /* IE6-9 */
 }
 
 #navbar > ul {
@@ -224,9 +231,10 @@ div {
   top: 0px;
   z-index: 50;
   width: 0px;
-  height: 0px
+  height: 0px;
 }
 
+/* TODO: Image or http://stackoverflow.com/questions/6950516/is-it-possible-to-make-a-box-arrow-in-css-3-with-a-gradient */
 #navbar .nav .arrow > span {
   border: 18px solid transparent;
   border-right: 1px none black;

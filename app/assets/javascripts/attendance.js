@@ -56,7 +56,7 @@ var attendance = {
 
           // Send update to server
           $.ajax({
-            url: 'attendances/alter?' +
+            url: '/attendances/alter?' +
                    'date=' + data.class_date + 
                    '&section=' + data.section_id +
                    '&user=' + user_id +

@@ -9,11 +9,11 @@
 
 <p>
   <b>Due date:</b>
-  <%= @assignment.due_date %>
+  <%= @assignment.due_date.strftime(date_page_format) %>
 </p>
 
 <p>
-  <b>Highest grade value:</b>
+  <b>Highest Grade Value:</b>
   <%= @assignment.highest_grade_value %>
 </p>
 
@@ -22,12 +22,16 @@
   <%= @assignment.weight %>
 </p>
 
-<p>
-  <%= @assignment.description %>
+<p class="box">
+  <%= @assignment.get_description %>
 </p>
 
-<%= link_to 'Files', files_assignment_path(@assignment) %>
+<a href="<%= files_assignment_path(@assignment) %>">
+  <input class="btn btn-primary" type="button" value="Files" />
+</a>
 
 <% if can? :update, @assignment %>
- | <%= link_to 'Edit', edit_assignment_path(@assignment) %>
+  <a href="<%= edit_assignment_path(@assignment) %>">
+    <input class="btn btn-primary" type="button" value="Edit" />
+  </a>
 <% end %>
