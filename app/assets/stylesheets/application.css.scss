@@ -55,6 +55,10 @@
   margin: 15px 0px 15px 0px;
 }
 
+.bootstrap-styles a input[type="button"] {
+  width: auto;
+}
+
 /* Global Styles */
 
 body {
@@ -152,10 +156,6 @@ div {
   text-decoration: none;
 }
 
-#headernav .nav > li > a:hover {
-  color: #EDEDED;
-}
-
 #headernav .login {
   font-size: 14px;
   font-weight: bold;
@@ -207,10 +207,6 @@ div {
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
-}
-
-#navbar .nav > li > a:hover {
-  color: #EDEDED;
 }
 
 #navbar .nav > li a.first {

@@ -67,6 +67,7 @@ class MessagesController < InheritedResources::Base
   def create
     @message = Message.new(params[:message])
     authorize! :create, @message
+    @message.date_sent = DateTime.now
 
     error = '';
     is_reply = false
@@ -89,7 +90,7 @@ class MessagesController < InheritedResources::Base
       if !@receiver_id.nil?
         @message.receiver_id = @receiver_id
       else
-        error = 'The user with the email address "' + params[:receiver_email] + '" does not exist'
+        error = 'The user with the email address "' + params[:receiver_email] + '" does not exist.'
       end
     end
 
@@ -107,11 +108,9 @@ class MessagesController < InheritedResources::Base
           @first_convo_message = Message.new(params[:message])
           @reply_to = @first_convo_message.reply_to
           @receiver_id = params[:message][:receiver_id]
-
-          format.html { render action: "new" }
-        else
-          format.html { render action: "new" }
         end
+
+        format.html { render action: "new" }
       end
     end
   end

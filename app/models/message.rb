@@ -5,15 +5,15 @@ class Message < ActiveRecord::Base
     find(:all, :conditions => ['receiver_id = ? OR sender_id = ?', user_id, user_id])
   end
 
-  # Same as user messages but only returns the first message of each convo
+  # Same as find_user_messages but only returns the first message of each convo
   def self.find_user_conversations(user_id)
-    find(:all, :conditions => ['reply_to is NULL AND (receiver_id = ? OR sender_id = ?)', user_id, user_id])
+    find(:all, :conditions => ['reply_to is NULL AND (receiver_id = ? OR sender_id = ?)', user_id, user_id], :order => "date_sent DESC")
   end
 
   # Finds all the messages that are in reply to the starting message including
   # the starting message, and orders by date
   def self.find_conversation(message_id)
-    find(:all, :conditions => ['reply_to = ? OR message_id = ?', message_id, message_id], :order => "date_sent DESC")
+    find(:all, :conditions => ['reply_to = ? OR message_id = ?', message_id, message_id], :order => "date_sent ASC")
   end
 
   # Find all the users in the conversation
