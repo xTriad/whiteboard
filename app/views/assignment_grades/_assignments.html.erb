@@ -7,6 +7,11 @@ function setup() {
 
 }
 
+$(document).ready(function() {
+  setup();
+  doStuff(this.form);
+});
+
 
 function doStuff(form) {
 var grade = form.grade.value;
@@ -68,8 +73,8 @@ $.ajax({
     <td>
      comment: <input type="text" name="comment" value="">
      </td>
-    <td>
-      <input type="submit" name ="button" value="Submit" onsubmit="doStuff(this.form);return false;">
+     <td>
+      <input type="submit" name ="button" value="Submit" onSubmit="doStuff(this.form); return false;">
     </td>
     </form>
     
