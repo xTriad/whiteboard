@@ -1,7 +1,7 @@
 <li>
   <%= link_to 'Assignments', assignments_path %>
   <span class="arrow">
-    <span>></span>
+    <span></span>
   </span>
 </li>
 
@@ -9,7 +9,7 @@
   <li>
     <%= link_to @course.name, assignments_path(:course => @course.course_id) %>
     <span class="arrow">
-      <span>></span>
+      <span></span>
     </span>
   </li>
 
@@ -19,7 +19,7 @@
       <li>
         <%= link_to @assignment.get_name, assignment_path(@assignment) %>
         <span class="arrow">
-          <span>></span>
+          <span></span>
         </span>
       </li>
     <% end %>
@@ -29,7 +29,7 @@
       <li>
         <%= link_to 'Edit', edit_assignment_path(@assignment) %>
         <span class="arrow">
-          <span>></span>
+          <span></span>
         </span>
       </li>
 
@@ -38,7 +38,7 @@
       <li>
         <%= link_to 'Files', files_assignment_path(@assignment) %>
         <span class="arrow">
-          <span>></span>
+          <span></span>
         </span>
       </li>
     <% end %>
@@ -48,7 +48,7 @@
     <li>
       <%= link_to 'New', new_assignment_path(:section => @section_id) %>
       <span class="arrow">
-        <span>></span>
+        <span></span>
       </span>
     </li>
   <% end %>
