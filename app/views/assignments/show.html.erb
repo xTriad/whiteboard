@@ -8,7 +8,7 @@
 </p>
 
 <p>
-  <b>Due date:</b>
+  <b>Due Date:</b>
   <%= @assignment.due_date.strftime(date_page_format) %>
 </p>
 
@@ -29,6 +29,12 @@
 <a href="<%= files_assignment_path(@assignment) %>">
   <input class="btn btn-primary" type="button" value="Files" />
 </a>
+
+<% if can? :manage, AssignmentConfigUpload %>
+  <a href="<%= configs_assignment_path(@assignment) %>">
+    <input class="btn btn-primary" type="button" value="Config" />
+  </a>
+<% end %>
 
 <% if can? :update, @assignment %>
   <a href="<%= edit_assignment_path(@assignment) %>">

@@ -16,6 +16,15 @@ class AssignmentsController < ApplicationController
     
   end
 
+  # GET /assignments/1/configs
+  # Has to be plural since "config" is a predfined method
+  def configs
+    authorize! :update, AssignmentConfigUpload
+    @assignment = Assignment.find(params[:id])
+    authorize! :read, @assignment
+    @course = Course.find_by_section_id(@assignment.section_id)
+  end
+
   # GET /assignments/1/files
   def files
     authorize! :update, AssignmentUpload

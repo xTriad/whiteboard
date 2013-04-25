@@ -1090,6 +1090,44 @@ ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
 
 
 --
+-- Name: assignment_config_uploads; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE assignment_config_uploads (
+    id integer NOT NULL,
+    file_name character varying(255),
+    content_type character varying(255),
+    file_size integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    assignment_id integer NOT NULL
+);
+
+
+ALTER TABLE public.assignment_config_uploads OWNER TO postgres;
+
+--
+-- Name: assignment_config_uploads_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE assignment_config_uploads_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.assignment_config_uploads_id_seq OWNER TO postgres;
+
+--
+-- Name: assignment_config_uploads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE assignment_config_uploads_id_seq OWNED BY assignment_config_uploads.id;
+
+
+--
 -- Name: assignment_uploads; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -1106,6 +1144,27 @@ CREATE TABLE assignment_uploads (
 
 
 ALTER TABLE public.assignment_uploads OWNER TO postgres;
+
+--
+-- Name: assignment_uploads_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE assignment_uploads_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.assignment_uploads_id_seq OWNER TO postgres;
+
+--
+-- Name: assignment_uploads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE assignment_uploads_id_seq OWNED BY assignment_uploads.id;
+
 
 --
 -- Name: attendance_attendance_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -1207,27 +1266,6 @@ ALTER SEQUENCE universities_university_name_seq OWNED BY universities.university
 
 
 --
--- Name: uploads_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE uploads_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.uploads_id_seq OWNER TO postgres;
-
---
--- Name: uploads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE uploads_id_seq OWNED BY assignment_uploads.id;
-
-
---
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1239,6 +1277,13 @@ ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('acti
 --
 
 ALTER TABLE ONLY admin_users ALTER COLUMN id SET DEFAULT nextval('admin_users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY assignment_config_uploads ALTER COLUMN id SET DEFAULT nextval('assignment_config_uploads_id_seq'::regclass);
 
 
 --
@@ -1259,7 +1304,7 @@ ALTER TABLE ONLY assignment_types ALTER COLUMN type_id SET DEFAULT nextval('"Ass
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY assignment_uploads ALTER COLUMN id SET DEFAULT nextval('uploads_id_seq'::regclass);
+ALTER TABLE ONLY assignment_uploads ALTER COLUMN id SET DEFAULT nextval('assignment_uploads_id_seq'::regclass);
 
 
 --
@@ -1497,19 +1542,27 @@ ALTER TABLE ONLY admin_users
 
 
 --
+-- Name: assignment_config_uploads_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY assignment_config_uploads
+    ADD CONSTRAINT assignment_config_uploads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: assignment_uploads_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY assignment_uploads
+    ADD CONSTRAINT assignment_uploads_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: universities_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY universities
     ADD CONSTRAINT universities_pkey PRIMARY KEY (university_id);
-
-
---
--- Name: uploads_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY assignment_uploads
-    ADD CONSTRAINT uploads_pkey PRIMARY KEY (id);
 
 
 --
@@ -1598,6 +1651,14 @@ ALTER TABLE ONLY admin_users
 
 
 --
+-- Name: FK_AssignmentConfigUploads_Assignments; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY assignment_config_uploads
+    ADD CONSTRAINT "FK_AssignmentConfigUploads_Assignments" FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id);
+
+
+--
 -- Name: FK_AssignmentGrades_Assignments; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1611,6 +1672,22 @@ ALTER TABLE ONLY assignment_grades
 
 ALTER TABLE ONLY assignment_grades
     ADD CONSTRAINT "FK_AssignmentGrades_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+
+--
+-- Name: FK_AssignmentUploads_Assignments; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY assignment_uploads
+    ADD CONSTRAINT "FK_AssignmentUploads_Assignments" FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id);
+
+
+--
+-- Name: FK_AssignmentUploads_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY assignment_uploads
+    ADD CONSTRAINT "FK_AssignmentUploads_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 --
@@ -1787,22 +1864,6 @@ ALTER TABLE ONLY sections_users_roles
 
 ALTER TABLE ONLY sections
     ADD CONSTRAINT "FK_Sections_Courses" FOREIGN KEY (course_id) REFERENCES courses(course_id);
-
-
---
--- Name: FK_Uploads_Assignments; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY assignment_uploads
-    ADD CONSTRAINT "FK_Uploads_Assignments" FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id);
-
-
---
--- Name: FK_Uploads_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY assignment_uploads
-    ADD CONSTRAINT "FK_Uploads_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 --

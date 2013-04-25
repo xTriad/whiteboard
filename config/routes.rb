@@ -8,10 +8,12 @@ Whiteboard::Application.routes.draw do
   resources :courses
   resources :sections
   resources :assignment_uploads
+  resources :assignment_config_uploads
   resources :assignment_grades
   resources :assignments do
     member do
-      get  'files' # /assignments/1/files
+      get 'files' # /assignments/1/files
+      get 'configs' # /assignments/1/config
     end
   end
 

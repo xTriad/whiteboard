@@ -41,6 +41,16 @@
           <span></span>
         </span>
       </li>
+
+    <% elsif params[:action] == 'configs' %>
+
+      <li>
+        <%= link_to 'Configuration', configs_assignment_path(@assignment) %>
+        <span class="arrow">
+          <span></span>
+        </span>
+      </li>
+
     <% end %>
 
   <% else %>
