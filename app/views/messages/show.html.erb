@@ -6,11 +6,18 @@
 <% @messages.each do |message| %>
   <p class="box">
     <span class="author">
-      <% if message.sender_id == current_user.id %>
-        Me
-      <% else %>
-        <% user = User.find(message.sender_id) %>
-        <%= link_to user.name, user_path(user.user_id) %>
+      <span class"left">
+        <% if message.sender_id == current_user.id %>
+          Me
+        <% else %>
+          <% user = User.find(message.sender_id) %>
+          <%= link_to user.name, user_path(user.user_id) %>
+        <% end %>
+      </span>
+      <% if !message.appointment_timestamp.nil? %>
+        <span class="right">
+          Appointment: <%= message.appointment_timestamp.strftime('%B %d, %Y at %I:%M %p') %>
+        </span>
       <% end %>
     </span>
     <span class="message">

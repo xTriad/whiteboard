@@ -69,6 +69,18 @@ class MessagesController < InheritedResources::Base
     authorize! :create, @message
     @message.date_sent = DateTime.now
 
+    if params.has_key?(:appointment_timestamp)
+      if params[:appointment_timestamp].match(/(\d{2})\/(\d{2})\/(\d{4})\s(\d{2}):(\d{2})\s(am|pm)/i)
+        month, day, year, hours, minutes, ampm = $1.to_i, $2.to_i, $3.to_i, $4.to_i, $5.to_i, $6.to_i
+
+        if ampm == 'pm'
+          hours += 12
+        end
+
+        @message.appointment_timestamp = Time.new(year, month, day, hours, minutes, 0)
+      end
+    end
+
     error = '';
     is_reply = false
 

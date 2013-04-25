@@ -11,6 +11,8 @@
     <% else %>
       <%= label_tag(:receiver_email, "Email") %>
       <%= text_field_tag(:receiver_email) %>
+      <%= label_tag(:appointment_timestamp, "Appointment Time") %>
+      <%= text_field_tag(:appointment_timestamp) %>
       <%= f.input :subject %>
     <% end %>
 
@@ -21,3 +23,13 @@
     <%= f.button :submit, :class => "btn-primary" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+  $('#appointment_timestamp').datetimepicker({
+    timeFormat: "hh:mm tt"
+  });
+});
+
+</script>
