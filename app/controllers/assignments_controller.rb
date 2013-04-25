@@ -18,7 +18,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/1/files
   def files
-    authorize! :update, Upload
+    authorize! :update, AssignmentUpload
     @assignment = Assignment.find(params[:id])
     authorize! :read, @assignment
     @course = Course.find_by_section_id(@assignment.section_id)

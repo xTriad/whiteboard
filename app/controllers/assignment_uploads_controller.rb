@@ -1,16 +1,16 @@
-class UploadsController < ApplicationController
+class AssignmentUploadsController < ApplicationController
   before_filter :authenticate_user!
 
   # GET /uploads
   # GET /uploads.json
   def index
-    authorize! :read, Upload
+    authorize! :read, AssignmentUpload
 
     if !params.has_key?(:assignment_id) || !params.has_key?(:user_id)
-      redirect_to root_path and return
+      redirect_to root_path and return # TODO: Render error page instead
     end
 
-    @uploads = Upload.where(:assignment_id => params[:assignment_id], :user_id => current_user.id)
+    @uploads = AssignmentUpload.where(:assignment_id => params[:assignment_id], :user_id => current_user.id)
 
     respond_to do |format|
       format.json { render json: @uploads.map{|upload| upload.to_jq_upload } }
@@ -20,7 +20,7 @@ class UploadsController < ApplicationController
   # GET /uploads/1
   # GET /uploads/1.json
   def show
-    authorize! :read, Upload
+    authorize! :read, AssignmentUpload
     redirect_to root_path
   end
 
@@ -29,13 +29,13 @@ class UploadsController < ApplicationController
   # This should never be called since the jquery-fileupload Javascript ajax
   # handles the creation of new Uploads.
   def new
-    authorize! :create, Upload
+    authorize! :create, AssignmentUpload
     redirect_to root_path
   end
 
   # GET /uploads/1/edit
   def edit
-    authorize! :update, Upload
+    authorize! :update, AssignmentUpload
     redirect_to root_path
   end
 
@@ -44,7 +44,7 @@ class UploadsController < ApplicationController
   # This method is called from the jquery-fileupload Javascript, not
   # from the new page/action above.
   def create
-    @upload = Upload.new(params[:upload])
+    @upload = AssignmentUpload.new(params[:assignment_upload])
     authorize! :create, @upload
 
     # Note that although these params are from the URL, they are also
@@ -72,7 +72,7 @@ class UploadsController < ApplicationController
   # PUT /uploads/1
   # PUT /uploads/1.json
   def update
-    authorize! :update, Upload
+    authorize! :update, AssignmentUpload
     redirect_to root_path
   end
 
@@ -80,13 +80,13 @@ class UploadsController < ApplicationController
   # DELETE /uploads/1.json
   def destroy
     # TODO: Javascript usage: http://railsapps.github.com/rails-javascript-include-external.html
-    @upload = Upload.find(params[:id])
+    @upload = AssignmentUpload.find(params[:id])
     authorize! :destroy, @upload
     @upload.paperclip_values!(@upload.read_attribute(:assignment_id), @upload.read_attribute(:user_id))
     @upload.destroy
 
     respond_to do |format|
-      format.html { redirect_to uploads_url }
+      format.html { redirect_to assignment_uploads_url }
       format.json { head :no_content }
     end
   end
