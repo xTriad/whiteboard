@@ -473,7 +473,7 @@ CREATE TABLE messages (
     receiver_deleted boolean DEFAULT false,
     date_sent date NOT NULL,
     reply_to integer,
-    appointment_date date
+    appointment_timestamp timestamp without time zone
 );
 
 
