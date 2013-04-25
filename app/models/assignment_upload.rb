@@ -1,6 +1,6 @@
-class Upload < ActiveRecord::Base
-  attr_accessible :upload, :assignment_id, :user_id
-  has_attached_file :upload,
+class AssignmentUpload < ActiveRecord::Base
+  attr_accessible :assignment_upload, :assignment_id, :user_id
+  has_attached_file :assignment_upload,
     :url => ":rails_root/storage/assignments/:assignment_id/:user_id/:basename.:extension", # where to retrieve
     :path => ":rails_root/storage/assignments/:assignment_id/:user_id/:basename.:extension" # where to save
 
@@ -11,14 +11,41 @@ class Upload < ActiveRecord::Base
     {
       :files => [
         {
-          :name => read_attribute(:upload_file_name),
-          :size => read_attribute(:upload_file_size),
-          :url => upload.url(:original),
-          :delete_url => upload_path(self),
+          :name => assignment_upload_file_name(),
+          :size => assignment_upload_file_size(),
+          :url => assignment_upload.url(:original),
+          :delete_url => assignment_upload_path(self),
           :delete_type => "DELETE"
         }
       ]
     }
+  end
+
+  # Rather than renaming the database column "file_name" to
+  # "assignment_upload_file_name" which paperclip expects, I've
+  # defined these methods instead.
+  def assignment_upload_file_name
+    read_attribute(:file_name)
+  end
+
+  def assignment_upload_file_name=(value)
+    write_attribute(:file_name, value)
+  end
+
+  def assignment_upload_file_size
+    read_attribute(:file_size)
+  end
+
+  def assignment_upload_file_size=(value)
+    write_attribute(:file_size, value)
+  end
+
+  def assignment_upload_content_type
+    read_attribute(:content_type)
+  end
+
+  def assignment_upload_content_type=(value)
+    write_attribute(:content_type, value)
   end
 
   # Sets the paperclip interpolation values sent in from

@@ -1090,6 +1090,24 @@ ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
 
 
 --
+-- Name: assignment_uploads; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE assignment_uploads (
+    id integer NOT NULL,
+    file_name character varying(255),
+    content_type character varying(255),
+    file_size integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    user_id integer NOT NULL,
+    assignment_id integer NOT NULL
+);
+
+
+ALTER TABLE public.assignment_uploads OWNER TO postgres;
+
+--
 -- Name: attendance_attendance_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1189,25 +1207,6 @@ ALTER SEQUENCE universities_university_name_seq OWNED BY universities.university
 
 
 --
--- Name: uploads; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE uploads (
-    id integer NOT NULL,
-    upload_file_name character varying(255),
-    upload_content_type character varying(255),
-    upload_file_size integer,
-    upload_updated_at timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    user_id integer NOT NULL,
-    assignment_id integer NOT NULL
-);
-
-
-ALTER TABLE public.uploads OWNER TO postgres;
-
---
 -- Name: uploads_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1225,7 +1224,7 @@ ALTER TABLE public.uploads_id_seq OWNER TO postgres;
 -- Name: uploads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE uploads_id_seq OWNED BY uploads.id;
+ALTER SEQUENCE uploads_id_seq OWNED BY assignment_uploads.id;
 
 
 --
@@ -1254,6 +1253,13 @@ ALTER TABLE ONLY assignment_grades ALTER COLUMN grade_id SET DEFAULT nextval('"A
 --
 
 ALTER TABLE ONLY assignment_types ALTER COLUMN type_id SET DEFAULT nextval('"AssignmentTypes_type_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY assignment_uploads ALTER COLUMN id SET DEFAULT nextval('uploads_id_seq'::regclass);
 
 
 --
@@ -1345,13 +1351,6 @@ ALTER TABLE ONLY sections ALTER COLUMN section_id SET DEFAULT nextval('"Sections
 --
 
 ALTER TABLE ONLY universities ALTER COLUMN university_id SET DEFAULT nextval('universities_university_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY uploads ALTER COLUMN id SET DEFAULT nextval('uploads_id_seq'::regclass);
 
 
 --
@@ -1509,7 +1508,7 @@ ALTER TABLE ONLY universities
 -- Name: uploads_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY uploads
+ALTER TABLE ONLY assignment_uploads
     ADD CONSTRAINT uploads_pkey PRIMARY KEY (id);
 
 
@@ -1794,7 +1793,7 @@ ALTER TABLE ONLY sections
 -- Name: FK_Uploads_Assignments; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY uploads
+ALTER TABLE ONLY assignment_uploads
     ADD CONSTRAINT "FK_Uploads_Assignments" FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id);
 
 
@@ -1802,7 +1801,7 @@ ALTER TABLE ONLY uploads
 -- Name: FK_Uploads_Users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY uploads
+ALTER TABLE ONLY assignment_uploads
     ADD CONSTRAINT "FK_Uploads_Users" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 

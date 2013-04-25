@@ -1,4 +1,4 @@
-  <%= form_for Upload.new, :url => uploads_path(:assignment_id => params[:id], :user_id => current_user.id), :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+  <%= form_for AssignmentUpload.new, :url => assignment_uploads_path(:assignment_id => params[:id], :user_id => current_user.id), :html => { :multipart => true, :id => "fileupload"  } do |f| %>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
       <div>
@@ -8,7 +8,7 @@
         <span class="btn btn-success fileinput-button">
           <i class="icon-plus icon-white"></i>
           <span>Add files...</span>
-          <%= f.file_field :upload %>
+          <%= f.file_field :assignment_upload %>
         </span>
         <button type="submit" class="btn btn-primary start">
           <i class="icon-upload icon-white"></i>
