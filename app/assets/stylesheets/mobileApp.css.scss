@@ -39,7 +39,7 @@ a {
 
 div {
   &.field, &.actions {
-    /*margin-bottom: 10px;*/
+    margin-bottom: 10px;
   }
 }
 
@@ -106,9 +106,9 @@ div {
 }
 
 
-h1, h2, h3, h4, h5, h6 {
+/*h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
-	}
+	}*/
 	
 
 /* Attendance Page */
@@ -263,38 +263,52 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
+
+
+/* Navbar is cluttery on mobile, and we don't want to show the
+sidebar as a sidebar */
+#navbar, #sidebar {
+	display:none;
+}
+
 /* Links */
 
-#sidebar {
+#mobilenav {
   color: #000;
   font-weight: bold;
   font-size: 18px;
   padding: 20px 0px 0px 0px;
+
+  background-color: #eee;
+
+  border-top: 1px solid #000;
 }
 
-/* Navbar */
-#navbar, #headernav {
+ #headernav {
   color: #000;
   font-weight: bold;
   font-size: 18px;
   padding: 20px 0px 0px 0px;
+
+  background-color: #eee;
+border: 1px solid #000;
 }
 
-#navbar > ul, #headernav > ul, #sidebar > ul {
+#mobilenav > ul, #headernav > ul {
   padding: 0px;
   margin: 0px 0px 0px 0px;
   width: 100%;
 }
 
-#navbar .nav, #headernav .nav, #sidebar .nav {
+#mobilenav .nav, #headernav .nav {
   float: left;
 }
 
-#navbar .nav > li:hover,#headernav .nav > li:hover, #sidebar .nav > li:hover {
+#mobilenav .nav > li:hover,#headernav .nav > li:hover {
   background-color: #CCC;
 }
 
-#navbar .nav > li > a, #headernav .nav > li > a, #sidebar .nav > li > a {
+#mobilenav .nav > li > a, #headernav .nav > li > a {
   color: #000;
   display: block;
   padding: 5px 20px;
@@ -303,11 +317,11 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
-#navbar .nav > li > a:hover, #headernav .nav > li > a:hover, #sidebar .nav > li > a:hover {
+#mobilenav .nav > li > a:hover, #headernav .nav > li > a:hover {
   color: #000;
 }
 
-#navbar .nav > li.selected, #headernav .nav > li.selected, #sidebar .nav > li.selected {
+#mobilenav .nav > li.selected, #headernav .nav > li.selected {
   background-color: #E7E7E7;
 }
 

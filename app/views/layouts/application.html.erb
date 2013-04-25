@@ -18,10 +18,14 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <header id="headernav">
       <%= render 'layouts/headernav' %>
+      <div id = "mobilenav">
+        <%= render 'layouts/mobilenav' %>
+      </div>
       <div class="clear"></div>
     </header>
 
     <div id="main" role="main">
+      
       <div id="navbar" class="body-row">
         <%= render 'layouts/navbar' %>
         <div class="clear"></div>
