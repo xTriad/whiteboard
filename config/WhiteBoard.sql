@@ -472,7 +472,8 @@ CREATE TABLE messages (
     sender_deleted boolean DEFAULT false,
     receiver_deleted boolean DEFAULT false,
     date_sent date NOT NULL,
-    reply_to integer
+    reply_to integer,
+    appointment_date date
 );
 
 
