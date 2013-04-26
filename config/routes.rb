@@ -8,11 +8,7 @@ Whiteboard::Application.routes.draw do
   resources :courses
   resources :sections
   resources :uploads
-  resources :assignment_grades do
-     collection do
-      get 'alter' # /assignment_grades/alter
-    end
-  end
+  resources :assignment_grades
   resources :assignment_uploads
   resources :assignment_config_uploads
   resources :assignment_grades
