@@ -60,7 +60,7 @@ $.ajax({
 <% @users.each do |user| %>
   <% grade = AssignmentGrade.find_user_grade(user.user_id, @assignment.assignment_id) %>
   <tr>
-    <form name="form" action="/assignment_grades/alter" method="" onsubmit="doStuff(this)">
+    <form name="form" action="alter_assignment_grades" method="" onsubmit="doStuff(this)">
     <td>
       <input type="hidden" name ="userid" value="<%=user.user_id%>">
       <input type="hidden" name ="assignment" value="<%=@assignment.assignment_id%>">      

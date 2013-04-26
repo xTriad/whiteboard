@@ -33,7 +33,7 @@ class AssignmentGradesController < ApplicationController
     if(@agrade!=nil)
 	    respond_to do |format|
 	      if @agrade.save
-		 format.html {redirect_to assignment_grades_path(:assignment => params[:assignment])}
+		 format.html {redirect_to assignment_grades_path(:assignment => params[:assignment_id])}
 	      else
 		format.html { redirect_to alter_assignment_grades, :notice => 'Invalid grade parameters.' }
 	      end
