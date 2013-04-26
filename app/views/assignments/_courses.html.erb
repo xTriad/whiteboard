@@ -4,7 +4,7 @@
 
 <table id="assignments" class="table">
 <% @assignments.each do |key, section_assignments| %>
-  <tr class="course_section_title_row">
+  <tr class="course_section_title_row section_<%= @assignments[key][:section].section_id %>">
     <td width="75%">
         <b>
           <%= @assignments[key][:course].name %>
@@ -56,16 +56,45 @@
 
 <script type="text/javascript">
 
+// Remember which assignment sections have been expanded
+var assignment_slider_cache = null;
+var local_storage_key = 'assignment_section_collapse';
+var collapsed = 1;
+var visible = 0;
+
 $(document).ready(function() {
+  var data = window.localStorage[local_storage_key];
+
+  if(data) {
+    assignment_slider_cache = $.parseJSON(data);
+  }
+  else {
+    assignment_slider_cache = {};
+  }
+
+  $('#assignments tr.course_section_title_row').each(function() {
+    var section_id = $(this).attr('class').match(/section_\d+/i)[0].split("_")[1];
+
+    if(assignment_slider_cache.hasOwnProperty(section_id) &&
+      assignment_slider_cache[section_id] == visible) {
+      $(this).next().find('div.slider').show();
+    }
+  });
+
   $('#assignments tr.course_section_title_row > td').css('cursor','pointer').click(function() {
     var divslider = $(this).parent().next().find('div.slider');
+    var section_id = $(this).parent().attr('class').match(/section_\d+/i)[0].split("_")[1];
 
     if(divslider.is(':hidden')) {
       divslider.slideDown('fast');
+      assignment_slider_cache[section_id] = visible;
     }
     else {
       divslider.slideUp('fast');
+      assignment_slider_cache[section_id] = collapsed;
     }
+
+    window.localStorage[local_storage_key] = JSON.stringify(assignment_slider_cache);
   });
 });
 
