@@ -26,7 +26,6 @@ class AssignmentGrade < ActiveRecord::Base
     end
   end
 
-
   def self.find_by_user_assignment(user_id, assignment_id)
     find(:first,
       :conditions => [
