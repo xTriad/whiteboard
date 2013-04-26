@@ -8,20 +8,6 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -150,7 +136,7 @@ CREATE TABLE assignments (
     assignment_id integer NOT NULL,
     type_id integer NOT NULL,
     section_id integer NOT NULL,
-    due_date date,
+    due_date timestamp with time zone,
     highest_grade_value integer DEFAULT 100 NOT NULL,
     weight double precision,
     created_at timestamp without time zone,
@@ -473,7 +459,7 @@ CREATE TABLE messages (
     receiver_deleted boolean DEFAULT false,
     date_sent date NOT NULL,
     reply_to integer,
-    appointment_timestamp timestamp without time zone
+    appointment_timestamp timestamp with time zone
 );
 
 

@@ -5,7 +5,8 @@
     <%= f.hidden_field :section_id, :value => @section_id %>
     <%= f.input :name, :autofocus => true %>
     <%= f.select :type_id, options_for_select(get_grade_type_select_options) %>
-    <%= f.input :due_date %>
+    <%= f.label :due_date %>
+    <%= f.text_field :due_date %>
     <%= f.input :highest_grade_value, :input_html => { :value => 100 } %>
     <%= f.input :weight, :input_html => { :value => 1 } %>
     <%= f.input :description %>
@@ -15,3 +16,15 @@
     <%= f.button :submit, :class => "btn-primary" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+  $('#assignment_due_date').datetimepicker({
+    minDate: 0,
+    dateFormat: "mm/dd/yy",
+    timeFormat: "hh:mm tt"
+  });
+});
+
+</script>
