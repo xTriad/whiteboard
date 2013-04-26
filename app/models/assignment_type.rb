@@ -6,4 +6,8 @@ class AssignmentType < ActiveRecord::Base
     find(:first, :conditions => ['type_id = ?', type_id]).name
   end
 
+  def to_s
+    self.name
+  end
+
 end

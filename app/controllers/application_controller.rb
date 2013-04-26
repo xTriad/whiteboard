@@ -36,9 +36,13 @@ class ApplicationController < ActionController::Base
 
   def output_user_list(users)
     output = ''
+    counter = users.length
 
     users.each do |user|
-      output += user.name + ' '
+      output += user.name
+      counter =- 1
+
+      output += ' ' if counter > 0
     end
 
     return output

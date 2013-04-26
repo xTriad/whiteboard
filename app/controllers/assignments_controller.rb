@@ -1,12 +1,9 @@
 class AssignmentsController < ApplicationController
   before_filter :authenticate_user!
-  helper_method :course_defined?,
-                :display_course_sections,
-                :get_user_courses
+  helper_method :display_course_sections,
+                :get_user_courses,
+                :get_grade_type_select_options
 
-  def course_defined?
-    return params.has_key?(:course)
-  end
 
   def display_course_sections
 
@@ -16,9 +13,28 @@ class AssignmentsController < ApplicationController
     
   end
 
+  def get_grade_type_select_options
+    options = []
+
+    AssignmentType.all.each do |type|
+      options << [type.name, type.type_id]
+    end
+
+    return options
+  end
+
+  # GET /assignments/1/configs
+  # Has to be plural since "config" is a predfined method
+  def configs
+    authorize! :update, AssignmentConfigUpload
+    @assignment = Assignment.find(params[:id])
+    authorize! :read, @assignment
+    @course = Course.find_by_section_id(@assignment.section_id)
+  end
+
   # GET /assignments/1/files
   def files
-    authorize! :update, Upload
+    authorize! :update, AssignmentUpload
     @assignment = Assignment.find(params[:id])
     authorize! :read, @assignment
     @course = Course.find_by_section_id(@assignment.section_id)
@@ -29,7 +45,7 @@ class AssignmentsController < ApplicationController
   def index
     authorize! :read, Assignment
 
-    if course_defined?
+    if params.has_key?(:course)
       @course = Course.find(params[:course])
 
       if is_student?
@@ -45,6 +61,30 @@ class AssignmentsController < ApplicationController
             :assignments => Assignment.find_by_section_id(section.section_id)
           }
         end
+      end
+    else
+      if is_student?
+        @sections = User.find_student_sections(current_user.id)
+      else
+        @sections = User.find_professor_sections(current_user.id)
+      end
+
+      # Find all the courses associated with the sections found
+      @courses = {}
+      @sections.each do |section|
+        if !@courses.has_key?(section.section_id)
+          @courses[section.section_id] = Course.find_by_section_id(section.section_id)
+        end
+      end
+
+      # Find all assignments in each section
+      @assignments = {}
+      @sections.each do |section|
+        @assignments[section.section_id] = {
+          :course => @courses[section.section_id],
+          :section => section,
+          :assignments => Assignment.find_by_section_id(section.section_id)
+        }
       end
     end
 
@@ -98,7 +138,19 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = Assignment.new(params[:assignment])
-    authorize! :create, @assignment    
+    authorize! :create, @assignment   
+
+    if params[:assignment].has_key?(:due_date)
+      if params[:assignment][:due_date].match(/(\d{2})\/(\d{2})\/(\d{4})\s(\d{2}):(\d{2})\s(am|pm)/i)
+        month, day, year, hours, minutes, ampm = $1.to_i, $2.to_i, $3.to_i, $4.to_i, $5.to_i, $6
+
+        if ampm == 'pm'
+          hours += 12
+        end
+
+        @assignment.due_date = Time.new(year, month, day, hours, minutes, 0, "-00:00")
+      end
+    end
 
     respond_to do |format|
       if @assignment.save

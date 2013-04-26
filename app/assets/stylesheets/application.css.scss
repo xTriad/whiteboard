@@ -252,6 +252,42 @@ div {
   height: 0px;
 }
 
+/* Set z-index of following arrow to be behind the preceeding li! */
+
+/*#navbar .nav .arrow > span:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    right: -7px;
+    top: -19px;
+    width: 27px;
+    height: 27px;
+    
+    background: #05568d;
+    background: -moz-linear-gradient(top,  #05568d 0%, #003f76 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#05568d), color-stop(100%,#003f76));
+    background: -webkit-linear-gradient(top,  #05568d 0%,#003f76 100%);
+    background: -o-linear-gradient(top,  #05568d 0%,#003f76 100%);
+    background: -ms-linear-gradient(top,  #05568d 0%,#003f76 100%);
+    background: linear-gradient(to bottom,  #05568d 0%,#003f76 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05568d', endColorstr='#003f76',GradientType=0 );
+
+    -webkit-transform: rotate(45deg);
+    -webkit-transform-origin: 0 0;
+    -moz-transform: rotate(45deg);
+    -moz-transform-origin: 0 0;
+    -o-transform: rotate(45deg);
+    -o-transform-origin: 0 0;
+    -ms-transform: rotate(45deg);
+    -ms-transform-origin: 0 0;
+    transform: rotate(45deg);
+    transform-origin: 0 0;
+}*/
+
+#navbar .nav .arrow > span:hover:after {
+  background: #003F76; /* Old browsers */
+}
+
 #navbar .date {
   float: right;
   font-weight: bold;
@@ -299,26 +335,27 @@ div {
   margin: 0px 5px 5px 0px;
   display: table;
   overflow: hidden;
+  background: #eeeeee;
   background: #eeeeee; /* Old browsers */
-  background: -moz-linear-gradient(top,  #eeeeee 0%, #dcdcdc 51%, #eeeeee 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(51%,#dcdcdc), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #dcdcdc 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#dcdcdc)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#dcdcdc 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#dcdcdc 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#dcdcdc 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#dcdcdc 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dcdcdc',GradientType=0 ); /* IE6-9 */
 }
 
 .blocks-buttons > .item:hover {
   cursor: pointer;
   background: #E7E7E7; /* Old browsers */
-  background: -moz-linear-gradient(top,  #eeeeee 0%, #d5d5d5 51%, #eeeeee 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(51%,#d5d5d5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #d5d5d5 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#d5d5d5)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#d5d5d5 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#d5d5d5 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#d5d5d5 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#d5d5d5 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#d5d5d5',GradientType=0 ); /* IE6-9 */
 }
 
 .blocks-buttons > .item > .valign {
@@ -359,8 +396,9 @@ div {
   float: left;
   padding: 20px 0px 0px 0px;
   background-color: #eee;
-  background-image: -webkit-radial-gradient(right, #eee, #ffffff 90%);
-  background-image: radial-gradient(right, #f2f2f2, #ffffff 80%);
+  background-image: -webkit-radial-gradient(right, #f2f2f2, #ffffff 90%);
+  background-image: -moz-radial-gradient(right, #f2f2f2, #ffffff 80%);
+  background-image: radial-gradient(right, #f2f2f2, #ffffff 90%);
 }
 
 #sidebar > ul {
@@ -472,4 +510,8 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+#mobilenav {
+  display:none;
 }

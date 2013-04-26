@@ -1,0 +1,328 @@
+
+@media all and (max-width: 979px) {
+	body {
+		color: #000;
+	  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	  font-size: 13px;
+	  line-height: 18px;
+	  background-color: #fff;
+	  margin: 0px 0px 20px 0px;
+	  padding: 0px;
+	}
+
+	p, ol, ul, td {
+	  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	  font-size: 14px;
+	  line-height: 18px;
+	}
+
+	li {
+	  list-style-type: none;
+	}
+
+	pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a {
+  color: #045100;
+  &:visited {
+    color: #045100;
+  }
+  &:hover {
+    color: #045100;
+    text-decoration: none;
+  }
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+
+.blocks-buttons > .item {
+  float: left;
+  padding: 7px 10px 10px 10px;
+  font-size: 12px;
+  width: 190px;
+  max-width: 190px;
+  height: 130px;
+  max-height: 130px;
+  margin: 0px 5px 5px 0px;
+  display: table;
+  overflow: hidden;
+  background: #eeeeee; /* Old browsers */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #dcdcdc 51%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(51%,#dcdcdc), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}
+
+.blocks-buttons > .item:hover {
+  cursor: pointer;
+  background: #E7E7E7; /* Old browsers */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #d5d5d5 51%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(51%,#d5d5d5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}
+
+.blocks-buttons > .item > .valign {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.blocks-buttons > .item > .valign > .title {
+  font-weight: bold;
+  line-height: 15px;
+  margin: 0px 0px 3px 0px;
+  padding: 0px;
+}
+
+.blocks-buttons > .item > .valign > .title > a {
+  color: #000;
+}
+
+.blocks-buttons > .item > .valign > .content {
+  padding: 0px;
+  margin: 0px;
+  line-height: 25px;
+  font-weight: normal;
+}
+
+.blocks-buttons > .item > .valign > .content > a {
+  color: #000;
+}
+
+
+/*h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	}*/
+	
+
+/* Attendance Page */
+
+#students_container > div {
+  float: left;
+}
+
+#ajax_errors {
+  color: #ff0000;
+  font-weight: bold;
+  margin: 0px auto;
+  text-align: center;
+}
+
+.student {
+  background-color: #ccc;
+  font-weight: bold;
+  border: 1px solid #000;
+  margin: 0px 10px 10px 0px;
+  width: 200px;
+  height: 139px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.student_name {
+  width: 100%;
+  color: #eee;
+  background-color: #000;
+  position: absolute;
+  bottom: 0px;
+}
+
+.last {
+  margin-right: 0px !important;
+}
+
+.present {
+  /*background-image: url('/assets/attendance/present.png');*/
+  background-image: url(image-path('attendance/present.png'));
+}
+
+.absent {
+  background-image: url(image-path('attendance/absent.png'));
+}
+
+.tardy {
+  background-image: url(image-path('attendance/tardy.png'));
+}
+
+.excused {
+  background-image: url(image-path('attendance/excused.png'));
+}
+
+/* So clicking the attendance doesn't highlight the element */
+.no_select {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Misc */
+
+.box-container {
+  width: auto;
+  padding: 0px;
+  margin-bottom: 20px;
+}
+
+.box {
+  background-color: #eee;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.box-container .half {
+  width: 42%;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.center {
+  margin: 0px auto !important;
+  text-align: center;
+}
+
+.top-right {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.box h1 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#notice {
+  color: green;
+}
+
+.clear {
+  clear: both;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
+
+/* Messaging */
+#message-convo .box > .author {
+  font-weight: bold;
+  margin: 0px 0px 5px 0px;
+  display: block;
+}
+
+#message-convo .box > .message {
+  display: block;
+}
+
+
+
+/* Navbar is cluttery on mobile, and we don't want to show the
+sidebar as a sidebar */
+#navbar, #sidebar {
+	display:none;
+}
+
+/* Links */
+
+#mobilenav {
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px 0px 0px 0px;
+
+  background-color: #eee;
+
+  border-top: 1px solid #000;
+}
+
+ #headernav {
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px 0px 0px 0px;
+
+  background-color: #eee;
+border: 1px solid #000;
+}
+
+#mobilenav > ul, #headernav > ul {
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
+  width: 100%;
+}
+
+#mobilenav .nav, #headernav .nav {
+  float: left;
+}
+
+#mobilenav .nav > li:hover,#headernav .nav > li:hover {
+  background-color: #CCC;
+}
+
+#mobilenav .nav > li > a, #headernav .nav > li > a {
+  color: #000;
+  display: block;
+  padding: 5px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+#mobilenav .nav > li > a:hover, #headernav .nav > li > a:hover {
+  color: #000;
+}
+
+#mobilenav .nav > li.selected, #headernav .nav > li.selected {
+  background-color: #E7E7E7;
+}
+
+} /* Ends mobile only css */

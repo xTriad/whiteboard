@@ -102,16 +102,17 @@ ActiveRecord::Schema.define(:version => 0) do
   end
 
   create_table "messages", :primary_key => "message_id", :force => true do |t|
-    t.integer "sender_id",                           :null => false
-    t.integer "receiver_id",                         :null => false
-    t.boolean "sent",             :default => false
-    t.string  "subject"
-    t.text    "message"
-    t.boolean "receiver_read",    :default => false
-    t.boolean "sender_deleted",   :default => false
-    t.boolean "receiver_deleted", :default => false
-    t.date    "date_sent",                           :null => false
-    t.integer "reply_to"
+    t.integer  "sender_id",                                :null => false
+    t.integer  "receiver_id",                              :null => false
+    t.boolean  "sent",                  :default => false
+    t.string   "subject"
+    t.text     "message"
+    t.boolean  "receiver_read",         :default => false
+    t.boolean  "sender_deleted",        :default => false
+    t.boolean  "receiver_deleted",      :default => false
+    t.date     "date_sent",                                :null => false
+    t.integer  "reply_to"
+    t.datetime "appointment_timestamp"
   end
 
   create_table "permissions", :primary_key => "perm_id", :force => true do |t|

@@ -39,10 +39,13 @@ var data = {
 $(document).ready(function() {
   attendance.init(data);
 
-  // To be unable to select weekends: beforeShowDay: $.datepicker.noWeekends,
-  $("#datepicker").datepicker({ minDate: "-1Y", maxDate: "+0D", dateFormat: "yy-mm-dd",
+  // TODO: Disallow weekends: beforeShowDay: $.datepicker.noWeekends
+  $("#datepicker").datepicker({
+    minDate: "-1Y",
+    maxDate: "+0D",
+    dateFormat: "yy-mm-dd",
     onSelect: function(dateText) {
-      location.href = 'attendances?date=' + dateText + "&section=" + <%= params[:section] %>;
+      location.href = '/attendances?date=' + dateText + "&section=" + <%= params[:section] %>;
     }
   });
 

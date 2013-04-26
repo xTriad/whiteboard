@@ -1,0 +1,97 @@
+<script type="text/javascript">
+function setup() {
+
+  $.ajaxSetup ({
+    cache: false
+  });
+
+}
+
+$(document).ready(function() {
+  setup();
+  doStuff(this.form);
+});
+
+
+function doStuff(form) {
+var grade = form.grade.value;
+var comment = form.comment.value;
+var user = form.userid.value;
+var assignment = form.assignment.value
+
+$.ajax({
+          url: 'assignment_grades/alter?' +
+                 'grade=' + grade + 
+                 '&comment=' + comment +
+                 '&user=' + user +
+                 '&assignment=' + assignment),
+          processData: false,
+          dataType: 'json',
+          success:function(a) {
+            // var s = ''
+
+            // for(var key in a) {
+            //   s += key + ': ' + a[key] + '\n';
+            // }
+
+            // alert(s);
+          },
+          error:function() {
+            $('#ajax_errors')
+              .html('Failed to update the grade.')
+              .fadeOut(3000, function() {
+                $('#ajax_errors').html('').css('display','block');
+              }
+            );
+          }
+        });
+
+
+}
+
+</script>
+
+
+<h1><%= @assignment.get_name %> Grades</h1>
+
+<hr>
+
+<table class="table table-striped">
+<% @users.each do |user| %>
+  <% grade = AssignmentGrade.find_user_grade(user.user_id, @assignment.assignment_id) %>
+  <tr>
+    <form name="form" action="alter_assignment_grades" method="" onsubmit="doStuff(this)">
+    <td>
+      <input type="hidden" name ="userid" value="<%=user.user_id%>">
+      <input type="hidden" name ="assignment" value="<%=@assignment.assignment_id%>">      
+
+    <td width="20%">
+      <b><%= user.name %></b>
+    </td>
+    <td>
+      <b><%= grade %></b>
+    </td>
+    <td>
+    grade: <input type="text" name="grade" value="">
+    </td>
+    <td>
+     comment: <input type="text" name="comment" value="">
+     </td>
+     <td>
+      <input type="submit" name ="button" value="Submit">
+    </td>
+    </form>
+    
+  </tr>
+ <% end %>
+
+</table>
+
+<div id="students_container"></div>
+
+<br style="clear: both;" />
+
+<div id="ajax_errors"></div>
+
+</table>
+

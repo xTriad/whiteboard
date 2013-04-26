@@ -1,0 +1,32 @@
+<ul class="nav">
+  <% if user_signed_in? %>
+
+    <li>
+      <%= link_to 'Home', root_path %>
+    </li>
+
+    <% if can? :read, Course %>
+      <li class="courses_controller">
+        <%= link_to 'Courses', courses_path %>
+      </li>
+    <% end %>
+
+    <% if can? :read, Assignment %>
+      <li class="assignments_controller">
+        <%= link_to 'Assignments', assignments_path %>
+      </li>
+    <% end %>
+
+    <% if can? :read, Attendance %>
+      <li class="attendances_controller">
+        <%= link_to 'Attendance', attendances_path %>
+      </li>
+    <% end %>
+
+    <% if can? :read, AssignmentGrade %>
+      <li class="assignment_grades_controller">
+        <%= link_to 'Gradebook', assignment_grades_path %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

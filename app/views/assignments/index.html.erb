@@ -1,4 +1,4 @@
-<% if course_defined? %>
+<% if params.has_key?(:course) %>
   <%= render 'assignments' %>
 <% else %>
   <%= render 'courses' %>

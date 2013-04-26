@@ -1,3 +1,17 @@
 // Place all the styles related to the Assignments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#assignments .table {
+  margin: 0px;
+}
+
+#assignments div.slider {
+  display: none;
+}
+
+#assignments .course_section_container_row > td {
+  padding: 0px;
+  margin: 0px;
+  border-top: 0px;
+}
