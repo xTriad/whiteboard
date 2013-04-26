@@ -5,24 +5,14 @@ class SectionsController < ApplicationController
   # GET /sections.json
   def index
     authorize! :read, Section
-    @sections = Section.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @sections }
-    end
+    redirect_to courses_path
   end
 
   # GET /sections/1
   # GET /sections/1.json
   def show
-    @section = Section.find(params[:id])
-    authorize! :read, @section
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @section }
-    end
+    authorize! :read, Section
+    redirect_to courses_path
   end
 
   # GET /sections/new
@@ -34,8 +24,13 @@ class SectionsController < ApplicationController
 
   # GET /sections/1/edit
   def edit
+    if !params.has_key?(:course)
+      redirect_to courses_path and return
+    end
+
     @section = Section.find(params[:id])
     authorize! :update, @section
+    @course = Course.find(params[:course])
   end
 
   # POST /sections

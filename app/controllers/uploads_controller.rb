@@ -5,10 +5,14 @@ class UploadsController < ApplicationController
   # GET /uploads.json
   def index
     authorize! :read, Upload
+
+    if !params.has_key?(:assignment_id) || !params.has_key?(:user_id)
+      redirect_to root_path and return
+    end
+
     @uploads = Upload.where(:assignment_id => params[:assignment_id], :user_id => current_user.id)
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @uploads.map{|upload| upload.to_jq_upload } }
     end
   end
@@ -16,7 +20,6 @@ class UploadsController < ApplicationController
   # GET /uploads/1
   # GET /uploads/1.json
   def show
-    debugger
     authorize! :read, Upload
     redirect_to root_path
   end
@@ -26,14 +29,12 @@ class UploadsController < ApplicationController
   # This should never be called since the jquery-fileupload Javascript ajax
   # handles the creation of new Uploads.
   def new
-    debugger
     authorize! :create, Upload
     redirect_to root_path
   end
 
   # GET /uploads/1/edit
   def edit
-    debugger
     authorize! :update, Upload
     redirect_to root_path
   end
@@ -71,7 +72,6 @@ class UploadsController < ApplicationController
   # PUT /uploads/1
   # PUT /uploads/1.json
   def update
-    debugger
     authorize! :update, Upload
     redirect_to root_path
   end

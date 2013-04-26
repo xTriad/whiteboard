@@ -8,22 +8,22 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
+    <%= javascript_tag do %>
+      var controller_name = "<%= controller_name %>";
+      $(document).ready(function() { selectSidebarButton(controller_name); });
+    <% end %>
   </head>
   
   <body class="<%= controller_name %> <%= action_name %>">
-    <header id="navbar">
-      <div class="nav-table">
-        <div class="nav-cell vertical">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </div>
+    <header id="headernav">
+      <%= render 'layouts/headernav' %>
+      <div class="clear"></div>
     </header>
 
     <div id="main" role="main">
-      <div id="topnav" class="body-row">
-        <div class="nav">
-          Something here.
-        </div>
+      <div id="navbar" class="body-row">
+        <%= render 'layouts/navbar' %>
+        <div class="clear"></div>
       </div>
       <div id="wrapper" class="body-row">
         <div id="content">

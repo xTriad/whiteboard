@@ -1,34 +1,36 @@
-
 <ul class="nav">
   <% if user_signed_in? %>
 
     <% if can? :read, Course %>
-      <li>
+      <li class="courses_controller">
         <%= link_to 'Courses', courses_path %>
       </li>
     <% end %>
 
     <% if can? :read, Assignment %>
-      <li>
+      <li class="assignments_controller">
         <%= link_to 'Assignments', assignments_path %>
       </li>
     <% end %>
 
     <% if can? :read, Attendance %>
-      <li>
+      <li class="attendances_controller">
         <%= link_to 'Attendance', attendances_path %>
       </li>
     <% end %>
 
     <% if can? :read, AssignmentGrade %>
-      <li>
+      <li class="assignment_grades_controller">
         <%= link_to 'Gradebook', assignment_grades_path %>
       </li>
     <% end %>
   <% else %>
     <li>
-      <%= link_to 'Something', root_path %>
+      <%= link_to 'Login', new_user_session_path %>
+    </li>
+    <li>
+      <%= link_to 'Forgot Password', new_user_password_path %>
     </li>
   <% end %>
-  <div style="height: 400px;"></div>
 </ul>
+<div class="clear" style="height: 300px;"></div>

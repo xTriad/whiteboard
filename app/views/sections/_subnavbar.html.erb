@@ -1,0 +1,23 @@
+<li>
+  <%= link_to 'Courses', courses_path %>
+  <span class="arrow">
+    <span>></span>
+  </span>
+</li>
+
+<% if !@course.nil? %>
+<li>
+  <%= link_to @course.name, course_path(@course.course_id, :section => @section.section_id) %>
+  <span class="arrow">
+    <span>></span>
+  </span>
+</li>
+  <% if params[:action] == 'edit' %>
+    <li>
+      <%= link_to 'Edit', edit_section_path(@section.section_id, :course => params[:course]) %>
+      <span class="arrow">
+        <span>></span>
+      </span>
+    </li>
+  <% end %>
+<% end %>

@@ -46,6 +46,7 @@ $.ajax({
           }
         });
 
+
 }
 
 </script>
@@ -53,15 +54,18 @@ $.ajax({
 
 <h1><%= @assignment.get_name %> Grades</h1>
 
-<table cellpadding="5">
+<hr>
 
+<table class="table table-striped">
 <% @users.each do |user| %>
   <% grade = AssignmentGrade.find_user_grade(user.user_id, @assignment.assignment_id) %>
   <tr>
-    <form name="form" action="" method="">
+    <form name="form" action="/assignment_grades/alter" method="" onsubmit="doStuff(this)">
     <td>
       <input type="hidden" name ="userid" value="<%=user.user_id%>">
       <input type="hidden" name ="assignment" value="<%=@assignment.assignment_id%>">      
+
+    <td width="20%">
       <b><%= user.name %></b>
     </td>
     <td>
@@ -74,7 +78,7 @@ $.ajax({
      comment: <input type="text" name="comment" value="">
      </td>
      <td>
-      <input type="submit" name ="button" value="Submit" onSubmit="doStuff(this.form); return false;">
+      <input type="submit" name ="button" value="Submit">
     </td>
     </form>
     
@@ -88,3 +92,6 @@ $.ajax({
 <br style="clear: both;" />
 
 <div id="ajax_errors"></div>
+
+</table>
+

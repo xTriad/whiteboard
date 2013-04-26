@@ -90,6 +90,10 @@ class AttendancesController < InheritedResources::Base
 
     if section_and_date_defined
 
+      @course_name = Course.find_name_by_section_id(params[:section])
+      @section_number = Section.find_number_by_section_id(params[:section])
+      @page_date = DateTime.parse(params[:date])
+
       # Show the students in the section for the given day
       @professors = Section.find_professors_in_section(params[:section])
       @tas = Section.find_tas_in_section(params[:section])

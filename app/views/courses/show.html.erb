@@ -1,24 +1,25 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @course.number %> <%= @course.name %></h1>
 
-<p>
-  <b>Course number:</b>
-  <%= @course.number %>
-</p>
+<hr>
 
-<p>
-  <b>Course name:</b>
-  <%= @course.name %>
+<p class="top-right">
+  <b>Section <%= @section.number %></b>
 </p>
 
 <p>
   <%= @section.description %>
 </p>
 
-<p>
-  <b><%= link_to 'Assignments', assignments_path(:course => @course.course_id) %></b>
-  <% if params.has_key?(:section) && is_professor? %>
-    | <b><%= link_to 'Edit', edit_section_path(params[:section], :course => @course.course_id) %></b>
-  <% end %>
-</p>
+<a href="<%= assignments_path(:course => @course.course_id) %>">
+  <input class="btn btn-primary" type="button" value="Assignments" />
+</a>
 
-<%= link_to 'Back', courses_path %>
+<% if is_professor? %>
+  <a href="<%= attendances_path(:date => DateTime.now.strftime(date_url_format), :section => @section.section_id) %>">
+    <input class="btn btn-primary" type="button" value="Attendance" />
+  </a>
+  <a href="<%= edit_section_path(params[:section], :course => @course.course_id) %>">
+    <input class="btn btn-primary" type="button" value="Edit" />
+  </a>
+<% end %>
+

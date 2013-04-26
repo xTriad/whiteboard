@@ -1,25 +1,25 @@
 class AssignmentGradesController < ApplicationController
+  before_filter :authenticate_user!
 
    # Handles the AJAX call from the professor
   # attendances/alter?date=2013-04-14&section=1&user=1&attendance=1
   def alter
-    authorize! :update, AssignmentGrades
+    authorize! :update, AssignmentGrade
     error = false
 
-    if !params.has_key?(:grade) || !params.has_key?(:user) || !params.has_key?(:assignment)
+    if !params.has_key?(:grade) || !params.has_key?(:userid) || !params.has_key?(:assignment)
       error = true
+  
     else
-      @agrade = AssignmentGrades.find_by_user_assignment(params[:user], params[:assignment])
-
-      put @agrade
+      @agrade = AssignmentGrade.find_by_user_assignment(params[:userid], params[:assignment])
 
       if(!@agrade)
-          @agrade = AssignmentGrades.new();
-          @agrade.user = params[:user]
+          @agrade = AssignmentGrade.new();
+          @agrade.user_id = params[:userid]
           @agrade.assignment_id=params[:assignment]
       else
       end
-      @agrade.grade=params[:grade]
+      @agrade.grade_value=params[:grade]
       @agrade.comment=params[:comment]
 
       # Sanitize the incoming grade - check grade value
@@ -30,12 +30,16 @@ class AssignmentGradesController < ApplicationController
       #end
     end
 
-    respond_to do |format|
-      if @agrade.save
-        format.json { render json: @agrade }
-      else
-        format.html { redirect_to root_path, :notice => 'Invalid grade parameters.' }
-      end
+    if(@agrade!=nil)
+	    respond_to do |format|
+	      if @agrade.save
+		 format.html {redirect_to assignment_grades_path(:assignment => params[:assignment])}
+	      else
+		format.html { redirect_to alter_assignment_grades, :notice => 'Invalid grade parameters.' }
+	      end
+	    end
+    else
+        redirect_to assignment_grades_path and return
     end
   end
 
@@ -46,12 +50,16 @@ class AssignmentGradesController < ApplicationController
 
       # List all the assignments in the section
       @assignments = Assignment.find_by_section_id(params[:section])
+      @course = Course.find_by_section_id(params[:section])
+      @section_id = params[:section]
 
     elsif params.has_key?(:assignment)
 
       # List all the users in the section for the assignment
       @assignment = Assignment.find(params[:assignment])
       @users = Section.find_students_in_section(@assignment.section_id)
+      @course = Course.find_by_section_id(@assignment.section_id)
+      @section_id = @assignment.section_id
 
     else
 
@@ -76,6 +84,9 @@ class AssignmentGradesController < ApplicationController
     @assignment_grade = AssignmentGrade.new
     @user_id = params[:user]
     @assignment_id = params[:assignment]
+    @assignment = Assignment.find(@assignment_id)
+    @course = Course.find_by_section_id(@assignment.section_id)
+    @section_id = @assignment.section_id
   end
 
   def create
@@ -97,6 +108,9 @@ class AssignmentGradesController < ApplicationController
 
     @user_id = @assignment_grade.user_id
     @assignment_id = @assignment_grade.assignment_id
+    @assignment = Assignment.find(@assignment_id)
+    @course = Course.find_by_section_id(@assignment.section_id)
+    @section_id = @assignment.section_id
   end
 
   def update

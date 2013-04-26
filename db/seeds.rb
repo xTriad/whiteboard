@@ -46,21 +46,21 @@ puts 'DEFAULT USERS'
   # Baylor
   User.create([
     {
-      :name => 'prof1',
+      :name => 'Paul Grabow',
       :email => 'prof1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'prof2',
+      :name => 'Bill Booth',
       :email => 'prof2@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'ta1',
+      :name => 'Garrett Benoit',
       :email => 'ta1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -74,7 +74,7 @@ puts 'DEFAULT USERS'
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student1',
+      :name => 'Bruce Wayne',
       :email => 'student1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -268,6 +268,11 @@ puts 'DEFAULT COURSES'
       :name => 'Computer Ethics'
     },
     {
+      :number => 1337,
+      :university_id => Constants::Uni::Baylor,
+      :name => 'A Course With A Really Long Name That Should Break Something'
+    },
+    {
       :number => 3344,
       :university_id => Constants::Uni::Baylor,
       :name => 'Data Structures'
@@ -304,12 +309,7 @@ puts 'DEFAULT SECTIONS'
 
   Course.all.each do |course|
     for x in 1..3
-      description = 'A blank description.'
-
-      if course.course_id == 4
-        description = 'I HOPE YOU LOVE GRABOW HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA'
-      end
-
+      description = 'The course description.\n\nIn tincidunt semper libero nec vestibulum. Cras consectetur hendrerit purus, ornare volutpat felis volutpat ac. Nulla tempus dolor sed erat feugiat vel egestas augue viverra. Suspendisse potenti. Suspendisse sed lorem mauris, pellentesque molestie diam. Proin sodales sapien at magna gravida interdum vel et magna. Vestibulum tincidunt tellus id sapien fermentum eget lobortis est blandit.'
       Section.create(:course_id => course.course_id, :number => x, :description => description);
     end
   end
@@ -330,7 +330,7 @@ puts 'DEFAULT ASSIGNMENTS'
   Assignment.create([
     {
       :name => 'Proofs',
-      :description => 'Figure out these impossible proofs.',
+      :description => 'Solve these  proofs.',
       :type_id => Constants::AssignType::Homework,
       :section_id => 1,
       :due_date => '2020-02-12',
@@ -339,7 +339,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Huffman Encoder',
-      :description => 'Create a huffman encoder',
+      :description => 'Create a Huffman Encoder',
       :type_id => Constants::AssignType::Program,
       :section_id => 1,
       :due_date => '2019-02-12',
@@ -387,7 +387,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Tetris',
-      :description => 'Create aTetris',
+      :description => 'Create Tetris',
       :type_id => Constants::AssignType::Program,
       :section_id => 3,
       :due_date => '2019-02-12',
@@ -396,7 +396,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Huffman Encoder',
-      :description => 'Create a huffman encoder',
+      :description => 'Create a Huffman Encoder',
       :type_id => Constants::AssignType::Program,
       :section_id => 3,
       :due_date => '2019-02-12',
@@ -414,7 +414,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Tetris',
-      :description => 'Create aTetris',
+      :description => 'Create Tetris',
       :type_id => Constants::AssignType::Program,
       :section_id => 4,
       :due_date => '2019-02-12',
@@ -423,7 +423,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Huffman Encoder',
-      :description => 'Create a huffman encoder',
+      :description => 'Create a Huffman Encoder',
       :type_id => Constants::AssignType::Program,
       :section_id => 4,
       :due_date => '2019-02-12',
@@ -441,7 +441,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Tetris',
-      :description => 'Create aTetris',
+      :description => 'Create Tetris',
       :type_id => Constants::AssignType::Program,
       :section_id => 5,
       :due_date => '2019-02-12',
@@ -450,7 +450,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Huffman Encoder',
-      :description => 'Create a huffman encoder',
+      :description => 'Create a Huffman Encoder',
       :type_id => Constants::AssignType::Program,
       :section_id => 5,
       :due_date => '2019-02-12',
@@ -501,6 +501,58 @@ puts 'DEFAULT ATTENDANCES'
       :user_id => Constants::User::Student4,
       :class_date => DateTime.new(2013,4,1),
       :attendance => Constants::Attendance::Present
+    }
+  ])
+
+# Insert Messages
+puts 'DEFAULT MESSAGES'
+
+  Message.create([
+    {
+      :sender_id => Constants::User::Professor1,
+      :receiver_id => Constants::User::Professor2,
+      :sent => true,
+      :subject => 'A Private Message',
+      :message => 'Ut sit amet turpis at sem viverra tempus. Ut libero dolor, bibendum et laoreet id, faucibus vel orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere fringilla sapien, vitae adipiscing dui dictum eget. Nulla nisl dolor, luctus et bibendum quis, suscipit nec eros. Aenean ac ante mollis massa tincidunt tempus nec et lacus. Ut lectus dui, sagittis id porttitor ut, bibendum non massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu tellus mi. Aenean ullamcorper.',
+      :receiver_read => false,
+      :sender_deleted => false,
+      :receiver_deleted => false,
+      :date_sent => DateTime.now
+    },
+    {
+      :sender_id => Constants::User::Professor2,
+      :receiver_id => Constants::User::Professor1,
+      :sent => true,
+      :subject => 'Re: A Private Message',
+      :message => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed dignissim purus eu felis semper eleifend. Ut venenatis elit at.',
+      :receiver_read => false,
+      :sender_deleted => false,
+      :receiver_deleted => false,
+      :date_sent => DateTime.now,
+      :reply_to => 1
+    },
+    {
+      :sender_id => Constants::User::Professor1,
+      :receiver_id => Constants::User::Professor2,
+      :sent => true,
+      :subject => 'Re: A Private Message',
+      :message => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu dolor ac dui vulputate nullam.',
+      :receiver_read => false,
+      :sender_deleted => false,
+      :receiver_deleted => false,
+      :date_sent => DateTime.now,
+      :reply_to => 1
+    },
+    {
+      :sender_id => Constants::User::Professor1,
+      :receiver_id => Constants::User::Professor2,
+      :sent => true,
+      :subject => 'Formatting Tests',
+      :message => 'Testing line breaks in html...<br /><br />Now testing using new lines...\\n\\nAgain\n\nThe End.',
+      :receiver_read => false,
+      :sender_deleted => false,
+      :receiver_deleted => false,
+      :date_sent => DateTime.now
     }
   ])
 

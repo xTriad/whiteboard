@@ -1,0 +1,23 @@
+<%= simple_form_for(@message) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.hidden_field :sender_id, :value => current_user.user_id %>
+
+    <% if @first_convo_message %>
+      <%= f.hidden_field :receiver_id, :value => @receiver_id %>
+      <%= f.hidden_field :reply_to, :value => @reply_to %>
+      <%= f.input :subject, :input_html => { :value => @first_convo_message.subject } %>
+    <% else %>
+      <%= label_tag(:receiver_email, "Email") %>
+      <%= text_field_tag(:receiver_email) %>
+      <%= f.input :subject %>
+    <% end %>
+
+    <%= f.input :message %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary" %>
+  </div>
+<% end %>

@@ -1,9 +1,12 @@
-<h1><%= Course.find_name_by_section_id(params[:section]) %> Assignments</h1>
+<h1><%= Course.find_name_by_section_id(params[:section]) %> Grades</h1>
 
-Section: <%= Section.find_number_by_section_id(params[:section]) %><br /><br />
+<hr>
 
-<table cellpadding="5">
+<p class="top-right">
+  <b>Section <%= Section.find_number_by_section_id(params[:section]) %></b>
+</p>
 
+<table class="table table-striped">
 <% @assignments.each do |assignment| %>
   <tr>
     <td>
@@ -13,7 +16,7 @@ Section: <%= Section.find_number_by_section_id(params[:section]) %><br /><br />
       <b><%= assignment.get_type_name %></b>
     </td>
     <td>
-      <b><%= assignment.due_date %></b>
+      <b><%= assignment.due_date.strftime(date_page_format) %></b>
     </td>
     <td>
       <b><%= assignment.highest_grade_value %></b>
@@ -23,5 +26,4 @@ Section: <%= Section.find_number_by_section_id(params[:section]) %><br /><br />
     </td>
   </tr>
 <% end %>
-
 </table>

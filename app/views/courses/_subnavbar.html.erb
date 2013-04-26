@@ -1,0 +1,15 @@
+<li>
+  <%= link_to 'Courses', courses_path %>
+  <span class="arrow">
+    <span>></span>
+  </span>
+</li>
+
+<% if !@course.nil? %>
+<li>
+  <%= link_to @course.name, course_path(@course.course_id, :section => params[:section]) %>
+  <span class="arrow">
+    <span>></span>
+  </span>
+</li>
+<% end %>

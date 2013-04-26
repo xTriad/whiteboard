@@ -254,7 +254,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activeadmin
+  activeadmin (= 0.5.1)
   better_errors (>= 0.3.2)
   binding_of_caller (>= 0.6.8)
   bootstrap-sass (>= 2.2.2.0)
@@ -270,11 +270,11 @@ DEPENDENCIES
   figaro (>= 0.5.3)
   hub (>= 1.10.2)
   jquery-fileupload-rails (= 0.4.1)!
-  jquery-rails
+  jquery-rails (= 2.2.0)
   launchy (>= 2.1.2)
   libv8 (>= 3.11.8)
   meta_search (>= 1.1.0.pre)
-  paperclip
+  paperclip (= 3.4.1)
   pg
   quiet_assets (>= 1.0.1)
   rails (= 3.2.11)

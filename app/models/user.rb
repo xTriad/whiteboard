@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 
   # Caches query results in the has_role? method
   # Roles_Cache[user_id] = [role_id, role_id ...]
+  # TODO: Use INSTANCE variables to handle all permissions!
+  #   Give each user a @role and even @can_do_something
+  #   Then we could do current_user.can_do_this or current_user.role can ...
+  #   This will allow us to query the database to see their university, section etc.
   Roles_Cache = {}
 
   # Finds the specific section the user is enrolled in by their
@@ -45,7 +49,23 @@ class User < ActiveRecord::Base
   end
 
   def self.find_name_by_user_id(user_id)
-    find(:first, :conditions => ['user_id = ?', user_id]).name
+    user = find(:first, :conditions => ['user_id = ?', user_id])
+
+    if !user.nil?
+      return user.name
+    else
+      return nil
+    end
+  end
+
+  def self.find_id_by_email(email)
+    user = find(:first, :conditions => ['email = ?', email])
+
+    if !user.nil?
+      return user.id
+    else
+      return nil
+    end
   end
 
   # This method gets called many times on every page view so

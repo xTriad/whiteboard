@@ -10,13 +10,13 @@ class Ability
     if user.has_role? Constants::Role::Admin
       can :manage, :all
     elsif user.has_role? Constants::Role::Professor
-      can :manage, [Assignment, Attendance, Section, AssignmentGrade, Upload]
+      can :manage, [Assignment, Attendance, Section, AssignmentGrade, Upload, Message]
       can :read, [Course]
     elsif user.has_role? Constants::Role::TA
-      can :manage, [Upload, AssignmentGrade]
+      can :manage, [Upload, AssignmentGrade, Message]
       can :read, [Assignment, Course, Section]
     elsif user.has_role? Constants::Role::Student
-      can :manage, [Upload]
+      can :manage, [Upload, Message]
       can :read, [Assignment, Course, Section]
 
       # http://stackoverflow.com/questions/10748529/creating-a-where-query-in-rails-from-an-array

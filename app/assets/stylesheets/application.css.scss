@@ -13,6 +13,7 @@
  *= require_tree .
  */
 
+/* Namespace the bootstrap styles so they don't conflic with our CSS */
 .bootstrap-styles {
   @import "bootstrap";
   @import "bootstrap-responsive";
@@ -20,6 +21,42 @@
 
 .bootstrap-padding {
   padding: 20px 20px 20px 0px !important;
+  font-size: 14px;
+  position: relative;
+}
+
+.bootstrap-styles h1, .bootstrap-styles h2, .bootstrap-styles h3 {
+  font-size: 27px;
+  font-family: "klavika-web", "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif !important;
+  line-height: 100% !important;
+  margin: 0px 0px 10px 0px;
+}
+
+.bootstrap-styles textarea {
+  height: 200px;
+  width: 500px;
+}
+
+.bootstrap-styles .form-actions {
+  background-color: transparent;
+  border-top: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.bootstrap-styles form {
+  margin: 0px;
+}
+
+.bootstrap-styles hr {
+  background-color: #eee;
+  border: none;
+  height: 10px;
+  margin: 15px 0px 15px 0px;
+}
+
+.bootstrap-styles a input[type="button"] {
+  width: auto;
 }
 
 /* Global Styles */
@@ -36,7 +73,7 @@ body {
 
 p, ol, ul, td {
   font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 18px;
 }
 
@@ -51,9 +88,9 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #0088cc;
   &:visited {
-    color: #555;
+    color: #0088cc;
   }
   &:hover {
     color: #045100;
@@ -67,75 +104,168 @@ div {
   }
 }
 
-/* Navigation */
+/* Header Nav */
+
+#headernav {
+  display: block;
+  width: auto;
+  padding: 0px;
+  margin: 0px auto;
+  color: #fff;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+
+  background: #333333; /* Old browsers */
+  background: -moz-linear-gradient(top,  #333333 0%, #3b3b3b 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#333333), color-stop(100%,#3b3b3b)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #333333 0%,#3b3b3b 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #333333 0%,#3b3b3b 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #333333 0%,#3b3b3b 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #333333 0%,#3b3b3b 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#3b3b3b',GradientType=0 ); /* IE6-9 */
+}
+
+#headernav > ul {
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
+}
+
+#headernav .nav {
+  float: right;
+}
+
+#headernav .nav > li {
+  float: left;
+  border-left: 1px solid #000;
+}
+
+#headernav .nav > li:hover {
+  background-color: #003F76;
+}
+
+#headernav .nav > li > a {
+  color: #fff;
+  display: block;
+  padding: 5px 13px;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+#headernav .login {
+  font-size: 14px;
+  font-weight: bold;
+  float: left;
+  padding: 5px 13px;
+}
+
+/* Navbar */
 
 #navbar {
-  width: auto;
-  padding: 0px 20px 0px 20px;
+  color: #fff;
+  border-radius: 10px 10px 0px 0px;
+  padding: 0px;
   margin: 0px auto;
-  background-color: #333;
-  border-bottom: 1px solid #000;
+  background: #05568d; /* Old browsers */
+  background: -moz-linear-gradient(top,  #05568d 0%, #003f76 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#05568d), color-stop(100%,#003f76)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #05568d 0%,#003f76 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #05568d 0%,#003f76 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #05568d 0%,#003f76 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #05568d 0%,#003f76 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05568d', endColorstr='#003f76',GradientType=0 ); /* IE6-9 */
+}
+
+#navbar > ul {
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 #navbar .nav {
-  float: right;
-  padding: 5px;
+  float: left;
 }
 
 #navbar .nav > li {
   float: left;
-  margin-left: 5px;
+  position: relative;
+  padding: 0px;
 }
 
-.nav-table {
-  width: 100%;
-  display: table;
+#navbar .nav > li:first-child {
+  border-radius: 10px 0px 0px 0px;
+  -webkit-border-radius: 10px 0px 0px 0px;
 }
 
-.nav-cell {
-  display: table-cell;
+#navbar .nav > li:hover {
+  background-color: #003F76;
 }
 
-.vertical {
-  vertical-align: middle;
-}
-
-.logo {
-  font-size: 20px;
-  float: left;
-}
-
-/*.logo {
-  background-color: #000;
-  background-image: url('/whiteboard2.png');
-  background-position: center center;
-  background-repeat: no-repeat;
-  text-decoration: none;
+#navbar .nav > li > a {
+  color: #fff;
   display: block;
-  height: 50px;
-  width: 200px;
-  margin: 5px;
-  float: left;
-  clear: left;
-}
-*/
-
-/* Top Nav */
-
-#topnav {
-  background-color: #05568D;
-  margin: 0px auto;
-  text-align: right;
+  padding: 10px 15px 10px 36px;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-#topnav .nav {
-  padding: 20px;
+#navbar .nav > li a.first {
+  padding-left: 20px;
+}
+
+#navbar .nav .arrow {
+  border: 19px solid transparent;
+  border-right: 1px none black;
+  border-left-color: #000;
+  -moz-border-right-colors: #000;
+  display: block;
+  position: absolute;
+  right: -18px;
+  top: 0px;
+  z-index: 50;
+  width: 0px;
+  height: 0px;
+}
+
+/* TODO: Image or http://stackoverflow.com/questions/6950516/is-it-possible-to-make-a-box-arrow-in-css-3-with-a-gradient */
+#navbar .nav .arrow > span {
+  border: 18px solid transparent;
+  border-right: 1px none black;
+  border-left-color: #05568D;
+  -moz-border-right-colors: #05568D;
+  display: block;
+  position: absolute;
+  right: 1px;
+  top: -18px;
+  z-index: 51;
+  white-space: nowrap;
+  overflow: hidden;
+  text-indent: 9999px;
+  width: 0px;
+  height: 0px;
+}
+
+#navbar .date {
+  float: right;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#navbar .date > li {
+  padding: 10px 20px;
 }
 
 /* Content */
 
 #main {
-  padding: 20px 20px 0px 20px;
+  padding: 70px 20px 0px 20px;
   margin: 0px auto;
 }
 
@@ -145,8 +275,7 @@ div {
   min-width: 768px;
   margin: 0px auto;
   border: 1px solid #000;
-  -webkit-box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
-  box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
+  box-shadow: 0px 0px 8px rgba(1, 1, 1, 0.87);
 }
 
 #wrapper {
@@ -159,49 +288,110 @@ div {
   float: right;
 }
 
+.blocks-buttons > .item {
+  float: left;
+  padding: 7px 10px 10px 10px;
+  font-size: 12px;
+  width: 190px;
+  max-width: 190px;
+  height: 130px;
+  max-height: 130px;
+  margin: 0px 5px 5px 0px;
+  display: table;
+  overflow: hidden;
+  background: #eeeeee; /* Old browsers */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #dcdcdc 51%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(51%,#dcdcdc), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#dcdcdc 51%,#eeeeee 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}
+
+.blocks-buttons > .item:hover {
+  cursor: pointer;
+  background: #E7E7E7; /* Old browsers */
+  background: -moz-linear-gradient(top,  #eeeeee 0%, #d5d5d5 51%, #eeeeee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(51%,#d5d5d5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#d5d5d5 51%,#eeeeee 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}
+
+.blocks-buttons > .item > .valign {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.blocks-buttons > .item > .valign > .title {
+  font-weight: bold;
+  line-height: 15px;
+  margin: 0px 0px 3px 0px;
+  padding: 0px;
+}
+
+.blocks-buttons > .item > .valign > .title > a {
+  color: #000;
+}
+
+.blocks-buttons > .item > .valign > .content {
+  padding: 0px;
+  margin: 0px;
+  line-height: 25px;
+  font-weight: normal;
+}
+
+.blocks-buttons > .item > .valign > .content > a {
+  color: #000;
+}
+
 /* Sidebar */
 
 #sidebar {
-  padding: 20px;
+  color: #000;
   font-weight: bold;
   font-size: 18px;
-  width: 17%;
+  width: 22%;
   float: left;
+  padding: 20px 0px 0px 0px;
   background-color: #eee;
   background-image: -webkit-radial-gradient(right, #eee, #ffffff 90%);
   background-image: radial-gradient(right, #f2f2f2, #ffffff 80%);
 }
 
+#sidebar > ul {
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
+  width: 100%;
+}
+
 #sidebar .nav {
-
+  float: left;
 }
 
-#sidebar .nav li {
-  list-style-position: outside;
-  font-size: 18px;
-  letter-spacing: 1px;
-  /*line-height:150%;*/
-  text-align: left;  
-  vertical-align: top;
-  padding: 0px;
-  margin: 0px;
+#sidebar .nav > li:hover {
+  background-color: #CCC;
 }
 
-
-#sidebar ul.nav {
-  padding: 0px;
-  margin: 0px;
+#sidebar .nav > li > a {
+  color: #000;
+  display: block;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
 }
 
-#sidebar li a {
-  color: #eee;
-  &:visited {
-    color: #555;
-  }
-  &:hover {
-    color: #045100;
-    text-decoration: none;
-  }
+#sidebar .nav > li > a:hover {
+  color: #000;
+}
+
+#sidebar .nav > li.selected {
+  background-color: #E7E7E7;
 }
 
 /* Misc */
@@ -229,6 +419,17 @@ div {
 
 .right {
   float: right;
+}
+
+.center {
+  margin: 0px auto !important;
+  text-align: center;
+}
+
+.top-right {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .box h1 {

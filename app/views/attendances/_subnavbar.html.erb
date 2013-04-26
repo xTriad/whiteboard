@@ -1,0 +1,15 @@
+<li>
+  <%= link_to 'Attendance', attendances_path %>
+  <span class="arrow">
+    <span>></span>
+  </span>
+</li>
+
+<% if section_and_date_defined %>
+  <li>
+    <%= link_to @course_name, request.url %></a>
+    <span class="arrow">
+      <span>></span>
+    </span>
+  </li>
+<% end %>

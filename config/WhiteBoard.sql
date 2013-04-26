@@ -8,6 +8,20 @@ SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -99,7 +113,7 @@ ALTER SEQUENCE "AssignmentGrades_user_id_seq" OWNED BY assignment_grades.user_id
 
 CREATE TABLE assignment_types (
     type_id integer NOT NULL,
-    name text NOT NULL,
+    name character varying(255) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -282,7 +296,7 @@ ALTER SEQUENCE "Attendance_user_id_seq" OWNED BY attendances.user_id;
 CREATE TABLE courses (
     course_id integer NOT NULL,
     number text NOT NULL,
-    name text NOT NULL,
+    name character varying(255) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     university_id integer NOT NULL
@@ -372,7 +386,7 @@ ALTER SEQUENCE "GroupUsers_user_id_seq" OWNED BY groups_users.user_id;
 
 CREATE TABLE groups (
     group_id integer NOT NULL,
-    name text NOT NULL,
+    name character varying(255) NOT NULL,
     associated_course integer NOT NULL,
     associated_section integer NOT NULL
 );
@@ -452,11 +466,13 @@ CREATE TABLE messages (
     sender_id integer NOT NULL,
     receiver_id integer NOT NULL,
     sent boolean DEFAULT false,
-    subject text,
+    subject character varying(255),
     message text,
     receiver_read boolean DEFAULT false,
     sender_deleted boolean DEFAULT false,
-    receiver_deleted boolean DEFAULT false
+    receiver_deleted boolean DEFAULT false,
+    date_sent date NOT NULL,
+    reply_to integer
 );
 
 
@@ -532,7 +548,7 @@ ALTER SEQUENCE "Messages_sender_id_seq" OWNED BY messages.sender_id;
 CREATE TABLE permissions (
     perm_id integer NOT NULL,
     role_id integer NOT NULL,
-    name text NOT NULL
+    name character varying(255) NOT NULL
 );
 
 
@@ -1123,7 +1139,7 @@ ALTER TABLE public.sections_users_roles OWNER TO postgres;
 
 CREATE TABLE universities (
     university_id integer NOT NULL,
-    university_name text NOT NULL
+    university_name character varying(255) NOT NULL
 );
 
 

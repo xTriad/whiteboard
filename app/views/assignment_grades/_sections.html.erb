@@ -1,13 +1,29 @@
 <h1>Gradebook</h1>
 
-<table cellpadding="5">
+<hr>
+<div id="courses" class="blocks-buttons">
+  <% @courses.each do |course| %>
+    <div class="item" id="course_<%= course[:course].course_id %>_section_<%= course[:section].section_id %>">
+      <div class="valign">
+        <div class="title">
+          <%= link_to course[:course].name, assignment_grades_path(:section => course[:section].section_id) %>
+        </div>
+        <div class="content">
+          Section <%= course[:section].number.to_s %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
 
-<% @courses.each do |course| %>
-  <tr>
-    <td>
-      <b><%= link_to course[:course].name + ' - ' + course[:section].number.to_s, assignment_grades_path(:section => course[:section].section_id) %></b>
-    </td>
-  </tr>
- <% end %>
+<script type="text/javascript">
 
-</table>
+$(document).ready(function() {
+  $('#courses .item').click(function() {
+    var section_id = $(this).attr('id').split('_')[3];
+    location.href = '/assignment_grades?section=' + section_id
+  })
+});
+
+</script>

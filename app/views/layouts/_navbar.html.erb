@@ -1,0 +1,13 @@
+<ul class="nav">
+  <li>
+    <a href="/" class="first">Whiteboard</a>
+    <span class="arrow">
+      <span>></span>
+    </span>
+  </li>
+  <%= render :partial => "subnavbar" %>
+</ul>
+
+<ul class="date">
+  <li><%= DateTime.now.strftime(date_page_format) %></li>
+</ul>

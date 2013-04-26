@@ -1,0 +1,36 @@
+
+<ul class="login">
+  <% if user_signed_in? %>
+    <li><%= current_user.name %></li>
+  <% else %>
+    <li>Welcome, Guest</li>
+  <% end %>
+</ul>
+
+<ul class="nav">
+  <% if user_signed_in? %>
+
+    <% if is_admin? %>
+      <li>
+        <%= link_to 'Admin', admin_root_path %>
+      </li>
+    <% end %>
+
+    <li>
+      <%= link_to 'Messages', messages_path %>
+    </li>
+    <li>
+      <%= link_to 'Edit account', edit_user_registration_path %>
+    </li>
+    <li>
+    <%= link_to 'Logout', destroy_user_session_path, :method =>'delete' %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to 'Login', new_user_session_path %>
+    </li>
+    <li>
+      <%= link_to 'Forgot Password', new_user_password_path %>
+    </li>
+  <% end %>
+</ul>
