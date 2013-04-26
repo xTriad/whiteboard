@@ -2,7 +2,8 @@ class AssignmentsController < ApplicationController
   before_filter :authenticate_user!
   helper_method :course_defined?,
                 :display_course_sections,
-                :get_user_courses
+                :get_user_courses,
+                :get_grade_type_select_options
 
   def course_defined?
     return params.has_key?(:course)
@@ -14,6 +15,16 @@ class AssignmentsController < ApplicationController
 
   def get_user_courses
     
+  end
+
+  def get_grade_type_select_options
+    options = []
+
+    AssignmentType.all.each do |type|
+      options << [type.name, type.type_id]
+    end
+
+    return options
   end
 
   # GET /assignments/1/configs

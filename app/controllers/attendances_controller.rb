@@ -104,7 +104,7 @@ class AttendancesController < InheritedResources::Base
 
       # Get an array of the student IDs that already have an attendance set
       @user_ids = []
-      @attendances.each{ |attendance| @user_ids << attendance.user_id }
+      @attendances.each { |attendance| @user_ids << attendance.user_id }
 
       # Create an attendance object for every student who doesn't already have one
       errors = { :error => false, :obj => nil }

@@ -21,8 +21,8 @@ class AssignmentConfigUpload < ActiveRecord::Base
   end
 
   # Rather than renaming the database column "file_name" to
-  # "assignment_upload_file_name" which paperclip expects, I've
-  # defined these methods instead.
+  # "assignment_config_upload_file_name" which paperclip
+  # expects, I've defined these methods instead.
   def assignment_config_upload_file_name
     read_attribute(:file_name)
   end
