@@ -16,7 +16,7 @@
       </span>
       <% if !message.appointment_timestamp.nil? %>
         <span class="right">
-          Appointment: <%= message.appointment_timestamp.strftime('%B %d, %Y at %I:%M %p') %>
+          Appointment: <%= message.appointment_timestamp.strftime('%B %d, %Y at %l:%M %p') %>
         </span>
       <% end %>
     </span>

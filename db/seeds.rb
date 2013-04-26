@@ -470,7 +470,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :name => 'Intro To Being a Hipster',
       :description => 'Teaches one how to dress and act like a hipster.',
       :type_id => Constants::AssignType::Homework,
-      :section_id => 26,
+      :section_id => 28,
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
       :weight => 1
@@ -479,7 +479,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :name => 'Intro To Being a Hipster',
       :description => 'Teaches one how to dress and act like a hipster.',
       :type_id => Constants::AssignType::Homework,
-      :section_id => 27,
+      :section_id => 29,
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
       :weight => 1

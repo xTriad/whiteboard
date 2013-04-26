@@ -1,13 +1,9 @@
 class AssignmentsController < ApplicationController
   before_filter :authenticate_user!
-  helper_method :course_defined?,
-                :display_course_sections,
+  helper_method :display_course_sections,
                 :get_user_courses,
                 :get_grade_type_select_options
 
-  def course_defined?
-    return params.has_key?(:course)
-  end
 
   def display_course_sections
 
@@ -49,7 +45,7 @@ class AssignmentsController < ApplicationController
   def index
     authorize! :read, Assignment
 
-    if course_defined?
+    if params.has_key?(:course)
       @course = Course.find(params[:course])
 
       if is_student?
@@ -65,6 +61,30 @@ class AssignmentsController < ApplicationController
             :assignments => Assignment.find_by_section_id(section.section_id)
           }
         end
+      end
+    else
+      if is_student?
+        @sections = User.find_student_sections(current_user.id)
+      else
+        @sections = User.find_professor_sections(current_user.id)
+      end
+
+      # Find all the courses associated with the sections found
+      @courses = {}
+      @sections.each do |section|
+        if !@courses.has_key?(section.section_id)
+          @courses[section.section_id] = Course.find_by_section_id(section.section_id)
+        end
+      end
+
+      # Find all assignments in each section
+      @assignments = {}
+      @sections.each do |section|
+        @assignments[section.section_id] = {
+          :course => @courses[section.section_id],
+          :section => section,
+          :assignments => Assignment.find_by_section_id(section.section_id)
+        }
       end
     end
 

@@ -2,8 +2,71 @@
 
 <hr>
 
-This page should display all the courses the student or professor is in. The course title should link to the individual assignment page for that course with the URL of assignments?course=1. However, the indidvidual assignments should also be listed under the course name and should be collapsible/expandable.
+<table id="assignments" class="table">
+<% @assignments.each do |key, section_assignments| %>
+  <tr class="course_section_title_row">
+    <td width="75%">
+        <b>
+          <%= @assignments[key][:course].name %>
+          <% if is_professor? %>
+            Section <%= @assignments[key][:section].number %>
+          <% end %>
+        </b>
+    </td>
+    <td width="25%" style="text-align: center;">
+      <% if is_professor? %>
+        <b><%= link_to 'Create New Assignment', new_assignment_path(:section => @assignments[key][:section].section_id) %></b>
+      <% end %>
+    </td>
+  </tr>
+  <tr class="course_section_container_row">
+    <td colspan="2">
+      <div class="slider">
+        <table class="table table-striped">
+          <% if @assignments[key][:assignments].length < 1 %>
+            <tr>
+              <td colspan="6">
+                No assignments.
+              </td>
+            </tr>
+          <% else %>
+            <% @assignments[key][:assignments].each do |assignment| %>
+              <tr>
+                <td width="25%"><%= link_to assignment.get_name, assignment_path(assignment) %></td>
+                <td width="20%"><%= assignment.get_type_name %></td>
+                <td width="20%"><%= assignment.due_date.strftime(date_page_format) %></td>
+                <td width="5%"><%= assignment.highest_grade_value %></td>
+                <td width="5%"><%= assignment.weight %></td>
+                <td width="25%" style="text-align: center;">
+                  <%= link_to 'Files', files_assignment_path(assignment) %>
+                  <% if is_professor? %>
+                    | <%= link_to 'Config', configs_assignment_path(assignment) %>
+                    | <%= link_to 'Edit', edit_assignment_path(assignment) %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    </td>
+  </tr>
+<% end %>
+</table>
 
-<br /><br />
+<script type="text/javascript">
 
-For a professor, each section should be listed with the assignments for each section.
+$(document).ready(function() {
+  $('#assignments tr.course_section_title_row > td').css('cursor','pointer').click(function() {
+    var divslider = $(this).parent().next().find('div.slider');
+
+    if(divslider.is(':hidden')) {
+      divslider.slideDown('fast');
+    }
+    else {
+      divslider.slideUp('fast');
+    }
+  });
+});
+
+</script>
