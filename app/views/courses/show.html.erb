@@ -7,7 +7,7 @@
 </p>
 
 <p>
-  <%= @section.description %>
+  <%= simple_format(@section.description) %>
 </p>
 
 <a href="<%= assignments_path(:course => @course.course_id) %>">

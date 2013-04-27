@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
                 :format_date_from_url,
                 :is_student?,
                 :is_professor?,
-                :is_admin?
+                :is_admin?,
+                :ae_some_html
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
