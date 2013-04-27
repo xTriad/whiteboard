@@ -5,12 +5,11 @@
 <table id="assignments" class="table">
 <% @assignments.each do |key, section_assignments| %>
   <tr class="course_section_title_row section_<%= @assignments[key][:section].section_id %>">
-    <td width="75%">
+    <td width="75%" class="course_section_name">
         <b>
-          <%= @assignments[key][:course].name %>
-          <% if is_professor? %>
-            Section <%= @assignments[key][:section].number %>
-          <% end %>
+          <% link_text = @assignments[key][:course].name %>
+          <% link_text += ' - Section ' + @assignments[key][:section].number.to_s if is_professor? %>
+          <%= link_to link_text, assignments_path(:course => @assignments[key][:course].course_id) %>
         </b>
     </td>
     <td width="25%" style="text-align: center;">
@@ -34,7 +33,7 @@
               <tr>
                 <td width="25%"><%= link_to assignment.get_name, assignment_path(assignment) %></td>
                 <td width="20%"><%= assignment.get_type_name %></td>
-                <td width="20%"><%= assignment.due_date.strftime(date_page_format) %></td>
+                <td width="20%"><%= assignment.formatted_due_date(date_page_format) %></td>
                 <td width="5%"><%= assignment.highest_grade_value %></td>
                 <td width="5%"><%= assignment.weight %></td>
                 <td width="25%" style="text-align: center;">
@@ -96,6 +95,11 @@ $(document).ready(function() {
 
     window.localStorage[local_storage_key] = JSON.stringify(assignment_slider_cache);
   });
+
+  // Stop the above click event from happening if a link within is clicked
+  $("#assignments a").click(function(event){
+    event.stopPropagation();
+  });  
 });
 
 </script>

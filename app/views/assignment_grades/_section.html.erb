@@ -7,57 +7,53 @@
 </p>
 
 <% if can? :write, AssignmentGrade %>
-<table class="table table-striped">
-<% @assignments.each do |assignment| %>
-  <tr>
-    <td>
-      <b><%= link_to assignment.get_name, assignment_grades_path(:assignment => assignment.assignment_id) %></b>
-    </td>
-    <td>
-      <b><%= assignment.get_type_name %></b>
-    </td>
-    <td>
-      <b><%= assignment.due_date.strftime(date_page_format) %></b>
-    </td>
-    <td>
-      <b><%= assignment.highest_grade_value %></b>
-    </td>
-    <td>
-      <b><%= assignment.weight %></b>
-    </td>
-  </tr>
+  <table class="table table-striped">
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td>
+          <b><%= link_to assignment.get_name, assignment_grades_path(:assignment => assignment.assignment_id) %></b>
+        </td>
+        <td>
+          <b><%= assignment.get_type_name %></b>
+        </td>
+        <td>
+          <b><%= assignment.formatted_due_date(date_page_format) %></b>
+        </td>
+        <td>
+          <b><%= assignment.highest_grade_value %></b>
+        </td>
+        <td>
+          <b><%= assignment.weight %></b>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% elsif can? :read, AssignmentGrade %>
+  <table class="table table-striped">
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td>
+          <b><%= assignment.get_name %></b>
+        </td>
+        <td>
+          <b><%= assignment.get_type_name %></b>
+        </td>
+        <td>
+          <b><%= assignment.formatted_due_date(date_page_format) %></b>
+        </td>
+        <td>
+          <b><%= assignment.highest_grade_value %></b>
+        </td>
+        <td>
+          <b><%= assignment.weight %></b>
+        </td>
+        <td>
+          <b><%= AssignmentGrade.find_user_grade(current_user.id,assignment.assignment_id) %></b>
+        </td>
+        <td>
+          <b><%= AssignmentGrade.find_user_comment(current_user.id,assignment.assignment_id) %></b>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
-</table>
-<%end%>
-
-<% if cannot? :write, AssignmentGrade %>
-    <% if can? :read, AssignmentGrade %>
-<table class="table table-striped">
-<% @assignments.each do |assignment| %>
-  <tr>
-    <td>
-      <b><%= assignment.get_name %></b>
-    </td>
-    <td>
-      <b><%= assignment.get_type_name %></b>
-    </td>
-    <td>
-      <b><%= assignment.due_date.strftime(date_page_format) %></b>
-    </td>
-    <td>
-      <b><%= assignment.highest_grade_value %></b>
-    </td>
-    <td>
-      <b><%= assignment.weight %></b>
-    </td>
-    <td>
-      <b><%= AssignmentGrade.find_user_grade(current_user.id,assignment.assignment_id) %></b>
-    </td>
-    <td>
-      <b><%= AssignmentGrade.find_user_comment(current_user.id,assignment.assignment_id) %></b>
-    </td>
-  </tr>
-<% end %>
-</table>
-   <%end%>
-<%end%>

@@ -9,7 +9,7 @@
 
 <p>
   <b>Due Date:</b>
-  <%= @assignment.due_date.strftime('%B %d, %Y at %l:%M %p') %>
+  <%= @assignment.formatted_due_date('%B %d, %Y at %l:%M %p') %>
 </p>
 
 <p>
@@ -22,9 +22,9 @@
   <%= @assignment.weight %>
 </p>
 
-<p class="box">
+<div class="box">
   <%= simple_format(@assignment.get_description) %>
-</p>
+</div>
 
 <a href="<%= files_assignment_path(@assignment) %>">
   <input class="btn btn-primary" type="button" value="Files" />

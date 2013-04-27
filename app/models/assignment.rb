@@ -25,4 +25,12 @@ class Assignment < ActiveRecord::Base
     (self.description != nil && self.description.match(/\S/)) ? self.description : 'No description.'
   end
 
+  def formatted_due_date(format)
+    if !self.due_date.nil?
+      return self.due_date.strftime(format)
+    else
+      return 'TBA'
+    end
+  end
+
 end

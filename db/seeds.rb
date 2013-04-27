@@ -309,7 +309,7 @@ puts 'DEFAULT SECTIONS'
 
   Course.all.each do |course|
     for x in 1..3
-      description = 'The course description.\n\nIn tincidunt semper libero nec vestibulum. Cras consectetur hendrerit purus, ornare volutpat felis volutpat ac. Nulla tempus dolor sed erat feugiat vel egestas augue viverra. Suspendisse potenti. Suspendisse sed lorem mauris, pellentesque molestie diam. Proin sodales sapien at magna gravida interdum vel et magna. Vestibulum tincidunt tellus id sapien fermentum eget lobortis est blandit.'
+      description = 'The course description.<br /><br />In tincidunt semper libero nec vestibulum. Cras consectetur hendrerit purus, ornare volutpat felis volutpat ac. Nulla tempus dolor sed erat feugiat vel egestas augue viverra. Suspendisse potenti. Suspendisse sed lorem mauris, pellentesque molestie diam. Proin sodales sapien at magna gravida interdum vel et magna. Vestibulum tincidunt tellus id sapien fermentum eget lobortis est blandit.'
       Section.create(:course_id => course.course_id, :number => x, :description => description);
     end
   end
@@ -548,7 +548,7 @@ puts 'DEFAULT MESSAGES'
       :receiver_id => Constants::User::Professor2,
       :sent => true,
       :subject => 'Formatting Tests',
-      :message => 'Testing line breaks in html...<br /><br />Now testing using new lines...\\n\\nAgain\n\nThe End.',
+      :message => 'Testing line breaks in html...<br /><br />The End.',
       :receiver_read => false,
       :sender_deleted => false,
       :receiver_deleted => false,

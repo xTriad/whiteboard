@@ -1,17 +1,6 @@
 class AssignmentsController < ApplicationController
   before_filter :authenticate_user!
-  helper_method :display_course_sections,
-                :get_user_courses,
-                :get_grade_type_select_options
-
-
-  def display_course_sections
-
-  end
-
-  def get_user_courses
-    
-  end
+  helper_method :get_grade_type_select_options
 
   def get_grade_type_select_options
     options = []
@@ -49,18 +38,19 @@ class AssignmentsController < ApplicationController
       @course = Course.find(params[:course])
 
       if is_student?
-        @section = User.find_user_section_by_course_id(current_user.id, @course.course_id)
-        @assignments = Assignment.find_by_section_id(@section.section_id)
+        @sections = []
+        @sections << User.find_user_section_by_course_id(current_user.id, @course.course_id)
       else
-        @prof_sections = User.find_professor_sections_in_course(current_user.id, @course.course_id)
-        @assignments = {}
+        @sections = User.find_professor_sections_in_course(current_user.id, @course.course_id)
+      end
 
-        @prof_sections.each do |section|
-          @assignments[section.section_id] = {
-            :section => section,
-            :assignments => Assignment.find_by_section_id(section.section_id)
-          }
-        end
+      @assignments = {}
+
+      @sections.each do |section|
+        @assignments[section.section_id] = {
+          :section => section,
+          :assignments => Assignment.find_by_section_id(section.section_id)
+        }
       end
     else
       if is_student?
