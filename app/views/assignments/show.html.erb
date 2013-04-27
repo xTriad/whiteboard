@@ -23,7 +23,7 @@
 </p>
 
 <p class="box">
-  <%= @assignment.get_description %>
+  <%= simple_format(@assignment.get_description) %>
 </p>
 
 <a href="<%= files_assignment_path(@assignment) %>">

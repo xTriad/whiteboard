@@ -1,57 +1,3 @@
-<script type="text/javascript">
-function setup() {
-
-  $.ajaxSetup ({
-    cache: false
-  });
-
-}
-
-$(document).ready(function() {
-  setup();
-  doStuff(this.form);
-});
-
-
-function doStuff(form) {
-var grade = form.grade.value;
-var comment = form.comment.value;
-var user = form.userid.value;
-var assignment = form.assignment.value
-
-$.ajax({
-          url: 'assignment_grades/alter?' +
-                 'grade=' + grade + 
-                 '&comment=' + comment +
-                 '&user=' + user +
-                 '&assignment=' + assignment),
-          processData: false,
-          dataType: 'json',
-          success:function(a) {
-            // var s = ''
-
-            // for(var key in a) {
-            //   s += key + ': ' + a[key] + '\n';
-            // }
-
-            // alert(s);
-          },
-          error:function() {
-            $('#ajax_errors')
-              .html('Failed to update the grade.')
-              .fadeOut(3000, function() {
-                $('#ajax_errors').html('').css('display','block');
-              }
-            );
-          }
-        });
-
-
-}
-
-</script>
-
-
 <h1><%= @assignment.get_name %> Grades</h1>
 
 <hr>
@@ -60,7 +6,7 @@ $.ajax({
 <% @users.each do |user| %>
   <% grade = AssignmentGrade.find_user_grade(user.user_id, @assignment.assignment_id) %>
   <tr>
-    <form name="form" action="/assignment_grades/alter" method="" onsubmit="doStuff(this)">
+    <form name="form" action="/assignment_grades/alter" method="" onsubmit="submit_ajax(this)">
     <td>
       <input type="hidden" name ="userid" value="<%=user.user_id%>">
       <input type="hidden" name ="assignment" value="<%=@assignment.assignment_id%>">      
@@ -95,3 +41,43 @@ $.ajax({
 
 </table>
 
+<script type="text/javascript">
+
+function setup() {
+  $.ajaxSetup ({
+    cache: false
+  });
+}
+
+function submit_ajax(form) {
+  var grade = form.grade.value;
+  var comment = form.comment.value;
+  var user = form.userid.value;
+  var assignment = form.assignment.value;
+
+  $.ajax({
+    url: 'assignment_grades/alter?' +
+         'grade=' + grade + 
+         '&comment=' + comment +
+         '&user=' + user +
+         '&assignment=' + assignment),
+    processData: false,
+    dataType: 'json',
+    success:function(a) {},
+    error:function() {
+      $('#ajax_errors')
+        .html('Failed to update the grade.')
+        .fadeOut(3000, function() {
+        $('#ajax_errors').html('').css('display','block');
+        }
+      );
+    }
+  });
+}
+
+$(document).ready(function() {
+  setup();
+  submit_ajax(this.form);
+});
+
+</script>

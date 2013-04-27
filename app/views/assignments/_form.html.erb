@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <%= f.hidden_field :section_id, :value => @section_id %>
     <%= f.input :name, :autofocus => true %>
+    <%= f.label :type_id %>
     <%= f.select :type_id, options_for_select(get_grade_type_select_options) %>
     <%= f.label :due_date %>
     <%= f.text_field :due_date %>

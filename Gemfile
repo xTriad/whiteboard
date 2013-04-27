@@ -32,3 +32,5 @@ gem "jquery-fileupload-rails", "0.4.1", :path => "vendor/gems/jquery-fileupload-
 gem 'paperclip', '3.4.1'
 gem 'debugger', :group => [:development, :test]
 gem "bootstrap-sass", ">= 2.2.2.0"
+gem 'guard'
+gem 'guard-shell'

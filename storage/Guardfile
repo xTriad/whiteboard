@@ -16,9 +16,10 @@ guard 'shell', :recursive => true do
     |r| `chmod a+x #{r[1]}.todo`
   }
 
-  # Run compileCode.todo with the file path as $1
-  watch(%r{^(.+)\.(c|cpp|java|pl|py)$}) {
-    |r| `./#{r[0][0, r[0].index(/\//)]}/compileCode.todo #{r[0][0, r[0].index(/\/[^\/]+$/)]}/`
-  }
+end
 
+group :shell do
+  watch(%r{^assignments\/(.+?)\/(.+?)\/(.+?)\.(c|cpp|java|pl|py)$}) {
+    |m| `assignments/#{m[1]}/compileCode.todo assignments/#{m[1]}/#{m[2]}/`
+  }
 end
