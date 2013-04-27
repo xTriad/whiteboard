@@ -44,29 +44,52 @@ class AssignmentGradesController < ApplicationController
   end
 
   def index
-    authorize! :read, AssignmentGrade
 
-    if params.has_key?(:section)
+    if is_professor?
 
-      # List all the assignments in the section
-      @assignments = Assignment.find_by_section_id(params[:section])
-      @course = Course.find_by_section_id(params[:section])
-      @section_id = params[:section]
+	    if params.has_key?(:section)
 
-    elsif params.has_key?(:assignment)
+	      # List all the assignments in the section
+	      @assignments = Assignment.find_by_section_id(params[:section])
+	      @course = Course.find_by_section_id(params[:section])
+	      @section_id = params[:section]
 
-      # List all the users in the section for the assignment
-      @assignment = Assignment.find(params[:assignment])
-      @users = Section.find_students_in_section(@assignment.section_id)
-      @course = Course.find_by_section_id(@assignment.section_id)
-      @section_id = @assignment.section_id
+	    elsif params.has_key?(:assignment)
 
-    else
+	      # List all the users in the section for the assignment
+	      @assignment = Assignment.find(params[:assignment])
+	      @users = Section.find_students_in_section(@assignment.section_id)
+	      @course = Course.find_by_section_id(@assignment.section_id)
+	      @section_id = @assignment.section_id
 
-      # List all the courses and sections the professor is teaching
-      @courses = Course.find_professor_courses(current_user.id)
+	    else
 
-    end
+	      # List all the courses and sections the professor is teaching
+	      @courses = Course.find_professor_courses(current_user.id)
+
+	    end
+
+   else if is_student?
+
+	    if params.has_key?(:section)
+
+	      # List all the assignments in the section
+	      @assignments = Assignment.find_by_section_id(params[:section])
+	      @course = Course.find_by_section_id(params[:section])
+	      @section_id = params[:section]
+              @grades = AssignmentGrade.find_grades_by_section_id(params[:section])
+
+	    else
+
+	      # List all the courses and sections the student is in
+	      @courses = Course.find_student_courses(current_user.id)
+
+	    end
+       end
+
+   end
+
+
   end
 
   def show

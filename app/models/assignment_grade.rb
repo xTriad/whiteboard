@@ -22,9 +22,20 @@ class AssignmentGrade < ActiveRecord::Base
     if grade != nil
       return grade.grade_value
     else
-      return 'N/A'
+      return '0'
     end
   end
+
+  def self.find_user_comment(user_id, assignment_id)
+    grade = find(:first, :conditions => ['user_id = ? AND assignment_id = ?', user_id, assignment_id])
+
+    if grade != nil
+      return grade.comment
+    else
+      return ' '
+    end
+  end
+
 
 
   def self.find_by_user_assignment(user_id, assignment_id)

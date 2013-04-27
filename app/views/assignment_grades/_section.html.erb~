@@ -54,7 +54,7 @@
       <b><%= AssignmentGrade.find_user_grade(current_user.id,assignment.assignment_id) %></b>
     </td>
     <td>
-      <b><%= AssignmentGrade.find_user_comment(current_user.id,assignment.assignment_id) %></b>
+      <b><%= AssignmentGrade.find_by_user_assignment(current_user.id,assignment.assignment_id).comment %></b>
     </td>
   </tr>
 <% end %>

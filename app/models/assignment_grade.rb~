@@ -27,10 +27,10 @@ class AssignmentGrade < ActiveRecord::Base
   end
 
 
-  def self.find_by_user_section_assignment(user_id, section_id, assignment_id)
+  def self.find_by_user_assignment(user_id, assignment_id)
     find(:first,
       :conditions => [
-        'user_id = ? AND section_id = ? AND assignment_id = ?', user_id, section_id, assignment_id
+        'user_id = ? AND assignment_id = ?', user_id, assignment_id
       ]
     )
   end

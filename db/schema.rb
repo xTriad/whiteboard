@@ -13,8 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 0) do
 
-<<<<<<< HEAD
-=======
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
     t.string   "resource_type", :null => false
@@ -49,6 +47,15 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "assignment_config_uploads", :force => true do |t|
+    t.string   "file_name"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "assignment_id", :null => false
+  end
+
   create_table "assignment_grades", :primary_key => "grade_id", :force => true do |t|
     t.integer "assignment_id", :null => false
     t.integer "user_id",       :null => false
@@ -63,10 +70,20 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "updated_at"
   end
 
+  create_table "assignment_uploads", :force => true do |t|
+    t.string   "file_name"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "user_id",       :null => false
+    t.integer  "assignment_id", :null => false
+  end
+
   create_table "assignments", :primary_key => "assignment_id", :force => true do |t|
     t.integer  "type_id",                              :null => false
     t.integer  "section_id",                           :null => false
-    t.date     "due_date"
+    t.datetime "due_date"
     t.integer  "highest_grade_value", :default => 100, :null => false
     t.float    "weight"
     t.datetime "created_at"
@@ -175,17 +192,6 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string "university_name", :null => false
   end
 
-  create_table "uploads", :force => true do |t|
-    t.string   "upload_file_name"
-    t.string   "upload_content_type"
-    t.integer  "upload_file_size"
-    t.datetime "upload_updated_at"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.integer  "user_id",             :null => false
-    t.integer  "assignment_id",       :null => false
-  end
-
   create_table "users", :primary_key => "user_id", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -206,5 +212,4 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "users", ["email"], :name => "index_Users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_Users_on_reset_password_token", :unique => true
 
->>>>>>> 5a577f821c558c39e9e3284f208360f9246bc3b6
 end

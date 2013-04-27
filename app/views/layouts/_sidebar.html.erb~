@@ -26,7 +26,7 @@
     <% end %>
 
     <% if cannot? :write, AssignmentGrade%>
-            <% if can? :read, AssignmentGrade%>
+            <% if can? read, AssignmentGrade%>
       <li class="assignment_grades_controller">
         <%= link_to 'Grades', assignment_grades_path %>
       </li>
