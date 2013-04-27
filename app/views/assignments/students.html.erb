@@ -1,0 +1,11 @@
+<h1><%= @assignment.name %> Student Files</h1>
+
+<hr>
+
+<table class="table table-striped">
+  <% @students.each do |student| %>
+    <tr>
+      <td><%= link_to student.name, files_assignment_path(@assignment, :user => student.user_id) %></td>
+    </tr>
+  <% end %>
+</table>
