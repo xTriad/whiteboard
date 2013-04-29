@@ -6,10 +6,10 @@
 <% @assignments.each do |key, section_assignments| %>
   <% if is_professor? %>
     <tr class="course_section_title_row section_<%= @assignments[key][:section].section_id %>">
-      <td width="75%">
+      <td width="70%">
         <b>Section <%= @assignments[key][:section].number %></b>
       </td>
-      <td width="25%" style="text-align: center;">
+      <td width="30%" style="text-align: center;">
         <b><%= link_to 'Create New Assignment', new_assignment_path(:section => @assignments[key][:section].section_id) %></b>
       </td>
     </tr>
@@ -27,15 +27,17 @@
           <% @assignments[key][:assignments].each do |assignment| %>
             <tr>
               <td width="25%"><%= link_to assignment.get_name, assignment_path(assignment) %></td>
-              <td width="20%"><%= assignment.get_type_name %></td>
+              <td width="15%"><%= assignment.get_type_name %></td>
               <td width="20%"><%= assignment.formatted_due_date(date_page_format) %></td>
               <td width="5%"><%= assignment.highest_grade_value %></td>
               <td width="5%"><%= assignment.weight %></td>
-              <td width="25%" style="text-align: center;">
-                <%= link_to 'Files', files_assignment_path(assignment) %>
-                <% if is_professor? %>
-                  | <%= link_to 'Config', configs_assignment_path(assignment) %>
-                  | <%= link_to 'Edit', edit_assignment_path(assignment) %>
+              <td width="30%" style="text-align: center;">
+                <% if is_student? %>
+                  <%= link_to 'Files', files_assignment_path(assignment) %>
+                <% elsif is_professor? %>
+                  <%= link_to 'Files', students_assignment_path(assignment) %> |
+                  <%= link_to 'Config', configs_assignment_path(assignment) %> |
+                  <%= link_to 'Edit', edit_assignment_path(assignment) %>
                 <% end %>
               </td>
             </tr>

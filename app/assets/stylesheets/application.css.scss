@@ -451,6 +451,10 @@ div.box {
   margin-bottom: 10px;
 }
 
+.box > p {
+  margin: 0px;
+}
+
 .box-container .half {
   width: 42%;
 }
