@@ -51,6 +51,15 @@
         </span>
       </li>
 
+    <% elsif params[:action] == 'students' %>
+
+      <li>
+        <%= link_to 'Student Files', students_assignment_path(@assignment) %>
+        <span class="arrow">
+          <span></span>
+        </span>
+      </li>
+
     <% end %>
 
   <% else %>

@@ -9,6 +9,7 @@ class Ability
 
     if user.has_role? Constants::Role::Admin
       can :manage, :all
+      # can :manage, User, User.where(:university_id => user.university_id)
     elsif user.has_role? Constants::Role::Professor
       can :manage, [Assignment, Attendance, Section, AssignmentGrade, AssignmentUpload, AssignmentConfigUpload, Message]
       can :read, [Course]

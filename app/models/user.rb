@@ -74,15 +74,15 @@ class User < ActiveRecord::Base
     cur_user_id = self.user_id
     has_role = false
 
-    puts ""
+    # puts ""
 
     # Check if we already have the query cached
     if Roles_Cache.has_key?(cur_user_id)
-      puts "\t1. Checking cache for role_id = #{role_id} in #{Roles_Cache[cur_user_id].to_s}"
+      # puts "\t1. Checking cache for role_id = #{role_id} in #{Roles_Cache[cur_user_id].to_s}"
 
       if Roles_Cache[cur_user_id].include?(role_id)
         has_role = true
-        puts "\t   2. Sucessfully retrieved the role from cache"
+        # puts "\t   2. Sucessfully retrieved the role from cache"
       end
     else
       the_users_roles = []
@@ -91,13 +91,13 @@ class User < ActiveRecord::Base
         the_users_roles << role.role_id
       end
 
-      puts "\t1. Queried database for role_id = #{role_id} and got #{the_users_roles.to_s}"
+      # puts "\t1. Queried database for role_id = #{role_id} and got #{the_users_roles.to_s}"
 
       # Store the role array in memory
       Roles_Cache[cur_user_id] = the_users_roles
 
       if the_users_roles.include?(role_id)
-        puts "\t   2. Successfully retrieved the role from the database"
+        # puts "\t   2. Successfully retrieved the role from the database"
         has_role = true
       end
     end

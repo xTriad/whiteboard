@@ -10,7 +10,7 @@ class AssignmentUploadsController < ApplicationController
       redirect_to root_path and return # TODO: Render error page instead
     end
 
-    @uploads = AssignmentUpload.where(:assignment_id => params[:assignment_id], :user_id => current_user.id)
+    @uploads = AssignmentUpload.where(:assignment_id => params[:assignment_id], :user_id => params[:user_id])
 
     respond_to do |format|
       format.json { render json: @uploads.map{|upload| upload.to_jq_upload } }

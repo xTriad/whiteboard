@@ -19,7 +19,8 @@ Whiteboard::Application.routes.draw do
   resources :assignments do
     member do
       get 'files' # /assignments/1/files
-      get 'configs' # /assignments/1/config
+      get 'configs' # /assignments/1/configs
+      get 'students' # /assignments/1/students
     end
   end
 

@@ -1,4 +1,9 @@
-<h1><%= @assignment.get_name %> Files</h1>
+<h1>
+  <% if params.has_key?(:user) %>
+    <%= @user.name %>'s
+  <% end %>
+  <%= @assignment.get_name %> Files
+</h1>
 
 <hr>
 

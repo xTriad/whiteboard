@@ -12,6 +12,15 @@ class AssignmentsController < ApplicationController
     return options
   end
 
+  # GET /assignments/1/students
+  def students
+    authorize! :update, AssignmentConfigUpload
+    @assignment = Assignment.find(params[:id])
+    authorize! :read, @assignment
+    @course = Course.find_by_section_id(@assignment.section_id)
+    @students = Section.find_students_in_section(@assignment.section_id)
+  end
+
   # GET /assignments/1/configs
   # Has to be plural since "config" is a predfined method
   def configs
@@ -26,6 +35,15 @@ class AssignmentsController < ApplicationController
     authorize! :update, AssignmentUpload
     @assignment = Assignment.find(params[:id])
     authorize! :read, @assignment
+
+    # If a professor/ta viewing a student's upoaded files
+    if params.has_key?(:user) && can?(:manage, AssignmentGrade)
+      @user_id = params[:user]
+    else
+      @user_id = current_user.id
+    end
+
+    @user = User.find(@user_id)
     @course = Course.find_by_section_id(@assignment.section_id)
   end
 

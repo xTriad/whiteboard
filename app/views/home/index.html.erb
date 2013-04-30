@@ -2,30 +2,17 @@
 
 <hr>
 
-<div class="box-container">
-  <div class="box half left">
-    Maecenas ac ante non urna imperdiet gravida ac et nisl. Aenean ac diam mi, eu rhoncus est. Pellentesque vel mauris dignissim dui lacinia mollis. Duis volutpat pellentesque velit sed semper. Aenean leo tortor, mollis non consequat eget, auctor vel lectus. Aenean in augue nec libero semper feugiat vel ullamcorper est. Quisque eu viverra nulla. Nulla faucibus dignissim est, sit amet placerat nisi porta eu.
-  </div>
-
-  <div class="box half right">
-    Aliquam erat volutpat. Donec convallis, eros at auctor gravida, urna dolor tincidunt ligula, dapibus ultrices elit erat eu nunc. Donec in orci erat. Nunc sed elit quis neque ornare lacinia ac et sapien.
-  </div>
-
-  <div class="clear"></div>
+<div id="datepicker" class="right" style="width: 43%"></div>
+<div class="left" style="width: 45%">
+  <% @course_sections.each do |cs| %>
+    <%= link_to cs[:course].number + ' ' + cs[:course].name + ' - ' + cs[:section].number.to_s, course_path(cs[:course], :section => cs[:section].section_id) %><br />
+  <% end %>
 </div>
 
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo elit sit amet erat fermentum vitae auctor lectus consectetur. Maecenas vestibulum orci sodales nibh tristique mollis. Suspendisse quam magna, tincidunt id accumsan in, imperdiet ut lectus. Vivamus at nisi urna. Aenean pulvinar ornare dictum. In mauris felis, consequat bibendum tincidunt eu, sagittis sit amet nunc. Duis mattis neque id dui vestibulum et volutpat turpis lobortis. Duis malesuada sollicitudin risus, nec dignissim ipsum consequat nec. Aenean commodo vulputate purus ac lacinia. Nulla nec ante nec arcu facilisis semper in scelerisque eros. Aliquam tempus sapien eu nisl vestibulum scelerisque. Maecenas tempus, sapien nec convallis auctor, felis felis elementum nibh, at mollis turpis nisi at nulla. Vestibulum sed massa magna, sit amet pretium arcu.
-</p>
+<script type="text/javascript">
 
-<p>
-  Maecenas adipiscing eros non augue adipiscing id egestas lorem lacinia. Cras eu tortor nec velit viverra imperdiet. Curabitur et orci lacus, sit amet commodo nibh. In et quam in ipsum sodales commodo. Proin euismod porttitor dui eget ultricies. Nam diam ligula, aliquam eu eleifend eu, adipiscing nec tellus. Nunc molestie ultricies est, at placerat velit eleifend eu. Nam scelerisque, lectus et aliquet tincidunt, massa odio fringilla ligula, vitae accumsan neque augue pellentesque ipsum. Donec dignissim risus fermentum lectus cursus et dictum metus elementum. Nulla sed nunc metus. Donec ullamcorper ipsum nec leo cursus vitae rhoncus lorem pharetra. Etiam bibendum tempus ipsum, vitae tempor libero porttitor at.
-</p>
+$(document).ready(function() {
+    $("#datepicker").datepicker();
+});
 
-<p>
-  Maecenas ac ante non urna imperdiet gravida ac et nisl. Aenean ac diam mi, eu rhoncus est. Pellentesque vel mauris dignissim dui lacinia mollis. Duis volutpat pellentesque velit sed semper. Aenean leo tortor, mollis non consequat eget, auctor vel lectus. Aenean in augue nec libero semper feugiat vel ullamcorper est. Quisque eu viverra nulla. Nulla faucibus dignissim est, sit amet placerat nisi porta eu.
-</p>
-
-<div class="box">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo elit sit amet erat fermentum vitae auctor lectus consectetur. Maecenas vestibulum orci sodales nibh tristique mollis. Suspendisse quam magna, tincidunt id accumsan in, imperdiet ut lectus. Vivamus at nisi urna. Aenean pulvinar ornare dictum. In mauris felis, consequat bibendum tincidunt eu, sagittis sit amet nunc. Duis mattis neque id dui vestibulum et volutpat turpis lobortis. Duis malesuada sollicitudin risus, nec dignissim ipsum consequat nec. Aenean commodo vulputate purus ac lacinia. Nulla nec ante nec arcu facilisis semper in scelerisque eros. Aliquam tempus sapien eu nisl vestibulum scelerisque. Maecenas tempus, sapien nec convallis auctor, felis felis elementum nibh, at mollis turpis nisi at nulla. Vestibulum sed massa magna, sit amet pretium arcu.
-</div>
+</script>
