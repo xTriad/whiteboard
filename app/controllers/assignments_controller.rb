@@ -151,9 +151,11 @@ class AssignmentsController < ApplicationController
     if params[:assignment].has_key?(:due_date)
       if params[:assignment][:due_date].match(/(\d{2})\/(\d{2})\/(\d{4})\s(\d{2}):(\d{2})\s(am|pm)/i)
         month, day, year, hours, minutes, ampm = $1.to_i, $2.to_i, $3.to_i, $4.to_i, $5.to_i, $6
-
-        if ampm == 'pm'
-          hours += 12
+        
+        if hours == 12 && ampm == 'am'
+          hours = 0
+        elsif ampm == 'pm'
+          hours += 11
         end
 
         @assignment.due_date = Time.new(year, month, day, hours, minutes, 0, "-00:00")

@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
     cur_user_id = self.user_id
     has_role = false
 
-    puts ""
+    # puts ""
 
     # Check if we already have the query cached
     if Roles_Cache.has_key?(cur_user_id)

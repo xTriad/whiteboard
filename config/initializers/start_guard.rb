@@ -4,4 +4,4 @@ require 'guard'
  # Guard.start(:guardfile => 'storage/Guardfile')
 
  # Watches at /storage
- Guard.start(:watchdir => 'storage')
+ # Guard.start(:watchdir => 'storage')

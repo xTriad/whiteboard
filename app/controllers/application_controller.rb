@@ -13,15 +13,15 @@ class ApplicationController < ActionController::Base
   end
 
   def is_student?
-      return cannot? :manage, AssignmentGrade
+      return current_user.has_role? Constants::Role::Student
   end
 
   def is_professor?
-    return can? :manage, AssignmentGrade
+    return current_user.has_role? Constants::Role::Professor
   end
 
   def is_admin?
-    return can? :manage, :all
+    return current_user.has_role? Constants::Role::Admin
   end
 
   # The format to store dates in the URL

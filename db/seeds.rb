@@ -46,14 +46,14 @@ puts 'DEFAULT USERS'
   # Baylor
   User.create([
     {
-      :name => 'Paul Grabow',
+      :name => 'James Howard',
       :email => 'prof1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'Bill Booth',
+      :name => 'Cody Sampson',
       :email => 'prof2@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -74,77 +74,77 @@ puts 'DEFAULT USERS'
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'Bruce Wayne',
+      :name => 'Lebron James',
       :email => 'student1@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student2',
+      :name => 'Rasbhard Lewis',
       :email => 'student2@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student3',
+      :name => 'Chris Bosh',
       :email => 'student3@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student4',
+      :name => 'Shane Battier',
       :email => 'student4@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student5',
+      :name => 'Mario Chalmers',
       :email => 'student5@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student6',
+      :name => 'Norris Cole',
       :email => 'student6@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student7',
+      :name => 'Dwayne Wade',
       :email => 'student7@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student8',
+      :name => 'Mike Miller',
       :email => 'student8@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student9',
+      :name => 'Ray Allen',
       :email => 'student9@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student10',
+      :name => 'James Jones',
       :email => 'student10@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student11',
+      :name => 'Chris Anderson',
       :email => 'student11@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -158,7 +158,7 @@ puts 'DEFAULT USERS'
       :university_id => Constants::Uni::Baylor
     },
     {
-      :name => 'student13',
+      :name => 'Joel Anthony',
       :email => 'student13@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -192,7 +192,7 @@ puts 'DEFAULT USERS'
   # Texas
   User.create([
     {
-      :name => 'prof3',
+      :name => 'William Powers',
       :email => 'prof3@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -206,7 +206,7 @@ puts 'DEFAULT USERS'
       :university_id => Constants::Uni::Texas
     },
     {
-      :name => 'student15',
+      :name => 'Kevin Durant',
       :email => 'student15@whiteboard.com',
       :password => 'password',
       :password_confirmation => 'password',
@@ -330,7 +330,7 @@ puts 'DEFAULT ASSIGNMENTS'
   Assignment.create([
     {
       :name => 'Proofs',
-      :description => 'Solve these  proofs.',
+      :description => 'Solve these proofs.',
       :type_id => Constants::AssignType::Homework,
       :section_id => 1,
       :due_date => '2020-02-12',
@@ -339,7 +339,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Huffman Encoder',
-      :description => 'Create a Huffman Encoder',
+      :description => 'Create a Huffman Encoder application capable of compressing and decompressing files.',
       :type_id => Constants::AssignType::Program,
       :section_id => 1,
       :due_date => '2019-02-12',
@@ -387,7 +387,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Tetris',
-      :description => 'Create Tetris',
+      :description => 'Create the Tetris game using the SDL library.',
       :type_id => Constants::AssignType::Program,
       :section_id => 3,
       :due_date => '2019-02-12',
@@ -396,7 +396,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Huffman Encoder',
-      :description => 'Create a Huffman Encoder',
+      :description => 'Create a Huffman Encoder application capable of compressing and decompressing files.',
       :type_id => Constants::AssignType::Program,
       :section_id => 3,
       :due_date => '2019-02-12',
@@ -405,7 +405,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Tic Tac Toe',
-      :description => 'Create Tic Tac Toe',
+      :description => 'Create the Tic Tac Toe game using the SDL library.',
       :type_id => Constants::AssignType::Program,
       :section_id => 3,
       :due_date => '2019-02-12',
@@ -414,7 +414,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Tetris',
-      :description => 'Create Tetris',
+      :description => 'Create the Tetris game using the SDL library.',
       :type_id => Constants::AssignType::Program,
       :section_id => 4,
       :due_date => '2019-02-12',
@@ -423,7 +423,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Huffman Encoder',
-      :description => 'Create a Huffman Encoder',
+      :description => 'Create a Huffman Encoder application capable of compressing and decompressing files.',
       :type_id => Constants::AssignType::Program,
       :section_id => 4,
       :due_date => '2019-02-12',
@@ -431,8 +431,8 @@ puts 'DEFAULT ASSIGNMENTS'
       :weight => 2
     },
     {
-      :name => 'Tic Tac Toe',
-      :description => 'Create Tic Tac Toe',
+      :name => 'Hello World',
+      :description => 'Write a simple hello world C++ program.',
       :type_id => Constants::AssignType::Program,
       :section_id => 4,
       :due_date => '2019-02-12',
@@ -441,7 +441,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Tetris',
-      :description => 'Create Tetris',
+      :description => 'Create the Tetris game using the SDL library.',
       :type_id => Constants::AssignType::Program,
       :section_id => 5,
       :due_date => '2019-02-12',
@@ -450,7 +450,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Huffman Encoder',
-      :description => 'Create a Huffman Encoder',
+      :description => 'Create a Huffman Encoder application capable of compressing and decompressing files.',
       :type_id => Constants::AssignType::Program,
       :section_id => 5,
       :due_date => '2019-02-12',
@@ -459,7 +459,7 @@ puts 'DEFAULT ASSIGNMENTS'
     },
     {
       :name => 'Tic Tac Toe',
-      :description => 'Create Tic Tac Toe',
+      :description => 'Create the Tic Tac Toe game using the SDL library.',
       :type_id => Constants::AssignType::Program,
       :section_id => 5,
       :due_date => '2019-02-12',
@@ -513,7 +513,7 @@ puts 'DEFAULT MESSAGES'
       :receiver_id => Constants::User::Professor2,
       :sent => true,
       :subject => 'A Private Message',
-      :message => 'Ut sit amet turpis at sem viverra tempus. Ut libero dolor, bibendum et laoreet id, faucibus vel orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere fringilla sapien, vitae adipiscing dui dictum eget. Nulla nisl dolor, luctus et bibendum quis, suscipit nec eros. Aenean ac ante mollis massa tincidunt tempus nec et lacus. Ut lectus dui, sagittis id porttitor ut, bibendum non massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu tellus mi. Aenean ullamcorper.',
+      :message => 'Ut sit amet turpis at sem viverra tempus. Ut libero dolor, bibendum et laoreet id, faucibus vel orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere fringilla sapien, vitae adipiscing dui dictum eget.<br /><br />Nulla nisl dolor, luctus et bibendum quis, suscipit nec eros. Aenean ac ante mollis massa tincidunt tempus nec et lacus. Ut lectus dui, sagittis id porttitor ut, bibendum non massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu tellus mi. Aenean ullamcorper.',
       :receiver_read => false,
       :sender_deleted => false,
       :receiver_deleted => false,
@@ -547,8 +547,8 @@ puts 'DEFAULT MESSAGES'
       :sender_id => Constants::User::Professor1,
       :receiver_id => Constants::User::Professor2,
       :sent => true,
-      :subject => 'Formatting Tests',
-      :message => 'Testing line breaks in html...<br /><br />The End.',
+      :subject => 'Hello',
+      :message => 'Hello there...<br /><br />The End.',
       :receiver_read => false,
       :sender_deleted => false,
       :receiver_deleted => false,
