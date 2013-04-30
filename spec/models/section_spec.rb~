@@ -20,7 +20,7 @@ require 'spec_helper'
   end
 
   it "should require a number" do
-    no_number = Section.new(@attr.merge(:number => ""))
+    no_number = Section.new(@attr.merge(:number) => ""))
     no_number.should_not be_valid
   end
 

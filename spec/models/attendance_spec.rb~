@@ -7,7 +7,7 @@ describe Attendance do
       :section_id => "2",
       :class_date => "2013-2-2",
       :user_id => "2",
-      :attendance => "1",
+      :attendance => "1"
       :attendance_id=>"2"
     }
   end
