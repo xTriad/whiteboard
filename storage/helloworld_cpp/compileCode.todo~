@@ -1,4 +1,0 @@
-
-g++ $1hello.cpp -o $1helloexecutable
-./$1helloexecutable > ./$1outputCPP
-
