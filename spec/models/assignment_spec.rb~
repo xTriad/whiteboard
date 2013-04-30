@@ -23,11 +23,11 @@ describe Assignment do
   end
 
   it "should require a section id" do
-    no_si = Assignment.new(@attr.merge(:section_id => ""))
+    no_si = Assignment.new(@attr.merge(:section_id) => ""))
     no_si.should_not be_valid
   end
   it "should require a highest grade value" do
-    no_hgv = Assignment.new(@attr.merge(:highest_grade_value => ""))
+    no_hgv = Assignment.new(@attr.merge(:highest_grade_value) => ""))
     no_hgv.should_not be_valid
   end
 
