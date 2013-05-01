@@ -24,7 +24,11 @@ group :shell do
     |m| `assignments/#{m[1]}/compileCode.todo assignments/#{m[1]}/#{m[2]}/`
   }
 
-  watch(%r{^assignments\/(.+?)\/(.+?)\/(.+)$}) {
+  # watch(%r{^assignments\/(.+?)\/(.+?)\/.([^c]|[^cpp]|[^java]|[^pl]|[^py])$}) {
+  #   |m| "lib/update_assignment_upload_list.rb"
+  # }
+
+  watch(%r{^assignments\/(.+?)\/(.+?)\/(.*)$}) {
     |m| "lib/update_assignment_upload_list.rb"
   }
 end
