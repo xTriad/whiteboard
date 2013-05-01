@@ -1,7 +1,7 @@
 class AssignmentConfigUpload < ActiveRecord::Base
   attr_accessible :assignment_config_upload, :assignment_id
   has_attached_file :assignment_config_upload,
-    :url => ":rails_root/storage/assignments/:assignment_id/:basename.:extension", # where to retrieve
+    :url => "/assignment_config_uploads/download?assignment=:assignment_id&name=:basename.:extension", # how to retrieve
     :path => ":rails_root/storage/assignments/:assignment_id/:basename.:extension" # where to save
 
   include Rails.application.routes.url_helpers
@@ -12,7 +12,7 @@ class AssignmentConfigUpload < ActiveRecord::Base
         {
           :name => assignment_config_upload_file_name(),
           :size => assignment_config_upload_file_size(),
-          :url => assignment_config_upload.url(:original),
+          :url => assignment_config_upload.url(:original).gsub("%3F", "?"),
           :delete_url => assignment_config_upload_path(self),
           :delete_type => "DELETE"
         }

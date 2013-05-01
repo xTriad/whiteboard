@@ -1,6 +1,15 @@
 class AssignmentConfigUploadsController < ApplicationController
   before_filter :authenticate_user!
 
+  def download
+    if !params.has_key?(:assignment) || !params.has_key?(:name)
+      redirect_to root_path and return
+    end
+
+    # Hardcoded, but couldn't care less at this point
+    send_file './storage/assignments/' + params[:assignment] + '/' + params[:name]
+  end
+
   # GET /uploads
   # GET /uploads.json
   def index
@@ -82,7 +91,7 @@ class AssignmentConfigUploadsController < ApplicationController
     # TODO: Javascript usage: http://railsapps.github.com/rails-javascript-include-external.html
     @upload = AssignmentConfigUpload.find(params[:id])
     authorize! :destroy, @upload
-    @upload.paperclip_values!(@upload.read_attribute(:assignment_id), @upload.read_attribute(:user_id))
+    @upload.paperclip_values!(@upload.read_attribute(:assignment_id))
     @upload.destroy
 
     respond_to do |format|

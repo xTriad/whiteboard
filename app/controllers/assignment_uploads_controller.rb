@@ -1,6 +1,15 @@
 class AssignmentUploadsController < ApplicationController
   before_filter :authenticate_user!
 
+  def download
+    if !params.has_key?(:assignment) || !params.has_key?(:user) || !params.has_key?(:name)
+      redirect_to root_path and return
+    end
+
+    # Hardcoded, but couldn't care less at this point
+    send_file './storage/assignments/' + params[:assignment] + '/' + params[:user] + '/' + params[:name]
+  end
+
   # GET /uploads
   # GET /uploads.json
   def index

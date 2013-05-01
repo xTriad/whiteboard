@@ -12,8 +12,16 @@ Whiteboard::Application.routes.draw do
       get 'alter' # /assignment_grades/alter
     end
   end
-  resources :assignment_uploads
-  resources :assignment_config_uploads
+  resources :assignment_uploads do
+    collection do
+      get 'download' # /assignment_uploads/download?assignment=13&user=6&name=routes.rb
+    end
+  end
+  resources :assignment_config_uploads do
+    collection do
+      get 'download' # /assignment_config_uploads/download?assignment=13&user=6&name=routes.rb
+    end
+  end
   resources :assignment_grades
   resources :assignments do
     member do
@@ -22,7 +30,6 @@ Whiteboard::Application.routes.draw do
       get 'students' # /assignments/1/students
     end
   end
-
   resources :attendances do
     collection do
       get 'alter' # /attendances/alter

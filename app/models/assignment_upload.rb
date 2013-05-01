@@ -1,7 +1,7 @@
 class AssignmentUpload < ActiveRecord::Base
   attr_accessible :assignment_upload, :assignment_id, :user_id
   has_attached_file :assignment_upload,
-    :url => ":rails_root/storage/assignments/:assignment_id/:user_id/:basename.:extension", # where to retrieve
+    :url => "/assignment_uploads/download?assignment=:assignment_id&user=:user_id&name=:basename.:extension", # how to retrieve
     :path => ":rails_root/storage/assignments/:assignment_id/:user_id/:basename.:extension" # where to save
 
   include Rails.application.routes.url_helpers
@@ -13,7 +13,7 @@ class AssignmentUpload < ActiveRecord::Base
         {
           :name => assignment_upload_file_name(),
           :size => assignment_upload_file_size(),
-          :url => assignment_upload.url(:original),
+          :url => assignment_upload.url(:original).gsub("%3F", "?"),
           :delete_url => assignment_upload_path(self),
           :delete_type => "DELETE"
         }
@@ -75,7 +75,7 @@ class AssignmentUpload < ActiveRecord::Base
     unless @user_id.nil? || @user_id == 0
       @user_id
     else
-      read_attribute(:assignment_id) # TODO: Might need to cache result
+      read_attribute(:user_id) # TODO: Might need to cache result
     end
   end
 end
