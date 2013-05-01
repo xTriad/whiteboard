@@ -344,7 +344,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :section_id => 1,
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
-      :weight => 2
+      :weight => 1
     },
     {
       :name => 'Test 1',
@@ -368,7 +368,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :section_id => 2,
       :due_date => '2022-02-14',
       :highest_grade_value => 90,
-      :weight => 2
+      :weight => 1
     },
     {
       :name => 'AVL Tree',
@@ -401,7 +401,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :section_id => 3,
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
-      :weight => 2
+      :weight => 1
     },
     {
       :name => 'Tic Tac Toe',
@@ -410,7 +410,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :section_id => 3,
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
-      :weight => 2
+      :weight => 1
     },
     {
       :name => 'Tetris',
@@ -428,7 +428,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :section_id => 4,
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
-      :weight => 2
+      :weight => 1
     },
     {
       :name => 'Hello World',
@@ -455,7 +455,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :section_id => 5,
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
-      :weight => 2
+      :weight => 1
     },
     {
       :name => 'Tic Tac Toe',
@@ -464,7 +464,7 @@ puts 'DEFAULT ASSIGNMENTS'
       :section_id => 5,
       :due_date => '2019-02-12',
       :highest_grade_value => 100,
-      :weight => 2
+      :weight => 1
     },
     {
       :name => 'Intro To Being a Hipster',

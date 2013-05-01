@@ -41,8 +41,8 @@ $(document).ready(function() {
 
   // TODO: Disallow weekends: beforeShowDay: $.datepicker.noWeekends
   $("#datepicker").datepicker({
-    minDate: "-1Y",
-    maxDate: "+0D",
+    // minDate: "-1Y",
+    // maxDate: "+0D",
     dateFormat: "yy-mm-dd",
     onSelect: function(dateText) {
       location.href = '/attendances?date=' + dateText + "&section=" + <%= params[:section] %>;

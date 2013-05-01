@@ -2,23 +2,6 @@
 
 <hr>
 
-<style type="text/css">
-
-/* Screw it, hardcoding CSS */
-
-#datepicker {
-  position: relative;
-}
-
-#datepicker > div {
-  position: absolute;
-  right: 0px;
-}
-
-</style>
-
-<!-- <div id="datepicker" class="right" style="width: 43%"></div> -->
-
 <table class="table table-striped">
   <% @course_sections.each do |cs| %>
     <tr>
@@ -28,11 +11,3 @@
     </tr>
   <% end %>
 </table>
-
-<script type="text/javascript">
-
-// $(document).ready(function() {
-//     $("#datepicker").datepicker();
-// });
-
-</script>
