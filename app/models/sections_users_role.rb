@@ -1,5 +1,5 @@
 class SectionsUsersRole < ActiveRecord::Base
-  attr_accessible :section_id, :user_id, :role_id
+  attr_accessible :section_id, :user_id, :role_id, :section, :user, :role
 
   belongs_to :section
   belongs_to :user

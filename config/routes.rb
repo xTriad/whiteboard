@@ -7,7 +7,6 @@ Whiteboard::Application.routes.draw do
   resources :messages
   resources :courses
   resources :sections
-  resources :uploads
   resources :assignment_grades do
      collection do
       get 'alter' # /assignment_grades/alter
