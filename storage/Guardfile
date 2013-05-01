@@ -8,18 +8,23 @@
 # The script needs to know file name(s) and accept a file path ($1).
 # When a new assn is made, put a compileCode.todo in the assn folder. This file will be used to compile/run all student files as soon as they are uploaded.
 
-
+# Make the script executable
 guard 'shell', :recursive => true do
-
-  # Make the script executable
   watch(%r{^(.+)\.todo$}) {
     |r| `chmod a+x #{r[1]}.todo`
   }
-
 end
 
+# Run the professor's makefile script which should have the name of "compileCode.todo"
+# m[1] = assignment_id
+# m[2] = user_id
+# m[3] = file_name
 group :shell do
   watch(%r{^assignments\/(.+?)\/(.+?)\/(.+?)\.(c|cpp|java|pl|py)$}) {
     |m| `assignments/#{m[1]}/compileCode.todo assignments/#{m[1]}/#{m[2]}/`
+  }
+
+  watch(%r{^assignments\/(.+?)\/(.+?)\/(.+)$}) {
+    |m| "lib/update_assignment_upload_list.rb"
   }
 end

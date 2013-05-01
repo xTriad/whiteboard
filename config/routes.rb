@@ -19,7 +19,7 @@ Whiteboard::Application.routes.draw do
   end
   resources :assignment_config_uploads do
     collection do
-      get 'download' # /assignment_config_uploads/download?assignment=13&user=6&name=routes.rb
+      get 'download' # /assignment_config_uploads/download?assignment=13&name=routes.rb
     end
   end
   resources :assignment_grades
