@@ -28,7 +28,7 @@ group :shell do
   #   |m| "lib/update_assignment_upload_list.rb"
   # }
 
-  watch(%r{^assignments\/(.+?)\/(.+?)\/(.*)$}) {
-    |m| "lib/update_assignment_upload_list.rb"
-  }
+  # watch(%r{^assignments\/(.+?)\/(.+?)\/(.*)$}) {
+  #   |m| "lib/update_assignment_upload_list.rb"
+  # }
 end

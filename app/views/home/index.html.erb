@@ -2,17 +2,37 @@
 
 <hr>
 
-<div id="datepicker" class="right" style="width: 43%"></div>
-<div class="left" style="width: 45%">
+<style type="text/css">
+
+/* Screw it, hardcoding CSS */
+
+#datepicker {
+  position: relative;
+}
+
+#datepicker > div {
+  position: absolute;
+  right: 0px;
+}
+
+</style>
+
+<!-- <div id="datepicker" class="right" style="width: 43%"></div> -->
+
+<table class="table table-striped">
   <% @course_sections.each do |cs| %>
-    <%= link_to cs[:course].number + ' ' + cs[:course].name + ' - ' + cs[:section].number.to_s, course_path(cs[:course], :section => cs[:section].section_id) %><br />
+    <tr>
+      <td>
+        <%= link_to cs[:course].number + ' ' + cs[:course].name + ' - ' + cs[:section].number.to_s, course_path(cs[:course], :section => cs[:section].section_id) %>
+      </td>
+    </tr>
   <% end %>
-</div>
+</table>
 
 <script type="text/javascript">
 
-$(document).ready(function() {
-    $("#datepicker").datepicker();
-});
+// $(document).ready(function() {
+//     $("#datepicker").datepicker();
+// });
 
 </script>

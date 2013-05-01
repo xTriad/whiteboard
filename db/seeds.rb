@@ -270,7 +270,7 @@ puts 'DEFAULT COURSES'
     {
       :number => 1337,
       :university_id => Constants::Uni::Baylor,
-      :name => 'A Course With A Really Long Name That Should Break Something'
+      :name => 'Volleyball'
     },
     {
       :number => 3344,
